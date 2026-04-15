@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { CartButton } from "./CartDrawer";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,9 +55,7 @@ export default function Header() {
 
         {/* CTA + Cart */}
         <div className="hidden items-center gap-4 lg:flex">
-          <button className="rounded-full border border-gold-500 px-5 py-2 text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950">
-            Comprar
-          </button>
+          <CartButton />
         </div>
 
         {/* Mobile menu button */}
