@@ -106,7 +106,7 @@ export default function Hero() {
               href="#cafes"
               className="rounded-full bg-gold-500 px-8 py-4 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
             >
-              Explorar Cafés
+              Comprar Avulso
             </a>
             <a
               href="#assinatura"
