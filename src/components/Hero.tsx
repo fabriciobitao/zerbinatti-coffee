@@ -4,12 +4,21 @@ export default function Hero() {
       {/* Background base */}
       <div className="absolute inset-0 bg-coffee-950" />
 
-      {/* Ambient glow - simula a luz quente da foto */}
+      {/* Farm image - do centro para a esquerda, combinando com tons quentes */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1611070257888-7e50e5915d7c?w=1920&q=80')",
+        }}
+      />
+      {/* Blend da fazenda - escurece para combinar com o fundo */}
+      <div className="absolute inset-0 bg-coffee-950/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950/50 via-coffee-950/60 to-coffee-950/90" />
+
+      {/* Ambient glow - simula a luz quente da foto do produto */}
       <div className="absolute right-0 top-1/3 h-[600px] w-[600px] rounded-full bg-amber-900/20 blur-[120px]" />
       <div className="absolute right-1/4 bottom-0 h-[400px] w-[400px] rounded-full bg-amber-800/10 blur-[100px]" />
-
-      {/* Decorative coffee beans pattern - lado esquerdo */}
-      <div className="absolute bottom-0 left-0 right-1/2 h-32 bg-gradient-to-t from-coffee-900/30 to-transparent" />
 
       {/* Product image - posicionada à direita, contida */}
       <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block">
@@ -57,7 +66,11 @@ export default function Hero() {
             Do Nosso{" "}
             <span className="italic text-gold-400">Legado</span>
             <br />
-            Para Sua Xícara
+            Para Sua Mesa
+            <br />
+            <span className="text-2xl font-normal text-coffee-300 md:text-3xl lg:text-4xl">
+              Desde 1897
+            </span>
           </h1>
 
           <p className="mt-6 max-w-md text-lg leading-relaxed text-coffee-200">
