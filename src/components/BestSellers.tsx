@@ -1,35 +1,27 @@
 const bestSellers = [
   {
     name: "Clássico Zerbinatti",
-    weight: "250g",
-    price: 49.9,
+    weight: "500g",
+    price: 69.9,
     reviews: 127,
     stars: 4.8,
     image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&q=80",
   },
   {
-    name: "Kit Degustação",
-    weight: "3x 250g",
-    price: 169.9,
-    reviews: 89,
-    stars: 4.9,
-    image: "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=400&q=80",
-  },
-  {
     name: "Reserva Especial",
-    weight: "250g",
-    price: 69.9,
+    weight: "500g",
+    price: 89.9,
     reviews: 64,
     stars: 4.7,
     image: "https://images.unsplash.com/photo-1587049016823-69ef9d68bd44?w=400&q=80",
   },
   {
-    name: "Combo Clássico 3x",
-    weight: "3x 250g",
+    name: "Micro-Lote Premium",
+    weight: "500g",
     price: 119.9,
-    reviews: 53,
+    reviews: 42,
     stars: 4.9,
-    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&q=80",
+    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=400&q=80",
   },
 ];
 
