@@ -119,15 +119,20 @@ export default function Subscription() {
                 ))}
               </ul>
 
-              <button
-                className={`w-full rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
-                  plan.highlight
-                    ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
-                    : "border border-coffee-600 text-coffee-200 hover:border-gold-500 hover:text-gold-400"
-                }`}
-              >
-                {plan.cta}
-              </button>
+              <div className="flex gap-3">
+                <button
+                  className={`flex-1 rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
+                    plan.highlight
+                      ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
+                      : "border border-coffee-600 text-coffee-200 hover:border-gold-500 hover:text-gold-400"
+                  }`}
+                >
+                  {plan.cta}
+                </button>
+                <button className="flex-1 rounded-full border border-coffee-600 py-3 text-sm font-medium text-coffee-300 transition-all hover:border-coffee-400 hover:text-coffee-100">
+                  Comprar Avulso
+                </button>
+              </div>
             </div>
           ))}
         </div>
