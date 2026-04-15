@@ -55,6 +55,12 @@ export default function Header() {
 
         {/* CTA + Cart */}
         <div className="hidden items-center gap-4 lg:flex">
+          <a
+            href="#cafes"
+            className="rounded-full border border-gold-500 px-5 py-2 text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950"
+          >
+            Comprar Avulso
+          </a>
           <CartButton />
         </div>
 
@@ -127,9 +133,13 @@ export default function Header() {
             >
               B2B
             </Link>
-            <button className="mt-2 rounded-full border border-gold-500 px-5 py-2 text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950">
-              Comprar
-            </button>
+            <a
+              href="#cafes"
+              className="mt-2 block rounded-full border border-gold-500 px-5 py-2 text-center text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950"
+              onClick={() => setMenuOpen(false)}
+            >
+              Comprar Avulso
+            </a>
           </div>
         </div>
       )}
