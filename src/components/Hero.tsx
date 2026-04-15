@@ -1,21 +1,24 @@
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-coffee-950">
-      {/* Background image - cena de café premium */}
+      {/* Background - dark base */}
+      <div className="absolute inset-0 bg-coffee-950" />
+
+      {/* Product image - posicionada à direita */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-contain bg-right-bottom bg-no-repeat md:bg-cover md:bg-right"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=1920&q=85')",
+          backgroundImage: "url('/images/hero-bg.jpg')",
         }}
       />
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950/95 via-coffee-950/80 to-coffee-950/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/80 via-transparent to-coffee-950/30" />
 
-      {/* Content - alinhado à esquerda como o site original */}
+      {/* Gradient overlay - escurece à esquerda, mantém produto visível à direita */}
+      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950 via-coffee-950/85 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/70 via-transparent to-coffee-950/50" />
+
+      {/* Content - alinhado à esquerda */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-xl pt-24">
+        <div className="max-w-lg pt-24 lg:max-w-xl">
           {/* Logo */}
           <img
             src="/images/logo-white.png"
