@@ -5,7 +5,6 @@ const bestSellers = [
     price: 69.9,
     reviews: 127,
     stars: 4.8,
-    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400&q=80",
   },
   {
     name: "Reserva Especial",
@@ -13,7 +12,6 @@ const bestSellers = [
     price: 89.9,
     reviews: 64,
     stars: 4.7,
-    image: "https://images.unsplash.com/photo-1587049016823-69ef9d68bd44?w=400&q=80",
   },
   {
     name: "Micro-Lote Premium",
@@ -21,7 +19,6 @@ const bestSellers = [
     price: 119.9,
     reviews: 42,
     stars: 4.9,
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=400&q=80",
   },
 ];
 
@@ -50,46 +47,41 @@ export default function BestSellers() {
     <section className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-10 flex items-end justify-between">
-          <div>
-            <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-              Destaque
-            </span>
-            <h2 className="mt-2 font-serif text-3xl font-bold text-coffee-900">
-              Mais Vendidos
-            </h2>
-          </div>
-          <a
-            href="#cafes"
-            className="text-sm font-medium text-gold-600 hover:text-gold-500"
-          >
-            Ver todos →
-          </a>
+        <div className="mb-10 text-center">
+          <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
+            Destaque
+          </span>
+          <h2 className="mt-2 font-serif text-3xl font-bold text-coffee-900">
+            Mais Vendidos
+          </h2>
         </div>
 
-        {/* Horizontal scroll on mobile, grid on desktop */}
-        <div className="flex gap-5 overflow-x-auto pb-4 md:grid md:grid-cols-4 md:overflow-visible md:pb-0">
+        {/* Grid centralizado */}
+        <div className="flex justify-center gap-5 overflow-x-auto pb-4 md:overflow-visible md:pb-0">
           {bestSellers.map((product) => (
             <div
               key={product.name}
-              className="group min-w-[220px] shrink-0 cursor-pointer rounded-xl border border-coffee-100 bg-white p-4 transition-all hover:border-gold-400 hover:shadow-lg md:min-w-0"
+              className="group w-[220px] shrink-0 cursor-pointer rounded-xl border border-coffee-100 bg-white p-4 transition-all hover:border-gold-400 hover:shadow-lg"
             >
-              {/* Image */}
-              <div className="overflow-hidden rounded-lg">
-                <div
-                  className="aspect-square bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                  style={{ backgroundImage: `url('${product.image}')` }}
+              {/* Product bag image */}
+              <div className="flex items-center justify-center rounded-lg bg-gradient-to-b from-coffee-50 to-coffee-100/50 py-4">
+                <img
+                  src="/images/rotulo-500g.png"
+                  alt={product.name}
+                  className="h-[160px] w-auto object-contain"
                 />
               </div>
 
               {/* Info */}
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <h3 className="text-sm font-semibold text-coffee-900">
                   {product.name}
                 </h3>
                 <p className="text-xs text-coffee-400">{product.weight}</p>
-                <Stars rating={product.stars} />
-                <div className="mt-2 flex items-baseline gap-1">
+                <div className="mt-1 flex justify-center">
+                  <Stars rating={product.stars} />
+                </div>
+                <div className="mt-2 flex items-baseline justify-center gap-1">
                   <span className="text-lg font-bold text-green-800">
                     {(product.price * 0.9).toLocaleString("pt-BR", {
                       style: "currency",
