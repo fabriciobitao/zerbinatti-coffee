@@ -16,9 +16,9 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <Products />
         <BestSellers />
         <Story />
-        <Products />
         <Quiz />
         <Subscription />
         <B2B />
