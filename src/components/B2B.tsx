@@ -2,8 +2,7 @@ export default function B2B() {
   return (
     <section id="contato" className="bg-coffee-100/50 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="grid gap-16 lg:grid-cols-2">
-          {/* Left: Content */}
+        <div className="mx-auto max-w-3xl">
           <div>
             <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
               Para Empresas
@@ -55,78 +54,6 @@ export default function B2B() {
                 </div>
               ))}
             </div>
-          </div>
-
-          {/* Right: Contact Form */}
-          <div className="rounded-2xl bg-white p-8 shadow-sm lg:p-10">
-            <h3 className="font-serif text-2xl font-bold text-coffee-900">
-              Solicitar Amostras
-            </h3>
-            <p className="mt-2 text-sm text-coffee-500">
-              Preencha o formulário e entraremos em contato em até 24h.
-            </p>
-
-            <form className="mt-8 space-y-5">
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-coffee-700">
-                  Nome completo
-                </label>
-                <input
-                  type="text"
-                  className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-3 text-sm text-coffee-900 outline-none transition-colors focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
-                  placeholder="Seu nome"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-coffee-700">
-                  E-mail corporativo
-                </label>
-                <input
-                  type="email"
-                  className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-3 text-sm text-coffee-900 outline-none transition-colors focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
-                  placeholder="email@empresa.com"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-coffee-700">
-                  Empresa
-                </label>
-                <input
-                  type="text"
-                  className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-3 text-sm text-coffee-900 outline-none transition-colors focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
-                  placeholder="Nome da empresa"
-                />
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-coffee-700">
-                  Tipo de negócio
-                </label>
-                <select className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-3 text-sm text-coffee-900 outline-none transition-colors focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
-                  <option value="">Selecione...</option>
-                  <option value="torrefacao">Torrefação</option>
-                  <option value="cafeteria">Cafeteria</option>
-                  <option value="restaurante">Restaurante / Hotel</option>
-                  <option value="escritorio">Escritório</option>
-                  <option value="outro">Outro</option>
-                </select>
-              </div>
-              <div>
-                <label className="mb-1.5 block text-sm font-medium text-coffee-700">
-                  Mensagem
-                </label>
-                <textarea
-                  rows={3}
-                  className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-3 text-sm text-coffee-900 outline-none transition-colors focus:border-gold-500 focus:ring-1 focus:ring-gold-500"
-                  placeholder="Conte-nos sobre seu negócio e volume estimado..."
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full rounded-full bg-coffee-900 py-3.5 text-sm font-semibold tracking-wide text-coffee-50 transition-all hover:bg-coffee-800 hover:shadow-lg"
-              >
-                Enviar Solicitação
-              </button>
-            </form>
           </div>
         </div>
       </div>
