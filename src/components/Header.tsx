@@ -11,14 +11,11 @@ export default function Header() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex flex-col">
-            <span className="font-serif text-xl font-bold tracking-wider text-coffee-50 uppercase">
-              Zerbinatti
-            </span>
-            <span className="text-[10px] tracking-[0.3em] text-gold-400 uppercase">
-              Coffee · Since 1897
-            </span>
-          </div>
+          <img
+            src="/images/logo-white.png"
+            alt="Zerbinatti Coffee"
+            className="h-10"
+          />
         </Link>
 
         {/* Desktop nav */}

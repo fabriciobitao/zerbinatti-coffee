@@ -7,14 +7,11 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex flex-col">
-              <span className="font-serif text-xl font-bold tracking-wider text-coffee-50 uppercase">
-                Zerbinatti
-              </span>
-              <span className="text-[10px] tracking-[0.3em] text-gold-400 uppercase">
-                Coffee · Since 1897
-              </span>
-            </div>
+            <img
+              src="/images/logo-white.png"
+              alt="Zerbinatti Coffee"
+              className="h-10"
+            />
             <p className="mt-4 text-sm leading-relaxed text-coffee-500">
               Café especial brasileiro com herança italiana. Três gerações
               de dedicação em cada xícara.

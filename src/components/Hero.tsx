@@ -22,14 +22,14 @@ export default function Hero() {
         </div>
 
         <h1 className="font-serif text-5xl font-bold leading-tight tracking-tight text-coffee-50 md:text-7xl lg:text-8xl">
-          Do Legado de{" "}
-          <span className="italic text-gold-400">1897</span>
+          Do Nosso{" "}
+          <span className="italic text-gold-400">Legado</span>
           <br />
           Para Sua Xícara
         </h1>
 
         <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-coffee-300 md:text-xl">
-          Três gerações de uma família italiana cultivando café especial
+          Uma família italiana cultivando café especial
           no coração do Brasil. Qualidade que transcende o tempo.
         </p>
 
@@ -65,28 +65,12 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Trust badges */}
-        <div className="mt-16 flex items-center justify-center gap-8 opacity-60">
-          <div className="text-center">
-            <div className="font-serif text-2xl font-bold text-coffee-50">
-              SCAA
-            </div>
-            <div className="text-xs text-coffee-400">Certificado</div>
-          </div>
-          <div className="h-8 w-px bg-coffee-700" />
-          <div className="text-center">
-            <div className="font-serif text-2xl font-bold text-coffee-50">
-              127+
-            </div>
-            <div className="text-xs text-coffee-400">Anos de Tradição</div>
-          </div>
-          <div className="h-8 w-px bg-coffee-700" />
-          <div className="text-center">
-            <div className="font-serif text-2xl font-bold text-coffee-50">
-              85+
-            </div>
-            <div className="text-xs text-coffee-400">Pontos SCA</div>
-          </div>
+        {/* Trust badges - selos reais */}
+        <div className="mt-16 flex items-center justify-center gap-6 opacity-80">
+          <img src="/images/selo-scaa.png" alt="SCAA Certified" className="h-12" />
+          <img src="/images/selo-100.png" alt="Zerbinatti 100" className="h-12" />
+          <img src="/images/selo-cup.png" alt="Zerbinatti Cup" className="h-12" />
+          <img src="/images/selo-brasil.png" alt="Brasil Prod" className="h-12" />
         </div>
       </div>
 
