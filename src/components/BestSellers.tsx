@@ -44,7 +44,7 @@ function Stars({ rating }: { rating: number }) {
 
 export default function BestSellers() {
   return (
-    <section className="bg-coffee-100/60 py-16 lg:py-20">
+    <section className="bg-coffee-200 py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10 text-center">
