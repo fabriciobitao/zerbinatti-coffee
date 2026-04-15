@@ -1,11 +1,11 @@
 const plans = [
   {
     name: "Descoberta",
-    price: "R$ 39,90",
+    price: "R$ 69,90",
     frequency: "/mês",
     description: "Perfeito para quem está começando no mundo do café especial.",
     features: [
-      "1 pacote de 250g por mês",
+      "1 pacote de 500g por mês",
       "Blend escolhido pelo mestre torrador",
       "Ficha de degustação inclusa",
       "Frete grátis",
@@ -15,11 +15,11 @@ const plans = [
   },
   {
     name: "Connoisseur",
-    price: "R$ 69,90",
+    price: "R$ 122,90",
     frequency: "/mês",
     description: "Para quem busca cafés únicos de diferentes regiões do Brasil.",
     features: [
-      "2 pacotes de 250g por mês",
+      "2 pacotes de 500g por mês",
       "Single origins exclusivos",
       "Notas de degustação detalhadas",
       "Acesso a micro-lotes primeiro",
@@ -30,11 +30,11 @@ const plans = [
   },
   {
     name: "Colecionador",
-    price: "R$ 119,90",
+    price: "R$ 209,90",
     frequency: "/mês",
     description: "A experiência completa para verdadeiros apaixonados.",
     features: [
-      "3 pacotes de 250g por mês",
+      "3 pacotes de 500g por mês",
       "Micro-lotes e raridades",
       "Kit de degustação profissional",
       "Convite para eventos exclusivos",
