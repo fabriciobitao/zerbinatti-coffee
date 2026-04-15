@@ -81,12 +81,27 @@ export default function Products() {
                   -10% PIX
                 </div>
 
-                {/* Image */}
-                <div className="overflow-hidden">
-                  <div
-                    className="aspect-[4/3] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${product.image}')` }}
-                  />
+                {/* Product bag mockup */}
+                <div className="flex items-center justify-center bg-gradient-to-b from-coffee-100 to-coffee-200/50 py-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                  <div className="relative w-[140px]">
+                    <div
+                      className="relative mx-auto h-[180px] w-full overflow-hidden rounded-b-lg rounded-t-sm"
+                      style={{
+                        background: "linear-gradient(135deg, #D4B896 0%, #C4A67D 25%, #B8956A 50%, #C4A67D 75%, #D4B896 100%)",
+                        boxShadow: "3px 3px 15px rgba(0,0,0,0.2), inset 2px 0 6px rgba(255,255,255,0.1)",
+                      }}
+                    >
+                      <div className="absolute inset-[6%] flex items-center justify-center">
+                        <img
+                          src="/images/rotulo-500g.png"
+                          alt={product.name}
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+                      <div className="absolute left-0 top-0 bottom-0 w-[6%]" style={{ background: "linear-gradient(90deg, rgba(0,0,0,0.1), transparent)" }} />
+                    </div>
+                    <div className="mx-auto mt-1 h-2 w-[85%] rounded-full" style={{ background: "radial-gradient(ellipse, rgba(0,0,0,0.15) 0%, transparent 70%)" }} />
+                  </div>
                 </div>
 
                 {/* Content */}
