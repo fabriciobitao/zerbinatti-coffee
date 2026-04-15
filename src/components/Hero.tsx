@@ -1,24 +1,43 @@
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-coffee-950">
-      {/* Background - dark base */}
+      {/* Background base */}
       <div className="absolute inset-0 bg-coffee-950" />
 
-      {/* Product image - posicionada à direita */}
-      <div
-        className="absolute inset-0 bg-contain bg-right-bottom bg-no-repeat md:bg-cover md:bg-right"
-        style={{
-          backgroundImage: "url('/images/hero-bg.jpg')",
-        }}
-      />
+      {/* Ambient glow - simula a luz quente da foto */}
+      <div className="absolute right-0 top-1/3 h-[600px] w-[600px] rounded-full bg-amber-900/20 blur-[120px]" />
+      <div className="absolute right-1/4 bottom-0 h-[400px] w-[400px] rounded-full bg-amber-800/10 blur-[100px]" />
 
-      {/* Gradient overlay - escurece à esquerda, mantém produto visível à direita */}
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950 via-coffee-950/85 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/70 via-transparent to-coffee-950/50" />
+      {/* Decorative coffee beans pattern - lado esquerdo */}
+      <div className="absolute bottom-0 left-0 right-1/2 h-32 bg-gradient-to-t from-coffee-900/30 to-transparent" />
 
-      {/* Content - alinhado à esquerda */}
+      {/* Product image - posicionada à direita, contida */}
+      <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block">
+        <div
+          className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/hero-bg.jpg')",
+          }}
+        />
+        {/* Fade suave para a esquerda */}
+        <div className="absolute inset-0 bg-gradient-to-r from-coffee-950 via-coffee-950/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/60 via-transparent to-coffee-950/40" />
+      </div>
+
+      {/* Mobile: imagem menor abaixo */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] h-[300px] md:hidden">
+        <div
+          className="absolute inset-0 bg-contain bg-bottom bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/hero-bg.jpg')",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-coffee-950 via-coffee-950/30 to-coffee-950/60" />
+      </div>
+
+      {/* Content - lado esquerdo */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-lg pt-24 lg:max-w-xl">
+        <div className="max-w-lg pt-24 pb-80 md:pb-0">
           {/* Logo */}
           <img
             src="/images/logo-white.png"
@@ -46,19 +65,25 @@ export default function Hero() {
             natural, torra média-clara. Notas de frutas e caramelo.
           </p>
 
-          {/* Flavor notes */}
-          <div className="mt-6 flex flex-wrap gap-4 text-sm text-coffee-300">
-            <div className="flex items-center gap-2">
-              <span className="h-px w-4 bg-gold-500/50" />
-              <span>Xícara Limpa</span>
+          {/* Specs - estilo ficha técnica */}
+          <div className="mt-8 grid grid-cols-3 gap-4">
+            <div className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-3 text-center backdrop-blur-sm">
+              <div className="text-xs text-coffee-400">Altitude</div>
+              <div className="mt-1 text-sm font-semibold text-coffee-100">
+                900-1000m
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="h-px w-4 bg-gold-500/50" />
-              <span>Corpo Encorpado</span>
+            <div className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-3 text-center backdrop-blur-sm">
+              <div className="text-xs text-coffee-400">Secagem</div>
+              <div className="mt-1 text-sm font-semibold text-coffee-100">
+                Natural
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="h-px w-4 bg-gold-500/50" />
-              <span>Acidez Equilibrada</span>
+            <div className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-3 text-center backdrop-blur-sm">
+              <div className="text-xs text-coffee-400">Torra</div>
+              <div className="mt-1 text-sm font-semibold text-coffee-100">
+                Média Clara
+              </div>
             </div>
           </div>
 
