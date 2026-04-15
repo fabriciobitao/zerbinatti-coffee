@@ -18,9 +18,9 @@ export default function Home() {
         <TrustBar />
         <Products />
         <BestSellers />
+        <Subscription />
         <Story />
         <Quiz />
-        <Subscription />
         <B2B />
       </main>
       <Footer />
