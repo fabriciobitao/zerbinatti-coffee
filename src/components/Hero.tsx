@@ -1,16 +1,17 @@
 export default function Hero() {
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden bg-coffee-950">
-      {/* Background image - foto real do site Zerbinatti */}
+      {/* Background image - cena de café premium */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/hero-bg.jpg')",
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=1920&q=85')",
         }}
       />
-      {/* Gradient overlay - escurece a esquerda para o texto ficar legível */}
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950/90 via-coffee-950/70 to-coffee-950/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/80 via-transparent to-coffee-950/40" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950/95 via-coffee-950/80 to-coffee-950/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/80 via-transparent to-coffee-950/30" />
 
       {/* Content - alinhado à esquerda como o site original */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
