@@ -7,7 +7,7 @@ const products = [
   {
     id: "classico-500g",
     name: "Clássico Zerbinatti",
-    description: "Blend tradicional da família. Notas de chocolate, caramelo e nozes.",
+    description: "Blend tradicional da família, embalagem 500g. Notas de chocolate, caramelo e nozes.",
     score: "85",
     roast: "Média",
     weight: "500g",
@@ -27,7 +27,7 @@ const products = [
   {
     id: "microlote-500g",
     name: "Micro-Lote Premium",
-    description: "Lote exclusivo em pacotes de 500g. Notas florais, cítricas e acidez brilhante.",
+    description: "Lote exclusivo, embalagem 500g. Notas florais, cítricas e acidez brilhante.",
     score: "90+",
     roast: "Clara",
     weight: "500g",
