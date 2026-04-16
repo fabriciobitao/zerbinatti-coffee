@@ -27,7 +27,7 @@ const products = [
   {
     id: "microlote-500g",
     name: "Micro-Lote Premium",
-    description: "Lote exclusivo, 500 pacotes. Notas florais, cítricas e acidez brilhante.",
+    description: "Lote exclusivo em pacotes de 500g. Notas florais, cítricas e acidez brilhante.",
     score: "90+",
     roast: "Clara",
     weight: "500g",
