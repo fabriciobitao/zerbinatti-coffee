@@ -14,7 +14,7 @@ const plans = [
     highlight: false,
   },
   {
-    name: "Da Família",
+    name: "Sommelier",
     price: "R$ 122,90",
     frequency: "/mês",
     description: "Para quem busca cafés únicos de diferentes regiões do Brasil.",
@@ -25,7 +25,7 @@ const plans = [
       "Acesso a micro-lotes primeiro",
       "Frete grátis",
     ],
-    cta: "Entrar pra Família",
+    cta: "Ser Sommelier",
     highlight: true,
   },
   {
