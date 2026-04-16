@@ -8,7 +8,7 @@ import Quiz from "@/components/Quiz";
 import Subscription from "@/components/Subscription";
 import B2B from "@/components/B2B";
 import Footer from "@/components/Footer";
-import WaveDivider from "@/components/WaveDivider";
+import SectionFade from "@/components/WaveDivider";
 
 export default function Home() {
   return (
@@ -19,13 +19,13 @@ export default function Home() {
         <TrustBar />
         <Products />
         <BestSellers />
-        <WaveDivider topColor="#D7CCC8" bottomColor="#1A1108" />
+        <SectionFade topColor="#D7CCC8" bottomColor="#1A1108" />
         <Subscription />
-        <WaveDivider topColor="#1A1108" bottomColor="#FDFBF7" />
+        <SectionFade topColor="#1A1108" bottomColor="#FDFBF7" />
         <Story />
         <Quiz />
         <B2B />
-        <WaveDivider topColor="#F6F3F0" bottomColor="#1A1108" />
+        <SectionFade topColor="#F6F3F0" bottomColor="#1A1108" />
       </main>
       <Footer />
     </>
