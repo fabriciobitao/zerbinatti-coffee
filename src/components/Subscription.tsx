@@ -17,7 +17,7 @@ const plans = [
     name: "Sommelier",
     price: "R$ 122,90",
     frequency: "/mês",
-    description: "Para quem busca cafés únicos de diferentes regiões do Brasil.",
+    description: "Para quem já sabe a diferença que um Zerbinatti faz na xícara.",
     features: [
       "2 pacotes de 500g por mês",
       "Single origins exclusivos",
@@ -32,7 +32,7 @@ const plans = [
     name: "Herdeiro",
     price: "R$ 209,90",
     frequency: "/mês",
-    description: "A experiência completa para verdadeiros apaixonados.",
+    description: "O legado Zerbinatti começa em 1897. Agora passa por você.",
     features: [
       "3 pacotes de 500g por mês",
       "Micro-lotes e raridades",
