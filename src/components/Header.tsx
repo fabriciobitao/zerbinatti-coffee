@@ -23,13 +23,12 @@ export default function Header() {
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/" className="flex items-baseline gap-2">
-          <span className="font-serif text-2xl font-bold tracking-wide text-coffee-50 md:text-3xl">
-            Zerbinatti
-          </span>
-          <span className="text-[10px] tracking-[0.25em] text-gold-400 uppercase">
-            Caffè
-          </span>
+        <Link href="/">
+          <img
+            src="/images/logo-white.png"
+            alt="Zerbinatti Coffee"
+            className="h-8 md:h-10"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

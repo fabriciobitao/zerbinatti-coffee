@@ -54,7 +54,7 @@ export default function Hero() {
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
         <div className="max-w-lg pt-24 pb-80 md:pb-0">
-          <img src="/images/logo-white.png" alt="Zerbinatti Coffee" className={`mb-8 h-14 ${fadeClass("delay-0")}`} />
+          <img src="/images/logo-white.png" alt="Zerbinatti Coffee" className={`mb-8 h-20 md:h-24 lg:h-28 ${fadeClass("delay-0")}`} />
 
           <div className={fadeClass("delay-200")}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-coffee-900/60 px-4 py-2 backdrop-blur-sm">
