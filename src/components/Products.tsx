@@ -17,7 +17,7 @@ const products = [
   {
     id: "reserva-500g",
     name: "Reserva Especial",
-    description: "Single origin, colheita seletiva. Notas de frutas vermelhas e mel.",
+    description: "Single origin, colheita seletiva, embalagem 500g. Notas de frutas vermelhas e mel.",
     score: "88",
     roast: "Média-Clara",
     weight: "500g",
