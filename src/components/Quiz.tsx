@@ -126,27 +126,27 @@ export default function Quiz() {
   // Landing state
   if (!started) {
     return (
-      <section id="quiz" className="relative overflow-hidden bg-coffee-50 py-24 lg:py-32">
+      <section id="quiz" className="relative overflow-hidden bg-coffee-50 py-16 sm:py-24 lg:py-32">
         <div className="absolute inset-0 opacity-5">
           <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=30')" }} />
         </div>
         <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-8">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">Experiência Personalizada</span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-900 md:text-5xl">Descubra Seu Café Ideal</h2>
-          <p className="mx-auto mt-6 max-w-xl text-lg text-coffee-600">
+          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">Descubra Seu Café Ideal</h2>
+          <p className="mx-auto mt-4 max-w-xl text-base text-coffee-600 sm:mt-6 sm:text-lg">
             Responda 5 perguntas rápidas e nosso algoritmo encontra o café perfeito para o seu paladar. Resultado compartilhável no Instagram.
           </p>
 
-          <div className="mt-12 flex items-center justify-center gap-3">
+          <div className="mt-8 flex items-center justify-center gap-1.5 sm:mt-12 sm:gap-3">
             {["Preparo", "Sabor", "Intensidade", "Momento", "Resultado"].map((step, i) => (
-              <div key={step} className="flex items-center gap-3">
+              <div key={step} className="flex items-center gap-1.5 sm:gap-3">
                 <div className="flex flex-col items-center">
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${i === 4 ? "bg-gold-500 text-coffee-950" : "bg-coffee-200 text-coffee-700"}`}>
+                  <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold sm:h-10 sm:w-10 sm:text-sm ${i === 4 ? "bg-gold-500 text-coffee-950" : "bg-coffee-200 text-coffee-700"}`}>
                     {i + 1}
                   </div>
-                  <span className="mt-2 text-xs text-coffee-500">{step}</span>
+                  <span className="mt-1 hidden text-xs text-coffee-500 sm:block">{step}</span>
                 </div>
-                {i < 4 && <div className="mb-5 h-px w-8 bg-coffee-300 sm:w-12" />}
+                {i < 4 && <div className="h-px w-4 bg-coffee-300 sm:mb-5 sm:w-12" />}
               </div>
             ))}
           </div>
@@ -167,12 +167,12 @@ export default function Quiz() {
   if (finished) {
     const result = getResult();
     return (
-      <section id="quiz" className="bg-coffee-50 py-24 lg:py-32">
+      <section id="quiz" className="bg-coffee-50 py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-2xl px-6 text-center lg:px-8">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">Seu Resultado</span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-900 md:text-5xl">Seu café ideal é</h2>
+          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">Seu café ideal é</h2>
 
-          <div className="mx-auto mt-10 max-w-md rounded-2xl border-2 border-gold-500 bg-white p-8 shadow-xl">
+          <div className="mx-auto mt-8 max-w-md rounded-2xl border-2 border-gold-500 bg-white p-5 shadow-xl sm:mt-10 sm:p-8">
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-coffee-100">
               <img src="/images/rotulo-500g.png" alt={result.name} className="h-16 w-auto object-contain" />
             </div>
@@ -213,7 +213,7 @@ export default function Quiz() {
   const progress = ((currentStep + 1) / (questions.length + 1)) * 100;
 
   return (
-    <section id="quiz" className="bg-coffee-50 py-24 lg:py-32">
+    <section id="quiz" className="bg-coffee-50 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-2xl px-6 lg:px-8">
         {/* Progress bar */}
         <div className="mb-2 flex items-center justify-between text-xs text-coffee-400">
@@ -262,7 +262,7 @@ export default function Quiz() {
             <button
               key={option.text}
               onClick={() => handleAnswer(q.options.indexOf(option))}
-              className={`w-full rounded-xl border-2 px-6 py-4 text-left transition-all duration-200 hover:border-gold-500 hover:bg-gold-500/5 hover:shadow-md active:scale-[0.98] ${
+              className={`w-full rounded-xl border-2 px-4 py-3.5 text-left transition-all duration-200 hover:border-gold-500 hover:bg-gold-500/5 hover:shadow-md active:scale-[0.98] sm:px-6 sm:py-4 ${
                 answers[currentStep] === q.options.indexOf(option)
                   ? "border-gold-500 bg-gold-500/10 text-coffee-900"
                   : "border-coffee-200 bg-white text-coffee-800"

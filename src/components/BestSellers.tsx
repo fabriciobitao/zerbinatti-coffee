@@ -53,31 +53,31 @@ export default function BestSellers() {
   const { addItem } = useCart();
 
   return (
-    <section className="bg-coffee-200 py-16 lg:py-20">
+    <section className="bg-coffee-200 py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Destaque
           </span>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-coffee-900">
+          <h2 className="mt-2 font-serif text-2xl font-bold text-coffee-900 sm:text-3xl">
             Mais Vendidos
           </h2>
         </div>
 
         {/* Grid centralizado */}
-        <div className="flex justify-center gap-5 overflow-x-auto pb-4 md:overflow-visible md:pb-0">
+        <div className="flex justify-center gap-3 overflow-x-auto pb-4 sm:gap-5 md:overflow-visible md:pb-0">
           {bestSellers.map((product) => (
             <div
               key={product.name}
-              className="group w-[220px] shrink-0 cursor-pointer rounded-xl border border-coffee-100 bg-white p-4 transition-all hover:border-gold-400 hover:shadow-lg"
+              className="group w-[170px] shrink-0 cursor-pointer rounded-xl border border-coffee-100 bg-white p-3 transition-all hover:border-gold-400 hover:shadow-lg sm:w-[220px] sm:p-4"
             >
               {/* Product bag image */}
               <div className="flex items-center justify-center rounded-lg bg-gradient-to-b from-coffee-50 to-coffee-100/50 py-4">
                 <img
                   src="/images/rotulo-500g.png"
                   alt={product.name}
-                  className="h-[160px] w-auto object-contain"
+                  className="h-[120px] w-auto object-contain sm:h-[160px]"
                 />
               </div>
 

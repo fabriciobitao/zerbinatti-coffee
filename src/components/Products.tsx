@@ -54,14 +54,14 @@ export default function Products() {
   const sectionRef = useScrollReveal();
 
   return (
-    <section id="cafes" className="bg-coffee-100/50 py-24 lg:py-32">
+    <section id="cafes" className="bg-coffee-100/50 py-16 sm:py-24 lg:py-32">
       <div ref={sectionRef} className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div className="reveal mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Nossos Cafés
           </span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-900 md:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
             Edições da Safra 2026
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-600">
@@ -71,7 +71,7 @@ export default function Products() {
         </div>
 
         {/* Product grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => {
             const inst = installments(product.price);
             return (
@@ -109,7 +109,7 @@ export default function Products() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   {/* Score badge */}
                   <div className="mb-3 flex items-center gap-2">
                     <span className="rounded-full bg-green-800/10 px-2.5 py-0.5 text-xs font-semibold text-green-800">

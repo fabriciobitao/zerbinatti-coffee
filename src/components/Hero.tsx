@@ -46,15 +46,15 @@ export default function Hero() {
       </div>
 
       {/* Mobile product */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[280px] h-[300px] md:hidden">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] max-w-[280px] h-[250px] sm:h-[300px] md:hidden">
         <div className="absolute inset-0 bg-contain bg-bottom bg-no-repeat" style={{ backgroundImage: "url('/images/hero-bg.jpg')" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-coffee-950 via-coffee-950/30 to-coffee-950/60" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-lg pt-24 pb-80 md:pb-0">
-          <img src="/images/logo-white.png" alt="Zerbinatti Coffee" className={`mb-8 h-20 md:h-24 lg:h-28 ${fadeClass("delay-0")}`} />
+        <div className="max-w-lg pt-20 pb-64 sm:pt-24 sm:pb-80 md:pb-0">
+          <img src="/images/logo-white.png" alt="Zerbinatti Coffee" className={`mb-6 h-14 sm:mb-8 sm:h-20 md:h-24 lg:h-28 ${fadeClass("delay-0")}`} />
 
           <div className={fadeClass("delay-200")}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-coffee-900/60 px-4 py-2 backdrop-blur-sm">
@@ -63,30 +63,30 @@ export default function Hero() {
             </div>
           </div>
 
-          <h1 className={`font-serif text-4xl font-bold leading-tight tracking-tight text-coffee-50 md:text-5xl lg:text-6xl ${fadeClass("delay-300")}`}>
+          <h1 className={`font-serif text-3xl font-bold leading-tight tracking-tight text-coffee-50 sm:text-4xl md:text-5xl lg:text-6xl ${fadeClass("delay-300")}`}>
             Do Nosso <span className="italic text-gold-400">Legado</span>
             <br />Para Sua Mesa
-            <br /><span className="text-2xl font-normal text-coffee-300 md:text-3xl lg:text-4xl">Desde 1897</span>
+            <br /><span className="text-xl font-normal text-coffee-300 sm:text-2xl md:text-3xl lg:text-4xl">Desde 1897</span>
           </h1>
 
-          <p className={`mt-6 max-w-md text-lg leading-relaxed text-coffee-200 ${fadeClass("delay-[500ms]")}`}>
+          <p className={`mt-4 max-w-md text-base leading-relaxed text-coffee-200 sm:mt-6 sm:text-lg ${fadeClass("delay-[500ms]")}`}>
             Café moído torrado premium da fazenda. 100% Arábica, secagem natural, torra média-clara. Notas de frutas e caramelo.
           </p>
 
-          <div className={`mt-8 grid grid-cols-3 gap-4 ${fadeClass("delay-[600ms]")}`}>
+          <div className={`mt-6 grid grid-cols-3 gap-2 sm:mt-8 sm:gap-4 ${fadeClass("delay-[600ms]")}`}>
             {[["Altitude", "900-1000m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
-              <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-3 text-center backdrop-blur-sm">
-                <div className="text-xs text-coffee-400">{label}</div>
-                <div className="mt-1 text-sm font-semibold text-coffee-100">{value}</div>
+              <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-2 text-center backdrop-blur-sm sm:p-3">
+                <div className="text-[10px] text-coffee-400 sm:text-xs">{label}</div>
+                <div className="mt-0.5 text-xs font-semibold text-coffee-100 sm:mt-1 sm:text-sm">{value}</div>
               </div>
             ))}
           </div>
 
           <div className={`mt-10 flex flex-col gap-4 sm:flex-row ${fadeClass("delay-[700ms]")}`}>
-            <a href="#cafes" className="rounded-full bg-gold-500 px-8 py-4 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all duration-200 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.97]">
+            <a href="#cafes" className="rounded-full bg-gold-500 px-6 py-3.5 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all duration-200 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.97] sm:px-8 sm:py-4">
               Comprar Avulso
             </a>
-            <a href="#assinatura" className="rounded-full border border-coffee-400/30 px-8 py-4 text-center text-sm font-medium tracking-wide text-coffee-200 transition-all duration-200 hover:border-coffee-300 hover:text-coffee-50 active:scale-[0.97]">
+            <a href="#assinatura" className="rounded-full border border-coffee-400/30 px-6 py-3.5 text-center text-sm font-medium tracking-wide text-coffee-200 transition-all duration-200 hover:border-coffee-300 hover:text-coffee-50 active:scale-[0.97] sm:px-8 sm:py-4">
               Assinar Mensal
             </a>
           </div>

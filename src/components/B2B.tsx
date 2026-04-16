@@ -1,18 +1,18 @@
 export default function B2B() {
   return (
-    <section id="contato" className="bg-coffee-100/50 py-24 lg:py-32">
+    <section id="contato" className="bg-coffee-100/50 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <div>
             <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
               Para Empresas
             </span>
-            <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-900 md:text-5xl">
+            <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
               Parceria B2B
             </h2>
             <div className="mt-4 h-px w-16 bg-gold-500" />
 
-            <p className="mt-8 text-lg leading-relaxed text-coffee-600">
+            <p className="mt-6 text-base leading-relaxed text-coffee-600 sm:mt-8 sm:text-lg">
               Torrefações, cafeterias, restaurantes e escritórios — levamos
               o café Zerbinatti direto para o seu negócio. Sem intermediários,
               com alocação exclusiva e preços especiais.
@@ -38,7 +38,7 @@ export default function B2B() {
               ].map((item) => (
                 <div
                   key={item.title}
-                  className="flex gap-4 rounded-xl border border-coffee-200 bg-white p-5"
+                  className="flex gap-3 rounded-xl border border-coffee-200 bg-white p-4 sm:gap-4 sm:p-5"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold-500/10">
                     <span className="text-lg text-gold-600">✦</span>

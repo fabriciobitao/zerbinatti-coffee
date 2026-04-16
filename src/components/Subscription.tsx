@@ -48,14 +48,14 @@ const plans = [
 
 export default function Subscription() {
   return (
-    <section id="assinatura" className="bg-coffee-950 py-24 lg:py-32">
+    <section id="assinatura" className="bg-coffee-950 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-400 uppercase">
             Assinatura
           </span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-50 md:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-50 sm:text-4xl md:text-5xl">
             Café Especial Todo Mês
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-400">
@@ -66,11 +66,11 @@ export default function Subscription() {
         </div>
 
         {/* Plans */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-5 sm:gap-8 md:grid-cols-3">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-2xl p-8 transition-all ${
+              className={`relative rounded-2xl p-5 transition-all sm:p-8 ${
                 plan.highlight
                   ? "border-2 border-gold-500 bg-coffee-900 shadow-2xl shadow-gold-500/10"
                   : "border border-coffee-800 bg-coffee-900/50"
@@ -92,7 +92,7 @@ export default function Subscription() {
               </div>
 
               <div className="mb-8">
-                <span className="font-serif text-4xl font-bold text-coffee-50">
+                <span className="font-serif text-3xl font-bold text-coffee-50 sm:text-4xl">
                   {plan.price}
                 </span>
                 <span className="text-coffee-400">{plan.frequency}</span>
