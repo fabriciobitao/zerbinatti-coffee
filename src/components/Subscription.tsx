@@ -70,7 +70,7 @@ export default function Subscription() {
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative rounded-2xl p-5 transition-all sm:p-8 ${
+              className={`relative flex flex-col rounded-2xl p-5 transition-all sm:p-8 ${
                 plan.highlight
                   ? "border-2 border-gold-500 bg-coffee-900 shadow-2xl shadow-gold-500/10"
                   : "border border-coffee-800 bg-coffee-900/50"
@@ -120,7 +120,7 @@ export default function Subscription() {
               </ul>
 
               <button
-                className={`w-full rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
+                className={`mt-auto w-full rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
                   plan.highlight
                     ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
                     : "bg-coffee-700 text-coffee-100 hover:bg-coffee-600 hover:shadow-lg"
