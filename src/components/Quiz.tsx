@@ -81,17 +81,14 @@ const results: Record<string, { id: string; name: string; price: number; weight:
 export default function Quiz() {
   const [started, setStarted] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  const [scores, setScores] = useState({ classico: 0, reserva: 0, micro: 0 });
+  const [answers, setAnswers] = useState<(number | null)[]>(questions.map(() => null));
   const [finished, setFinished] = useState(false);
   const { addItem } = useCart();
 
-  const handleAnswer = (points: { classico: number; reserva: number; micro: number }) => {
-    const newScores = {
-      classico: scores.classico + points.classico,
-      reserva: scores.reserva + points.reserva,
-      micro: scores.micro + points.micro,
-    };
-    setScores(newScores);
+  const handleAnswer = (optionIndex: number) => {
+    const newAnswers = [...answers];
+    newAnswers[currentStep] = optionIndex;
+    setAnswers(newAnswers);
 
     if (currentStep < questions.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -100,7 +97,21 @@ export default function Quiz() {
     }
   };
 
+  const getScores = () => {
+    const totals = { classico: 0, reserva: 0, micro: 0 };
+    answers.forEach((answerIdx, stepIdx) => {
+      if (answerIdx !== null) {
+        const pts = questions[stepIdx].options[answerIdx].points;
+        totals.classico += pts.classico;
+        totals.reserva += pts.reserva;
+        totals.micro += pts.micro;
+      }
+    });
+    return totals;
+  };
+
   const getResult = () => {
+    const scores = getScores();
     const winner = Object.entries(scores).sort((a, b) => b[1] - a[1])[0][0];
     return results[winner];
   };
@@ -108,7 +119,7 @@ export default function Quiz() {
   const restart = () => {
     setStarted(false);
     setCurrentStep(0);
-    setScores({ classico: 0, reserva: 0, micro: 0 });
+    setAnswers(questions.map(() => null));
     setFinished(false);
   };
 
@@ -250,8 +261,12 @@ export default function Quiz() {
           {q.options.map((option) => (
             <button
               key={option.text}
-              onClick={() => handleAnswer(option.points)}
-              className="w-full rounded-xl border-2 border-coffee-200 bg-white px-6 py-4 text-left text-coffee-800 transition-all duration-200 hover:border-gold-500 hover:bg-gold-500/5 hover:shadow-md active:scale-[0.98]"
+              onClick={() => handleAnswer(q.options.indexOf(option))}
+              className={`w-full rounded-xl border-2 px-6 py-4 text-left transition-all duration-200 hover:border-gold-500 hover:bg-gold-500/5 hover:shadow-md active:scale-[0.98] ${
+                answers[currentStep] === q.options.indexOf(option)
+                  ? "border-gold-500 bg-gold-500/10 text-coffee-900"
+                  : "border-coffee-200 bg-white text-coffee-800"
+              }`}
             >
               <span className="text-base font-medium">{option.text}</span>
             </button>
