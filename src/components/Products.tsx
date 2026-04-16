@@ -147,7 +147,7 @@ export default function Products() {
                   {/* CTA */}
                   <button
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, weight: product.weight })}
-                    className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-800 hover:shadow-lg active:scale-[0.97] group-hover:bg-gold-600 group-hover:text-coffee-950"
+                    className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-700 hover:shadow-lg active:scale-[0.97]"
                   >
                     Adicionar ao Carrinho
                   </button>
