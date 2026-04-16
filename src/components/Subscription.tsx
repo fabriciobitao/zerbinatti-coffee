@@ -1,6 +1,6 @@
 const plans = [
   {
-    name: "Descoberta",
+    name: "Apreciador",
     price: "R$ 69,90",
     frequency: "/mês",
     description: "Perfeito para quem está começando no mundo do café especial.",
@@ -10,11 +10,11 @@ const plans = [
       "Ficha de degustação inclusa",
       "Frete grátis",
     ],
-    cta: "Começar Descoberta",
+    cta: "Ser Apreciador",
     highlight: false,
   },
   {
-    name: "Connoisseur",
+    name: "Da Família",
     price: "R$ 122,90",
     frequency: "/mês",
     description: "Para quem busca cafés únicos de diferentes regiões do Brasil.",
@@ -25,11 +25,11 @@ const plans = [
       "Acesso a micro-lotes primeiro",
       "Frete grátis",
     ],
-    cta: "Ser Connoisseur",
+    cta: "Entrar pra Família",
     highlight: true,
   },
   {
-    name: "Colecionador",
+    name: "Herdeiro",
     price: "R$ 209,90",
     frequency: "/mês",
     description: "A experiência completa para verdadeiros apaixonados.",
@@ -41,7 +41,7 @@ const plans = [
       "Desconto de 15% na loja",
       "Frete grátis",
     ],
-    cta: "Ser Colecionador",
+    cta: "Ser Herdeiro",
     highlight: false,
   },
 ];
