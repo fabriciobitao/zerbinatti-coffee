@@ -1,5 +1,10 @@
+"use client";
+
+import { useCart } from "@/lib/cart-context";
+
 const products = [
   {
+    id: "classico-500g",
     name: "Clássico Zerbinatti",
     description: "Blend tradicional da família. Notas de chocolate, caramelo e nozes.",
     score: "85",
@@ -7,9 +12,9 @@ const products = [
     weight: "500g",
     price: 69.9,
     tag: "Mais Vendido",
-    image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
   },
   {
+    id: "reserva-500g",
     name: "Reserva Especial",
     description: "Single origin, colheita seletiva. Notas de frutas vermelhas e mel.",
     score: "88",
@@ -17,9 +22,9 @@ const products = [
     weight: "500g",
     price: 89.9,
     tag: "Edição Limitada",
-    image: "https://images.unsplash.com/photo-1587049016823-69ef9d68bd44?w=600&q=80",
   },
   {
+    id: "microlote-500g",
     name: "Micro-Lote Premium",
     description: "Lote exclusivo, 500 pacotes. Notas florais, cítricas e acidez brilhante.",
     score: "90+",
@@ -27,7 +32,6 @@ const products = [
     weight: "500g",
     price: 119.9,
     tag: "Raridade",
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=600&q=80",
   },
 ];
 
@@ -45,6 +49,8 @@ function installments(value: number) {
 }
 
 export default function Products() {
+  const { addItem } = useCart();
+
   return (
     <section id="cafes" className="bg-coffee-100/50 py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -92,11 +98,7 @@ export default function Products() {
                       }}
                     >
                       <div className="absolute inset-[6%] flex items-center justify-center">
-                        <img
-                          src="/images/rotulo-500g.png"
-                          alt={product.name}
-                          className="h-full w-full object-contain"
-                        />
+                        <img src="/images/rotulo-500g.png" alt={product.name} className="h-full w-full object-contain" />
                       </div>
                       <div className="absolute left-0 top-0 bottom-0 w-[6%]" style={{ background: "linear-gradient(90deg, rgba(0,0,0,0.1), transparent)" }} />
                     </div>
@@ -125,16 +127,12 @@ export default function Products() {
 
                   {/* Pricing */}
                   <div className="mt-5 rounded-lg bg-coffee-50 p-4">
-                    {/* PIX price */}
                     <div className="flex items-baseline gap-2">
                       <span className="text-2xl font-bold text-green-800">
                         {pixPrice(product.price)}
                       </span>
-                      <span className="text-sm font-medium text-green-700">
-                        no PIX
-                      </span>
+                      <span className="text-sm font-medium text-green-700">no PIX</span>
                     </div>
-                    {/* Original price */}
                     <div className="mt-1 text-sm text-coffee-400">
                       ou {formatCurrency(product.price)} em até{" "}
                       <span className="font-semibold text-coffee-700">
@@ -145,7 +143,10 @@ export default function Products() {
                   </div>
 
                   {/* CTA */}
-                  <button className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-800 hover:shadow-lg">
+                  <button
+                    onClick={() => addItem({ id: product.id, name: product.name, price: product.price, weight: product.weight })}
+                    className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-800 hover:shadow-lg active:scale-95"
+                  >
                     Adicionar ao Carrinho
                   </button>
                 </div>

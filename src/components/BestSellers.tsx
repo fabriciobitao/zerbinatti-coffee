@@ -1,5 +1,10 @@
+"use client";
+
+import { useCart } from "@/lib/cart-context";
+
 const bestSellers = [
   {
+    id: "classico-500g",
     name: "Clássico Zerbinatti",
     weight: "500g",
     price: 69.9,
@@ -7,6 +12,7 @@ const bestSellers = [
     stars: 4.8,
   },
   {
+    id: "reserva-500g",
     name: "Reserva Especial",
     weight: "500g",
     price: 89.9,
@@ -14,6 +20,7 @@ const bestSellers = [
     stars: 4.7,
   },
   {
+    id: "microlote-500g",
     name: "Micro-Lote Premium",
     weight: "500g",
     price: 119.9,
@@ -43,6 +50,8 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default function BestSellers() {
+  const { addItem } = useCart();
+
   return (
     <section className="bg-coffee-200 py-16 lg:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -93,6 +102,12 @@ export default function BestSellers() {
                 <p className="text-xs text-coffee-400">
                   {product.reviews} avaliações
                 </p>
+                <button
+                  onClick={() => addItem({ id: product.id, name: product.name, price: product.price, weight: product.weight })}
+                  className="mt-3 w-full rounded-full bg-coffee-900 py-2 text-xs font-semibold text-coffee-50 transition-all hover:bg-coffee-800 active:scale-95"
+                >
+                  Adicionar
+                </button>
               </div>
             </div>
           ))}

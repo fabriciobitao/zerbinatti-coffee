@@ -123,7 +123,7 @@ export default function Subscription() {
                 className={`w-full rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
                   plan.highlight
                     ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
-                    : "border border-coffee-600 text-coffee-200 hover:border-gold-500 hover:text-gold-400"
+                    : "bg-coffee-700 text-coffee-100 hover:bg-coffee-600 hover:shadow-lg"
                 }`}
               >
                 {plan.cta}
