@@ -82,7 +82,7 @@ export default function Subscription() {
                 </div>
               )}
 
-              <div className="mb-6">
+              <div className="mb-6 text-center">
                 <h3 className="font-serif text-2xl font-bold text-coffee-50">
                   {plan.name}
                 </h3>
