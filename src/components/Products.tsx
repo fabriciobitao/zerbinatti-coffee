@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart } from "@/lib/cart-context";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const products = [
   {
@@ -50,12 +51,13 @@ function installments(value: number) {
 
 export default function Products() {
   const { addItem } = useCart();
+  const sectionRef = useScrollReveal();
 
   return (
     <section id="cafes" className="bg-coffee-100/50 py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div ref={sectionRef} className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-16 text-center">
+        <div className="reveal mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Nossos Cafés
           </span>
@@ -75,7 +77,7 @@ export default function Products() {
             return (
               <div
                 key={product.name}
-                className="group relative overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-xl"
+                className={`reveal reveal-delay-${products.indexOf(product) + 1} group relative overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(26,17,8,0.25)]`}
               >
                 {/* Tag */}
                 <div className="absolute left-4 top-4 z-10 rounded-full bg-coffee-900/90 px-3 py-1 text-xs font-medium text-gold-400 backdrop-blur-sm">
@@ -145,7 +147,7 @@ export default function Products() {
                   {/* CTA */}
                   <button
                     onClick={() => addItem({ id: product.id, name: product.name, price: product.price, weight: product.weight })}
-                    className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-800 hover:shadow-lg active:scale-95"
+                    className="mt-4 w-full rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-800 hover:shadow-lg active:scale-[0.97] group-hover:bg-gold-600 group-hover:text-coffee-950"
                   >
                     Adicionar ao Carrinho
                   </button>

@@ -39,7 +39,7 @@ const badges = [
 
 export default function TrustBar() {
   return (
-    <section className="border-b border-coffee-200 bg-white py-5">
+    <section className="border-b border-coffee-200/50 bg-gradient-to-b from-coffee-100 to-coffee-50 py-6">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
           {badges.map((badge) => (
