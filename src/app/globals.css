@@ -165,6 +165,15 @@ body::after {
 .drop-cap-gold::first-letter {
   color: var(--color-gold-600);
 }
+/* Mobile: drop cap menor para nao quebrar o fluxo em tela estreita */
+@media (max-width: 640px) {
+  .drop-cap::first-letter {
+    font-size: 3.4em;
+    line-height: 0.85;
+    padding-right: 0.1em;
+    padding-top: 0.1em;
+  }
+}
 
 /* Pull quote — citação editorial com ornamento */
 .pull-quote {
@@ -188,6 +197,19 @@ body::after {
   color: var(--color-gold-500);
   opacity: 0.35;
 }
+@media (max-width: 640px) {
+  .pull-quote {
+    font-size: 1.375rem;
+    line-height: 1.3;
+    padding-left: 1.1rem;
+    border-left-width: 2px;
+  }
+  .pull-quote::before {
+    font-size: 4.25rem;
+    top: -1.75rem;
+    left: -0.15rem;
+  }
+}
 
 /* Marginalia — anotação lateral em tipografia pequena */
 .marginalia {
@@ -199,6 +221,27 @@ body::after {
   color: var(--color-coffee-500);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
+}
+
+/* Marginalia-horizontal — variante mobile/horizontal */
+.marginalia-h {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-coffee-500);
+}
+.marginalia-h::before {
+  content: "";
+  display: inline-block;
+  width: 1.25rem;
+  height: 1px;
+  background: var(--color-gold-500);
+  opacity: 0.8;
 }
 
 /* Kicker — eyebrow tipográfico com ornamento */
@@ -221,6 +264,17 @@ body::after {
   height: 1px;
   background: currentColor;
   opacity: 0.6;
+}
+@media (max-width: 640px) {
+  .kicker {
+    font-size: 0.625rem;
+    letter-spacing: 0.24em;
+    gap: 0.5rem;
+  }
+  .kicker::before,
+  .kicker::after {
+    width: 1rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
@@ -358,17 +412,56 @@ body::after {
   transform: scaleX(1);
 }
 
+/* Monthly feature — details colapsável no mobile, forçado aberto no desktop */
+@media (min-width: 768px) {
+  details.monthly-why > ul {
+    display: block !important;
+  }
+}
+details.monthly-why > ul {
+  display: block;
+}
+details.monthly-why:not([open]) > ul {
+  display: none;
+}
+@media (min-width: 768px) {
+  details.monthly-why:not([open]) > ul {
+    display: block;
+  }
+  details.monthly-why > summary svg {
+    display: none;
+  }
+}
+
 /* Respeita usuário que desativou motion */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .bean-rotate,
   .float-subtle,
   .word-rise {
-    animation: none;
+    animation: none !important;
   }
   .reveal-stagger > *,
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+  .card-lift:hover {
+    transform: none;
+  }
+  .link-editorial::after {
+    transform: scaleX(1);
     transition: none;
   }
 }

@@ -19,9 +19,9 @@ export default function Products() {
         aria-hidden
       >
         <span
-          className="select-none font-serif italic text-coffee-200/50"
+          className="select-none font-serif italic text-coffee-200/35 sm:text-coffee-200/50"
           style={{
-            fontSize: "clamp(10rem, 28vw, 28rem)",
+            fontSize: "clamp(15rem, 44vw, 28rem)",
             fontWeight: 400,
             lineHeight: 1,
             letterSpacing: "-0.04em",
@@ -35,7 +35,7 @@ export default function Products() {
         <div className="reveal flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-16">
           <div className="max-w-xl">
             <Kicker>Cafés da casa</Kicker>
-            <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.25rem,5.5vw,4.5rem)]">
+            <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.75rem,8vw,4.5rem)]">
               Três cafés
               <br />
               <span className="italic text-gold-600">da safra 2026.</span>

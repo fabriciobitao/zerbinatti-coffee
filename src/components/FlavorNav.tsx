@@ -73,7 +73,7 @@ export default function FlavorNav() {
         <span
           className="select-none font-serif italic text-coffee-100/60"
           style={{
-            fontSize: "clamp(8rem, 22vw, 22rem)",
+            fontSize: "clamp(13rem, 35vw, 22rem)",
             fontWeight: 400,
             lineHeight: 1,
             letterSpacing: "-0.04em",
@@ -103,36 +103,36 @@ export default function FlavorNav() {
           </div>
         </div>
 
-        {/* Grid editorial — 2 colunas mobile, 3 tablet, 6 desktop com hover dramático */}
-        <div className="mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-coffee-200 bg-coffee-200 sm:grid-cols-3 lg:grid-cols-6">
+        {/* Grid editorial — 2 colunas mobile, 3 tablet, 6 desktop com hover/active dramático */}
+        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-coffee-200 bg-coffee-200 sm:mt-16 sm:grid-cols-3 lg:grid-cols-6">
           {flavors.map((flavor) => {
             const Icon = flavor.icon;
             return (
               <Link
                 key={flavor.key}
                 href={`/cafes/${flavor.slug}`}
-                className="group relative flex flex-col items-start gap-4 bg-coffee-50 p-6 transition-all duration-500 hover:bg-coffee-900 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-gold-500 sm:p-8"
+                className="group relative flex min-h-[180px] flex-col items-start gap-3 bg-coffee-50 p-4 transition-all duration-500 hover:bg-coffee-900 active:bg-coffee-900 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-gold-500 sm:gap-4 sm:p-6 lg:p-8"
               >
                 {/* Número de ordem tipográfico */}
-                <span className="font-serif text-[10px] tracking-[0.3em] text-coffee-400 uppercase transition-colors group-hover:text-gold-400">
+                <span className="font-serif text-xs tracking-[0.2em] text-coffee-600 uppercase transition-colors group-hover:text-gold-400 group-active:text-gold-400">
                   {String(flavors.indexOf(flavor) + 1).padStart(2, "0")}
                 </span>
 
                 <Icon
-                  size={56}
-                  className="text-coffee-800 transition-all duration-500 group-hover:text-gold-400 group-hover:scale-110"
+                  size={40}
+                  className="text-coffee-800 transition-all duration-500 group-hover:text-gold-400 group-hover:scale-110 group-active:text-gold-400 sm:!w-[48px] sm:!h-[48px] lg:!w-[56px] lg:!h-[56px]"
                 />
 
                 <div>
-                  <h3 className="font-serif text-lg font-bold leading-tight text-coffee-900 transition-colors group-hover:text-coffee-50 sm:text-xl">
+                  <h3 className="font-serif text-base font-bold leading-tight text-coffee-900 transition-colors group-hover:text-coffee-50 group-active:text-coffee-50 sm:text-lg lg:text-xl">
                     {flavor.label}
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-coffee-600 transition-colors group-hover:text-coffee-300">
+                  <p className="mt-1.5 text-xs leading-relaxed text-coffee-700 transition-colors group-hover:text-coffee-300 group-active:text-coffee-300 sm:mt-2">
                     {flavor.description}
                   </p>
                 </div>
 
-                <span className="mt-auto flex items-center gap-2 pt-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-700 transition-colors group-hover:text-gold-400">
+                <span className="mt-auto flex items-center gap-2 pt-2 text-xs font-semibold uppercase tracking-[0.15em] text-coffee-800 transition-colors group-hover:text-gold-400 group-active:text-gold-400 sm:pt-4">
                   Ver café
                   <svg
                     className="h-3 w-3 transition-transform duration-500 group-hover:translate-x-1"

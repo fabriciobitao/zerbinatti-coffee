@@ -24,7 +24,7 @@ export default function Hero() {
         <span
           className="select-none font-serif font-bold leading-none text-coffee-200/50"
           style={{
-            fontSize: "clamp(14rem, 40vw, 42rem)",
+            fontSize: "clamp(22rem, 55vw, 42rem)",
             WebkitTextStroke: "1.5px rgb(215 204 200 / 0.45)",
             color: "transparent",
             letterSpacing: "-0.04em",
@@ -38,7 +38,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[500px] w-[500px] rounded-full bg-gold-400/15 blur-[120px]" />
       <div className="pointer-events-none absolute left-[-10%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-coffee-700/10 blur-[120px]" />
 
-      {/* Marginália vertical esquerda */}
+      {/* Marginália vertical esquerda — desktop */}
       <div className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 hidden lg:block">
         <Marginalia>
           Serra do Cabral · Minas Gerais · Italia 1897
@@ -48,6 +48,17 @@ export default function Hero() {
       <div className="relative mx-auto grid max-w-7xl grid-cols-12 gap-6 px-6 lg:px-8">
         {/* Coluna esquerda — conteúdo editorial */}
         <div className="col-span-12 lg:col-span-7 lg:pt-14">
+          {/* Marginalia horizontal — mobile only (substitui a vertical) */}
+          <div
+            className={`mb-6 flex items-center gap-2 transition-opacity duration-700 lg:hidden ${
+              loaded ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <span className="marginalia-h">
+              Serra do Cabral · MG · Italia 1897
+            </span>
+          </div>
+
           <div
             className={`transition-all duration-700 ${
               loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -56,18 +67,18 @@ export default function Hero() {
             <Kicker>Dal 1897 · Famiglia Zerbinatti</Kicker>
           </div>
 
-          {/* Título editorial em escala dramática */}
-          <h1 className="mt-8 font-serif font-bold leading-[0.92] tracking-[-0.035em] text-coffee-900">
-            <span className="block text-[clamp(3rem,9vw,7.5rem)]">
+          {/* Título editorial em escala dramática — mobile condensa em 2 linhas */}
+          <h1 className="mt-6 font-serif font-bold leading-[0.92] tracking-[-0.035em] text-coffee-900 sm:mt-8">
+            <span className="block text-[clamp(3.25rem,13vw,7.5rem)]">
               <SplitReveal text="Café brasileiro," stagger={0.06} />
             </span>
             <span
-              className="mt-2 block italic text-gold-600 text-[clamp(3rem,9vw,7.5rem)]"
+              className="mt-1 block italic text-gold-600 text-[clamp(3.25rem,13vw,7.5rem)] sm:mt-2"
               style={{ fontWeight: 400 }}
             >
               <SplitReveal text="casa italiana," stagger={0.06} />
             </span>
-            <span className="mt-2 block text-[clamp(3rem,9vw,7.5rem)]">
+            <span className="mt-1 block text-[clamp(3rem,12vw,7.5rem)] sm:mt-2">
               <SplitReveal text="desde 1897." stagger={0.06} />
             </span>
           </h1>
@@ -105,7 +116,7 @@ export default function Hero() {
                 <div className="font-serif text-xl font-bold text-coffee-900 sm:text-2xl">
                   {value}
                 </div>
-                <div className="mt-1 text-[10px] tracking-[0.25em] text-coffee-500 uppercase sm:text-xs">
+                <div className="mt-1 text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   {label}
                 </div>
               </div>
@@ -135,7 +146,7 @@ export default function Hero() {
             </a>
             <a
               href="#cafes"
-              className="link-editorial text-sm font-semibold uppercase tracking-[0.2em] text-coffee-900"
+              className="link-editorial inline-flex min-h-[44px] items-center text-sm font-semibold uppercase tracking-[0.2em] text-coffee-900 underline decoration-coffee-400 underline-offset-[6px] decoration-1"
             >
               Ver os três cafés
             </a>
@@ -151,39 +162,72 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
             </span>
-            <span className="text-[10px] font-medium tracking-[0.3em] text-coffee-600 uppercase">
+            <span className="text-xs font-medium tracking-[0.2em] text-coffee-700 uppercase">
               Safra 2026 · torrado esta semana
             </span>
           </div>
         </div>
 
-        {/* Coluna direita — grão 3D signature */}
-        <div className="col-span-12 lg:col-span-5 lg:pt-4">
+        {/* Coluna direita — grão 3D signature (md+) */}
+        <div className="hidden md:col-span-12 md:block lg:col-span-5 lg:pt-4">
           <div className="relative flex items-center justify-center lg:justify-end">
             <div
               className={`float-subtle transition-all duration-1000 delay-300 ${
                 loaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
               }`}
             >
-              <CoffeeBean3D size={420} className="hidden md:block" />
-              <CoffeeBean3D size={260} className="md:hidden" />
+              <CoffeeBean3D size={420} />
             </div>
 
             {/* Metadata flutuante ao lado do grão */}
             <div
-              className={`absolute left-4 bottom-0 max-w-[180px] rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm transition-all delay-[1500ms] duration-700 md:bottom-10 md:left-auto md:right-[-20px] ${
+              className={`absolute bottom-10 right-[-20px] max-w-[180px] rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm transition-all delay-[1500ms] duration-700 ${
                 loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <div className="text-[10px] font-medium tracking-[0.25em] text-gold-700 uppercase">
+              <div className="text-xs font-semibold tracking-[0.2em] text-coffee-800 uppercase">
                 Torra da semana
               </div>
               <div className="mt-2 font-serif text-lg font-bold leading-tight text-coffee-900">
                 Yellow Bourbon
               </div>
-              <div className="mt-1 text-xs text-coffee-600">
+              <div className="mt-1 text-xs text-coffee-700">
                 Talhão alto · 1.050m · honey
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Grão fantasma mobile — posicionado absoluto, atrás do conteúdo, signature preservada */}
+      <div
+        className={`pointer-events-none absolute right-[-60px] top-[8%] md:hidden transition-all duration-1000 delay-300 ${
+          loaded ? "opacity-60 scale-100" : "opacity-0 scale-90"
+        }`}
+        aria-hidden
+      >
+        <div className="float-subtle">
+          <CoffeeBean3D size={220} />
+        </div>
+      </div>
+
+      {/* Metadata card — mobile, abaixo do CTA, em linha editorial */}
+      <div
+        className={`relative mx-auto mt-10 max-w-7xl px-6 md:hidden ${
+          loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        } transition-all duration-700 delay-[1500ms]`}
+      >
+        <div className="inline-flex items-center gap-4 rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm">
+          <div className="h-10 w-px bg-gold-500/60" />
+          <div>
+            <div className="text-xs font-semibold tracking-[0.2em] text-coffee-800 uppercase">
+              Torra da semana
+            </div>
+            <div className="mt-1 font-serif text-base font-bold leading-tight text-coffee-900">
+              Yellow Bourbon
+            </div>
+            <div className="mt-0.5 text-xs text-coffee-700">
+              Talhão alto · 1.050m · honey
             </div>
           </div>
         </div>
@@ -197,7 +241,7 @@ export default function Hero() {
         aria-hidden
       >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-[10px] tracking-[0.3em] text-coffee-500 uppercase">
+          <span className="text-xs tracking-[0.2em] text-coffee-700 uppercase">
             Scroll
           </span>
           <div className="h-10 w-px bg-gradient-to-b from-coffee-400 to-transparent" />

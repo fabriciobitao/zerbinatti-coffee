@@ -38,7 +38,7 @@ export function PullQuote({
     <figure className={`my-12 ${className}`}>
       <blockquote className="pull-quote">{children}</blockquote>
       {cite && (
-        <figcaption className="mt-4 pl-6 text-sm uppercase tracking-[0.2em] text-coffee-500">
+        <figcaption className="mt-4 pl-6 text-sm uppercase tracking-[0.2em] text-coffee-700">
           — {cite}
         </figcaption>
       )}

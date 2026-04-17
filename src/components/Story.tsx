@@ -21,7 +21,7 @@ export default function Story() {
         <span
           className="select-none font-serif font-bold text-coffee-100/60"
           style={{
-            fontSize: "clamp(12rem, 32vw, 34rem)",
+            fontSize: "clamp(16rem, 48vw, 34rem)",
             lineHeight: 1,
             letterSpacing: "-0.04em",
           }}
@@ -30,7 +30,7 @@ export default function Story() {
         </span>
       </div>
 
-      {/* Marginalia vertical */}
+      {/* Marginalia vertical desktop */}
       <div className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 lg:block">
         <Marginalia>Cap. II · Giuseppe → Lucca</Marginalia>
       </div>
@@ -39,7 +39,11 @@ export default function Story() {
         {/* Header editorial */}
         <div className="mx-auto max-w-3xl text-center">
           <Kicker>A Casa Zerbinatti</Kicker>
-          <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.5rem,6vw,5rem)]">
+          {/* Marginalia horizontal — mobile (substitui a vertical oculta) */}
+          <div className="mt-4 flex justify-center lg:hidden">
+            <span className="marginalia-h">Cap. II · Giuseppe → Lucca</span>
+          </div>
+          <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.75rem,8vw,5rem)]">
             Quatro gerações,
             <br />
             <span className="italic text-gold-600">um ofício.</span>
@@ -47,10 +51,10 @@ export default function Story() {
           <AsymmetricDivider className="mx-auto mt-8 justify-center" />
         </div>
 
-        {/* Grid asymmetric: texto ocupa col-span-7, imagem col-span-5 desktop */}
+        {/* Grid asymmetric: mobile mostra texto primeiro (order), desktop volta para esq→dir */}
         <div className="mt-16 grid grid-cols-12 gap-8 lg:gap-14">
-          {/* Imagem + elementos flutuantes */}
-          <div className="col-span-12 lg:col-span-5 lg:mt-8">
+          {/* Imagem + elementos flutuantes — vem DEPOIS no mobile (order-2), antes no desktop */}
+          <div className="order-2 col-span-12 mt-10 lg:order-1 lg:col-span-5 lg:mt-8">
             <div className="relative">
               {/* Imagem principal duotone */}
               <div className="grain-local relative overflow-hidden rounded-2xl">
@@ -74,11 +78,11 @@ export default function Story() {
               </div>
 
               {/* Selo 1897 flutuante */}
-              <div className="absolute -bottom-6 -right-6 rounded-xl bg-coffee-900 p-5 shadow-2xl sm:-bottom-8 sm:-right-8 sm:p-6">
+              <div className="absolute -bottom-4 -right-2 rounded-xl bg-coffee-900 p-4 shadow-2xl sm:-bottom-8 sm:-right-8 sm:p-6">
                 <div className="flex items-center gap-3 text-gold-400">
                   <FleurIcon size={32} strokeWidth={1} />
                   <div>
-                    <div className="text-[9px] tracking-[0.3em] text-coffee-300 uppercase">
+                    <div className="text-xs tracking-[0.2em] text-coffee-200 uppercase">
                       Dal
                     </div>
                     <div className="font-serif text-2xl font-bold leading-none text-coffee-50">
@@ -89,8 +93,8 @@ export default function Story() {
               </div>
 
               {/* Sub-card — data */}
-              <div className="absolute -top-4 -left-4 rounded-lg border border-coffee-200 bg-coffee-50 px-4 py-2 shadow-lg">
-                <div className="text-[10px] tracking-[0.3em] text-coffee-500 uppercase">
+              <div className="absolute -top-3 -left-2 rounded-lg border border-coffee-200 bg-coffee-50 px-3 py-2 shadow-lg sm:-top-4 sm:-left-4 sm:px-4">
+                <div className="text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   Primeira torra
                 </div>
                 <div className="font-serif text-sm font-bold text-coffee-900">
@@ -100,8 +104,8 @@ export default function Story() {
             </div>
           </div>
 
-          {/* Conteúdo editorial */}
-          <div className="col-span-12 lg:col-span-7 lg:pl-6">
+          {/* Conteúdo editorial — order-1 mobile (vem primeiro) */}
+          <div className="order-1 col-span-12 lg:order-2 lg:col-span-7 lg:pl-6">
             <div className="flex items-center gap-4 text-coffee-700">
               <MountainIcon size={36} strokeWidth={1.2} className="text-gold-600" />
               <h3 className="font-serif text-2xl font-bold text-coffee-800 sm:text-3xl">
@@ -136,7 +140,7 @@ export default function Story() {
                 <div className="mt-4 font-serif text-3xl font-bold leading-none text-coffee-900 sm:text-4xl">
                   100%
                 </div>
-                <div className="mt-2 text-[10px] tracking-[0.25em] text-coffee-500 uppercase sm:text-xs">
+                <div className="mt-2 text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   Arábica
                 </div>
               </div>
@@ -147,7 +151,7 @@ export default function Story() {
                 <div className="mt-4 font-serif text-3xl font-bold leading-none text-coffee-900 sm:text-4xl">
                   85+
                 </div>
-                <div className="mt-2 text-[10px] tracking-[0.25em] text-coffee-500 uppercase sm:text-xs">
+                <div className="mt-2 text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   Pontos SCA
                 </div>
               </div>
@@ -155,10 +159,13 @@ export default function Story() {
                 <div className="text-gold-600">
                   <ScrollIcon size={24} strokeWidth={1.2} />
                 </div>
-                <div className="mt-4 font-serif text-3xl font-bold leading-none text-coffee-900 sm:text-4xl">
+                <div
+                  className="mt-4 font-serif text-3xl font-bold leading-none text-coffee-900 sm:text-4xl"
+                  aria-label="quatro"
+                >
                   IV
                 </div>
-                <div className="mt-2 text-[10px] tracking-[0.25em] text-coffee-500 uppercase sm:text-xs">
+                <div className="mt-2 text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   Gerações
                 </div>
               </div>
