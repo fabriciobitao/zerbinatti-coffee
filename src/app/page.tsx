@@ -4,6 +4,8 @@ import TrustBar from "@/components/TrustBar";
 import BestSellers from "@/components/BestSellers";
 import Story from "@/components/Story";
 import Products from "@/components/Products";
+import FlavorNav from "@/components/FlavorNav";
+import MonthlyFeature from "@/components/MonthlyFeature";
 import Quiz from "@/components/Quiz";
 import Combos from "@/components/Combos";
 import Subscription from "@/components/Subscription";
@@ -18,8 +20,10 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <FlavorNav />
         <Quiz />
         <Products />
+        <MonthlyFeature />
         <BestSellers />
         <Combos />
         <SectionFade topColor="#FFFFFF" bottomColor="#1A1108" />

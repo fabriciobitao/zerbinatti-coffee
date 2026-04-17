@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import B2BForm from "@/components/B2BForm";
+import B2BCalculator from "@/components/B2BCalculator";
 import { Ornament, Monogram } from "@/components/ui/Ornament";
 
 export const metadata = {
@@ -187,6 +188,28 @@ export default function ParaEmpresas() {
                   <p className="mt-2 text-sm text-coffee-700">{i.d}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Calculadora */}
+        <section className="border-y border-coffee-200 bg-coffee-50 py-20 sm:py-24">
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
+            <div className="text-center">
+              <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
+                Calculadora de consumo
+              </span>
+              <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl">
+                Simule o consumo do seu time em 10 segundos
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-coffee-700">
+                Ajuste os sliders para ver volume mensal, tier de preço e
+                estimativa. Proposta formal em até 1 dia útil.
+              </p>
+              <Ornament className="mt-6" />
+            </div>
+            <div className="mt-12">
+              <B2BCalculator />
             </div>
           </div>
         </section>

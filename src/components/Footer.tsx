@@ -51,6 +51,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/comparar" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Comparar os 3 cafés
+                </Link>
+              </li>
+              <li>
                 <Link href="/#kits" className="text-sm text-coffee-300 hover:text-gold-400">
                   Kits e Presentes
                 </Link>
@@ -81,6 +86,11 @@ export default function Footer() {
               <li>
                 <Link href="/para-empresas" className="text-sm text-coffee-300 hover:text-gold-400">
                   B2B / Parcerias
+                </Link>
+              </li>
+              <li>
+                <Link href="/safra/2026" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Diário da Safra 2026
                 </Link>
               </li>
               <li>
