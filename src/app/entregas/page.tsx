@@ -2,7 +2,7 @@ import StaticPage from "@/components/StaticPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
 export const metadata = {
-  title: "Política de Entregas — Zerbinatti Coffee",
+  title: "Política de entregas — Zerbinatti Coffee",
   description:
     "Prazos, frete, troca e devolução de café torrado Zerbinatti.",
 };
@@ -11,7 +11,7 @@ export default function Entregas() {
   return (
     <StaticPage
       eyebrow="Logística"
-      title="Política de Entregas"
+      title="Política de entregas"
       lastUpdated="16 de abril de 2026"
     >
       <h2 className="mt-4 font-serif text-2xl font-bold text-coffee-900">

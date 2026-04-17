@@ -38,7 +38,7 @@ export default function Story() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header editorial */}
         <div className="mx-auto max-w-3xl text-center">
-          <Kicker>A Casa Zerbinatti</Kicker>
+          <Kicker>A casa Zerbinatti</Kicker>
           {/* Marginalia horizontal — mobile (substitui a vertical oculta) */}
           <div className="mt-4 flex justify-center lg:hidden">
             <span className="marginalia-h">Cap. II · Giuseppe → Lucca</span>

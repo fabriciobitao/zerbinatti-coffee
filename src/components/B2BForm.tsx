@@ -151,11 +151,11 @@ export default function B2BForm() {
             onChange={(e) => update("segment", e.target.value)}
             className="w-full rounded-lg border border-coffee-200 bg-coffee-50 px-3 py-2.5 text-sm outline-none focus:border-gold-500"
           >
-            <option value="cafeteria">Cafeteria / Coffee shop</option>
-            <option value="restaurante">Restaurante / Hotel</option>
+            <option value="cafeteria">Cafeteria / coffee shop</option>
+            <option value="restaurante">Restaurante / hotel</option>
             <option value="torrefacao">Torrefação</option>
-            <option value="escritorio">Escritório / Coworking</option>
-            <option value="varejo">Varejo / Mercado</option>
+            <option value="escritorio">Escritório / coworking</option>
+            <option value="varejo">Varejo / mercado</option>
             <option value="outro">Outro</option>
           </select>
         </Field>

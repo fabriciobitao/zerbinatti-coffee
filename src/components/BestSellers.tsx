@@ -61,7 +61,7 @@ export default function BestSellers() {
             Destaque
           </span>
           <h2 className="mt-2 font-serif text-2xl font-bold text-coffee-900 sm:text-3xl">
-            Mais Vendidos
+            Mais vendidos
           </h2>
         </div>
 

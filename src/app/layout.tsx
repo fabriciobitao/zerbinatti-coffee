@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Zerbinatti Coffee — Café brasileiro, casa italiana, desde 1897",
+        alt: "Zerbinatti Coffee — café brasileiro, casa italiana, desde 1897",
       },
     ],
   },

@@ -37,7 +37,7 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               <li>
                 <Link href="#cafes" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Todos os Cafés
+                  Todos os cafés
                 </Link>
               </li>
               <li>
@@ -47,7 +47,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="#quiz" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Quiz do Café
+                  Quiz do café
                 </Link>
               </li>
               <li>
@@ -57,7 +57,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/#kits" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Kits e Presentes
+                  Kits e presentes
                 </Link>
               </li>
             </ul>
@@ -70,12 +70,12 @@ export default function Footer() {
             <ul className="mt-4 space-y-3">
               <li>
                 <Link href="#origem" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Nossa História
+                  Nossa história
                 </Link>
               </li>
               <li>
                 <Link href="/fazenda" className="text-sm text-coffee-300 hover:text-gold-400">
-                  A Fazenda
+                  A fazenda
                 </Link>
               </li>
               <li>
@@ -85,12 +85,12 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/para-empresas" className="text-sm text-coffee-300 hover:text-gold-400">
-                  B2B / Parcerias
+                  B2B / parcerias
                 </Link>
               </li>
               <li>
                 <Link href="/safra/2026" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Diário da Safra 2026
+                  Diário da safra 2026
                 </Link>
               </li>
               <li>
@@ -152,13 +152,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-6 text-xs text-coffee-400">
               <Link href="/termos" className="hover:text-gold-400">
-                Termos de Uso
+                Termos de uso
               </Link>
               <Link href="/privacidade" className="hover:text-gold-400">
                 Privacidade
               </Link>
               <Link href="/entregas" className="hover:text-gold-400">
-                Política de Entregas
+                Política de entregas
               </Link>
             </div>
           </div>

@@ -12,7 +12,7 @@ export default function B2B() {
         <div className="mx-auto max-w-3xl">
           <div>
             <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-              Para Empresas
+              Para empresas
             </span>
             <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
               Parceria B2B
@@ -28,12 +28,12 @@ export default function B2B() {
             <div className="mt-10 space-y-6">
               {[
                 {
-                  title: "Torrefações e Cafeterias",
+                  title: "Torrefações e cafeterias",
                   description:
                     "Grãos verdes ou torrados, lotes exclusivos, suporte técnico para sua torra.",
                 },
                 {
-                  title: "Restaurantes e Hotéis",
+                  title: "Restaurantes e hotéis",
                   description:
                     "Blend personalizado com a identidade do seu estabelecimento.",
                 },

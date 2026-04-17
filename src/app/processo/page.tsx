@@ -40,7 +40,7 @@ export default function Processo() {
     },
   ];
   return (
-    <StaticPage eyebrow="Do grão à xícara" title="Nosso Processo">
+    <StaticPage eyebrow="Do grão à xícara" title="Nosso processo">
       <p>
         Café especial de verdade começa muito antes do torrador. Veja cada
         etapa que um grão Zerbinatti percorre até chegar na sua xícara.

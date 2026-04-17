@@ -89,7 +89,7 @@ export function CartButton() {
           {/* Header */}
           <div className="flex items-center justify-between border-b border-coffee-200 px-6 py-4">
             <div>
-              <h3 className="font-serif text-xl font-bold text-coffee-900">Seu Carrinho</h3>
+              <h3 className="font-serif text-xl font-bold text-coffee-900">Seu carrinho</h3>
               {itemCount > 0 && (
                 <p className="text-xs text-coffee-500">{itemCount} {itemCount === 1 ? "item" : "itens"}</p>
               )}
@@ -111,7 +111,7 @@ export function CartButton() {
               <p className="text-lg font-medium text-coffee-700">Seu carrinho está vazio</p>
               <p className="text-center text-sm text-coffee-500">Frete grátis acima de R$ 99</p>
               <button onClick={() => setOpen(false)} className="mt-2 rounded-full bg-coffee-900 px-6 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-800 active:scale-[0.97]">
-                Explorar Cafés
+                Explorar cafés
               </button>
             </div>
           ) : (
@@ -192,7 +192,7 @@ export function CartButton() {
                   Finalizar via WhatsApp — {formatCurrency(pixTotal)}
                 </a>
                 <div className="mt-3 flex items-center justify-between">
-                  <button onClick={() => setOpen(false)} className="text-sm text-coffee-500 hover:text-coffee-700">Continuar Comprando</button>
+                  <button onClick={() => setOpen(false)} className="text-sm text-coffee-500 hover:text-coffee-700">Continuar comprando</button>
                   <button onClick={clearCart} className="text-xs text-coffee-400 hover:text-red-600">Limpar</button>
                 </div>
               </div>

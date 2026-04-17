@@ -2,7 +2,7 @@ import StaticPage from "@/components/StaticPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
 export const metadata = {
-  title: "Termos de Uso — Zerbinatti Coffee",
+  title: "Termos de uso — Zerbinatti Coffee",
   description:
     "Termos e condições de uso do site e da loja Zerbinatti Coffee.",
 };
@@ -11,7 +11,7 @@ export default function Termos() {
   return (
     <StaticPage
       eyebrow="Legal"
-      title="Termos de Uso"
+      title="Termos de uso"
       lastUpdated="16 de abril de 2026"
     >
       <p>
@@ -21,16 +21,16 @@ export default function Termos() {
       </p>
 
       <h2 className="mt-8 font-serif text-2xl font-bold text-coffee-900">
-        1. Aceitação dos Termos
+        1. Aceitação dos termos
       </h2>
       <p>
-        O uso deste site implica a aceitação integral destes Termos de Uso, da
-        nossa Política de Privacidade e da Política de Entregas. Se você não
+        O uso deste site implica a aceitação integral destes Termos de uso, da
+        nossa Política de privacidade e da Política de entregas. Se você não
         concorda com algum dos termos, por favor não utilize o site.
       </p>
 
       <h2 className="mt-8 font-serif text-2xl font-bold text-coffee-900">
-        2. Produtos e Pedidos
+        2. Produtos e pedidos
       </h2>
       <p>
         As informações de produtos, preços e disponibilidade estão sujeitas a
@@ -58,7 +58,7 @@ export default function Termos() {
       </p>
 
       <h2 className="mt-8 font-serif text-2xl font-bold text-coffee-900">
-        5. Propriedade Intelectual
+        5. Propriedade intelectual
       </h2>
       <p>
         Todo o conteúdo do site (textos, imagens, marca, fotografias,

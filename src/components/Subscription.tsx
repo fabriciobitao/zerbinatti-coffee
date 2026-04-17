@@ -120,7 +120,7 @@ export default function Subscription() {
             >
               {plan.highlight && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gold-500 px-4 py-1 text-xs font-bold tracking-wide text-coffee-950 uppercase">
-                  Mais Popular
+                  Mais popular
                 </div>
               )}
 

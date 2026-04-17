@@ -5,7 +5,7 @@ import { useCart } from "@/lib/cart-context";
 const combos = [
   {
     id: "kit-degustacao",
-    name: "Kit Degustação",
+    name: "Kit degustação",
     description: "Experimente os 3 cafés da safra. Perfeito para descobrir seu favorito.",
     items: ["Clássico 250g", "Reserva 250g", "Micro-Lote 250g"],
     originalPrice: 209.7,
@@ -22,18 +22,18 @@ const combos = [
     originalPrice: 149.7,
     price: 119.9,
     weight: "3x 250g",
-    tag: "Leve 3 Pague 2",
+    tag: "Leve 3 pague 2",
     image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
   },
   {
     id: "kit-presente",
-    name: "Presente Especial",
+    name: "Presente especial",
     description: "Caixa premium com 2 cafés exclusivos + coador artesanal.",
-    items: ["Reserva 250g", "Micro-Lote 250g", "Coador Artesanal"],
+    items: ["Reserva 250g", "Micro-Lote 250g", "Coador artesanal"],
     originalPrice: 219.7,
     price: 179.9,
     weight: "kit presente",
-    tag: "Ideal para Presente",
+    tag: "Ideal para presente",
     image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
   },
 ];
@@ -51,10 +51,10 @@ export default function Combos() {
         {/* Section header */}
         <div className="mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-            Kits e Combos
+            Kits e combos
           </span>
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
-            Mais Café, Mais Desconto
+            Mais café, mais desconto
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-600">
             Monte seu kit ou escolha um pronto. Quanto mais café, maior o
@@ -144,7 +144,7 @@ export default function Combos() {
                     }
                     className="mt-4 w-full rounded-full bg-gold-500 py-3 text-sm font-bold text-coffee-950 transition-all hover:bg-gold-400 hover:shadow-lg active:scale-[0.97]"
                   >
-                    Comprar Kit
+                    Comprar kit
                   </button>
                 </div>
               </div>

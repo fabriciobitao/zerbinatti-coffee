@@ -82,10 +82,10 @@ export const products: Product[] = [
     longDescription:
       "Nascido na primeira torra de Giuseppe Zerbinatti em 1897, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente — o café que fez a reputação da casa e que você serve sem pensar duas vezes.",
     price: 69.9,
-    tag: "Mais Vendido",
+    tag: "Mais vendido",
     tagVariant: "popular",
     score: "85",
-    roast: "Média",
+    roast: "média",
     weight: "500g",
     origin: {
       farm: "Fazenda Santa Rita + lotes parceiros",
@@ -175,10 +175,10 @@ export const products: Product[] = [
     longDescription:
       "Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. Processo cereja-descascado revela a doçura do fruto e a acidez fina característica das variedades Yellow Bourbon cultivadas acima de 1.000m. Edição limitada da safra — quando acaba, acaba.",
     price: 89.9,
-    tag: "Edição Limitada",
+    tag: "Edição limitada",
     tagVariant: "limited",
     score: "88",
-    roast: "Média-Clara",
+    roast: "média-clara",
     weight: "500g",
     origin: {
       farm: "Fazenda Santa Rita",
@@ -276,7 +276,7 @@ export const products: Product[] = [
     tag: "Raridade",
     tagVariant: "new",
     score: "90+",
-    roast: "Clara",
+    roast: "clara",
     weight: "500g",
     origin: {
       farm: "Fazenda Santa Rita — Talhão 7",

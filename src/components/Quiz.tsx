@@ -10,10 +10,10 @@ const questions = [
     label: "Preparo",
     question: "Como você costuma preparar seu café?",
     options: [
-      { text: "Coador / Filtro", points: { classico: 3, reserva: 1, micro: 0 } },
-      { text: "Cafeteira Italiana (Moka)", points: { classico: 2, reserva: 2, micro: 1 } },
-      { text: "Espresso / Máquina", points: { classico: 1, reserva: 2, micro: 2 } },
-      { text: "Prensa Francesa", points: { classico: 1, reserva: 2, micro: 3 } },
+      { text: "Coador / filtro", points: { classico: 3, reserva: 1, micro: 0 } },
+      { text: "Cafeteira italiana (Moka)", points: { classico: 2, reserva: 2, micro: 1 } },
+      { text: "Espresso / máquina", points: { classico: 1, reserva: 2, micro: 2 } },
+      { text: "Prensa francesa", points: { classico: 1, reserva: 2, micro: 3 } },
       { text: "Hario V60 / Chemex", points: { classico: 0, reserva: 2, micro: 3 } },
     ],
   },
@@ -72,7 +72,7 @@ const catalog: Record<
     name: "Clássico Zerbinatti",
     price: 69.9,
     weight: "500g",
-    roast: "Torra Média",
+    roast: "Torra média",
     description:
       "Blend da família desde 1897. Chocolate, caramelo e nozes — o café do dia a dia que atravessa gerações.",
   },
@@ -82,7 +82,7 @@ const catalog: Record<
     name: "Reserva Especial",
     price: 89.9,
     weight: "500g",
-    roast: "Torra Média-Clara",
+    roast: "Torra média-clara",
     description:
       "Single origin com doçura de frutas vermelhas e mel. Para quem busca equilíbrio e complexidade.",
   },
@@ -92,7 +92,7 @@ const catalog: Record<
     name: "Micro-Lote Premium",
     price: 119.9,
     weight: "500g",
-    roast: "Torra Clara",
+    roast: "Torra clara",
     description:
       "Geisha SCA 90+. Jasmim, bergamota, mel de laranjeira. Raridade da safra 2025.",
   },

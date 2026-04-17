@@ -5,7 +5,7 @@ import B2BCalculator from "@/components/B2BCalculator";
 import { Ornament, Monogram } from "@/components/ui/Ornament";
 
 export const metadata = {
-  title: "Para Empresas — Zerbinatti Coffee B2B",
+  title: "Para empresas — Zerbinatti Coffee B2B",
   description:
     "Café especial Zerbinatti para cafeterias, restaurantes, torrefações e escritórios. Parceria direta com a fazenda, alocação exclusiva, preços escalonados.",
 };

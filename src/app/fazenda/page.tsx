@@ -1,14 +1,14 @@
 import StaticPage from "@/components/StaticPage";
 
 export const metadata = {
-  title: "A Fazenda — Zerbinatti Coffee",
+  title: "A fazenda — Zerbinatti Coffee",
   description:
     "Conheça a fazenda Zerbinatti — herança italiana, solo brasileiro, café especial desde 1897.",
 };
 
 export default function Fazenda() {
   return (
-    <StaticPage eyebrow="Origem" title="A Fazenda">
+    <StaticPage eyebrow="Origem" title="A fazenda">
       <p>
         Nossa fazenda fica na Serra do Cabral, Minas Gerais, a 900–1.000
         metros de altitude. Solos de origem vulcânica, noites frias e dias
@@ -31,7 +31,7 @@ export default function Fazenda() {
       <ul className="list-disc space-y-2 pl-6">
         <li>Altitude: 900–1.000 m</li>
         <li>Variedades: Bourbon Amarelo, Catuaí Vermelho, Mundo Novo</li>
-        <li>Processo: Natural e Cereja Descascado</li>
+        <li>Processo: natural e cereja descascado</li>
         <li>Pontuação SCA: 85 a 90+</li>
         <li>Colheita: 100% seletiva, manual</li>
       </ul>
