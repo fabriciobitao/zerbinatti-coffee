@@ -11,10 +11,10 @@ export default function Story() {
         {/* Section header */}
         <div className="mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-            Nossa História
+            A Casa Zerbinatti
           </span>
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
-            Tradição e Paixão pelo Café
+            Quatro gerações, um ofício
           </h2>
           <Ornament className="mt-6" />
         </div>
@@ -43,29 +43,30 @@ export default function Story() {
           {/* Right: Content */}
           <div className="flex flex-col justify-center">
             <h3 className="font-serif text-2xl font-bold text-coffee-800 sm:text-3xl">
-              Da Itália ao Coração do Brasil
+              Da Itália à Serra do Cabral
             </h3>
             <p className="mt-6 text-base leading-relaxed text-coffee-600 sm:text-lg">
-              A família Zerbinatti trouxe da Itália não apenas uma tradição
-              agrícola, mas uma filosofia: o café perfeito nasce da terra, do
-              tempo e do cuidado de quem planta.
+              Em 1897, Giuseppe Zerbinatti desembarcou em Santos vindo do norte
+              da Itália. Em 1952, o neto fez a primeira torra comercial. Hoje, a
+              quarta geração toca a casa — os mesmos cadernos de torra, um
+              padrão de especialidade que o tempo ensinou a reconhecer.
             </p>
             <p className="mt-4 text-base leading-relaxed text-coffee-600 sm:text-lg">
-              Cada grão Zerbinatti é cultivado com dedicação artesanal.
-              Colheita seletiva, secagem natural ao sol, torra precisa — cada
-              etapa é um ritual de qualidade.
+              Torramos em lotes pequenos porque, acima desse volume, o controle
+              fino de temperatura é impossível. Toda sacola sai da torrefação
+              com data, produtor nomeado e receita da casa. Nada entra
+              anônimo.
             </p>
             <p className="mt-4 text-base leading-relaxed text-coffee-600 sm:text-lg">
-              Nosso café não é produzido em massa. É uma edição limitada da
-              natureza, com terroir único e notas que contam a história de cada
-              safra.
+              Tradição, para nós, não é decoração — é método. É o que permite
+              ao café especial atravessar quatro gerações sem virar commodity.
             </p>
 
             {/* Notas de paladar */}
             <div className="mt-8">
               <img
                 src="/images/notas-paladar.png"
-                alt="Notas de paladar - Xícara limpa, corpo encorpado, acidez equilibrada"
+                alt="Notas do paladar da casa — xícara limpa, corpo redondo, acidez equilibrada"
                 className="w-full max-w-sm rounded-lg"
               />
             </div>

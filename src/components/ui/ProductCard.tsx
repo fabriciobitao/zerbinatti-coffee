@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useCart } from "@/lib/cart-context";
 import { Product } from "@/lib/data/products";
 import { Badge } from "./Badge";
+import { SCABadge } from "./SCABadge";
+import { FreshnessSignal } from "./FreshnessSignal";
 
 function formatCurrency(value: number) {
   return value.toLocaleString("pt-BR", {
@@ -83,11 +85,14 @@ export function ProductCard({
       </Link>
 
       <div className="flex flex-1 flex-col p-4 sm:p-6">
-        <div className="mb-3 flex items-center gap-2">
-          <Badge variant="score">SCA {product.score}</Badge>
+        <div className="mb-3 flex flex-wrap items-center gap-2">
+          <SCABadge score={product.score} size="sm" />
           <span className="text-xs text-coffee-600">
             Torra {product.roast}
           </span>
+        </div>
+        <div className="mb-3">
+          <FreshnessSignal roastDate={product.roastDate} variant="compact" />
         </div>
 
         <h3 className="font-serif text-xl font-bold text-coffee-900">

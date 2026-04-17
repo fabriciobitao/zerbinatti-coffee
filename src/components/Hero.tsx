@@ -59,22 +59,23 @@ export default function Hero() {
           <div className={fadeClass("delay-200")}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-coffee-900/60 px-4 py-2 backdrop-blur-sm">
               <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
-              <span className="text-xs tracking-[0.2em] text-gold-400 uppercase">Colheita Limitada 2026</span>
+              <span className="text-xs tracking-[0.2em] text-gold-400 uppercase">Safra 2026 · torrado esta semana</span>
             </div>
           </div>
 
           <h1 className={`font-serif text-3xl font-bold leading-tight tracking-tight text-coffee-50 sm:text-4xl md:text-5xl lg:text-6xl ${fadeClass("delay-300")}`}>
-            Do Nosso <span className="italic text-gold-400">Legado</span>
-            <br />Para Sua Mesa
-            <br /><span className="text-xl font-normal text-coffee-300 sm:text-2xl md:text-3xl lg:text-4xl">Desde 1897</span>
+            Café brasileiro,
+            <br /><span className="italic text-gold-400">casa italiana</span>,
+            <br />desde 1897.
           </h1>
 
           <p className={`mt-4 max-w-md text-base leading-relaxed text-coffee-200 sm:mt-6 sm:text-lg ${fadeClass("delay-[500ms]")}`}>
-            Café moído torrado premium da fazenda. 100% Arábica, secagem natural, torra média-clara. Notas de frutas e caramelo.
+            Quatro gerações torrando café especial na Serra do Cabral. Lotes rastreados,
+            torra sob demanda, data de torra em cada sacola.
           </p>
 
           <div className={`mt-6 grid grid-cols-3 gap-2 sm:mt-8 sm:gap-4 ${fadeClass("delay-[600ms]")}`}>
-            {[["Altitude", "900-1000m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
+            {[["Altitude", "900-1.200m"], ["Processo", "Natural / Honey"], ["SCA", "85 a 90+"]].map(([label, value]) => (
               <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-2 text-center backdrop-blur-sm sm:p-3">
                 <div className="text-[10px] text-coffee-400 sm:text-xs">{label}</div>
                 <div className="mt-0.5 text-xs font-semibold text-coffee-100 sm:mt-1 sm:text-sm">{value}</div>
@@ -83,11 +84,11 @@ export default function Hero() {
           </div>
 
           <div className={`mt-10 flex flex-col gap-4 sm:flex-row ${fadeClass("delay-[700ms]")}`}>
-            <a href="#cafes" className="rounded-full bg-gold-500 px-6 py-3.5 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all duration-200 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.97] sm:px-8 sm:py-4">
-              Comprar Avulso
+            <a href="#quiz" className="rounded-full bg-gold-500 px-6 py-3.5 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all duration-200 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.97] sm:px-8 sm:py-4">
+              Descobrir meu café
             </a>
-            <a href="#assinatura" className="rounded-full border border-coffee-400/30 px-6 py-3.5 text-center text-sm font-medium tracking-wide text-coffee-200 transition-all duration-200 hover:border-coffee-300 hover:text-coffee-50 active:scale-[0.97] sm:px-8 sm:py-4">
-              Assinar Mensal
+            <a href="#cafes" className="rounded-full border border-coffee-400/30 px-6 py-3.5 text-center text-sm font-medium tracking-wide text-coffee-200 transition-all duration-200 hover:border-coffee-300 hover:text-coffee-50 active:scale-[0.97] sm:px-8 sm:py-4">
+              Ver todos os cafés
             </a>
           </div>
 

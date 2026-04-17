@@ -21,7 +21,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Café Especial desde 1897`,
+    default: `${siteConfig.name} | Café brasileiro, casa italiana, desde 1897`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -45,20 +45,20 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Café Especial desde 1897`,
+    title: `${siteConfig.name} | Café brasileiro, casa italiana, desde 1897`,
     description: siteConfig.description,
     images: [
       {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Zerbinatti Coffee — Café especial brasileiro desde 1897",
+        alt: "Zerbinatti Coffee — Café brasileiro, casa italiana, desde 1897",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} | Café Especial desde 1897`,
+    title: `${siteConfig.name} | Café brasileiro, casa italiana, desde 1897`,
     description: siteConfig.description,
     site: siteConfig.twitter,
     images: ["/images/og-default.jpg"],

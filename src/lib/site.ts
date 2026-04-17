@@ -7,9 +7,9 @@ export const siteConfig = {
   url:
     process.env.NEXT_PUBLIC_SITE_URL ||
     "https://cafe-alpha-five.vercel.app",
-  tagline: "Café especial brasileiro desde 1897",
+  tagline: "Café brasileiro, casa italiana, desde 1897",
   description:
-    "Café especial brasileiro com herança italiana desde 1897. Colheita seletiva na Serra do Cabral, MG. Torra sob demanda, frete grátis acima de R$ 99.",
+    "Café brasileiro de quatro gerações, torrado sob demanda na Serra do Cabral (MG). Blend tradicional, single origin e microlotes raros, com data de torra e ficha técnica em cada sacola.",
   foundingYear: 1897,
   locale: "pt_BR",
   twitter: "@zerbinatticoffee",

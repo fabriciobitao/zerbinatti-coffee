@@ -7,6 +7,9 @@ import { SensoryProfile } from "@/components/ui/SensoryProfile";
 import { Reviews } from "@/components/ui/Reviews";
 import { Badge } from "@/components/ui/Badge";
 import { Ornament } from "@/components/ui/Ornament";
+import { SCABadge } from "@/components/ui/SCABadge";
+import { FreshnessSignal } from "@/components/ui/FreshnessSignal";
+import { BrewGuide } from "@/components/ui/BrewGuide";
 import { productSchema, breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
 import { AddToCartButton } from "./AddToCartButton";
@@ -133,13 +136,16 @@ export default async function ProductPage({
                   </div>
                 </div>
               </div>
+              <div className="mt-4">
+                <FreshnessSignal roastDate={product.roastDate} />
+              </div>
             </div>
 
             {/* Product info */}
             <div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Badge variant={product.tagVariant}>{product.tag}</Badge>
-                <Badge variant="score">SCA {product.score}</Badge>
+                <SCABadge score={product.score} />
                 <Badge variant="discount">-10% PIX</Badge>
               </div>
               <h1 className="mt-4 font-serif text-4xl font-bold text-coffee-900 sm:text-5xl">
@@ -235,6 +241,24 @@ export default async function ProductPage({
             </div>
           </div>
 
+          {/* Guia de preparo — receitas da casa para este café */}
+          {product.brewRecipes && product.brewRecipes.length > 0 && (
+            <div className="mt-20">
+              <div className="mb-8">
+                <h2 className="font-serif text-2xl font-bold text-coffee-900 sm:text-3xl">
+                  Como preparar este café
+                </h2>
+                <Ornament className="mt-3" />
+                <p className="mt-4 max-w-2xl text-sm text-coffee-600">
+                  Receitas específicas para este lote, calibradas pela nossa
+                  equipe. Parâmetros ajustados para os métodos em que o perfil
+                  brilha.
+                </p>
+              </div>
+              <BrewGuide recipes={product.brewRecipes} />
+            </div>
+          )}
+
           {/* Ficha técnica + sensorial */}
           <div className="mt-20 grid gap-10 lg:grid-cols-2">
             <div className="rounded-2xl border border-coffee-100 bg-white p-8">
@@ -253,6 +277,13 @@ export default async function ProductPage({
                   { label: "Variedade botânica", value: product.origin.variety },
                   { label: "Processo", value: product.origin.process },
                   { label: "Safra", value: product.harvest },
+                  {
+                    label: "Data de torra",
+                    value: new Date(product.roastDate).toLocaleDateString(
+                      "pt-BR",
+                      { day: "2-digit", month: "long", year: "numeric" }
+                    ),
+                  },
                 ].map((row) => (
                   <div
                     key={row.label}

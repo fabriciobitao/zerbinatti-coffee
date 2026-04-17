@@ -13,14 +13,14 @@ export default function Products() {
       <div ref={sectionRef} className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="reveal mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-            Nossos Cafés
+            Cafés da casa
           </span>
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
-            Edições da Safra 2026
+            Três cafés da safra 2026
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-600">
-            Cada lote é único, como a safra que o produziu. Quando acaba,
-            acaba.
+            Um blend tradicional, um single origin sazonal e um microlote raro.
+            Torrados sob demanda, enviados com data de torra.
           </p>
           <Ornament className="mt-6" />
         </div>

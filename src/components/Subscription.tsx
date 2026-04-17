@@ -97,11 +97,12 @@ export default function Subscription() {
             Assinatura
           </span>
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-50 sm:text-4xl md:text-5xl">
-            Café Especial Todo Mês
+            A curadoria da casa, todo mês na sua mesa
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-300">
-            Receba cafés selecionados na sua porta. Pause, troque ou cancele
-            quando quiser. Sem compromisso.
+            O mestre de torra escolhe o café do mês. Você recebe torrado sob
+            demanda, com ficha técnica e carta da casa. Pause, troque ou
+            cancele com um clique — sem ligação, sem multa.
           </p>
           <Ornament className="mt-6" />
         </div>

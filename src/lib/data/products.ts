@@ -22,6 +22,25 @@ export type Review = {
   text: string;
 };
 
+export type BrewMethod =
+  | "V60"
+  | "Chemex"
+  | "Aeropress"
+  | "Prensa Francesa"
+  | "Espresso"
+  | "Moka"
+  | "Coado";
+
+export type BrewRecipe = {
+  method: BrewMethod;
+  ratio: string;
+  grind: string;
+  waterTemp: string;
+  dose: string;
+  time: string;
+  note?: string;
+};
+
 export type Product = {
   slug: string;
   id: string;
@@ -46,7 +65,9 @@ export type Product = {
   notes: string[];
   sensory: SensoryProfile;
   harvest: string;
+  roastDate: string;
   recommendedMethods: string[];
+  brewRecipes: BrewRecipe[];
   reviews: Review[];
 };
 
@@ -77,7 +98,46 @@ export const products: Product[] = [
     notes: ["Chocolate ao leite", "Caramelo", "Nozes", "Final doce"],
     sensory: { sweetness: 4, acidity: 2, body: 4, complexity: 3 },
     harvest: "Safra 2025",
+    roastDate: "2026-04-10",
     recommendedMethods: ["Espresso", "Prensa Francesa", "Moka", "Coado"],
+    brewRecipes: [
+      {
+        method: "Espresso",
+        ratio: "1:2",
+        grind: "Fina",
+        waterTemp: "92-94°C",
+        dose: "18g → 36g",
+        time: "25-30s",
+        note: "Corpo denso, crema firme. Ideal para espresso puro ou com leite.",
+      },
+      {
+        method: "Prensa Francesa",
+        ratio: "1:15",
+        grind: "Grossa",
+        waterTemp: "93°C",
+        dose: "20g para 300ml",
+        time: "4min de infusão",
+        note: "Agite a crosta aos 4min, descarte a espuma, pressione devagar.",
+      },
+      {
+        method: "Moka",
+        ratio: "Encher o filtro sem compactar",
+        grind: "Média-fina",
+        waterTemp: "Pré-aquecida até a válvula",
+        dose: "Filtro cheio, sem tamp",
+        time: "3-4min em fogo médio-baixo",
+        note: "Tire do fogo ao primeiro som de borbulha. A tradição da casa.",
+      },
+      {
+        method: "Coado",
+        ratio: "1:14",
+        grind: "Média",
+        waterTemp: "93°C",
+        dose: "25g para 350ml",
+        time: "3-4min total",
+        note: "Filtro de pano ou papel. Molhe o filtro antes para remover gosto.",
+      },
+    ],
     reviews: [
       {
         author: "Marina Costa",
@@ -136,7 +196,46 @@ export const products: Product[] = [
     ],
     sensory: { sweetness: 5, acidity: 4, body: 3, complexity: 4 },
     harvest: "Safra 2025 — lote 042",
+    roastDate: "2026-04-05",
     recommendedMethods: ["Hario V60", "Chemex", "Aeropress", "Espresso"],
+    brewRecipes: [
+      {
+        method: "V60",
+        ratio: "1:16",
+        grind: "Média-fina",
+        waterTemp: "93°C",
+        dose: "20g para 320ml",
+        time: "2:45-3:15min",
+        note: "Bloom de 40g por 30s. Depois despeje em espiral, pausando aos 100g e 200g.",
+      },
+      {
+        method: "Chemex",
+        ratio: "1:17",
+        grind: "Média",
+        waterTemp: "94°C",
+        dose: "30g para 500ml",
+        time: "4-4:30min",
+        note: "Clareza máxima. Use filtro Chemex original para reter mais óleos.",
+      },
+      {
+        method: "Aeropress",
+        ratio: "1:14",
+        grind: "Média",
+        waterTemp: "88°C",
+        dose: "15g para 210ml",
+        time: "1:30min total",
+        note: "Método invertido. Agite 10s, repouse 1min, pressione 30s.",
+      },
+      {
+        method: "Espresso",
+        ratio: "1:2,2",
+        grind: "Fina",
+        waterTemp: "93-94°C",
+        dose: "18g → 40g",
+        time: "28-32s",
+        note: "Puxa mais extração para destacar notas florais e cítricas.",
+      },
+    ],
     reviews: [
       {
         author: "Pedro Henrique Serra",
@@ -196,7 +295,37 @@ export const products: Product[] = [
     ],
     sensory: { sweetness: 4, acidity: 5, body: 3, complexity: 5 },
     harvest: "Safra 2025 — lote Geisha 01",
+    roastDate: "2026-04-14",
     recommendedMethods: ["Hario V60", "Chemex", "Kalita Wave"],
+    brewRecipes: [
+      {
+        method: "V60",
+        ratio: "1:16,5",
+        grind: "Média-fina",
+        waterTemp: "94°C",
+        dose: "15g para 250ml",
+        time: "2:30-2:45min",
+        note: "Bloom de 30g por 30s. Despeje em espiral suave, sem agitar o leito.",
+      },
+      {
+        method: "Chemex",
+        ratio: "1:17",
+        grind: "Média",
+        waterTemp: "94°C",
+        dose: "25g para 425ml",
+        time: "4min",
+        note: "Extração limpa que separa os florais dos cítricos. Beba quente E temperado.",
+      },
+      {
+        method: "Aeropress",
+        ratio: "1:14",
+        grind: "Média",
+        waterTemp: "85°C",
+        dose: "14g para 200ml",
+        time: "2min total",
+        note: "Método invertido, água mais fria preserva o jasmim. Pressione em 40s.",
+      },
+    ],
     reviews: [
       {
         author: "Gustavo Nakamura",
