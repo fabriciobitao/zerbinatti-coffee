@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Monogram } from "@/components/ui/Ornament";
 
 export default function Footer() {
   return (
@@ -12,7 +13,16 @@ export default function Footer() {
               alt="Zerbinatti Coffee"
               className="h-10"
             />
-            <p className="mt-4 text-sm leading-relaxed text-coffee-300">
+            <div className="mt-5 flex items-center gap-3 text-gold-400">
+              <Monogram size={36} className="shrink-0" />
+              <div className="text-[10px] tracking-[0.3em] uppercase text-coffee-300">
+                Dal 1897
+                <div className="font-serif text-sm tracking-normal normal-case text-coffee-200">
+                  Famiglia Zerbinatti
+                </div>
+              </div>
+            </div>
+            <p className="mt-5 text-sm leading-relaxed text-coffee-300">
               Café especial brasileiro com herança italiana. Três gerações
               de dedicação em cada xícara.
             </p>
@@ -68,8 +78,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#contato" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link href="/para-empresas" className="text-sm text-coffee-300 hover:text-gold-400">
                   B2B / Parcerias
+                </Link>
+              </li>
+              <li>
+                <Link href="/revista" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Revista Zerbinatti
                 </Link>
               </li>
             </ul>

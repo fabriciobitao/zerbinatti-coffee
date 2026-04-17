@@ -18,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <Quiz />
         <Products />
         <BestSellers />
         <Combos />
@@ -25,7 +26,6 @@ export default function Home() {
         <Subscription />
         <SectionFade topColor="#1A1108" bottomColor="#FDFBF7" />
         <Story />
-        <Quiz />
         <B2B />
         <SectionFade topColor="#F6F3F0" bottomColor="#1A1108" />
       </main>

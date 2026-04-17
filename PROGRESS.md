@@ -1,6 +1,6 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-04-16 (Onda 1 UX/CX)
+**Ultima atualizacao:** 2026-04-16 (Ondas 2+3 UX/CX)
 
 ## O que e
 E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). Opcao C: marca completa com B2C + B2B + ecossistema de conteudo.
@@ -31,6 +31,18 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 - [x] Descricoes dos planos personalizadas para identidade Zerbinatti
 - [x] Botoes dos planos alinhados na mesma linha (flex + mt-auto)
 - [x] Descricoes dos produtos com embalagem 500g
+- [x] **Ondas 2+3 UX/CX**: sistema de design + conteudo editorial + B2B dedicado
+  - Design system unificado: `Button`, `Badge`, `ProductCard`, `Ornament`, `Monogram`, `HeritageSeal`, `FAQ`, `Reviews`, `SensoryProfile` (radar SVG)
+  - Dataset central de produtos em `src/lib/data/products.ts` (origem, sensorial, reviews, metodos, notas)
+  - 3 PDPs em `/cafes/[slug]` com ficha de origem, perfil sensorial (radar 1-5), reviews verificadas e relacionados
+  - 9 reviews realistas (3 por SKU) com nome, local, metodo, nota, data
+  - Subscription FAQ expandida (6 perguntas) com accordion dark
+  - Quiz: email capture + upsell assinatura com -15% + link para PDP no resultado
+  - `/para-empresas` dedicado: hero, segmentos, prova social, formulario B2B estruturado (CNPJ, volume, segmento)
+  - Revista em `/revista` com 3 ensaios editoriais (Terroir, Preparo, Historia) e PDPs proprias
+  - Sistema heraldico: monograma Z no Hero/Footer/B2B, Ornament italiano substituindo divisores `h-px`
+  - Header reorganizado: Cafes, Assinatura, Quiz, Revista, B2B
+  - Quiz movido para apos Hero (jornada de descoberta antes dos cafes)
 - [x] **Onda 1 UX/CX**: destrava bloqueadores de conversao
   - WhatsApp via env var (NEXT_PUBLIC_WHATSAPP_NUMBER) — nao mais numero fake hardcoded
   - Botoes de assinatura funcionais (abrem WhatsApp com plano pre-preenchido)
@@ -47,16 +59,17 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 ## Pendente
 - [ ] Criar Shopify dev store e conectar
 - [ ] Integrar Sanity CMS
-- [ ] Paginas de produto individuais
 - [ ] Checkout real (Shopify)
-- [ ] Sistema de assinatura (Shopify)
+- [ ] Sistema de assinatura real (Shopify Subscriptions) + area do cliente
 - [ ] i18n (PT/EN)
-- [ ] Blog
-- [ ] Fotos reais da fazenda (substituir placeholders Unsplash)
+- [ ] Fotos reais da fazenda (substituir placeholders Unsplash e mockup CSS do pacote)
+- [ ] Integracao email do Quiz com Klaviyo/Resend (hoje grava em localStorage)
+- [ ] Form B2B integrar com CRM (hoje abre WhatsApp)
 - [ ] Instagram, TikTok, YouTube (criar contas)
-- [ ] Klaviyo + Resend
 - [ ] GA4 + Meta Pixel
-- [ ] SEO otimizado
+- [ ] SEO otimizado + sitemap.xml
+- [ ] Reviews reais migrar para Judge.me/Loox/Yotpo (hoje dataset estatico)
+- [ ] Mais artigos na Revista (meta: 1/mes)
 
 ## Decisoes de arquitetura
 - Shopify Headless por: pagamentos BR nativos, Instagram Shopping, assinaturas maduras

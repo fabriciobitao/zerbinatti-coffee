@@ -33,11 +33,11 @@ export default function Header() {
 
         <div className="hidden items-center gap-8 lg:flex">
           {[
-            ["#cafes", "Cafés"],
-            ["#assinatura", "Assinatura"],
-            ["#origem", "Nossa História"],
-            ["#quiz", "Descubra Seu Café"],
-            ["#contato", "B2B"],
+            ["/#cafes", "Cafés"],
+            ["/#assinatura", "Assinatura"],
+            ["/#quiz", "Descubra seu café"],
+            ["/revista", "Revista"],
+            ["/para-empresas", "B2B"],
           ].map(([href, label]) => (
             <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400">
               {label}
@@ -70,11 +70,11 @@ export default function Header() {
       >
         <div className="flex flex-col gap-4">
           {[
-            ["#cafes", "Cafés"],
-            ["#assinatura", "Assinatura"],
-            ["#origem", "Nossa História"],
-            ["#quiz", "Descubra Seu Café"],
-            ["#contato", "B2B"],
+            ["/#cafes", "Cafés"],
+            ["/#assinatura", "Assinatura"],
+            ["/#quiz", "Descubra seu café"],
+            ["/revista", "Revista"],
+            ["/para-empresas", "B2B"],
           ].map(([href, label]) => (
             <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 hover:text-gold-400" onClick={() => setMenuOpen(false)}>
               {label}

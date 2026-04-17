@@ -1,6 +1,35 @@
 "use client";
 
 import { buildWhatsAppUrl } from "@/lib/config";
+import { FAQ } from "@/components/ui/FAQ";
+import { Ornament } from "@/components/ui/Ornament";
+
+const faqItems = [
+  {
+    q: "Posso pausar ou cancelar a qualquer momento?",
+    a: "Sim. Pause, adie a próxima remessa ou cancele a assinatura sem multa, sem pergunta. Tudo pela área do cliente ou via WhatsApp. Você continua no controle.",
+  },
+  {
+    q: "Quando chega a primeira caixa?",
+    a: "Assinaturas confirmadas até quarta-feira entram na torra da semana e são postadas na sexta. Capitais recebem em 3-5 dias úteis; interior em 5-8 dias úteis.",
+  },
+  {
+    q: "Posso escolher o café de cada mês ou muda sozinho?",
+    a: "No Apreciador, o mestre torrador seleciona. No Sommelier e Herdeiro você pode trocar, fixar um favorito ou pedir surpresa — a decisão é sua.",
+  },
+  {
+    q: "Qual a diferença entre assinar e comprar avulso?",
+    a: "Assinantes pagam até 15% menos, recebem antes dos avulsos em lançamentos de micro-lote, e têm frete grátis sempre. Além de um bilhete escrito à mão do torrador explicando o café do mês.",
+  },
+  {
+    q: "Meu plano atende dois ou mais bebedores?",
+    a: "O Apreciador (500g/mês) rende para 1 pessoa que toma 2 xícaras/dia. O Sommelier (1kg/mês) atende casal. O Herdeiro (1,5kg/mês) é perfeito para família de 3-4 pessoas.",
+  },
+  {
+    q: "Como funciona a garantia de satisfação?",
+    a: "Se o primeiro mês não te conquistar, devolvemos 100% do valor. Sem precisar devolver o pacote. Simples assim — confiamos no café que torramos.",
+  },
+];
 
 const plans = [
   {
@@ -74,7 +103,7 @@ export default function Subscription() {
             Receba cafés selecionados na sua porta. Pause, troque ou cancele
             quando quiser. Sem compromisso.
           </p>
-          <div className="mx-auto mt-4 h-px w-16 bg-gold-500" />
+          <Ornament className="mt-6" />
         </div>
 
         {/* Plans */}
@@ -200,9 +229,24 @@ export default function Subscription() {
           </div>
         </div>
 
+        {/* FAQ */}
+        <div className="mt-20 mx-auto max-w-3xl">
+          <div className="text-center">
+            <span className="text-xs font-medium tracking-[0.3em] text-gold-400 uppercase">
+              Dúvidas frequentes
+            </span>
+            <h3 className="mt-3 font-serif text-2xl font-bold text-coffee-50 sm:text-3xl">
+              Tudo que você precisa saber antes de assinar
+            </h3>
+          </div>
+          <div className="mt-8 rounded-2xl border border-coffee-800 bg-coffee-900/40 px-6 sm:px-8">
+            <FAQ items={faqItems} theme="dark" />
+          </div>
+        </div>
+
         {/* Guarantee */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-coffee-400">
+          <p className="text-sm text-coffee-300">
             ✦ Satisfação garantida ou seu dinheiro de volta no primeiro mês ✦
           </p>
         </div>

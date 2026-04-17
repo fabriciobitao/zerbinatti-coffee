@@ -1,3 +1,5 @@
+import { Ornament } from "@/components/ui/Ornament";
+
 export default function Story() {
   return (
     <section id="origem" className="relative overflow-hidden bg-coffee-50 py-16 sm:py-24 lg:py-32">
@@ -14,7 +16,7 @@ export default function Story() {
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
             Tradição e Paixão pelo Café
           </h2>
-          <div className="mx-auto mt-4 h-px w-16 bg-gold-500" />
+          <Ornament className="mt-6" />
         </div>
 
         {/* Timeline */}
@@ -72,19 +74,19 @@ export default function Story() {
                 <div className="font-serif text-2xl font-bold text-coffee-800 sm:text-3xl">
                   100%
                 </div>
-                <div className="mt-1 text-sm text-coffee-500">Arábica</div>
+                <div className="mt-1 text-sm text-coffee-600">Arábica</div>
               </div>
               <div>
                 <div className="font-serif text-2xl font-bold text-coffee-800 sm:text-3xl">
                   85+
                 </div>
-                <div className="mt-1 text-sm text-coffee-500">Pontos SCA</div>
+                <div className="mt-1 text-sm text-coffee-600">Pontos SCA</div>
               </div>
               <div>
                 <div className="font-serif text-2xl font-bold text-coffee-800 sm:text-3xl">
                   SCAA
                 </div>
-                <div className="mt-1 text-sm text-coffee-500">Certificado</div>
+                <div className="mt-1 text-sm text-coffee-600">Certificado</div>
               </div>
             </div>
           </div>
