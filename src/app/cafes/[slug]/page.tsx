@@ -7,6 +7,8 @@ import { SensoryProfile } from "@/components/ui/SensoryProfile";
 import { Reviews } from "@/components/ui/Reviews";
 import { Badge } from "@/components/ui/Badge";
 import { Ornament } from "@/components/ui/Ornament";
+import { productSchema, breadcrumbSchema } from "@/lib/schema";
+import { siteConfig } from "@/lib/site";
 import { AddToCartButton } from "./AddToCartButton";
 
 export async function generateStaticParams() {
@@ -46,8 +48,24 @@ export default async function ProductPage({
   const pix = product.price * 0.9;
   const related = products.filter((p) => p.slug !== slug);
 
+  const crumbs = breadcrumbSchema([
+    { name: "Início", url: siteConfig.url },
+    { name: "Cafés", url: `${siteConfig.url}/#cafes` },
+    { name: product.name, url: `${siteConfig.url}/cafes/${product.slug}` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema(product)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }}
+      />
       <Header />
       <main className="bg-coffee-50">
         <div className="mx-auto max-w-7xl px-6 pt-28 pb-12 lg:px-8 lg:pt-32">

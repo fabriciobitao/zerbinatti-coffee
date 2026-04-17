@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { articles, getArticleBySlug } from "@/lib/data/articles";
 import { Ornament } from "@/components/ui/Ornament";
+import { articleSchema } from "@/lib/schema";
 
 export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
@@ -44,6 +45,12 @@ export default async function ArticlePage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleSchema(article)),
+        }}
+      />
       <Header />
       <main className="bg-coffee-50">
         <article className="pt-28 pb-16">

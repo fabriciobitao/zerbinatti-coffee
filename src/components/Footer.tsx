@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Monogram } from "@/components/ui/Ornament";
+import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function Footer() {
   return (
@@ -98,20 +99,7 @@ export default function Footer() {
             <p className="mt-4 text-sm text-coffee-300">
               Receba novidades sobre safras e lançamentos exclusivos.
             </p>
-            <label htmlFor="newsletter-email" className="sr-only">
-              E-mail para newsletter
-            </label>
-            <div className="mt-4 flex gap-2">
-              <input
-                id="newsletter-email"
-                type="email"
-                placeholder="seu@email.com"
-                className="flex-1 rounded-lg border border-coffee-800 bg-coffee-900 px-4 py-2.5 text-sm text-coffee-100 outline-none placeholder:text-coffee-400 focus:border-gold-500"
-              />
-              <button className="rounded-lg bg-gold-500 px-4 py-2.5 text-sm font-semibold text-coffee-950 transition-colors hover:bg-gold-400">
-                Assinar
-              </button>
-            </div>
+            <NewsletterForm />
 
             {/* Social */}
             <div className="mt-6 flex gap-4">

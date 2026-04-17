@@ -94,14 +94,28 @@ export default function Quiz() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const { addItem } = useCart();
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    // Placeholder de integracao com Klaviyo/Resend no futuro
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem("zerbinatti-quiz-email", email);
-      } catch {}
+    try {
+      localStorage.setItem("zerbinatti-quiz-email", email);
+    } catch {}
+    try {
+      const result = getResult();
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "quiz",
+          email,
+          metadata: {
+            recommended: result.name,
+            source: "quiz",
+          },
+        }),
+      });
+    } catch {
+      // Fail silent — localStorage ainda guarda
     }
     setEmailSubmitted(true);
   };

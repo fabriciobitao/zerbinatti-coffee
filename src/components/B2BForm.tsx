@@ -29,7 +29,7 @@ export default function B2BForm() {
   const [form, setForm] = useState<FormState>(initial);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const msg = [
       `*Novo contato B2B — Zerbinatti Coffee*`,
@@ -45,6 +45,30 @@ export default function B2BForm() {
       `*Mensagem:*`,
       form.message || "—",
     ].join("\n");
+
+    // Fire-and-forget para o backend
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "b2b",
+          name: form.name,
+          company: form.company,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+          metadata: {
+            cnpj: form.cnpj || "",
+            segment: form.segment,
+            volume: form.volume,
+          },
+        }),
+      });
+    } catch {
+      // Fail silent — WhatsApp abre mesmo assim
+    }
+
     window.open(buildWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
     setSent(true);
   };

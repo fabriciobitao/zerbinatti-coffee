@@ -28,8 +28,10 @@ export default function Story() {
                 className="aspect-[4/5] bg-cover bg-center"
                 style={{
                   backgroundImage:
-                    "url('https://images.unsplash.com/photo-1524350876685-274059332603?w=800&q=80')",
+                    "url('https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=1200&q=85&auto=format&fit=crop')",
                 }}
+                role="img"
+                aria-label="Cerejas de café maduras no cafezal — safra Zerbinatti"
               />
             </div>
             {/* Floating card */}

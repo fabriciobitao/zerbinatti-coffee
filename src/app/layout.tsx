@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Playfair_Display, Inter } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
+import { siteConfig, gaId, metaPixelId, organizationSchema } from "@/lib/site";
+import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -16,24 +19,62 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Zerbinatti Coffee | From the 1897 Legacy to Your Cup",
-  description:
-    "Café especial brasileiro com herança italiana desde 1897. Colheita limitada, qualidade premium, direto da fazenda para sua xícara.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | Café Especial desde 1897`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
   keywords: [
     "café especial",
     "specialty coffee",
-    "Brazilian coffee",
+    "café brasileiro",
     "Zerbinatti",
     "café premium",
     "single origin",
+    "Serra do Cabral",
+    "assinatura de café",
+    "café gourmet",
   ],
+  authors: [{ name: "Família Zerbinatti" }],
+  creator: "Zerbinatti Coffee",
+  publisher: "Zerbinatti Coffee",
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Zerbinatti Coffee | Since 1897",
-    description:
-      "Café especial brasileiro com herança italiana desde 1897. Qualidade premium, colheita limitada.",
     type: "website",
     locale: "pt_BR",
-    alternateLocale: "en_US",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | Café Especial desde 1897`,
+    description: siteConfig.description,
+    images: [
+      {
+        url: "/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Zerbinatti Coffee — Café especial brasileiro desde 1897",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} | Café Especial desde 1897`,
+    description: siteConfig.description,
+    site: siteConfig.twitter,
+    images: ["/images/og-default.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 
@@ -47,11 +88,22 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${playfair.variable} ${inter.variable} h-full antialiased`}
     >
+      <head>
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema()),
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <CartProvider>
           {children}
           <CartToasts />
         </CartProvider>
+        <Analytics gaId={gaId} metaPixelId={metaPixelId} />
       </body>
     </html>
   );

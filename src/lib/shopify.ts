@@ -10,6 +10,8 @@ const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "";
 const storefrontAccessToken =
   process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN || "";
 
+export const isShopifyConfigured = Boolean(domain && storefrontAccessToken);
+
 const endpoint = `https://${domain}/api/2024-01/graphql.json`;
 
 export async function shopifyFetch<T>({
@@ -19,6 +21,12 @@ export async function shopifyFetch<T>({
   query: string;
   variables?: Record<string, unknown>;
 }): Promise<T> {
+  if (!isShopifyConfigured) {
+    throw new Error(
+      "Shopify não configurado — defina NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN e SHOPIFY_STOREFRONT_ACCESS_TOKEN"
+    );
+  }
+
   const res = await fetch(endpoint, {
     method: "POST",
     headers: {
