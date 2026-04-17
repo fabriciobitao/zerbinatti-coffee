@@ -3,26 +3,51 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { products } from "@/lib/data/products";
 import { ProductCard } from "@/components/ui/ProductCard";
-import { Ornament } from "@/components/ui/Ornament";
+import { Kicker, AsymmetricDivider } from "@/components/ui/Editorial";
 
 export default function Products() {
   const sectionRef = useScrollReveal();
 
   return (
-    <section id="cafes" className="bg-coffee-100/50 py-16 sm:py-24 lg:py-32">
-      <div ref={sectionRef} className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="reveal mb-16 text-center">
-          <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-            Cafés da casa
-          </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
-            Três cafés da safra 2026
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-coffee-600">
-            Um blend tradicional, um single origin sazonal e um microlote raro.
-            Torrados sob demanda, enviados com data de torra.
-          </p>
-          <Ornament className="mt-6" />
+    <section
+      id="cafes"
+      className="relative overflow-hidden bg-coffee-100/50 py-20 sm:py-28 lg:py-36"
+    >
+      {/* Backdrop tipográfico */}
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        aria-hidden
+      >
+        <span
+          className="select-none font-serif italic text-coffee-200/50"
+          style={{
+            fontSize: "clamp(10rem, 28vw, 28rem)",
+            fontWeight: 400,
+            lineHeight: 1,
+            letterSpacing: "-0.04em",
+          }}
+        >
+          III
+        </span>
+      </div>
+
+      <div ref={sectionRef} className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="reveal flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-16">
+          <div className="max-w-xl">
+            <Kicker>Cafés da casa</Kicker>
+            <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.25rem,5.5vw,4.5rem)]">
+              Três cafés
+              <br />
+              <span className="italic text-gold-600">da safra 2026.</span>
+            </h2>
+          </div>
+          <div className="max-w-sm">
+            <AsymmetricDivider className="mb-5" />
+            <p className="text-base leading-relaxed text-coffee-600 sm:text-lg">
+              Um blend tradicional, um single origin sazonal e um microlote raro.
+              Torrados sob demanda, enviados com data de torra.
+            </p>
+          </div>
         </div>
 
         <div className="grid gap-5 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">

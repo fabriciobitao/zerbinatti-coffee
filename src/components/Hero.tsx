@@ -1,113 +1,206 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import CoffeeBean3D from "@/components/ui/CoffeeBean3D";
+import { SplitReveal, Kicker, Marginalia } from "@/components/ui/Editorial";
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 100);
+    const t = setTimeout(() => setLoaded(true), 60);
     return () => clearTimeout(t);
   }, []);
 
-  const fadeClass = (delay: string) =>
-    `transition-all duration-700 ease-out ${delay} ${
-      loaded ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-    }`;
-
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-coffee-950">
-      {/* Farm background with Ken Burns */}
+    <section className="relative min-h-screen overflow-hidden bg-coffee-50 pt-24 pb-16 sm:pt-28 sm:pb-24">
+      {/* Backdrop tipográfico gigante — número 1897 em outline */}
       <div
-        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-[2s] ease-out ${
-          loaded ? "scale-100" : "scale-110"
+        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-[1800ms] ${
+          loaded ? "opacity-100" : "opacity-0"
         }`}
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1611070257888-7e50e5915d7c?w=1920&q=80')",
-        }}
-      />
-      <div className="absolute inset-0 bg-coffee-950/70" />
-      <div className="absolute inset-0 bg-gradient-to-r from-coffee-950/50 via-coffee-950/60 to-coffee-950/90" />
-
-      {/* Ambient glow */}
-      <div className="absolute right-0 top-1/3 h-[600px] w-[600px] rounded-full bg-amber-900/20 blur-[120px]" />
-
-      {/* Product image right */}
-      <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden md:block">
-        <div
-          className={`absolute inset-0 bg-contain bg-center bg-no-repeat transition-all duration-1000 delay-500 ${
-            loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-          }`}
-          style={{ backgroundImage: "url('/images/hero-bg.jpg')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-coffee-950 via-coffee-950/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-coffee-950/60 via-transparent to-coffee-950/40" />
+        aria-hidden
+      >
+        <span
+          className="select-none font-serif font-bold leading-none text-coffee-200/50"
+          style={{
+            fontSize: "clamp(14rem, 40vw, 42rem)",
+            WebkitTextStroke: "1.5px rgb(215 204 200 / 0.45)",
+            color: "transparent",
+            letterSpacing: "-0.04em",
+          }}
+        >
+          1897
+        </span>
       </div>
 
-      {/* Mobile product */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] max-w-[280px] h-[250px] sm:h-[300px] md:hidden">
-        <div className="absolute inset-0 bg-contain bg-bottom bg-no-repeat" style={{ backgroundImage: "url('/images/hero-bg.jpg')" }} />
-        <div className="absolute inset-0 bg-gradient-to-t from-coffee-950 via-coffee-950/30 to-coffee-950/60" />
+      {/* Glow ambiental */}
+      <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[500px] w-[500px] rounded-full bg-gold-400/15 blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-10%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-coffee-700/10 blur-[120px]" />
+
+      {/* Marginália vertical esquerda */}
+      <div className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 hidden lg:block">
+        <Marginalia>
+          Serra do Cabral · Minas Gerais · Italia 1897
+        </Marginalia>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 lg:px-8">
-        <div className="max-w-lg pt-20 pb-64 sm:pt-24 sm:pb-80 md:pb-0">
-          <img src="/images/logo-white.png" alt="Zerbinatti Coffee" className={`mb-6 h-14 sm:mb-8 sm:h-20 md:h-24 lg:h-28 ${fadeClass("delay-0")}`} />
-
-          <div className={fadeClass("delay-200")}>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-coffee-900/60 px-4 py-2 backdrop-blur-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold-400" />
-              <span className="text-xs tracking-[0.2em] text-gold-400 uppercase">Safra 2026 · torrado esta semana</span>
-            </div>
+      <div className="relative mx-auto grid max-w-7xl grid-cols-12 gap-6 px-6 lg:px-8">
+        {/* Coluna esquerda — conteúdo editorial */}
+        <div className="col-span-12 lg:col-span-7 lg:pt-14">
+          <div
+            className={`transition-all duration-700 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <Kicker>Dal 1897 · Famiglia Zerbinatti</Kicker>
           </div>
 
-          <h1 className={`font-serif text-3xl font-bold leading-tight tracking-tight text-coffee-50 sm:text-4xl md:text-5xl lg:text-6xl ${fadeClass("delay-300")}`}>
-            Café brasileiro,
-            <br /><span className="italic text-gold-400">casa italiana</span>,
-            <br />desde 1897.
+          {/* Título editorial em escala dramática */}
+          <h1 className="mt-8 font-serif font-bold leading-[0.92] tracking-[-0.035em] text-coffee-900">
+            <span className="block text-[clamp(3rem,9vw,7.5rem)]">
+              <SplitReveal text="Café brasileiro," stagger={0.06} />
+            </span>
+            <span
+              className="mt-2 block italic text-gold-600 text-[clamp(3rem,9vw,7.5rem)]"
+              style={{ fontWeight: 400 }}
+            >
+              <SplitReveal text="casa italiana," stagger={0.06} />
+            </span>
+            <span className="mt-2 block text-[clamp(3rem,9vw,7.5rem)]">
+              <SplitReveal text="desde 1897." stagger={0.06} />
+            </span>
           </h1>
 
-          <p className={`mt-4 max-w-md text-base leading-relaxed text-coffee-200 sm:mt-6 sm:text-lg ${fadeClass("delay-[500ms]")}`}>
-            Quatro gerações torrando café especial na Serra do Cabral. Lotes rastreados,
-            torra sob demanda, data de torra em cada sacola.
-          </p>
+          {/* Lede + ornamento */}
+          <div
+            className={`mt-10 max-w-xl transition-all duration-700 delay-700 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <div className="flex items-center gap-3 text-gold-600" aria-hidden>
+              <span className="h-px w-8 bg-current" />
+              <svg className="h-2 w-2" viewBox="0 0 12 12" fill="currentColor">
+                <circle cx="6" cy="6" r="2" />
+              </svg>
+            </div>
+            <p className="mt-5 font-serif text-lg italic leading-relaxed text-coffee-700 sm:text-xl md:text-2xl">
+              Quatro gerações torrando café especial na Serra do Cabral.
+              Lotes rastreados, torra sob demanda, data de torra em cada sacola.
+            </p>
+          </div>
 
-          <div className={`mt-6 grid grid-cols-3 gap-2 sm:mt-8 sm:gap-4 ${fadeClass("delay-[600ms]")}`}>
-            {[["Altitude", "900-1.200m"], ["Processo", "Natural / Honey"], ["SCA", "85 a 90+"]].map(([label, value]) => (
-              <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-2 text-center backdrop-blur-sm sm:p-3">
-                <div className="text-[10px] text-coffee-400 sm:text-xs">{label}</div>
-                <div className="mt-0.5 text-xs font-semibold text-coffee-100 sm:mt-1 sm:text-sm">{value}</div>
+          {/* Stats em linha editorial */}
+          <div
+            className={`mt-10 grid max-w-lg grid-cols-3 gap-x-8 transition-all duration-700 delay-[900ms] ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            {[
+              ["900-1.200m", "Altitude"],
+              ["Natural·Honey", "Processo"],
+              ["85 a 90+", "Pontos SCA"],
+            ].map(([value, label]) => (
+              <div key={label} className="border-t border-coffee-900/20 pt-3">
+                <div className="font-serif text-xl font-bold text-coffee-900 sm:text-2xl">
+                  {value}
+                </div>
+                <div className="mt-1 text-[10px] tracking-[0.25em] text-coffee-500 uppercase sm:text-xs">
+                  {label}
+                </div>
               </div>
             ))}
           </div>
 
-          <div className={`mt-10 flex flex-col gap-4 sm:flex-row ${fadeClass("delay-[700ms]")}`}>
-            <a href="#quiz" className="rounded-full bg-gold-500 px-6 py-3.5 text-center text-sm font-semibold tracking-wide text-coffee-950 uppercase transition-all duration-200 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20 active:scale-[0.97] sm:px-8 sm:py-4">
+          {/* CTAs */}
+          <div
+            className={`mt-10 flex flex-col gap-3 transition-all duration-700 delay-[1100ms] sm:flex-row sm:items-center sm:gap-6 ${
+              loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            <a
+              href="#quiz"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-coffee-900 px-8 py-4 text-sm font-semibold tracking-wide text-coffee-50 transition-all duration-500 hover:bg-coffee-950 hover:shadow-[0_25px_50px_-15px_rgba(26,17,8,0.5)] active:scale-[0.98]"
+            >
               Descobrir meu café
+              <svg
+                className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
-            <a href="#cafes" className="rounded-full border border-coffee-400/30 px-6 py-3.5 text-center text-sm font-medium tracking-wide text-coffee-200 transition-all duration-200 hover:border-coffee-300 hover:text-coffee-50 active:scale-[0.97] sm:px-8 sm:py-4">
-              Ver todos os cafés
+            <a
+              href="#cafes"
+              className="link-editorial text-sm font-semibold uppercase tracking-[0.2em] text-coffee-900"
+            >
+              Ver os três cafés
             </a>
           </div>
 
-          <div className={`mt-12 flex items-center gap-4 ${fadeClass("delay-[800ms]")}`}>
-            <img src="/images/selo-scaa.png" alt="SCAA" className="h-10" />
-            <img src="/images/selo-100.png" alt="Zerbinatti 100" className="h-10" />
-            <img src="/images/selo-cup.png" alt="Zerbinatti Cup" className="h-10" />
-            <img src="/images/selo-brasil.png" alt="Brasil Prod" className="h-10" />
+          {/* Badge safra — rebaixado, elegante */}
+          <div
+            className={`mt-12 inline-flex items-center gap-3 transition-all duration-700 delay-[1300ms] ${
+              loaded ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-gold-500 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gold-500" />
+            </span>
+            <span className="text-[10px] font-medium tracking-[0.3em] text-coffee-600 uppercase">
+              Safra 2026 · torrado esta semana
+            </span>
+          </div>
+        </div>
+
+        {/* Coluna direita — grão 3D signature */}
+        <div className="col-span-12 lg:col-span-5 lg:pt-4">
+          <div className="relative flex items-center justify-center lg:justify-end">
+            <div
+              className={`float-subtle transition-all duration-1000 delay-300 ${
+                loaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
+              }`}
+            >
+              <CoffeeBean3D size={420} className="hidden md:block" />
+              <CoffeeBean3D size={260} className="md:hidden" />
+            </div>
+
+            {/* Metadata flutuante ao lado do grão */}
+            <div
+              className={`absolute left-4 bottom-0 max-w-[180px] rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm transition-all delay-[1500ms] duration-700 md:bottom-10 md:left-auto md:right-[-20px] ${
+                loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
+            >
+              <div className="text-[10px] font-medium tracking-[0.25em] text-gold-700 uppercase">
+                Torra da semana
+              </div>
+              <div className="mt-2 font-serif text-lg font-bold leading-tight text-coffee-900">
+                Yellow Bourbon
+              </div>
+              <div className="mt-1 text-xs text-coffee-600">
+                Talhão alto · 1.050m · honey
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className={`absolute bottom-8 left-1/2 -translate-x-1/2 ${fadeClass("delay-[1200ms]")}`}>
+      {/* Scroll cue minimalista */}
+      <div
+        className={`absolute bottom-6 left-1/2 -translate-x-1/2 transition-opacity duration-1000 delay-[1800ms] ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+        aria-hidden
+      >
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xs tracking-widest text-coffee-500 uppercase">Explore</span>
-          <div className="relative h-10 w-4 rounded-full border border-coffee-600/40">
-            <div className="absolute left-1/2 top-1.5 h-2 w-0.5 -translate-x-1/2 animate-bounce rounded-full bg-gold-400" />
-          </div>
+          <span className="text-[10px] tracking-[0.3em] text-coffee-500 uppercase">
+            Scroll
+          </span>
+          <div className="h-10 w-px bg-gradient-to-b from-coffee-400 to-transparent" />
         </div>
       </div>
     </section>

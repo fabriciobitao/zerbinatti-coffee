@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { Ornament } from "@/components/ui/Ornament";
+import { Kicker, PullQuote } from "@/components/ui/Editorial";
 import { SCABadge } from "@/components/ui/SCABadge";
 import { FreshnessSignal } from "@/components/ui/FreshnessSignal";
+import { ScrollIcon } from "@/components/ui/HeraldicIcons";
 import { getProductBySlug } from "@/lib/data/products";
 
 /**
@@ -22,29 +23,49 @@ export default function MonthlyFeature() {
   if (!product) return null;
 
   return (
-    <section className="bg-coffee-100/50 py-16 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="text-center">
-          <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-            {edition.month}
-          </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
-            {edition.title}
+    <section className="relative overflow-hidden bg-coffee-100/50 py-20 sm:py-28 lg:py-32">
+      {/* Backdrop tipográfico */}
+      <div
+        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        aria-hidden
+      >
+        <span
+          className="select-none font-serif text-coffee-200/40"
+          style={{
+            fontSize: "clamp(8rem, 20vw, 20rem)",
+            fontWeight: 700,
+            lineHeight: 1,
+            letterSpacing: "-0.04em",
+          }}
+        >
+          04
+        </span>
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
+        <div className="mx-auto max-w-3xl text-center">
+          <Kicker>{edition.month}</Kicker>
+          <h2 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.02em] text-coffee-900 text-[clamp(2.25rem,5.5vw,4.5rem)]">
+            {edition.title.split(" ").slice(0, 4).join(" ")}
+            <br />
+            <span className="italic text-gold-600">
+              {edition.title.split(" ").slice(4).join(" ")}
+            </span>
           </h2>
-          <Ornament className="mt-6" />
         </div>
 
-        <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-14">
+        <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-14">
           {/* Produto destaque */}
           <Link
             href={`/cafes/${product.slug}`}
             className="group relative overflow-hidden rounded-2xl bg-coffee-950 transition-all hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
           >
             <div
-              className="aspect-[4/5] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              className="aspect-[4/5] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
               style={{
                 backgroundImage:
                   "linear-gradient(180deg, transparent 40%, rgba(26,17,8,0.85) 100%), url('https://images.unsplash.com/photo-1559526642-c3f001ea68ee?w=1200&q=85&auto=format&fit=crop')",
+                filter: "sepia(0.25) saturate(1.15)",
               }}
               role="img"
               aria-label={`Edição do mês — ${product.name}`}
@@ -74,17 +95,14 @@ export default function MonthlyFeature() {
 
           {/* Carta do torrador */}
           <div className="flex flex-col justify-center">
-            <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
-              {edition.letterTitle}
-            </span>
-            <blockquote className="mt-4">
-              <p className="font-serif text-xl leading-relaxed text-coffee-800 sm:text-2xl">
-                &ldquo;{edition.letter.split(" — ")[0]}&rdquo;
-              </p>
-              <footer className="mt-6 text-sm text-coffee-600">
-                — {edition.letter.split(" — ")[1]}
-              </footer>
-            </blockquote>
+            <div className="flex items-center gap-3 text-gold-600">
+              <ScrollIcon size={28} strokeWidth={1.2} />
+              <Kicker>{edition.letterTitle}</Kicker>
+            </div>
+
+            <PullQuote cite={edition.letter.split(" — ")[1]} className="mt-6">
+              {edition.letter.split(" — ")[0]}
+            </PullQuote>
 
             <div className="mt-8 border-t border-coffee-200 pt-6">
               <h4 className="font-serif text-base font-bold text-coffee-900">

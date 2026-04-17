@@ -114,3 +114,261 @@ body::after {
 ::-webkit-scrollbar-track { background: var(--color-coffee-100); }
 ::-webkit-scrollbar-thumb { background: var(--color-coffee-400); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-coffee-600); }
+
+/* ═══════════════════════════════════════════════════
+   EDITORIAL TYPOGRAPHY SYSTEM
+   ═══════════════════════════════════════════════════ */
+
+/* Escala tipográfica dramática */
+.text-display {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+.text-display-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 10vw, 9rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+.text-editorial {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 6vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.text-lede {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.875rem);
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+}
+
+/* Drop cap editorial — primeira letra gigante em estilo revista */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  float: left;
+  font-size: 4.8em;
+  line-height: 0.82;
+  padding-right: 0.08em;
+  padding-top: 0.08em;
+  color: var(--color-coffee-900);
+}
+.drop-cap-gold::first-letter {
+  color: var(--color-gold-600);
+}
+
+/* Pull quote — citação editorial com ornamento */
+.pull-quote {
+  position: relative;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.25;
+  color: var(--color-coffee-900);
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--color-gold-500);
+}
+.pull-quote::before {
+  content: "\201C";
+  position: absolute;
+  left: -0.25rem;
+  top: -2.5rem;
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--color-gold-500);
+  opacity: 0.35;
+}
+
+/* Marginalia — anotação lateral em tipografia pequena */
+.marginalia {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-coffee-500);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Kicker — eyebrow tipográfico com ornamento */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+.kicker::before,
+.kicker::after {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+/* ═══════════════════════════════════════════════════
+   IMAGE TREATMENTS
+   ═══════════════════════════════════════════════════ */
+
+/* Duotone coffee × gold — override sobre imagens via mix-blend-mode */
+.duotone-coffee {
+  position: relative;
+  isolation: isolate;
+}
+.duotone-coffee > img,
+.duotone-coffee > div[style*="background-image"] {
+  filter: grayscale(1) contrast(1.05);
+}
+.duotone-coffee::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-coffee-900), var(--color-coffee-700));
+  mix-blend-mode: lighten;
+  pointer-events: none;
+  z-index: 1;
+}
+.duotone-coffee::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--color-gold-500), var(--color-coffee-100));
+  mix-blend-mode: darken;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+}
+
+/* Grain intenso aplicado localmente */
+.grain-local {
+  position: relative;
+}
+.grain-local::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+/* Vignette sutil para imagens hero */
+.vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(26,17,8,0.55) 100%);
+}
+
+/* ═══════════════════════════════════════════════════
+   MOTION SYSTEM
+   ═══════════════════════════════════════════════════ */
+
+/* Reveal em série com stagger natural */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-stagger.revealed > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+.reveal-stagger.revealed > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+
+/* Texto desliza de baixo por palavra */
+@keyframes word-rise {
+  from { opacity: 0; transform: translateY(1em) rotate(2deg); }
+  to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+.word-rise {
+  display: inline-block;
+  opacity: 0;
+  animation: word-rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Rotação 3D contínua — signature grão */
+@keyframes bean-rotate {
+  from { transform: rotateY(0) rotateX(-8deg); }
+  to { transform: rotateY(360deg) rotateX(-8deg); }
+}
+.bean-rotate {
+  animation: bean-rotate 18s linear infinite;
+  transform-style: preserve-3d;
+}
+
+/* Micro-float contínuo */
+@keyframes float-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-subtle {
+  animation: float-subtle 5s ease-in-out infinite;
+}
+
+/* Hover choreography — card que respira */
+.card-lift {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-lift:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 60px -20px rgba(26, 17, 8, 0.25);
+}
+
+/* Underline que cresce — link editorial */
+.link-editorial {
+  position: relative;
+  display: inline-block;
+}
+.link-editorial::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0.3);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-editorial:hover::after {
+  transform: scaleX(1);
+}
+
+/* Respeita usuário que desativou motion */
+@media (prefers-reduced-motion: reduce) {
+  .bean-rotate,
+  .float-subtle,
+  .word-rise {
+    animation: none;
+  }
+  .reveal-stagger > *,
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { articles, getArticleBySlug } from "@/lib/data/articles";
 import { Ornament } from "@/components/ui/Ornament";
+import { Kicker, AsymmetricDivider } from "@/components/ui/Editorial";
 import { articleSchema } from "@/lib/schema";
 
 export async function generateStaticParams() {
@@ -67,27 +68,31 @@ export default async function ArticlePage({
               <span className="text-coffee-800">{article.category}</span>
             </nav>
 
-            <span className="mt-10 block text-xs font-semibold tracking-[0.3em] text-gold-600 uppercase">
-              {article.category}
-            </span>
-            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-coffee-900 sm:text-5xl">
+            <div className="mt-10">
+              <Kicker>{article.category}</Kicker>
+            </div>
+            <h1 className="mt-6 font-serif font-bold leading-[0.95] tracking-[-0.025em] text-coffee-900 text-[clamp(2.25rem,6vw,4.5rem)]">
               {article.title}
             </h1>
-            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-coffee-600">
+            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-medium tracking-[0.12em] text-coffee-600 uppercase">
               <span>Por {article.author}</span>
-              <span>·</span>
+              <span className="text-gold-500">◆</span>
               <span>{formatDate(article.publishedAt)}</span>
-              <span>·</span>
+              <span className="text-gold-500">◆</span>
               <span>{article.readingTime} de leitura</span>
             </div>
 
-            <Ornament className="my-10" />
+            <AsymmetricDivider className="my-12" />
 
-            <div className="space-y-6 font-serif text-[17px] leading-relaxed text-coffee-800 sm:text-lg">
+            <div className="space-y-7 text-[17px] leading-[1.75] text-coffee-800 sm:text-lg">
               {article.body.map((p, i) => (
                 <p
                   key={i}
-                  className={i === 0 ? "first-letter:float-left first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:leading-[0.85] first-letter:mr-2 first-letter:mt-1 first-letter:text-gold-600" : ""}
+                  className={
+                    i === 0
+                      ? "drop-cap drop-cap-gold font-serif text-lg leading-[1.65] sm:text-xl"
+                      : "font-serif"
+                  }
                 >
                   {p}
                 </p>
