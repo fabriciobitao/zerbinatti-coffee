@@ -12,7 +12,7 @@ export default function Footer() {
               alt="Zerbinatti Coffee"
               className="h-10"
             />
-            <p className="mt-4 text-sm leading-relaxed text-coffee-500">
+            <p className="mt-4 text-sm leading-relaxed text-coffee-300">
               Café especial brasileiro com herança italiana. Três gerações
               de dedicação em cada xícara.
             </p>
@@ -25,22 +25,22 @@ export default function Footer() {
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="#cafes" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="#cafes" className="text-sm text-coffee-300 hover:text-gold-400">
                   Todos os Cafés
                 </Link>
               </li>
               <li>
-                <Link href="#assinatura" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="#assinatura" className="text-sm text-coffee-300 hover:text-gold-400">
                   Assinaturas
                 </Link>
               </li>
               <li>
-                <Link href="#quiz" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="#quiz" className="text-sm text-coffee-300 hover:text-gold-400">
                   Quiz do Café
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="/#kits" className="text-sm text-coffee-300 hover:text-gold-400">
                   Kits e Presentes
                 </Link>
               </li>
@@ -53,22 +53,22 @@ export default function Footer() {
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="#origem" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="#origem" className="text-sm text-coffee-300 hover:text-gold-400">
                   Nossa História
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="/fazenda" className="text-sm text-coffee-300 hover:text-gold-400">
                   A Fazenda
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="/processo" className="text-sm text-coffee-300 hover:text-gold-400">
                   Processo
                 </Link>
               </li>
               <li>
-                <Link href="#contato" className="text-sm text-coffee-500 hover:text-gold-400">
+                <Link href="#contato" className="text-sm text-coffee-300 hover:text-gold-400">
                   B2B / Parcerias
                 </Link>
               </li>
@@ -80,14 +80,18 @@ export default function Footer() {
             <h4 className="text-sm font-semibold tracking-wide text-coffee-200 uppercase">
               Newsletter
             </h4>
-            <p className="mt-4 text-sm text-coffee-500">
+            <p className="mt-4 text-sm text-coffee-300">
               Receba novidades sobre safras e lançamentos exclusivos.
             </p>
+            <label htmlFor="newsletter-email" className="sr-only">
+              E-mail para newsletter
+            </label>
             <div className="mt-4 flex gap-2">
               <input
+                id="newsletter-email"
                 type="email"
                 placeholder="seu@email.com"
-                className="flex-1 rounded-lg border border-coffee-800 bg-coffee-900 px-4 py-2.5 text-sm text-coffee-200 outline-none placeholder:text-coffee-600 focus:border-gold-500"
+                className="flex-1 rounded-lg border border-coffee-800 bg-coffee-900 px-4 py-2.5 text-sm text-coffee-100 outline-none placeholder:text-coffee-400 focus:border-gold-500"
               />
               <button className="rounded-lg bg-gold-500 px-4 py-2.5 text-sm font-semibold text-coffee-950 transition-colors hover:bg-gold-400">
                 Assinar
@@ -130,17 +134,17 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-16 border-t border-coffee-800 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-xs text-coffee-600">
+            <p className="text-xs text-coffee-400">
               &copy; 2026 Zerbinatti Coffee. Todos os direitos reservados.
             </p>
-            <div className="flex gap-6 text-xs text-coffee-600">
-              <Link href="#" className="hover:text-coffee-400">
+            <div className="flex gap-6 text-xs text-coffee-400">
+              <Link href="/termos" className="hover:text-gold-400">
                 Termos de Uso
               </Link>
-              <Link href="#" className="hover:text-coffee-400">
+              <Link href="/privacidade" className="hover:text-gold-400">
                 Privacidade
               </Link>
-              <Link href="#" className="hover:text-coffee-400">
+              <Link href="/entregas" className="hover:text-gold-400">
                 Política de Entregas
               </Link>
             </div>

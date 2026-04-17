@@ -1,28 +1,38 @@
+"use client";
+
+import { useCart } from "@/lib/cart-context";
+
 const combos = [
   {
+    id: "kit-degustacao",
     name: "Kit Degustação",
     description: "Experimente os 3 cafés da safra. Perfeito para descobrir seu favorito.",
     items: ["Clássico 250g", "Reserva 250g", "Micro-Lote 250g"],
     originalPrice: 209.7,
     price: 169.9,
+    weight: "3x 250g",
     tag: "Economize R$ 39,80",
     image: "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80",
   },
   {
+    id: "kit-classico-3x",
     name: "Combo Clássico 3x",
     description: "Leve 3 pacotes do nosso best seller com desconto especial.",
     items: ["Clássico 250g x3"],
     originalPrice: 149.7,
     price: 119.9,
+    weight: "3x 250g",
     tag: "Leve 3 Pague 2",
     image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80",
   },
   {
+    id: "kit-presente",
     name: "Presente Especial",
     description: "Caixa premium com 2 cafés exclusivos + coador artesanal.",
     items: ["Reserva 250g", "Micro-Lote 250g", "Coador Artesanal"],
     originalPrice: 219.7,
     price: 179.9,
+    weight: "kit presente",
     tag: "Ideal para Presente",
     image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80",
   },
@@ -33,15 +43,17 @@ function formatCurrency(value: number) {
 }
 
 export default function Combos() {
+  const { addItem } = useCart();
+
   return (
-    <section className="bg-white py-24 lg:py-32">
+    <section id="kits" className="bg-white py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Kits e Combos
           </span>
-          <h2 className="mt-4 font-serif text-4xl font-bold text-coffee-900 md:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
             Mais Café, Mais Desconto
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-600">
@@ -67,6 +79,8 @@ export default function Combos() {
                   <div
                     className="aspect-[16/9] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                     style={{ backgroundImage: `url('${combo.image}')` }}
+                    role="img"
+                    aria-label={combo.name}
                   />
                   <div className="absolute right-4 top-4 rounded-full bg-gold-500 px-3 py-1 text-xs font-bold text-coffee-950">
                     -{discount}%
@@ -82,7 +96,7 @@ export default function Combos() {
                   <h3 className="font-serif text-xl font-bold text-coffee-900">
                     {combo.name}
                   </h3>
-                  <p className="mt-2 text-sm text-coffee-500">
+                  <p className="mt-2 text-sm text-coffee-600">
                     {combo.description}
                   </p>
 
@@ -102,7 +116,7 @@ export default function Combos() {
                   {/* Pricing */}
                   <div className="mt-5 rounded-lg bg-coffee-50 p-4">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-sm text-coffee-400 line-through">
+                      <span className="text-sm text-coffee-500 line-through">
                         {formatCurrency(combo.originalPrice)}
                       </span>
                     </div>
@@ -114,12 +128,22 @@ export default function Combos() {
                         no PIX
                       </span>
                     </div>
-                    <div className="mt-1 text-xs text-coffee-400">
+                    <div className="mt-1 text-xs text-coffee-500">
                       ou {formatCurrency(combo.price)} no cartão
                     </div>
                   </div>
 
-                  <button className="mt-4 w-full rounded-full bg-gold-500 py-3 text-sm font-bold text-coffee-950 transition-all hover:bg-gold-400 hover:shadow-lg">
+                  <button
+                    onClick={() =>
+                      addItem({
+                        id: combo.id,
+                        name: combo.name,
+                        price: combo.price,
+                        weight: combo.weight,
+                      })
+                    }
+                    className="mt-4 w-full rounded-full bg-gold-500 py-3 text-sm font-bold text-coffee-950 transition-all hover:bg-gold-400 hover:shadow-lg active:scale-[0.97]"
+                  >
                     Comprar Kit
                   </button>
                 </div>

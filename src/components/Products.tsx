@@ -115,7 +115,7 @@ export default function Products() {
                     <span className="rounded-full bg-green-800/10 px-2.5 py-0.5 text-xs font-semibold text-green-800">
                       SCA {product.score}
                     </span>
-                    <span className="text-xs text-coffee-400">
+                    <span className="text-xs text-coffee-600">
                       Torra {product.roast}
                     </span>
                   </div>
@@ -123,7 +123,7 @@ export default function Products() {
                   <h3 className="font-serif text-xl font-bold text-coffee-900">
                     {product.name}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-coffee-500">
+                  <p className="mt-2 text-sm leading-relaxed text-coffee-600">
                     {product.description}
                   </p>
 
@@ -135,7 +135,7 @@ export default function Products() {
                       </span>
                       <span className="text-sm font-medium text-green-700">no PIX</span>
                     </div>
-                    <div className="mt-1 text-sm text-coffee-400">
+                    <div className="mt-1 text-sm text-coffee-600">
                       ou {formatCurrency(product.price)} em até{" "}
                       <span className="font-semibold text-coffee-700">
                         {inst.count}x de {inst.value}

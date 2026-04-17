@@ -1,4 +1,9 @@
+import { buildWhatsAppUrl, CONTACT_EMAIL } from "@/lib/config";
+
 export default function B2B() {
+  const whatsAppUrl = buildWhatsAppUrl(
+    "Olá! Tenho interesse em parceria B2B com a Zerbinatti Coffee."
+  );
   return (
     <section id="contato" className="bg-coffee-100/50 py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -58,7 +63,7 @@ export default function B2B() {
             {/* CTA */}
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <a
-                href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Tenho%20interesse%20em%20parceria%20B2B%20com%20a%20Zerbinatti%20Coffee."
+                href={whatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-coffee-900 px-8 py-4 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-800 hover:shadow-lg active:scale-[0.97]"
@@ -69,7 +74,7 @@ export default function B2B() {
                 Falar com Comercial
               </a>
               <a
-                href="mailto:contato@zerbinatticoffee.com"
+                href={`mailto:${CONTACT_EMAIL}`}
                 className="inline-flex items-center justify-center rounded-full border border-coffee-300 px-8 py-4 text-sm font-medium text-coffee-700 transition-all duration-200 hover:border-coffee-500 hover:text-coffee-900 active:scale-[0.97]"
               >
                 Enviar E-mail

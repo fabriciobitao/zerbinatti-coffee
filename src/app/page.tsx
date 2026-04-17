@@ -5,6 +5,7 @@ import BestSellers from "@/components/BestSellers";
 import Story from "@/components/Story";
 import Products from "@/components/Products";
 import Quiz from "@/components/Quiz";
+import Combos from "@/components/Combos";
 import Subscription from "@/components/Subscription";
 import B2B from "@/components/B2B";
 import Footer from "@/components/Footer";
@@ -19,7 +20,8 @@ export default function Home() {
         <TrustBar />
         <Products />
         <BestSellers />
-        <SectionFade topColor="#D7CCC8" bottomColor="#1A1108" />
+        <Combos />
+        <SectionFade topColor="#FFFFFF" bottomColor="#1A1108" />
         <Subscription />
         <SectionFade topColor="#1A1108" bottomColor="#FDFBF7" />
         <Story />

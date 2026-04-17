@@ -1,13 +1,20 @@
+"use client";
+
+import { buildWhatsAppUrl } from "@/lib/config";
+
 const plans = [
   {
     name: "Apreciador",
-    price: "R$ 69,90",
+    price: "R$ 59,41",
+    originalPrice: "R$ 69,90",
+    savings: "Economize R$ 125,88/ano",
     frequency: "/mês",
     description: "Perfeito para quem está começando no mundo do café especial.",
     features: [
       "1 pacote de 500g por mês",
       "Blend escolhido pelo mestre torrador",
       "Ficha de degustação inclusa",
+      "15% off do preço avulso",
       "Frete grátis",
     ],
     cta: "Ser Apreciador",
@@ -46,6 +53,11 @@ const plans = [
   },
 ];
 
+function subscribeUrl(planName: string, price: string) {
+  const msg = `Olá! Quero assinar o plano ${planName} (${price}/mês) da Zerbinatti Coffee. Pode me guiar para finalizar a assinatura?`;
+  return buildWhatsAppUrl(msg);
+}
+
 export default function Subscription() {
   return (
     <section id="assinatura" className="bg-coffee-950 py-16 sm:py-24 lg:py-32">
@@ -58,7 +70,7 @@ export default function Subscription() {
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-50 sm:text-4xl md:text-5xl">
             Café Especial Todo Mês
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-coffee-400">
+          <p className="mx-auto mt-4 max-w-xl text-coffee-300">
             Receba cafés selecionados na sua porta. Pause, troque ou cancele
             quando quiser. Sem compromisso.
           </p>
@@ -86,16 +98,26 @@ export default function Subscription() {
                 <h3 className="font-serif text-2xl font-bold text-coffee-50">
                   {plan.name}
                 </h3>
-                <p className="mt-2 text-sm text-coffee-400">
+                <p className="mt-2 text-sm text-coffee-300">
                   {plan.description}
                 </p>
               </div>
 
               <div className="mb-8">
+                {plan.originalPrice && (
+                  <div className="mb-1 text-sm text-coffee-500 line-through">
+                    {plan.originalPrice}
+                  </div>
+                )}
                 <span className="font-serif text-3xl font-bold text-coffee-50 sm:text-4xl">
                   {plan.price}
                 </span>
-                <span className="text-coffee-400">{plan.frequency}</span>
+                <span className="text-coffee-300">{plan.frequency}</span>
+                {plan.savings && (
+                  <div className="mt-2 inline-block rounded-full bg-gold-500/15 px-2.5 py-0.5 text-xs font-semibold text-gold-400">
+                    {plan.savings}
+                  </div>
+                )}
               </div>
 
               <ul className="mb-8 space-y-3">
@@ -114,27 +136,73 @@ export default function Subscription() {
                         d="M4.5 12.75l6 6 9-13.5"
                       />
                     </svg>
-                    <span className="text-sm text-coffee-300">{feature}</span>
+                    <span className="text-sm text-coffee-200">{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <button
-                className={`mt-auto w-full rounded-full py-3 text-sm font-semibold tracking-wide transition-all ${
+              <a
+                href={subscribeUrl(plan.name, plan.price)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`mt-auto block w-full rounded-full py-3 text-center text-sm font-semibold tracking-wide transition-all ${
                   plan.highlight
                     ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
-                    : "bg-coffee-700 text-coffee-100 hover:bg-coffee-600 hover:shadow-lg"
+                    : "bg-coffee-700 text-coffee-50 hover:bg-coffee-600 hover:shadow-lg"
                 }`}
               >
                 {plan.cta}
-              </button>
+              </a>
             </div>
           ))}
         </div>
 
+        {/* How it works */}
+        <div className="mt-16 rounded-2xl border border-coffee-800 bg-coffee-900/40 p-6 sm:p-10">
+          <h3 className="text-center font-serif text-xl font-bold text-coffee-50 sm:text-2xl">
+            Como funciona
+          </h3>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                n: "1",
+                t: "Escolha seu plano",
+                d: "Apreciador, Sommelier ou Herdeiro — cancele quando quiser.",
+              },
+              {
+                n: "2",
+                t: "Nós torramos e enviamos",
+                d: "Seu café sai da torrefação para sua casa em até 5 dias úteis.",
+              },
+              {
+                n: "3",
+                t: "Pause, troque ou adie",
+                d: "Vai viajar? Pausa com um clique. Sem multa, sem burocracia.",
+              },
+              {
+                n: "4",
+                t: "Receba todo mês",
+                d: "Café fresco chegando sozinho — você só abre e prepara.",
+              },
+            ].map((s) => (
+              <div key={s.n}>
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-coffee-950">
+                  {s.n}
+                </div>
+                <h4 className="mt-4 font-serif text-lg font-bold text-coffee-50">
+                  {s.t}
+                </h4>
+                <p className="mt-2 text-sm leading-relaxed text-coffee-300">
+                  {s.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Guarantee */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-coffee-500">
+          <p className="text-sm text-coffee-400">
             ✦ Satisfação garantida ou seu dinheiro de volta no primeiro mês ✦
           </p>
         </div>

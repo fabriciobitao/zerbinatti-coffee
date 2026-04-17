@@ -1,6 +1,6 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-04-16
+**Ultima atualizacao:** 2026-04-16 (Onda 1 UX/CX)
 
 ## O que e
 E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). Opcao C: marca completa com B2C + B2B + ecossistema de conteudo.
@@ -31,6 +31,18 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 - [x] Descricoes dos planos personalizadas para identidade Zerbinatti
 - [x] Botoes dos planos alinhados na mesma linha (flex + mt-auto)
 - [x] Descricoes dos produtos com embalagem 500g
+- [x] **Onda 1 UX/CX**: destrava bloqueadores de conversao
+  - WhatsApp via env var (NEXT_PUBLIC_WHATSAPP_NUMBER) — nao mais numero fake hardcoded
+  - Botoes de assinatura funcionais (abrem WhatsApp com plano pre-preenchido)
+  - Apreciador reprecificado com 15% off (R$59,41) + "Economize R$125,88/ano"
+  - Secao "Como funciona" da assinatura (4 passos)
+  - Combos renderizado na home + botao "Comprar Kit" funcional
+  - Quiz: corrigido "4 perguntas" (era "5") e removida promessa de share Instagram
+  - Paginas legais: /termos, /privacidade, /entregas, /fazenda, /processo (LGPD compliance)
+  - Footer: dead links substituidos por paginas reais; label do newsletter; contraste
+  - CartDrawer: barra lateral colorida por SKU + progress bar de frete gratis
+  - Focus-visible global (acessibilidade WCAG / Lei Brasileira de Inclusao)
+  - Contrastes corrigidos em Products, Footer, CartDrawer (coffee-400 -> 500/600)
 
 ## Pendente
 - [ ] Criar Shopify dev store e conectar

@@ -134,17 +134,17 @@ export default function Quiz() {
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">Experiência Personalizada</span>
           <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">Descubra Seu Café Ideal</h2>
           <p className="mx-auto mt-4 max-w-xl text-base text-coffee-600 sm:mt-6 sm:text-lg">
-            Responda 5 perguntas rápidas e nosso algoritmo encontra o café perfeito para o seu paladar. Resultado compartilhável no Instagram.
+            Responda 4 perguntas rápidas e nosso algoritmo encontra o café perfeito para o seu paladar.
           </p>
 
           <div className="mt-8 flex items-center justify-center gap-1.5 sm:mt-12 sm:gap-3">
             {["Preparo", "Sabor", "Intensidade", "Momento", "Resultado"].map((step, i) => (
               <div key={step} className="flex items-center gap-1.5 sm:gap-3">
                 <div className="flex flex-col items-center">
-                  <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold sm:h-10 sm:w-10 sm:text-sm ${i === 4 ? "bg-gold-500 text-coffee-950" : "bg-coffee-200 text-coffee-700"}`}>
+                  <div className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-bold sm:h-10 sm:w-10 sm:text-sm ${i === 4 ? "bg-gold-500 text-coffee-950" : "bg-coffee-200 text-coffee-800"}`}>
                     {i + 1}
                   </div>
-                  <span className="mt-1 hidden text-xs text-coffee-500 sm:block">{step}</span>
+                  <span className="mt-1 hidden text-xs text-coffee-600 sm:block">{step}</span>
                 </div>
                 {i < 4 && <div className="h-px w-4 bg-coffee-300 sm:mb-5 sm:w-12" />}
               </div>
@@ -157,7 +157,7 @@ export default function Quiz() {
           >
             Começar o Quiz — 2 minutos
           </button>
-          <p className="mt-4 text-sm text-coffee-400">Mais de 2.000 pessoas já descobriram seu café ideal</p>
+          <p className="mt-4 text-sm text-coffee-600">Mais de 2.000 pessoas já descobriram seu café ideal</p>
         </div>
       </section>
     );

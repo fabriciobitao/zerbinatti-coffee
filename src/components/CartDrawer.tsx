@@ -2,9 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { useCart } from "@/lib/cart-context";
+import { buildWhatsAppUrl } from "@/lib/config";
 
 function formatCurrency(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
+// Cor de acento por SKU para diferenciar visualmente no carrinho
+function getAccentColor(id: string): string {
+  if (id.startsWith("classico")) return "#6D4C41"; // coffee-600 (marrom classico)
+  if (id.startsWith("reserva")) return "#D4A017"; // gold-500 (dourado)
+  if (id.startsWith("microlote")) return "#2E5A3A"; // green-800 (verde micro-lote)
+  if (id.startsWith("kit")) return "#B8860B"; // gold-600 (combos)
+  return "#8D6E63"; // coffee-500 fallback
 }
 
 function buildWhatsAppLink(items: { name: string; quantity: number; price: number; weight: string }[], total: number, pixTotal: number) {
@@ -12,7 +22,7 @@ function buildWhatsAppLink(items: { name: string; quantity: number; price: numbe
     (i) => `• ${i.quantity}x ${i.name} (${i.weight}) — ${formatCurrency(i.price * i.quantity)}`
   );
   const msg = `Olá! Gostaria de finalizar meu pedido:\n\n${lines.join("\n")}\n\nSubtotal: ${formatCurrency(total)}\nNo PIX (10% off): ${formatCurrency(pixTotal)}\n\nAguardo instruções para pagamento!`;
-  return `https://wa.me/5500000000000?text=${encodeURIComponent(msg)}`;
+  return buildWhatsAppUrl(msg);
 }
 
 export function CartButton() {
@@ -111,12 +121,15 @@ export function CartButton() {
                   <div key={item.id} className="mb-4 rounded-xl border border-coffee-200 bg-white p-4">
                     <div className="flex items-start justify-between">
                       <div className="flex gap-3">
-                        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-coffee-100">
+                        <div
+                          className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-coffee-100"
+                          style={{ boxShadow: `inset 4px 0 0 ${getAccentColor(item.id)}` }}
+                        >
                           <img src="/images/rotulo-500g.png" alt={item.name} className="h-10 w-auto object-contain" />
                         </div>
                         <div>
                           <h4 className="text-sm font-semibold text-coffee-900">{item.name}</h4>
-                          <p className="text-xs text-coffee-400">{item.weight}</p>
+                          <p className="text-xs text-coffee-500">{item.weight}</p>
                           <p className="mt-1 text-sm font-bold text-coffee-900">{formatCurrency(item.price)}</p>
                         </div>
                       </div>
@@ -144,7 +157,21 @@ export function CartButton() {
                     Frete grátis aplicado
                   </div>
                 )}
-                <div className="mb-1 flex justify-between text-sm text-coffee-500">
+                {total < 99 && (
+                  <div className="mb-3">
+                    <div className="mb-1 flex justify-between text-xs text-coffee-600">
+                      <span>Faltam {formatCurrency(99 - total)} para frete grátis</span>
+                      <span>{Math.round((total / 99) * 100)}%</span>
+                    </div>
+                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-coffee-200">
+                      <div
+                        className="h-full rounded-full bg-gold-500 transition-all duration-500"
+                        style={{ width: `${Math.min(100, (total / 99) * 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
+                <div className="mb-1 flex justify-between text-sm text-coffee-600">
                   <span>Subtotal</span>
                   <span>{formatCurrency(total)}</span>
                 </div>
