@@ -22,7 +22,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1800&q=85&auto=format&fit=crop')",
+            "url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70&auto=format&fit=crop')",
           backgroundSize: "cover",
           backgroundPosition: "center right",
           filter: "brightness(0.42) saturate(1.15) contrast(1.05)",
@@ -49,30 +49,18 @@ export default function Hero() {
         }}
       />
 
-      {/* Bokeh dourado — luzes fora de foco flutuando */}
+      {/* Bokeh dourado — luzes fora de foco (reduzido para performance) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[12%] right-[8%] h-[320px] w-[320px] rounded-full bg-gold-500/30 blur-[80px] bokeh-pulse"
+        className="pointer-events-none absolute top-[12%] right-[8%] h-[280px] w-[280px] rounded-full bg-gold-500/25 blur-[60px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[38%] right-[28%] h-[180px] w-[180px] rounded-full bg-gold-400/35 blur-[60px] bokeh-pulse"
-        style={{ animationDelay: "1.5s" }}
+        className="pointer-events-none absolute bottom-[15%] right-[18%] h-[220px] w-[220px] rounded-full bg-gold-600/20 blur-[60px]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute bottom-[15%] right-[18%] h-[240px] w-[240px] rounded-full bg-gold-600/25 blur-[90px] bokeh-pulse"
-        style={{ animationDelay: "3s" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute bottom-[30%] left-[18%] h-[200px] w-[200px] rounded-full bg-gold-500/15 blur-[100px] bokeh-pulse"
-        style={{ animationDelay: "2.2s" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-[22%] left-[42%] h-[140px] w-[140px] rounded-full bg-gold-400/20 blur-[70px] bokeh-pulse"
-        style={{ animationDelay: "4s" }}
+        className="pointer-events-none absolute top-[35%] left-[30%] h-[160px] w-[160px] rounded-full bg-gold-400/15 blur-[70px]"
       />
 
       {/* Vapor subindo — detalhe fino atmosférico */}
@@ -255,7 +243,7 @@ export default function Hero() {
                 className="absolute inset-0 bg-cover"
                 style={{
                   backgroundImage:
-                    "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1600&q=90&auto=format&fit=crop')",
+                    "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=75&auto=format&fit=crop')",
                   backgroundPosition: "center 65%",
                   filter: "saturate(1.1) contrast(1.08)",
                 }}
@@ -287,7 +275,7 @@ export default function Hero() {
             className="aspect-[4/5] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=90&auto=format&fit=crop')",
+                "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=70&auto=format&fit=crop')",
               filter: "saturate(1.1) contrast(1.08)",
             }}
             role="img"

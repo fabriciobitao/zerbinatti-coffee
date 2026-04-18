@@ -89,6 +89,19 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        <link
+          rel="preload"
+          as="image"
+          href="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=75&auto=format&fit=crop"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70&auto=format&fit=crop"
+          fetchPriority="high"
+        />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
         <Script
           id="organization-schema"
           type="application/ld+json"
