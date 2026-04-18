@@ -133,11 +133,11 @@ export default function Hero() {
 
           {/* Título editorial cinematográfico */}
           <h1 className="mt-7 font-serif font-bold leading-[0.95] tracking-[-0.035em] text-coffee-50 sm:mt-9">
-            <span className="block text-[clamp(2.75rem,8vw,5.5rem)]">
+            <span className="block text-[clamp(2rem,5.5vw,3.75rem)]">
               <SplitReveal text="Do legado" stagger={0.06} />
             </span>
             <span
-              className="mt-2 flex items-center gap-4 sm:mt-3 sm:gap-6"
+              className="mt-1 flex items-center gap-3 sm:mt-2 sm:gap-5"
               aria-label="Zerbinatti 1897"
             >
               <Image
@@ -146,17 +146,17 @@ export default function Hero() {
                 width={406}
                 height={180}
                 priority
-                sizes="(max-width: 640px) 220px, (max-width: 1024px) 300px, 360px"
-                className="h-[clamp(3.75rem,10vw,6.75rem)] w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
+                sizes="(max-width: 640px) 180px, (max-width: 1024px) 240px, 300px"
+                className="h-[clamp(3rem,7.5vw,5rem)] w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
               />
               <span
-                className="font-serif italic text-gold-500 text-[clamp(2.75rem,8vw,5.5rem)] leading-none"
+                className="font-serif italic text-gold-500 text-[clamp(2rem,5.5vw,3.75rem)] leading-none"
                 style={{ fontWeight: 400 }}
               >
                 1897
               </span>
             </span>
-            <span className="mt-2 block text-[clamp(2.75rem,8vw,5.5rem)] sm:mt-3">
+            <span className="mt-1 block text-[clamp(2rem,5.5vw,3.75rem)] sm:mt-2">
               <SplitReveal text="para sua xícara." stagger={0.06} />
             </span>
           </h1>
