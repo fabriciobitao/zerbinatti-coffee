@@ -31,7 +31,19 @@ const faqItems = [
   },
 ];
 
-const plans = [
+type Plan = {
+  name: string;
+  price: string;
+  originalPrice?: string;
+  savings?: string;
+  frequency: string;
+  description: string;
+  features: string[];
+  cta: string;
+  highlight: boolean;
+};
+
+const plans: Plan[] = [
   {
     name: "Apreciador",
     price: "R$ 69,99",
