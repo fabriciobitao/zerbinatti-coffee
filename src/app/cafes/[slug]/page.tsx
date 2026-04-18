@@ -270,7 +270,7 @@ export default async function ProductPage({
                 {[
                   { label: "Fazenda", value: product.origin.farm },
                   {
-                    label: "Região / Estado",
+                    label: "Região / estado",
                     value: `${product.origin.region} / ${product.origin.state}`,
                   },
                   { label: "Altitude", value: product.origin.altitude },
