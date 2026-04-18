@@ -249,29 +249,70 @@ export default function Hero() {
         {/* Coluna direita — fotografia de produto (lg+) */}
         <div className="hidden lg:col-span-5 lg:block">
           <div
-            className={`relative h-full min-h-[640px] transition-all duration-1000 delay-300 ${
+            className={`group relative h-full min-h-[640px] transition-all duration-1000 delay-300 ${
               loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
             }`}
           >
-            <div className="relative h-full min-h-[640px] overflow-hidden rounded-2xl shadow-[0_50px_100px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
+            {/* Glow dourado ambiente — halo editorial por trás da moldura */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute -inset-6 rounded-[2rem] opacity-60 blur-2xl"
+              style={{
+                background:
+                  "radial-gradient(ellipse at 50% 40%, rgba(212,160,23,0.22), transparent 65%)",
+              }}
+            />
+            <div
+              className="relative h-full min-h-[640px] overflow-hidden rounded-2xl ring-1 ring-gold-500/30"
+              style={{
+                boxShadow:
+                  "0 50px 120px -30px rgba(0,0,0,0.9), 0 0 80px -20px rgba(212,160,23,0.28), inset 0 0 0 1px rgba(212,160,23,0.08), inset 0 -60px 80px -40px rgba(26,17,8,0.5)",
+              }}
+            >
               <div
-                className="absolute inset-0 bg-cover"
+                className="absolute inset-0 bg-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.015]"
                 style={{
-                  backgroundImage:
-                    "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=75&auto=format&fit=crop')",
-                  backgroundPosition: "center 65%",
-                  filter: "saturate(1.1) contrast(1.08)",
+                  backgroundImage: "url('/images/hero-pacote-zerbinatti.jpg')",
+                  backgroundPosition: "center",
+                  filter: "saturate(1.12) contrast(1.08) brightness(1.02)",
                 }}
                 role="img"
-                aria-label="Xícara de café fumegante em ambiente escuro com bokeh dourado"
+                aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira rústica"
               />
-              {/* Gradiente inferior — integra com o fundo escuro */}
+              {/* Gradiente inferior — funde com o fundo #1a1108 da seção */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%]"
                 style={{
                   background:
-                    "linear-gradient(to top, rgba(26,17,8,0.55), transparent)",
+                    "linear-gradient(to top, rgba(26,17,8,0.75) 0%, rgba(26,17,8,0.35) 50%, transparent 100%)",
+                }}
+              />
+              {/* Gradiente lateral esquerdo — transição suave com a coluna de texto */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-0 w-[12%]"
+                style={{
+                  background:
+                    "linear-gradient(to right, rgba(26,17,8,0.35), transparent)",
+                }}
+              />
+              {/* Vinheta interna — drama cinematográfico */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,0.35) 100%)",
+                }}
+              />
+              {/* Filete dourado superior — assinatura editorial */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-px"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, rgba(230,190,68,0.5) 30%, rgba(230,190,68,0.5) 70%, transparent)",
                 }}
               />
             </div>
@@ -285,16 +326,39 @@ export default function Hero() {
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
-        <div className="relative overflow-hidden rounded-2xl shadow-[0_40px_80px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
+        <div
+          className="relative overflow-hidden rounded-2xl ring-1 ring-gold-500/30"
+          style={{
+            boxShadow:
+              "0 40px 90px -25px rgba(0,0,0,0.9), 0 0 60px -20px rgba(212,160,23,0.25), inset 0 0 0 1px rgba(212,160,23,0.08)",
+          }}
+        >
           <div
             className="aspect-[4/5] bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=70&auto=format&fit=crop')",
-              filter: "saturate(1.1) contrast(1.08)",
+              backgroundImage: "url('/images/hero-pacote-zerbinatti.jpg')",
+              filter: "saturate(1.12) contrast(1.08) brightness(1.02)",
             }}
             role="img"
-            aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira"
+            aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira rústica"
+          />
+          {/* Gradiente inferior — funde com fundo */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[28%]"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(26,17,8,0.7), transparent)",
+            }}
+          />
+          {/* Filete dourado superior */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 h-px"
+            style={{
+              background:
+                "linear-gradient(to right, transparent, rgba(230,190,68,0.5) 30%, rgba(230,190,68,0.5) 70%, transparent)",
+            }}
           />
           {/* Badge safra — canto */}
           <div className="absolute top-4 left-4 rounded-md border border-gold-500/50 bg-coffee-950/90 px-3 py-1.5 backdrop-blur-sm">

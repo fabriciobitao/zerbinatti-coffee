@@ -92,7 +92,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=75&auto=format&fit=crop"
+          href="/images/hero-pacote-zerbinatti.jpg"
           fetchPriority="high"
         />
         <link
