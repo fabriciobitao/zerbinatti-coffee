@@ -254,9 +254,32 @@ export default function Hero() {
             </a>
             <a
               href="#contato"
-              className="link-editorial inline-flex min-h-[44px] items-center text-sm font-medium tracking-[0.18em] text-gold-300 underline decoration-gold-500/60 underline-offset-[6px] decoration-1 uppercase hover:text-gold-200"
+              className="group inline-flex items-center justify-center gap-2.5 rounded-full border border-gold-500/60 bg-coffee-950/40 px-7 py-4 text-sm font-semibold tracking-wide text-gold-300 backdrop-blur-sm transition-all duration-500 hover:border-gold-400 hover:bg-coffee-900/60 hover:text-gold-200 hover:shadow-[0_20px_40px_-15px_rgba(230,190,68,0.35)] active:scale-[0.98]"
             >
-              Solicitar amostras e informações
+              <svg
+                className="h-4 w-4 text-gold-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
+              >
+                <rect x="4" y="7" width="16" height="12" rx="1.5" />
+                <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                <path d="M9 12h6M9 15h4" />
+              </svg>
+              Sua cafeteria começa aqui
+              <svg
+                className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.75"
+              >
+                <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
 
