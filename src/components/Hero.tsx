@@ -264,23 +264,6 @@ export default function Hero() {
                 />
               </div>
 
-              {/* Metadata flutuante — torra da semana */}
-              <div
-                className={`absolute -bottom-6 -right-6 max-w-[220px] rounded-xl border border-gold-500/25 bg-coffee-950/90 p-4 shadow-2xl backdrop-blur-md transition-all delay-[1500ms] duration-700 ${
-                  loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                }`}
-              >
-                <div className="text-[10px] font-semibold tracking-[0.22em] text-gold-400 uppercase">
-                  Torra da semana
-                </div>
-                <div className="mt-2 font-serif text-lg font-bold leading-tight text-coffee-50">
-                  Yellow Bourbon
-                </div>
-                <div className="mt-1 text-xs text-coffee-300">
-                  Talhão alto · 1.050m · honey
-                </div>
-              </div>
-
               {/* Selo safra — canto superior esquerdo */}
               <div
                 className={`absolute -top-5 -left-5 rounded-lg border border-gold-500/50 bg-coffee-950 px-4 py-2 shadow-xl transition-all delay-[1300ms] duration-700 ${
@@ -322,15 +305,6 @@ export default function Hero() {
             </div>
             <div className="font-serif text-base font-bold leading-none text-coffee-50">
               2026
-            </div>
-          </div>
-          {/* Torra da semana — canto inferior */}
-          <div className="absolute bottom-4 right-4 max-w-[180px] rounded-lg border border-gold-500/25 bg-coffee-950/90 p-3 backdrop-blur-md">
-            <div className="text-[9px] font-semibold tracking-[0.22em] text-gold-400 uppercase">
-              Torra da semana
-            </div>
-            <div className="mt-1 font-serif text-base font-bold leading-tight text-coffee-50">
-              Yellow Bourbon
             </div>
           </div>
         </div>
