@@ -381,6 +381,54 @@ body::after {
   animation: float-subtle 5s ease-in-out infinite;
 }
 
+/* Vapor subindo — atmosfera de café quente */
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) translateX(0) scale(0.9);
+  }
+  15% {
+    opacity: 0.55;
+  }
+  60% {
+    opacity: 0.35;
+    transform: translateY(-80px) translateX(12px) scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-180px) translateX(-6px) scale(1.35);
+  }
+}
+.steam-wisp {
+  animation: steam-rise 7s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+.steam-wisp-delay-1 { animation-delay: 1.2s; animation-duration: 8s; }
+.steam-wisp-delay-2 { animation-delay: 2.8s; animation-duration: 6.5s; }
+.steam-wisp-delay-3 { animation-delay: 4.1s; animation-duration: 7.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .steam-wisp,
+  .steam-wisp-delay-1,
+  .steam-wisp-delay-2,
+  .steam-wisp-delay-3 {
+    animation: none !important;
+    opacity: 0.2;
+  }
+}
+
+/* Bokeh pulse sutil — luzes douradas fora de foco */
+@keyframes bokeh-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.08); }
+}
+.bokeh-pulse {
+  animation: bokeh-pulse 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bokeh-pulse { animation: none !important; }
+}
+
 /* Hover choreography — card que respira */
 .card-lift {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
