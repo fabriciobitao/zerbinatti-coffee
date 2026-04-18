@@ -244,39 +244,33 @@ export default function Hero() {
         </div>
 
         {/* Coluna direita — fotografia de produto (lg+) */}
-        <div className="hidden lg:col-span-5 lg:block lg:pt-2">
-          <div className="relative flex items-center justify-center lg:justify-end">
-            <div
-              className={`relative transition-all duration-1000 delay-300 ${
-                loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-            >
-              {/* Moldura fotográfica — drop shadow forte */}
-              <div className="relative overflow-hidden rounded-2xl shadow-[0_50px_100px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
-                <div
-                  className="aspect-[4/5] w-[340px] bg-cover bg-center sm:w-[400px] lg:w-[460px]"
-                  style={{
-                    backgroundImage: "url('/images/hero-pacote-zerbinatti.png')",
-                    filter: "saturate(1.08) contrast(1.04)",
-                  }}
-                  role="img"
-                  aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira"
-                />
-              </div>
-
-              {/* Selo safra — canto superior esquerdo */}
+        <div className="hidden lg:col-span-5 lg:block">
+          <div
+            className={`relative h-full min-h-[640px] transition-all duration-1000 delay-300 ${
+              loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            }`}
+          >
+            <div className="relative h-full min-h-[640px] overflow-hidden rounded-2xl shadow-[0_50px_100px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
               <div
-                className={`absolute -top-5 -left-5 rounded-lg border border-gold-500/50 bg-coffee-950 px-4 py-2 shadow-xl transition-all delay-[1300ms] duration-700 ${
-                  loaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
-                }`}
-              >
-                <div className="text-[10px] tracking-[0.25em] text-gold-400 uppercase">
-                  Safra
-                </div>
-                <div className="font-serif text-xl font-bold leading-none text-coffee-50">
-                  2026
-                </div>
-              </div>
+                className="absolute inset-0 bg-cover"
+                style={{
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5b4?w=1600&q=90&auto=format&fit=crop')",
+                  backgroundPosition: "center 65%",
+                  filter: "saturate(1.1) contrast(1.08)",
+                }}
+                role="img"
+                aria-label="Xícara de café fumegante em ambiente escuro com bokeh dourado"
+              />
+              {/* Gradiente inferior — integra com o fundo escuro */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-40"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(26,17,8,0.55), transparent)",
+                }}
+              />
             </div>
           </div>
         </div>
@@ -292,8 +286,9 @@ export default function Hero() {
           <div
             className="aspect-[4/5] bg-cover bg-center"
             style={{
-              backgroundImage: "url('/images/hero-pacote-zerbinatti.png')",
-              filter: "saturate(1.08) contrast(1.04)",
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5b4?w=1400&q=90&auto=format&fit=crop')",
+              filter: "saturate(1.1) contrast(1.08)",
             }}
             role="img"
             aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira"
