@@ -26,9 +26,9 @@ export default function Home() {
         <BestSellers />
         <SectionFade topColor="#dcc7a9" bottomColor="#1A1108" />
         <Subscription />
-        <SectionFade topColor="#1A1108" bottomColor="#ebe0d2" />
-        <MonthlyFeature />
+        <SectionFade topColor="#1A1108" bottomColor="#dcc7a9" />
         <Combos />
+        <MonthlyFeature />
         <Story />
         <B2B />
         <SectionFade topColor="#dcc7a9" bottomColor="#1A1108" />
