@@ -28,7 +28,7 @@ export default function Entregas() {
       </h2>
       <ul className="list-disc space-y-2 pl-6">
         <li>
-          <strong>Capitais Sudeste/Sul:</strong> 2-4 dias úteis após postagem.
+          <strong>Capitais sudeste/sul:</strong> 2-4 dias úteis após postagem.
         </li>
         <li>
           <strong>Demais capitais:</strong> 4-7 dias úteis após postagem.

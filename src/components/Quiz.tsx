@@ -79,7 +79,7 @@ const catalog: Record<
   reserva: {
     id: "reserva-500g",
     slug: "reserva",
-    name: "Reserva Especial",
+    name: "Reserva especial",
     price: 89.9,
     weight: "500g",
     roast: "Torra média-clara",
@@ -89,7 +89,7 @@ const catalog: Record<
   micro: {
     id: "microlote-500g",
     slug: "microlote",
-    name: "Micro-Lote Premium",
+    name: "Micro-Lote premium",
     price: 119.9,
     weight: "500g",
     roast: "Torra clara",
@@ -103,19 +103,19 @@ const profiles: Record<
   { name: string; tagline: string; description: string }
 > = {
   classico: {
-    name: "O Clássico",
+    name: "O clássico",
     tagline: "Quem sabe o que gosta e volta sempre.",
     description:
       "Você prefere cafés doces, encorpados e previsíveis no melhor sentido — um abraço firme de manhã. Valoriza consistência mais que surpresa.",
   },
   reserva: {
-    name: "O Curador",
+    name: "O curador",
     tagline: "Equilíbrio entre doçura e descoberta.",
     description:
       "Seu paladar busca o ponto onde doçura encontra acidez e corpo encontra clareza. Aprecia o café que conversa com a comida e dura na memória.",
   },
   micro: {
-    name: "O Explorador",
+    name: "O explorador",
     tagline: "Paladar treinado, quer o que poucos provam.",
     description:
       "Você caça cafés raros, florais, de complexidade viva. Toma café como toma vinho — com atenção, em xícara pequena, notas anotadas.",

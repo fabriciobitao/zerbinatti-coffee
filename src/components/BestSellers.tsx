@@ -13,7 +13,7 @@ const bestSellers = [
   },
   {
     id: "reserva-500g",
-    name: "Reserva Especial",
+    name: "Reserva especial",
     weight: "500g",
     price: 89.9,
     reviews: 64,
@@ -21,7 +21,7 @@ const bestSellers = [
   },
   {
     id: "microlote-500g",
-    name: "Micro-Lote Premium",
+    name: "Micro-Lote premium",
     weight: "500g",
     price: 119.9,
     reviews: 42,

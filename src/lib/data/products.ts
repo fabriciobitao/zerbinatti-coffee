@@ -168,7 +168,7 @@ export const products: Product[] = [
   {
     slug: "reserva",
     id: "reserva-500g",
-    name: "Reserva Especial",
+    name: "Reserva especial",
     tagline: "Single origin de colheita seletiva",
     description:
       "Single origin, colheita seletiva, embalagem 500g. Notas de frutas vermelhas e mel.",
@@ -266,7 +266,7 @@ export const products: Product[] = [
   {
     slug: "microlote",
     id: "microlote-500g",
-    name: "Micro-Lote Premium",
+    name: "Micro-Lote premium",
     tagline: "Raridade da safra 2025 — SCA 90+",
     description:
       "Lote exclusivo, embalagem 500g. Notas florais, cítricas e acidez brilhante.",
