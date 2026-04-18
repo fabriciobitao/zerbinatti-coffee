@@ -287,7 +287,7 @@ export default function Hero() {
             className="aspect-[4/5] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url('https://images.unsplash.com/photo-1511537190424-bbbab87ac5b4?w=1400&q=90&auto=format&fit=crop')",
+                "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=90&auto=format&fit=crop')",
               filter: "saturate(1.1) contrast(1.08)",
             }}
             role="img"
