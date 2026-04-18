@@ -186,15 +186,45 @@ export default function Hero() {
             }`}
           >
             {[
-              ["900-1.200m", "Altitude"],
-              ["Natural·Honey", "Processo"],
-              ["85 a 90+", "Pontos SCA"],
-            ].map(([value, label]) => (
+              {
+                value: "900-1.200m",
+                label: "Altitude",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M3 20 L9 10 L13 15 L17 8 L21 20 Z" />
+                    <circle cx="17" cy="4.5" r="1.2" fill="currentColor" stroke="none" />
+                  </svg>
+                ),
+              },
+              {
+                value: "Natural · Honey",
+                label: "Processo",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M12 3 C 8 9, 6 12, 6 15 a 6 6 0 0 0 12 0 c 0 -3 -2 -6 -6 -12 Z" />
+                  </svg>
+                ),
+              },
+              {
+                value: "85 a 90+",
+                label: "Pontos SCA",
+                icon: (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M12 3 l2.4 5 5.6 0.8 -4 3.9 1 5.5 -5 -2.7 -5 2.7 1 -5.5 -4 -3.9 5.6 -0.8 Z" />
+                  </svg>
+                ),
+              },
+            ].map(({ value, label, icon }) => (
               <div key={label} className="border-t border-gold-500/30 pt-3">
-                <div className="font-serif text-xl font-bold text-gold-400 sm:text-2xl">
-                  {value}
+                <div className="flex items-center gap-2">
+                  <span className="h-4 w-4 shrink-0 text-gold-500 sm:h-[18px] sm:w-[18px]">
+                    {icon}
+                  </span>
+                  <div className="font-sans text-lg font-semibold tracking-tight text-gold-400 sm:text-xl">
+                    {value}
+                  </div>
                 </div>
-                <div className="mt-1 text-[10px] tracking-[0.22em] text-coffee-300 uppercase sm:text-xs">
+                <div className="mt-1.5 text-[10px] font-medium tracking-[0.22em] text-coffee-300 uppercase sm:text-xs">
                   {label}
                 </div>
               </div>
