@@ -218,8 +218,18 @@ export default function Quiz() {
   // Landing state
   if (!started) {
     return (
-      <section id="quiz" className="relative overflow-hidden bg-coffee-50 py-16 sm:py-24 lg:py-32">
-        <div className="absolute inset-0 opacity-5">
+      <section
+        id="quiz"
+        className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+        style={{
+          background:
+            "linear-gradient(180deg, #efe4d6 0%, #e8d9c6 60%, #e3d2bd 100%)",
+        }}
+      >
+        {/* Glow ambiente */}
+        <div className="pointer-events-none absolute top-0 left-1/3 h-[420px] w-[420px] rounded-full bg-gold-400/10 blur-[120px]" />
+        <div className="pointer-events-none absolute bottom-0 right-[10%] h-[360px] w-[360px] rounded-full bg-coffee-700/10 blur-[120px]" />
+        <div className="absolute inset-0 opacity-10">
           <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=30')" }} />
         </div>
         <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-8">
@@ -267,7 +277,14 @@ export default function Quiz() {
     const subscriptionDiscount = topProduct.price * 0.85;
 
     return (
-      <section id="quiz" className="bg-coffee-50 py-16 sm:py-24 lg:py-32">
+      <section
+        id="quiz"
+        className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+        style={{
+          background:
+            "linear-gradient(180deg, #efe4d6 0%, #e8d9c6 100%)",
+        }}
+      >
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
           {/* Profile card */}
           <div className="text-center">
@@ -463,7 +480,14 @@ export default function Quiz() {
   const progress = ((currentStep + 1) / (questions.length + 1)) * 100;
 
   return (
-    <section id="quiz" className="bg-coffee-50 py-16 sm:py-24 lg:py-32">
+    <section
+      id="quiz"
+      className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+      style={{
+        background:
+          "linear-gradient(180deg, #efe4d6 0%, #e8d9c6 60%, #e3d2bd 100%)",
+      }}
+    >
       <div className="mx-auto max-w-2xl px-6 lg:px-8">
         <div className="mb-2 flex items-center justify-between text-xs text-coffee-600">
           <span>Pergunta {currentStep + 1} de {questions.length}</span>

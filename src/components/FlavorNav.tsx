@@ -64,14 +64,24 @@ const flavors: Flavor[] = [
 
 export default function FlavorNav() {
   return (
-    <section className="relative overflow-hidden bg-coffee-50 py-20 sm:py-28">
+    <section
+      className="relative overflow-hidden py-20 sm:py-28"
+      style={{
+        background:
+          "linear-gradient(180deg, #f5ede4 0%, #ebe0d2 55%, #efe4d6 100%)",
+      }}
+    >
+      {/* Glow ambiente */}
+      <div className="pointer-events-none absolute top-[20%] right-[-5%] h-[400px] w-[400px] rounded-full bg-gold-400/10 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-[10%] left-[-8%] h-[380px] w-[380px] rounded-full bg-coffee-700/10 blur-[110px]" />
+
       {/* Tipografia backdrop */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden
       >
         <span
-          className="select-none font-serif italic text-coffee-100/60"
+          className="select-none font-serif italic text-coffee-200/55"
           style={{
             fontSize: "clamp(13rem, 35vw, 22rem)",
             fontWeight: 400,
@@ -111,7 +121,7 @@ export default function FlavorNav() {
               <Link
                 key={flavor.key}
                 href={`/cafes/${flavor.slug}`}
-                className="group relative flex min-h-[180px] flex-col items-start gap-3 bg-coffee-50 p-4 transition-all duration-500 hover:bg-coffee-900 active:bg-coffee-900 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-gold-500 sm:gap-4 sm:p-6 lg:p-8"
+                className="group relative flex min-h-[180px] flex-col items-start gap-3 bg-[#f5ede4] p-4 transition-all duration-500 hover:bg-coffee-900 active:bg-coffee-900 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-gold-500 sm:gap-4 sm:p-6 lg:p-8"
               >
                 {/* Número de ordem tipográfico */}
                 <span className="font-serif text-xs tracking-[0.2em] text-coffee-600 uppercase transition-colors group-hover:text-gold-400 group-active:text-gold-400">

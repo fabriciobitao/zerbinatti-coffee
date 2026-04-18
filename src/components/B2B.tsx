@@ -7,8 +7,18 @@ export default function B2B() {
     "Olá! Tenho interesse em parceria B2B com a Zerbinatti Coffee."
   );
   return (
-    <section id="contato" className="bg-coffee-100/50 py-16 sm:py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="contato"
+      className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+      style={{
+        background:
+          "linear-gradient(180deg, #ebe0d2 0%, #e3d2bd 50%, #dcc7a9 100%)",
+      }}
+    >
+      {/* Glow ambiente */}
+      <div className="pointer-events-none absolute top-0 right-0 h-[400px] w-[400px] rounded-full bg-gold-400/10 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[360px] w-[360px] rounded-full bg-coffee-700/10 blur-[120px]" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <div>
             <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">

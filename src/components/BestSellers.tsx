@@ -53,8 +53,17 @@ export default function BestSellers() {
   const { addItem } = useCart();
 
   return (
-    <section className="bg-coffee-200 py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      className="relative overflow-hidden py-12 sm:py-16 lg:py-20"
+      style={{
+        background:
+          "linear-gradient(180deg, #dcc7a9 0%, #d4b896 50%, #dcc7a9 100%)",
+      }}
+    >
+      {/* Glow caramelo — calor de balcão de torrefação */}
+      <div className="pointer-events-none absolute top-0 left-1/4 h-[380px] w-[380px] rounded-full bg-gold-400/15 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 right-1/4 h-[340px] w-[340px] rounded-full bg-coffee-700/10 blur-[110px]" />
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Header */}
         <div className="mb-10 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
@@ -70,7 +79,7 @@ export default function BestSellers() {
           {bestSellers.map((product) => (
             <div
               key={product.name}
-              className="group w-[170px] shrink-0 cursor-pointer rounded-xl border border-coffee-100 bg-white p-3 transition-all hover:border-gold-400 hover:shadow-lg sm:w-[220px] sm:p-4"
+              className="group w-[170px] shrink-0 cursor-pointer rounded-xl border border-coffee-200 bg-[#f5ede4] p-3 transition-all hover:border-gold-400 hover:shadow-lg sm:w-[220px] sm:p-4"
             >
               {/* Product bag image */}
               <div className="flex items-center justify-center rounded-lg bg-gradient-to-b from-coffee-50 to-coffee-100/50 py-4">

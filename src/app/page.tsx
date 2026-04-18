@@ -26,12 +26,12 @@ export default function Home() {
         <MonthlyFeature />
         <BestSellers />
         <Combos />
-        <SectionFade topColor="#FFFFFF" bottomColor="#1A1108" />
+        <SectionFade topColor="#e8d9c6" bottomColor="#1A1108" />
         <Subscription />
-        <SectionFade topColor="#1A1108" bottomColor="#FDFBF7" />
+        <SectionFade topColor="#1A1108" bottomColor="#ebe0d2" />
         <Story />
         <B2B />
-        <SectionFade topColor="#F6F3F0" bottomColor="#1A1108" />
+        <SectionFade topColor="#dcc7a9" bottomColor="#1A1108" />
       </main>
       <Footer />
     </>

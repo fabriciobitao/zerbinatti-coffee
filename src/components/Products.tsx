@@ -11,15 +11,23 @@ export default function Products() {
   return (
     <section
       id="cafes"
-      className="relative overflow-hidden bg-coffee-100/50 py-20 sm:py-28 lg:py-36"
+      className="relative overflow-hidden py-20 sm:py-28 lg:py-36"
+      style={{
+        background:
+          "linear-gradient(180deg, #efe4d6 0%, #e8d9c6 50%, #ebe0d2 100%)",
+      }}
     >
+      {/* Glows ambientais — calor de torra */}
+      <div className="pointer-events-none absolute top-[10%] left-[-8%] h-[420px] w-[420px] rounded-full bg-gold-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-[5%] right-[-10%] h-[460px] w-[460px] rounded-full bg-coffee-700/12 blur-[130px]" />
+
       {/* Backdrop tipográfico */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden
       >
         <span
-          className="select-none font-serif italic text-coffee-200/35 sm:text-coffee-200/50"
+          className="select-none font-serif italic text-coffee-300/35 sm:text-coffee-300/45"
           style={{
             fontSize: "clamp(15rem, 44vw, 28rem)",
             fontWeight: 400,

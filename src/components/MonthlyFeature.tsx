@@ -23,14 +23,24 @@ export default function MonthlyFeature() {
   if (!product) return null;
 
   return (
-    <section className="relative overflow-hidden bg-coffee-100/50 py-20 sm:py-28 lg:py-32">
+    <section
+      className="relative overflow-hidden py-20 sm:py-28 lg:py-32"
+      style={{
+        background:
+          "linear-gradient(180deg, #ebe0d2 0%, #e3d2bd 50%, #dcc7a9 100%)",
+      }}
+    >
+      {/* Glow dourado central — luz de edição especial */}
+      <div className="pointer-events-none absolute top-1/2 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold-400/12 blur-[140px]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[360px] w-[360px] rounded-full bg-coffee-800/10 blur-[120px]" />
+
       {/* Backdrop tipográfico */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden
       >
         <span
-          className="select-none font-serif text-coffee-200/40"
+          className="select-none font-serif text-coffee-300/40"
           style={{
             fontSize: "clamp(14rem, 42vw, 20rem)",
             fontWeight: 700,

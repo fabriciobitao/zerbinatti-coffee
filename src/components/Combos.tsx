@@ -46,8 +46,19 @@ export default function Combos() {
   const { addItem } = useCart();
 
   return (
-    <section id="kits" className="bg-white py-16 sm:py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section
+      id="kits"
+      className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+      style={{
+        background:
+          "linear-gradient(180deg, #dcc7a9 0%, #e3d2bd 40%, #e8d9c6 100%)",
+      }}
+    >
+      {/* Glows de calor */}
+      <div className="pointer-events-none absolute top-[10%] right-[-5%] h-[420px] w-[420px] rounded-full bg-gold-400/12 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-[5%] left-[-5%] h-[380px] w-[380px] rounded-full bg-coffee-700/10 blur-[120px]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
         <div className="mb-16 text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
@@ -72,7 +83,7 @@ export default function Combos() {
             return (
               <div
                 key={combo.name}
-                className="group overflow-hidden rounded-2xl border-2 border-gold-400/30 bg-white transition-all hover:border-gold-500 hover:shadow-xl"
+                className="group overflow-hidden rounded-2xl border-2 border-gold-400/40 bg-[#f5ede4] transition-all hover:border-gold-500 hover:shadow-xl"
               >
                 {/* Image */}
                 <div className="relative overflow-hidden">

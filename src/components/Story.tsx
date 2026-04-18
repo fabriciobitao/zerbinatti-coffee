@@ -11,15 +11,23 @@ export default function Story() {
   return (
     <section
       id="origem"
-      className="relative overflow-hidden bg-coffee-50 py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden py-24 sm:py-32 lg:py-40"
+      style={{
+        background:
+          "linear-gradient(180deg, #ebe0d2 0%, #e8d9c6 45%, #efe4d6 100%)",
+      }}
     >
+      {/* Glow ambiental — luz dourada de fim de tarde na torrefação */}
+      <div className="pointer-events-none absolute -top-20 right-[-10%] h-[500px] w-[500px] rounded-full bg-gold-400/12 blur-[130px]" />
+      <div className="pointer-events-none absolute bottom-0 left-[-8%] h-[420px] w-[420px] rounded-full bg-coffee-700/10 blur-[120px]" />
+
       {/* Fundo tipográfico gigante */}
       <div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"
         aria-hidden
       >
         <span
-          className="select-none font-serif font-bold text-coffee-100/60"
+          className="select-none font-serif font-bold text-coffee-200/45"
           style={{
             fontSize: "clamp(16rem, 48vw, 34rem)",
             lineHeight: 1,
@@ -93,7 +101,7 @@ export default function Story() {
               </div>
 
               {/* Sub-card — data */}
-              <div className="absolute -top-3 -left-2 rounded-lg border border-coffee-200 bg-coffee-50 px-3 py-2 shadow-lg sm:-top-4 sm:-left-4 sm:px-4">
+              <div className="absolute -top-3 -left-2 rounded-lg border border-coffee-200 bg-[#f5ede4] px-3 py-2 shadow-lg sm:-top-4 sm:-left-4 sm:px-4">
                 <div className="text-xs tracking-[0.2em] text-coffee-700 uppercase">
                   Primeira torra
                 </div>

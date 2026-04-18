@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import CoffeeBean3D from "@/components/ui/CoffeeBean3D";
 import { SplitReveal, Kicker, Marginalia } from "@/components/ui/Editorial";
 
 export default function Hero() {
@@ -13,7 +12,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-coffee-50 pt-24 pb-16 sm:pt-28 sm:pb-24">
+    <section
+      className="relative min-h-screen overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-24"
+      style={{
+        background:
+          "linear-gradient(135deg, #f5ede4 0%, #ebe0d2 48%, #e8d9c6 100%)",
+      }}
+    >
       {/* Backdrop tipográfico gigante — número 1897 em outline */}
       <div
         className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-[1800ms] ${
@@ -22,10 +27,10 @@ export default function Hero() {
         aria-hidden
       >
         <span
-          className="select-none font-serif font-bold leading-none text-coffee-200/50"
+          className="select-none font-serif font-bold leading-none"
           style={{
             fontSize: "clamp(22rem, 55vw, 42rem)",
-            WebkitTextStroke: "1.5px rgb(215 204 200 / 0.45)",
+            WebkitTextStroke: "1.5px rgba(184, 149, 106, 0.35)",
             color: "transparent",
             letterSpacing: "-0.04em",
           }}
@@ -34,9 +39,10 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* Glow ambiental */}
-      <div className="pointer-events-none absolute right-[-10%] top-[20%] h-[500px] w-[500px] rounded-full bg-gold-400/15 blur-[120px]" />
-      <div className="pointer-events-none absolute left-[-10%] bottom-[10%] h-[400px] w-[400px] rounded-full bg-coffee-700/10 blur-[120px]" />
+      {/* Glow ambiental — luzes de torrefação */}
+      <div className="pointer-events-none absolute right-[-10%] top-[15%] h-[560px] w-[560px] rounded-full bg-gold-400/20 blur-[120px]" />
+      <div className="pointer-events-none absolute left-[-10%] bottom-[8%] h-[440px] w-[440px] rounded-full bg-coffee-700/15 blur-[120px]" />
+      <div className="pointer-events-none absolute right-[20%] bottom-[20%] h-[300px] w-[300px] rounded-full bg-gold-500/8 blur-[100px]" />
 
       {/* Marginália vertical esquerda — desktop */}
       <div className="pointer-events-none absolute left-6 top-1/2 -translate-y-1/2 hidden lg:block">
@@ -168,56 +174,122 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Coluna direita — grão 3D signature (md+) */}
+        {/* Coluna direita — fotografia editorial (md+) */}
         <div className="hidden md:col-span-12 md:block lg:col-span-5 lg:pt-4">
           <div className="relative flex items-center justify-center lg:justify-end">
             <div
-              className={`float-subtle transition-all duration-1000 delay-300 ${
-                loaded ? "opacity-100 scale-100" : "opacity-0 scale-90"
+              className={`relative transition-all duration-1000 delay-300 ${
+                loaded ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
             >
-              <CoffeeBean3D size={420} />
-            </div>
+              {/* Moldura editorial com fotografia de cerejas maduras */}
+              <div className="grain-local relative overflow-hidden rounded-2xl shadow-[0_40px_80px_-30px_rgba(44,29,14,0.45)]">
+                <div
+                  className="aspect-[4/5] w-[320px] bg-cover bg-center sm:w-[380px] lg:w-[440px]"
+                  style={{
+                    backgroundImage:
+                      "url('https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=1400&q=85&auto=format&fit=crop')",
+                    filter: "sepia(0.25) saturate(1.15) contrast(1.05)",
+                  }}
+                  role="img"
+                  aria-label="Cerejas maduras de café arábica na Serra do Cabral — safra Zerbinatti"
+                />
+                {/* Overlay duotone café + dourado */}
+                <div
+                  className="absolute inset-0 mix-blend-multiply"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(44,29,14,0.20) 0%, rgba(184,134,11,0.10) 55%, rgba(212,160,23,0.12) 100%)",
+                  }}
+                />
+                {/* Vinheta interna elegante */}
+                <div
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      "radial-gradient(ellipse at center, transparent 50%, rgba(26,17,8,0.28) 100%)",
+                  }}
+                />
+              </div>
 
-            {/* Metadata flutuante ao lado do grão */}
-            <div
-              className={`absolute bottom-10 right-[-20px] max-w-[180px] rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm transition-all delay-[1500ms] duration-700 ${
-                loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-              }`}
-            >
-              <div className="text-xs font-semibold tracking-[0.2em] text-coffee-800 uppercase">
-                Torra da semana
+              {/* Metadata flutuante — badge torra da semana */}
+              <div
+                className={`absolute -bottom-5 -right-4 max-w-[200px] rounded-xl border border-coffee-200/80 bg-[#f5ede4]/95 p-4 shadow-xl backdrop-blur-md transition-all delay-[1500ms] duration-700 sm:-bottom-6 sm:-right-6 ${
+                  loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <div className="text-xs font-semibold tracking-[0.2em] text-coffee-800 uppercase">
+                  Torra da semana
+                </div>
+                <div className="mt-2 font-serif text-lg font-bold leading-tight text-coffee-900">
+                  Yellow Bourbon
+                </div>
+                <div className="mt-1 text-xs text-coffee-700">
+                  Talhão alto · 1.050m · honey
+                </div>
               </div>
-              <div className="mt-2 font-serif text-lg font-bold leading-tight text-coffee-900">
-                Yellow Bourbon
-              </div>
-              <div className="mt-1 text-xs text-coffee-700">
-                Talhão alto · 1.050m · honey
+
+              {/* Selo data safra — canto superior esquerdo */}
+              <div
+                className={`absolute -top-4 -left-4 rounded-lg border border-gold-500/40 bg-coffee-900 px-4 py-2 shadow-lg transition-all delay-[1300ms] duration-700 ${
+                  loaded ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+                }`}
+              >
+                <div className="text-[10px] tracking-[0.25em] text-gold-300 uppercase">
+                  Safra
+                </div>
+                <div className="font-serif text-xl font-bold leading-none text-coffee-50">
+                  2026
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Grão fantasma mobile — posicionado absoluto, atrás do conteúdo, signature preservada */}
+      {/* Fotografia mobile — aparece acima dos stats (fluxo normal, não absoluto) */}
       <div
-        className={`pointer-events-none absolute right-[-60px] top-[8%] md:hidden transition-all duration-1000 delay-300 ${
-          loaded ? "opacity-60 scale-100" : "opacity-0 scale-90"
+        className={`relative mx-auto mt-12 max-w-7xl px-6 md:hidden transition-all duration-1000 delay-200 ${
+          loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
-        aria-hidden
       >
-        <div className="float-subtle">
-          <CoffeeBean3D size={220} />
+        <div className="grain-local relative overflow-hidden rounded-2xl shadow-xl">
+          <div
+            className="aspect-[4/3] bg-cover bg-center"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=1200&q=85&auto=format&fit=crop')",
+              filter: "sepia(0.25) saturate(1.15) contrast(1.05)",
+            }}
+            role="img"
+            aria-label="Cerejas maduras de café arábica — Serra do Cabral"
+          />
+          <div
+            className="absolute inset-0 mix-blend-multiply"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(44,29,14,0.20), rgba(212,160,23,0.12))",
+            }}
+          />
+          {/* Badge safra — canto */}
+          <div className="absolute top-4 left-4 rounded-md border border-gold-500/40 bg-coffee-900/90 px-3 py-1.5 backdrop-blur-sm">
+            <div className="text-[9px] tracking-[0.25em] text-gold-300 uppercase">
+              Safra
+            </div>
+            <div className="font-serif text-base font-bold leading-none text-coffee-50">
+              2026
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Metadata card — mobile, abaixo do CTA, em linha editorial */}
+      {/* Metadata card — mobile, abaixo da imagem, em linha editorial */}
       <div
-        className={`relative mx-auto mt-10 max-w-7xl px-6 md:hidden ${
+        className={`relative mx-auto mt-8 max-w-7xl px-6 md:hidden ${
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         } transition-all duration-700 delay-[1500ms]`}
       >
-        <div className="inline-flex items-center gap-4 rounded-xl border border-coffee-200/80 bg-coffee-50/80 p-4 backdrop-blur-sm">
+        <div className="inline-flex items-center gap-4 rounded-xl border border-coffee-200/80 bg-[#f5ede4]/90 p-4 backdrop-blur-sm">
           <div className="h-10 w-px bg-gold-500/60" />
           <div>
             <div className="text-xs font-semibold tracking-[0.2em] text-coffee-800 uppercase">
