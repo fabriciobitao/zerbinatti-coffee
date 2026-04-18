@@ -252,32 +252,15 @@ export default function Hero() {
               }`}
             >
               {/* Moldura fotográfica — drop shadow forte */}
-              <div className="grain-local relative overflow-hidden rounded-2xl shadow-[0_50px_100px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/20">
+              <div className="relative overflow-hidden rounded-2xl shadow-[0_50px_100px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
                 <div
-                  className="aspect-[4/5] w-[340px] bg-cover bg-center sm:w-[400px] lg:w-[440px]"
+                  className="aspect-[4/5] w-[340px] bg-cover bg-center sm:w-[400px] lg:w-[460px]"
                   style={{
-                    backgroundImage:
-                      "url('https://images.unsplash.com/photo-1559525839-d9acfd27edfa?w=1200&q=85&auto=format&fit=crop')",
-                    filter: "saturate(1.15) contrast(1.08) brightness(0.95)",
+                    backgroundImage: "url('/images/hero-pacote-zerbinatti.png')",
+                    filter: "saturate(1.08) contrast(1.04)",
                   }}
                   role="img"
-                  aria-label="Fazenda Zerbinatti na Serra do Cabral — safra 2026"
-                />
-                {/* Overlay de integração — puxa para paleta escura dourada */}
-                <div
-                  className="absolute inset-0 mix-blend-multiply"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(26,17,8,0.35) 0%, rgba(184,134,11,0.08) 55%, rgba(26,17,8,0.25) 100%)",
-                  }}
-                />
-                {/* Vinheta interna */}
-                <div
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    background:
-                      "radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.45) 100%)",
-                  }}
+                  aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira"
                 />
               </div>
 
@@ -322,23 +305,15 @@ export default function Hero() {
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
-        <div className="grain-local relative overflow-hidden rounded-2xl shadow-[0_40px_80px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/20">
+        <div className="relative overflow-hidden rounded-2xl shadow-[0_40px_80px_-25px_rgba(0,0,0,0.85)] ring-1 ring-gold-500/25">
           <div
             className="aspect-[4/5] bg-cover bg-center"
             style={{
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1559525839-d9acfd27edfa?w=1200&q=85&auto=format&fit=crop')",
-              filter: "saturate(1.15) contrast(1.08) brightness(0.95)",
+              backgroundImage: "url('/images/hero-pacote-zerbinatti.png')",
+              filter: "saturate(1.08) contrast(1.04)",
             }}
             role="img"
-            aria-label="Fazenda Zerbinatti na Serra do Cabral — safra 2026"
-          />
-          <div
-            className="absolute inset-0 mix-blend-multiply"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(26,17,8,0.35), rgba(184,134,11,0.08), rgba(26,17,8,0.25))",
-            }}
+            aria-label="Pacote Zerbinatti Coffee com xícara fumegante e grãos torrados sobre mesa de madeira"
           />
           {/* Badge safra — canto */}
           <div className="absolute top-4 left-4 rounded-md border border-gold-500/50 bg-coffee-950/90 px-3 py-1.5 backdrop-blur-sm">
