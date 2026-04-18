@@ -99,14 +99,14 @@ function subscribeUrl(planName: string, price: string) {
 
 export default function Subscription() {
   return (
-    <section id="assinatura" className="bg-coffee-950 py-16 sm:py-24 lg:py-32">
+    <section id="assinatura" className="bg-coffee-950 py-10 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center sm:mb-16">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-400 uppercase">
             Assinatura
           </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-50 sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif text-2xl font-bold text-coffee-50 sm:text-4xl md:text-5xl">
             A curadoria da casa, todo mês na sua mesa
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-300">
@@ -118,11 +118,11 @@ export default function Subscription() {
         </div>
 
         {/* Plans */}
-        <div className="grid gap-5 sm:gap-8 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-8 md:grid-cols-3">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative flex flex-col rounded-2xl p-5 transition-all sm:p-8 ${
+              className={`relative flex flex-col rounded-2xl p-4 transition-all sm:p-8 ${
                 plan.highlight
                   ? "border-2 border-gold-500 bg-coffee-900 shadow-2xl shadow-gold-500/10"
                   : "border border-coffee-800 bg-coffee-900/50"
@@ -134,8 +134,8 @@ export default function Subscription() {
                 </div>
               )}
 
-              <div className="mb-6 text-center">
-                <h3 className="font-serif text-2xl font-bold text-coffee-50">
+              <div className="mb-5 text-center sm:mb-6">
+                <h3 className="font-serif text-xl font-bold text-coffee-50 sm:text-2xl">
                   {plan.name}
                 </h3>
                 <p className="mt-2 text-sm text-coffee-300">
@@ -143,13 +143,13 @@ export default function Subscription() {
                 </p>
               </div>
 
-              <div className="mb-8">
+              <div className="mb-6 sm:mb-8">
                 {plan.originalPrice && (
                   <div className="mb-1 text-sm text-coffee-500 line-through">
                     {plan.originalPrice}
                   </div>
                 )}
-                <span className="font-serif text-3xl font-bold text-coffee-50 sm:text-4xl">
+                <span className="font-serif text-2xl font-bold text-coffee-50 sm:text-4xl">
                   {plan.price}
                 </span>
                 <span className="text-coffee-300">{plan.frequency}</span>
@@ -160,7 +160,7 @@ export default function Subscription() {
                 )}
               </div>
 
-              <ul className="mb-8 space-y-3">
+              <ul className="mb-6 space-y-2.5 sm:mb-8 sm:space-y-3">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
                     <svg
@@ -185,7 +185,7 @@ export default function Subscription() {
                 href={subscribeUrl(plan.name, plan.price)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`mt-auto block w-full rounded-full py-3 text-center text-sm font-semibold tracking-wide transition-all ${
+                className={`mt-auto block w-full rounded-full py-2.5 text-center text-sm font-semibold tracking-wide transition-all sm:py-3 ${
                   plan.highlight
                     ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"
                     : "bg-coffee-700 text-coffee-50 hover:bg-coffee-600 hover:shadow-lg"
@@ -198,7 +198,7 @@ export default function Subscription() {
         </div>
 
         {/* How it works */}
-        <div className="mt-16 rounded-2xl border border-coffee-800 bg-coffee-900/40 p-6 sm:p-10">
+        <div className="mt-10 rounded-2xl border border-coffee-800 bg-coffee-900/40 p-4 sm:mt-16 sm:p-10">
           <h3 className="text-center font-serif text-xl font-bold text-coffee-50 sm:text-2xl">
             Como funciona
           </h3>

@@ -318,7 +318,7 @@ export default function B2B() {
   return (
     <section
       id="contato"
-      className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+      className="relative overflow-hidden py-10 sm:py-24 lg:py-32"
       style={{
         background:
           "linear-gradient(180deg, #ebe0d2 0%, #e3d2bd 50%, #dcc7a9 100%)",
@@ -340,7 +340,7 @@ export default function B2B() {
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Para cafeterias · hotéis · restaurantes
           </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif text-2xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
             Abra uma cafeteria de especialidade sem investir em equipamento
           </h2>
           <Ornament className="mt-5" />
@@ -382,7 +382,7 @@ export default function B2B() {
         </div>
 
         {/* Planos */}
-        <div className="mt-14 grid grid-cols-1 gap-6 md:mt-20 md:grid-cols-3 md:gap-6 lg:gap-8">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:gap-6 md:mt-20 md:grid-cols-3 lg:gap-8">
           {plans.map((plan) => {
             const Icon = planIcon(plan.name);
             const waUrl = buildWhatsAppUrl(plan.whatsAppMessage);
@@ -391,7 +391,7 @@ export default function B2B() {
               <article
                 key={plan.name}
                 className={[
-                  "relative flex flex-col rounded-2xl bg-white p-6 shadow-sm transition-all duration-300 sm:p-8",
+                  "relative flex flex-col rounded-2xl bg-white p-4 shadow-sm transition-all duration-300 sm:p-8",
                   isHighlighted
                     ? "border-2 border-gold-500 ring-4 ring-gold-500/20 md:-translate-y-3"
                     : "border border-coffee-200 hover:-translate-y-1 hover:shadow-lg",
@@ -417,16 +417,16 @@ export default function B2B() {
                   <span
                     aria-hidden="true"
                     className={[
-                      "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl",
+                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl sm:h-12 sm:w-12",
                       isHighlighted
                         ? "bg-gold-500/15 text-gold-600"
                         : "bg-coffee-900/5 text-coffee-800",
                     ].join(" ")}
                   >
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                   </span>
                   <div>
-                    <h3 className="font-serif text-2xl font-bold text-coffee-900">
+                    <h3 className="font-serif text-xl font-bold text-coffee-900 sm:text-2xl">
                       {plan.name}
                     </h3>
                     <p className="text-xs tracking-wide text-coffee-600 uppercase">
@@ -435,11 +435,11 @@ export default function B2B() {
                   </div>
                 </div>
 
-                <p className="mt-5 font-serif text-lg text-coffee-900">
+                <p className="mt-4 font-serif text-base text-coffee-900 sm:mt-5 sm:text-lg">
                   {plan.volume}
                 </p>
 
-                <dl className="mt-5 space-y-4 border-t border-coffee-100 pt-5 text-sm">
+                <dl className="mt-4 space-y-3 border-t border-coffee-100 pt-4 text-sm sm:mt-5 sm:space-y-4 sm:pt-5">
                   <div>
                     <dt className="text-[11px] font-semibold tracking-[0.18em] text-gold-600 uppercase">
                       Equipamento incluso
@@ -458,7 +458,7 @@ export default function B2B() {
                   </div>
                 </dl>
 
-                <ul className="mt-6 space-y-2.5">
+                <ul className="mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5 text-sm text-coffee-800">
                       <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
@@ -483,7 +483,7 @@ export default function B2B() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={[
-                    "mt-6 inline-flex items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 active:scale-[0.97]",
+                    "mt-5 inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2 active:scale-[0.97] sm:mt-6 sm:px-6 sm:py-3.5",
                     isHighlighted
                       ? "bg-gold-500 text-coffee-950 hover:bg-gold-600 hover:shadow-lg"
                       : "bg-coffee-900 text-coffee-50 hover:bg-coffee-700 hover:shadow-lg",
@@ -497,7 +497,7 @@ export default function B2B() {
         </div>
 
         {/* Como funciona o comodato */}
-        <div className="mt-20 sm:mt-28">
+        <div className="mt-14 sm:mt-28">
           <div className="mx-auto max-w-3xl text-center">
             <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
               O processo
@@ -508,29 +508,29 @@ export default function B2B() {
             <Ornament className="mt-4" />
           </div>
 
-          <ol className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="mt-8 grid grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {steps.map((step, index) => {
               const Icon = step.Icon;
               return (
                 <li
                   key={step.title}
-                  className="relative flex flex-col rounded-2xl border border-coffee-200 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/60 hover:bg-white hover:shadow-md"
+                  className="relative flex flex-col rounded-2xl border border-coffee-200 bg-white/70 p-4 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold-500/60 hover:bg-white hover:shadow-md sm:p-6"
                 >
                   <div className="flex items-center justify-between">
                     <span
                       aria-hidden="true"
-                      className="flex h-11 w-11 items-center justify-center rounded-xl bg-coffee-900/5 text-coffee-800"
+                      className="flex h-10 w-10 items-center justify-center rounded-xl bg-coffee-900/5 text-coffee-800 sm:h-11 sm:w-11"
                     >
                       <Icon className="h-5 w-5" />
                     </span>
                     <span
                       aria-hidden="true"
-                      className="font-serif text-3xl leading-none text-gold-500/60"
+                      className="font-serif text-2xl leading-none text-gold-500/60 sm:text-3xl"
                     >
                       {String(index + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h4 className="mt-5 font-serif text-lg font-semibold text-coffee-900">
+                  <h4 className="mt-4 font-serif text-base font-semibold text-coffee-900 sm:mt-5 sm:text-lg">
                     {step.title}
                   </h4>
                   <p className="mt-2 text-sm leading-relaxed text-coffee-700">
@@ -543,10 +543,10 @@ export default function B2B() {
         </div>
 
         {/* O que está incluído */}
-        <div className="mt-20 sm:mt-28">
+        <div className="mt-14 sm:mt-28">
           <div className="overflow-hidden rounded-3xl border border-coffee-200 bg-white/80 backdrop-blur-sm">
             <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1.1fr_1.9fr]">
-              <div className="relative border-b border-coffee-100 bg-coffee-900 p-8 text-coffee-50 sm:p-10 lg:border-r lg:border-b-0">
+              <div className="relative border-b border-coffee-100 bg-coffee-900 p-6 text-coffee-50 sm:p-10 lg:border-r lg:border-b-0">
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute top-0 right-0 h-40 w-40 rounded-full bg-gold-500/20 blur-3xl"
@@ -571,7 +571,7 @@ export default function B2B() {
                 </div>
               </div>
 
-              <ul className="grid grid-cols-1 gap-x-6 gap-y-4 p-8 sm:p-10 md:grid-cols-2">
+              <ul className="grid grid-cols-1 gap-x-6 gap-y-3 p-6 sm:gap-y-4 sm:p-10 md:grid-cols-2">
                 {includedItems.map((item) => (
                   <li
                     key={item}
@@ -592,9 +592,9 @@ export default function B2B() {
         </div>
 
         {/* CTAs finais */}
-        <div className="mt-16 sm:mt-20">
+        <div className="mt-12 sm:mt-20">
           <div className="mx-auto max-w-3xl text-center">
-            <h3 className="font-serif text-2xl font-bold text-coffee-900 sm:text-3xl">
+            <h3 className="font-serif text-xl font-bold text-coffee-900 sm:text-3xl">
               Pronto para servir o melhor café especial do Brasil?
             </h3>
             <p className="mt-4 text-base text-coffee-700">

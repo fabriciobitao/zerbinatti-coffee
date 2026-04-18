@@ -352,7 +352,7 @@ export default function Hero() {
 
       {/* Fotografia mobile — aparece abaixo do texto */}
       <div
-        className={`relative mx-auto mt-14 max-w-7xl px-6 lg:hidden transition-all duration-1000 delay-200 ${
+        className={`relative mx-auto mt-10 max-w-7xl px-6 lg:hidden transition-all duration-1000 delay-200 ${
           loaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
@@ -364,7 +364,7 @@ export default function Hero() {
           }}
         >
           <div
-            className="aspect-[4/5] bg-cover bg-center"
+            className="aspect-[4/3] bg-cover bg-center sm:aspect-[4/5]"
             style={{
               backgroundImage: "url('/images/hero-pacote-zerbinatti.jpg')",
               filter: "saturate(1.12) contrast(1.08) brightness(1.02)",

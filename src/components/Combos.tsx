@@ -48,7 +48,7 @@ export default function Combos() {
   return (
     <section
       id="kits"
-      className="relative overflow-hidden py-16 sm:py-24 lg:py-32"
+      className="relative overflow-hidden py-10 sm:py-24 lg:py-32"
       style={{
         background:
           "linear-gradient(180deg, #dcc7a9 0%, #e3d2bd 40%, #e8d9c6 100%)",
@@ -60,11 +60,11 @@ export default function Combos() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section header */}
-        <div className="mb-16 text-center">
+        <div className="mb-10 text-center sm:mb-16">
           <span className="text-xs font-medium tracking-[0.3em] text-gold-600 uppercase">
             Kits e combos
           </span>
-          <h2 className="mt-4 font-serif text-3xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif text-2xl font-bold text-coffee-900 sm:text-4xl md:text-5xl">
             Mais café, mais desconto
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-coffee-600">
@@ -75,7 +75,7 @@ export default function Combos() {
         </div>
 
         {/* Combos grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
           {combos.map((combo) => {
             const discount = Math.round(
               ((combo.originalPrice - combo.price) / combo.originalPrice) * 100
@@ -99,12 +99,12 @@ export default function Combos() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="mb-2 inline-block rounded-full bg-gold-400/10 px-3 py-1 text-xs font-semibold text-gold-600">
                     {combo.tag}
                   </div>
 
-                  <h3 className="font-serif text-xl font-bold text-coffee-900">
+                  <h3 className="font-serif text-lg font-bold text-coffee-900 sm:text-xl">
                     {combo.name}
                   </h3>
                   <p className="mt-2 text-sm text-coffee-600">
@@ -125,14 +125,14 @@ export default function Combos() {
                   </ul>
 
                   {/* Pricing */}
-                  <div className="mt-5 rounded-lg bg-coffee-50 p-4">
+                  <div className="mt-4 rounded-lg bg-coffee-50 p-3 sm:mt-5 sm:p-4">
                     <div className="flex items-baseline gap-2">
                       <span className="text-sm text-coffee-500 line-through">
                         {formatCurrency(combo.originalPrice)}
                       </span>
                     </div>
                     <div className="flex items-baseline gap-2">
-                      <span className="text-2xl font-bold text-green-800">
+                      <span className="text-xl font-bold text-green-800 sm:text-2xl">
                         {formatCurrency(combo.price * 0.9)}
                       </span>
                       <span className="text-sm font-medium text-green-700">
@@ -153,7 +153,7 @@ export default function Combos() {
                         weight: combo.weight,
                       })
                     }
-                    className="mt-4 w-full rounded-full bg-gold-500 py-3 text-sm font-bold text-coffee-950 transition-all hover:bg-gold-400 hover:shadow-lg active:scale-[0.97]"
+                    className="mt-4 w-full rounded-full bg-gold-500 py-2.5 text-sm font-bold text-coffee-950 transition-all hover:bg-gold-400 hover:shadow-lg active:scale-[0.97] sm:py-3"
                   >
                     Comprar kit
                   </button>

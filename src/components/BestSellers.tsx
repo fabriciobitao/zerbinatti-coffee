@@ -54,7 +54,7 @@ export default function BestSellers() {
 
   return (
     <section
-      className="relative overflow-hidden py-12 sm:py-16 lg:py-20"
+      className="relative overflow-hidden py-10 sm:py-16 lg:py-20"
       style={{
         background:
           "linear-gradient(180deg, #dcc7a9 0%, #d4b896 50%, #dcc7a9 100%)",
@@ -79,14 +79,14 @@ export default function BestSellers() {
           {bestSellers.map((product) => (
             <div
               key={product.name}
-              className="group w-[170px] shrink-0 cursor-pointer rounded-xl border border-coffee-200 bg-[#f5ede4] p-3 transition-all hover:border-gold-400 hover:shadow-lg sm:w-[220px] sm:p-4"
+              className="group w-[145px] shrink-0 cursor-pointer rounded-xl border border-coffee-200 bg-[#f5ede4] p-2.5 transition-all hover:border-gold-400 hover:shadow-lg sm:w-[220px] sm:p-4"
             >
               {/* Product bag image */}
-              <div className="flex items-center justify-center rounded-lg bg-gradient-to-b from-coffee-50 to-coffee-100/50 py-4">
+              <div className="flex items-center justify-center rounded-lg bg-gradient-to-b from-coffee-50 to-coffee-100/50 py-3 sm:py-4">
                 <img
                   src="/images/rotulo-500g.png"
                   alt={product.name}
-                  className="h-[120px] w-auto object-contain sm:h-[160px]"
+                  className="h-[95px] w-auto object-contain sm:h-[160px]"
                 />
               </div>
 

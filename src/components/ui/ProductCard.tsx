@@ -37,21 +37,21 @@ export function ProductCard({
     <div
       className={`reveal reveal-delay-${delay} group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_20px_60px_-15px_rgba(26,17,8,0.25)]`}
     >
-      <div className="absolute left-4 top-4 z-10">
+      <div className="absolute left-2.5 top-2.5 z-10 sm:left-4 sm:top-4">
         <Badge variant={product.tagVariant}>{product.tag}</Badge>
       </div>
-      <div className="absolute right-4 top-4 z-10">
+      <div className="absolute right-2.5 top-2.5 z-10 sm:right-4 sm:top-4">
         <Badge variant="discount">-10% PIX</Badge>
       </div>
 
       <Link
         href={`/cafes/${product.slug}`}
         aria-label={`Ver detalhes do ${product.name}`}
-        className="flex items-center justify-center bg-gradient-to-b from-coffee-100 to-coffee-200/50 py-8 transition-transform duration-500 group-hover:scale-[1.02]"
+        className="flex items-center justify-center bg-gradient-to-b from-coffee-100 to-coffee-200/50 py-5 transition-transform duration-500 group-hover:scale-[1.02] sm:py-8"
       >
-        <div className="relative w-[140px]">
+        <div className="relative w-[100px] sm:w-[140px]">
           <div
-            className="relative mx-auto h-[180px] w-full overflow-hidden rounded-b-lg rounded-t-sm"
+            className="relative mx-auto h-[130px] w-full overflow-hidden rounded-b-lg rounded-t-sm sm:h-[180px]"
             style={{
               background:
                 "linear-gradient(135deg, #D4B896 0%, #C4A67D 25%, #B8956A 50%, #C4A67D 75%, #D4B896 100%)",
@@ -84,7 +84,7 @@ export function ProductCard({
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col p-4 sm:p-6">
+      <div className="flex flex-1 flex-col p-3 sm:p-6">
         <div className="mb-3 flex flex-wrap items-center gap-2">
           <SCABadge score={product.score} size="sm" />
           <span className="text-xs text-coffee-600">
@@ -95,7 +95,7 @@ export function ProductCard({
           <FreshnessSignal roastDate={product.roastDate} variant="compact" />
         </div>
 
-        <h3 className="font-serif text-xl font-bold text-coffee-900">
+        <h3 className="font-serif text-lg font-bold text-coffee-900 sm:text-xl">
           <Link
             href={`/cafes/${product.slug}`}
             className="hover:text-coffee-700"
@@ -121,15 +121,15 @@ export function ProductCard({
           ))}
         </div>
 
-        <div className="mt-auto pt-5 rounded-lg">
-          <div className="rounded-lg bg-coffee-50 p-4">
+        <div className="mt-auto pt-4 rounded-lg sm:pt-5">
+          <div className="rounded-lg bg-coffee-50 p-3 sm:p-4">
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-green-800">
+              <span className="text-xl font-bold text-green-800 sm:text-2xl">
                 {pixPrice(product.price)}
               </span>
-              <span className="text-sm font-medium text-green-700">no PIX</span>
+              <span className="text-xs font-medium text-green-700 sm:text-sm">no PIX</span>
             </div>
-            <div className="mt-1 min-h-[2.75rem] text-sm text-coffee-600">
+            <div className="mt-1 min-h-[2.5rem] text-xs text-coffee-600 sm:min-h-[2.75rem] sm:text-sm">
               ou {formatCurrency(product.price)} em até{" "}
               <span className="font-semibold text-coffee-700">
                 {inst.count}x de {inst.value}
@@ -139,7 +139,7 @@ export function ProductCard({
           </div>
         </div>
 
-        <div className="mt-4 flex gap-2">
+        <div className="mt-3 flex gap-2 sm:mt-4">
           <button
             onClick={() =>
               addItem({
@@ -149,13 +149,13 @@ export function ProductCard({
                 weight: product.weight,
               })
             }
-            className="flex-1 rounded-full bg-coffee-900 py-3 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-700 hover:shadow-lg active:scale-[0.97]"
+            className="flex-1 rounded-full bg-coffee-900 py-2.5 text-sm font-semibold text-coffee-50 transition-all duration-200 hover:bg-coffee-700 hover:shadow-lg active:scale-[0.97] sm:py-3"
           >
             Adicionar
           </button>
           <Link
             href={`/cafes/${product.slug}`}
-            className="rounded-full border border-coffee-300 px-4 py-3 text-sm font-semibold text-coffee-900 transition-all hover:border-coffee-500 hover:bg-coffee-50"
+            className="rounded-full border border-coffee-300 px-3 py-2.5 text-sm font-semibold text-coffee-900 transition-all hover:border-coffee-500 hover:bg-coffee-50 sm:px-4 sm:py-3"
           >
             Detalhes
           </Link>

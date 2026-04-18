@@ -24,7 +24,7 @@ export default function MonthlyFeature() {
 
   return (
     <section
-      className="relative overflow-hidden py-20 sm:py-28 lg:py-32"
+      className="relative overflow-hidden py-12 sm:py-28 lg:py-32"
       style={{
         background:
           "linear-gradient(180deg, #ebe0d2 0%, #e3d2bd 50%, #dcc7a9 100%)",
@@ -64,7 +64,7 @@ export default function MonthlyFeature() {
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-10 md:grid-cols-2 md:gap-14">
+        <div className="mt-10 grid gap-8 sm:mt-16 md:grid-cols-2 md:gap-14">
           {/* Produto destaque */}
           <Link
             href={`/cafes/${product.slug}`}
