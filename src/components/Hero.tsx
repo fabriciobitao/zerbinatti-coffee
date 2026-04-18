@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { SplitReveal, Kicker, Marginalia } from "@/components/ui/Editorial";
 
 export default function Hero() {
@@ -136,12 +137,26 @@ export default function Hero() {
               <SplitReveal text="Do legado" stagger={0.06} />
             </span>
             <span
-              className="mt-1 block italic text-gold-500 text-[clamp(2.75rem,8vw,5.5rem)] sm:mt-2"
-              style={{ fontWeight: 400 }}
+              className="mt-2 flex items-center gap-4 sm:mt-3 sm:gap-6"
+              aria-label="Zerbinatti 1897"
             >
-              <SplitReveal text="Zerbinatti 1897" stagger={0.06} />
+              <Image
+                src="/images/logo-white.png"
+                alt="Zerbinatti Coffee"
+                width={406}
+                height={180}
+                priority
+                sizes="(max-width: 640px) 220px, (max-width: 1024px) 300px, 360px"
+                className="h-[clamp(3.75rem,10vw,6.75rem)] w-auto drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
+              />
+              <span
+                className="font-serif italic text-gold-500 text-[clamp(2.75rem,8vw,5.5rem)] leading-none"
+                style={{ fontWeight: 400 }}
+              >
+                1897
+              </span>
             </span>
-            <span className="mt-1 block text-[clamp(2.75rem,8vw,5.5rem)] sm:mt-2">
+            <span className="mt-2 block text-[clamp(2.75rem,8vw,5.5rem)] sm:mt-3">
               <SplitReveal text="para sua xícara." stagger={0.06} />
             </span>
           </h1>
