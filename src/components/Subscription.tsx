@@ -34,9 +34,7 @@ const faqItems = [
 const plans = [
   {
     name: "Apreciador",
-    price: "R$ 59,41",
-    originalPrice: "R$ 69,90",
-    savings: "Economize R$ 125,88/ano",
+    price: "R$ 69,99",
     frequency: "/mês",
     description: "Perfeito para quem está começando no mundo do café especial.",
     features: [
