@@ -458,7 +458,7 @@ export default function B2B() {
                   </div>
                 </dl>
 
-                <ul className="mt-5 space-y-2 sm:mt-6 sm:space-y-2.5">
+                <ul className="mt-5 flex-1 space-y-2 sm:mt-6 sm:space-y-2.5">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5 text-sm text-coffee-800">
                       <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
@@ -469,7 +469,7 @@ export default function B2B() {
 
                 <div
                   className={[
-                    "mt-6 rounded-xl px-4 py-3 text-sm font-medium",
+                    "mt-6 flex min-h-[3.5rem] items-center rounded-xl px-4 py-3 text-sm font-medium",
                     isHighlighted
                       ? "bg-gold-500/10 text-coffee-900"
                       : "bg-coffee-900/[0.04] text-coffee-800",
