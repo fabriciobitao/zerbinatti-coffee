@@ -121,19 +121,21 @@ export function ProductCard({
           ))}
         </div>
 
-        <div className="mt-5 rounded-lg bg-coffee-50 p-4">
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-green-800">
-              {pixPrice(product.price)}
-            </span>
-            <span className="text-sm font-medium text-green-700">no PIX</span>
-          </div>
-          <div className="mt-1 text-sm text-coffee-600">
-            ou {formatCurrency(product.price)} em até{" "}
-            <span className="font-semibold text-coffee-700">
-              {inst.count}x de {inst.value}
-            </span>{" "}
-            sem juros
+        <div className="mt-auto pt-5 rounded-lg">
+          <div className="rounded-lg bg-coffee-50 p-4">
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-bold text-green-800">
+                {pixPrice(product.price)}
+              </span>
+              <span className="text-sm font-medium text-green-700">no PIX</span>
+            </div>
+            <div className="mt-1 min-h-[2.75rem] text-sm text-coffee-600">
+              ou {formatCurrency(product.price)} em até{" "}
+              <span className="font-semibold text-coffee-700">
+                {inst.count}x de {inst.value}
+              </span>{" "}
+              sem juros
+            </div>
           </div>
         </div>
 
