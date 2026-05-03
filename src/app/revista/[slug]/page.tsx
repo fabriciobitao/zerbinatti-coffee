@@ -49,11 +49,15 @@ export async function generateMetadata({
   const article = await getArticleBySlug(slug);
   if (!article) return {};
 
-  const title = article.seo?.metaTitle ?? article.title;
+  const baseTitle = article.seo?.metaTitle ?? article.title;
+  // Garante padrao "Titulo · Zerbinatti" sem duplicar marca
+  const title = baseTitle.toLowerCase().includes("zerbinatti")
+    ? baseTitle
+    : `${baseTitle} · Zerbinatti`;
   const description = article.seo?.metaDescription ?? article.excerpt;
   const ogImage = article.coverImage?.asset?._ref
     ? urlForImage(article.coverImage).width(1200).height(630).fit("crop").url()
-    : `${siteConfig.url}/images/og-default.jpg`;
+    : undefined;
 
   return {
     title,
@@ -61,18 +65,22 @@ export async function generateMetadata({
     alternates: { canonical: `/revista/${slug}` },
     openGraph: {
       type: "article",
+      locale: "pt_BR",
       title,
       description,
       url: `/revista/${slug}`,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
+      ...(ogImage && {
+        images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
+      }),
       publishedTime: article.publishedAt,
       authors: [article.author],
+      section: article.category,
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [ogImage],
+      ...(ogImage && { images: [ogImage] }),
     },
   };
 }

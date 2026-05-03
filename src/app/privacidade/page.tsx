@@ -10,16 +10,22 @@ const LAST_UPDATED_ISO = "2026-05-03";
 const LAST_UPDATED_BR = "03 de maio de 2026";
 
 export const metadata: Metadata = {
-  title: "Política de privacidade",
+  title: "Privacidade · Zerbinatti",
   description:
-    "Como a Zerbinatti Coffee coleta, usa, compartilha e protege seus dados pessoais — em conformidade com a LGPD.",
+    "Como a Zerbinatti coleta, usa, compartilha e protege seus dados pessoais — bases legais, direitos do titular e contato do DPO. Em conformidade com a LGPD.",
   alternates: { canonical: "/privacidade" },
   openGraph: {
-    title: "Política de privacidade — Zerbinatti Coffee",
-    description:
-      "Política de privacidade LGPD-compliant da Zerbinatti Coffee. Dados coletados, bases legais, direitos do titular e contato do DPO.",
-    url: "/privacidade",
     type: "article",
+    locale: "pt_BR",
+    url: "/privacidade",
+    title: "Privacidade · Zerbinatti",
+    description:
+      "Política de privacidade LGPD-compliant. Dados coletados, bases legais e direitos do titular.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacidade · Zerbinatti",
+    description: "Política de privacidade LGPD-compliant da Zerbinatti.",
   },
   robots: { index: true, follow: true },
 };

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
-import { siteConfig, gaId, metaPixelId, organizationSchema } from "@/lib/site";
+import { siteConfig, gaId, metaPixelId } from "@/lib/site";
+import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { Analytics } from "@/components/Analytics";
 import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
@@ -113,6 +114,12 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema()),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema()),
           }}
         />
       </head>

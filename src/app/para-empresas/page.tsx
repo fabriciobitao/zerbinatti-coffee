@@ -8,17 +8,23 @@ import { faqPageSchema } from "@/lib/schema";
 import { buildWhatsAppUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
-  title:
-    "Café Especial para Empresas — Aluguel de Máquina + Grão | Zerbinatti",
+  title: "Para empresas · Zerbinatti",
   description:
-    "Café especial para empresas: máquina profissional em comodato + grãos torrados na semana. Quatro modelos por porte de equipe. Atendimento técnico incluso.",
+    "Café para empresas: máquina profissional em comodato + grão torrado na semana. Quatro modelos para equipes de 5 a 500. Manutenção e treinamento inclusos.",
   alternates: { canonical: "/para-empresas" },
   openGraph: {
-    title: "Café da casa, na sua empresa — Zerbinatti B2B",
-    description:
-      "Máquina profissional em comodato + grãos torrados na semana. Quatro modelos para equipes de 5 a 500.",
-    url: "/para-empresas",
     type: "website",
+    locale: "pt_BR",
+    url: "/para-empresas",
+    title: "Para empresas · Zerbinatti",
+    description:
+      "Máquina em comodato + grão recorrente. O mesmo café da assinatura B2C, agora na copa da empresa.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Para empresas · Zerbinatti",
+    description:
+      "Máquina em comodato + grão torrado na semana. Quatro modelos para equipes de 5 a 500.",
   },
 };
 

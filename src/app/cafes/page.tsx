@@ -7,16 +7,23 @@ import { product } from "@/lib/data/products";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Cafés da casa — pacotes Zerbinatti | Café especial brasileiro",
+  title: "Cafés · Zerbinatti",
   description:
-    "Os pacotes da casa Zerbinatti: blend Bourbon + Catuaí da Serra do Cabral, em três versões — 500g em grãos, 250g em grãos, 250g moído. Torra fresca, casa italiana desde 1897.",
+    "Os pacotes da casa: Bourbon Amarelo e Catuaí Vermelho da Serra do Cabral, em 500g em grãos, 250g em grãos ou 250g moído. Score SCA 85, torra fresca datada.",
   alternates: { canonical: "/cafes" },
   openGraph: {
-    title: "Cafés da casa Zerbinatti — três pacotes, um café",
-    description:
-      "Bourbon Amarelo e Catuaí Vermelho da Serra do Cabral em três pacotes. Torra fresca, casa italiana desde 1897.",
-    url: "/cafes",
     type: "website",
+    locale: "pt_BR",
+    url: "/cafes",
+    title: "Cafés · Zerbinatti",
+    description:
+      "Três pacotes, um café. Bourbon e Catuaí da Serra do Cabral, torrados na semana.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cafés · Zerbinatti",
+    description:
+      "Bourbon e Catuaí da Serra do Cabral em três pacotes. Score SCA 85.",
   },
 };
 

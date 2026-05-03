@@ -21,17 +21,23 @@ export async function generateMetadata(
   const { slug } = await params;
   const sku = getSkuById(slug);
   if (!sku) return {};
-  const title = `${product.name} ${sku.label} — ${product.origin.variety}, Score SCA ${product.score} | Zerbinatti`;
-  const description = `${product.name} ${sku.shortLabel}, da ${product.origin.region}, ${product.origin.altitude}, processo ${product.origin.process}. Notas de ${product.notes.slice(0, 3).join(", ")}. Torra fresca, casa italiana desde 1897.`;
+  const title = `${product.name} ${sku.shortLabel} · Zerbinatti`;
+  const description = `${product.name} ${sku.shortLabel} — Bourbon e Catuaí da Serra do Cabral, ${product.origin.altitude}, processo ${product.origin.process}. Notas de ${product.notes.slice(0, 3).join(", ").toLowerCase()}. Torra fresca, frete grátis.`;
   return {
     title,
     description,
     alternates: { canonical: `/cafes/${slug}` },
     openGraph: {
-      title: `${product.name} ${sku.label} — Zerbinatti`,
-      description,
-      url: `/cafes/${slug}`,
       type: "website",
+      locale: "pt_BR",
+      url: `/cafes/${slug}`,
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

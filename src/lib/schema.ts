@@ -383,6 +383,50 @@ export function howToSchema(input: HowToInput) {
 // ---------------------------------------------------------------------------
 
 /**
+ * Organization JSON-LD — identidade canonica da casa.
+ *
+ * Usado no layout raiz (renderiza em todas as paginas) para alimentar
+ * Knowledge Panel, sitelinks e atribuicao de marca em SERP.
+ *
+ * E-E-A-T: founder + foundingDate + endereco real + canais de contato
+ * comprovam autoridade e legitimidade da entidade.
+ */
+export function organizationSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: siteConfig.name,
+    legalName: "Zerbinatti Coffee",
+    url: siteConfig.url,
+    logo: `${siteConfig.url}/images/logo.png`,
+    image: `${siteConfig.url}/images/logo.png`,
+    description: siteConfig.description,
+    foundingDate: "1897",
+    founder: {
+      "@type": "Person",
+      name: "Giuseppe Zerbinatti",
+    },
+    foundingLocation: {
+      "@type": "Place",
+      name: "Treviso, Italia",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer service",
+      areaServed: "BR",
+      availableLanguage: ["Portuguese", "Italian"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "BR",
+      addressRegion: "MG",
+      addressLocality: "Serra do Cabral",
+    },
+    sameAs: [],
+  };
+}
+
+/**
  * WebSite com potentialAction = SearchAction para sinalizar sitelinks
  * searchbox ao Google. Inserir no layout raiz junto ao Organization.
  */

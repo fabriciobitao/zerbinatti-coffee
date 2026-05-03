@@ -14,17 +14,23 @@ import { buildWhatsAppUrl } from "@/lib/config";
 import { product } from "@/lib/data/products";
 
 export const metadata: Metadata = {
-  title:
-    "Assinatura de Café Especial — Quinzenal ou Mensal | Zerbinatti",
+  title: "Assinatura · Zerbinatti",
   description:
-    "Assinatura de café especial brasileiro, torrado na semana e entregue na sua casa. Quinzenal ou mensal, frete grátis, cancele quando quiser. Casa italiana desde 1897.",
+    "Café brasileiro torrado na semana, entregue a cada quinzena ou mês. Frete grátis, cancele em 1 clique, primeiro envio com 15% off. Casa italiana desde 1897.",
   alternates: { canonical: "/assinatura" },
   openGraph: {
-    title: "O cartão da casa — Assinatura Zerbinatti Coffee",
-    description:
-      "Um pacote a cada quinze dias, torrado sob demanda. A casa escolhe, você recebe.",
-    url: "/assinatura",
     type: "website",
+    locale: "pt_BR",
+    url: "/assinatura",
+    title: "Assinatura · Zerbinatti",
+    description:
+      "Café fresco a cada quinzena ou mês. Frete grátis, cancele em 1 clique. Primeiro envio com 15% off.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Assinatura · Zerbinatti",
+    description:
+      "Café fresco a cada quinzena ou mês. Frete grátis, cancele quando quiser.",
   },
 };
 

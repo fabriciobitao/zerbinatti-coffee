@@ -6,17 +6,23 @@ import SobreTimeline from "@/components/SobreTimeline";
 import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title:
-    "Nossa História — Famiglia Zerbinatti, Quatro Gerações desde 1897",
+  title: "Sobre · Zerbinatti",
   description:
-    "De Treviso ao Cerrado Mineiro: a história da família Zerbinatti, quatro gerações torrando café com método italiano e grão brasileiro. Casa fundada em 1897.",
+    "Quatro gerações de uma casa italiana de café, de Treviso (1897) à Serra do Cabral (2026). A história curta da casa — a longa está na xícara.",
   alternates: { canonical: "/sobre" },
   openGraph: {
-    title: "Nossa História — Quatro Gerações Zerbinatti desde 1897",
-    description:
-      "De Treviso ao Cerrado Mineiro: o método italiano que atravessou um século e um oceano.",
-    url: "/sobre",
     type: "article",
+    locale: "pt_BR",
+    url: "/sobre",
+    title: "Sobre · Zerbinatti",
+    description:
+      "De Treviso à Serra do Cabral: 129 anos da casa, em quatro gerações. O mesmo gesto, repetido.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sobre · Zerbinatti",
+    description:
+      "Quatro gerações Zerbinatti, de Treviso à Serra do Cabral. Desde 1897.",
   },
 };
 

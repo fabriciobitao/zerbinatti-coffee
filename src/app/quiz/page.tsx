@@ -5,16 +5,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import QuizFlow from "@/components/QuizFlow";
 
 export const metadata: Metadata = {
-  title: "Quiz — Qual Pacote de Café Zerbinatti é Para Você?",
+  title: "Quiz · Zerbinatti",
   description:
-    "Em 30 segundos, descubra qual pacote da Zerbinatti combina com seu ritmo. 3 perguntas, sem cadastro.",
+    "Três perguntas, 30 segundos, uma recomendação. Descubra qual pacote Zerbinatti combina com seu ritmo de consumo. Sem cadastro, sem fricção.",
   alternates: { canonical: "/quiz" },
   openGraph: {
-    title: "Qual pacote Zerbinatti para você? — Teste de 30s",
-    description:
-      "Três perguntas, uma recomendação. A casa indica o pacote e a frequência.",
-    url: "/quiz",
     type: "website",
+    locale: "pt_BR",
+    url: "/quiz",
+    title: "Quiz · Zerbinatti",
+    description:
+      "3 perguntas, 30 segundos. A casa indica o pacote e a frequência.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Quiz · Zerbinatti",
+    description:
+      "3 perguntas, 30 segundos. A casa indica o pacote certo para você.",
   },
 };
 

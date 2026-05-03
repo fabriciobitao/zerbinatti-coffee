@@ -13,19 +13,26 @@ const PAGE_SIZE = 12;
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Revista — Ensaios sobre cafe, oficio e mesa | Zerbinatti",
+  title: "Revista · Zerbinatti",
   description:
-    "Notas da casa: tecnica, historia, lugares e receitas. Editorial Zerbinatti Coffee, escrito por quem torra.",
+    "Ensaios sobre café e tradição: técnica, história, lugares e receitas. Editorial da casa, escrito por quem torra. Notas, métodos e memórias da Zerbinatti.",
   alternates: {
     canonical: "/revista",
     types: { "application/rss+xml": "/revista/rss.xml" },
   },
   openGraph: {
-    title: "Revista Zerbinatti — Ensaios sobre cafe, oficio e mesa",
-    description:
-      "Notas da casa: tecnica, historia, lugares e receitas. Casa italiana desde 1897.",
-    url: "/revista",
     type: "website",
+    locale: "pt_BR",
+    url: "/revista",
+    title: "Revista · Zerbinatti",
+    description:
+      "Ensaios sobre café e tradição. Notas da casa: técnica, história, lugares e receitas.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Revista · Zerbinatti",
+    description:
+      "Ensaios sobre café e tradição, escritos por quem torra.",
   },
 };
 

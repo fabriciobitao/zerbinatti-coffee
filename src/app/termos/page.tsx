@@ -10,16 +10,22 @@ const LAST_UPDATED_ISO = "2026-05-03";
 const LAST_UPDATED_BR = "03 de maio de 2026";
 
 export const metadata: Metadata = {
-  title: "Termos de uso",
+  title: "Termos · Zerbinatti",
   description:
-    "Termos e condições de uso do site e da loja Zerbinatti Coffee — pedidos, entregas, trocas, propriedade intelectual e foro.",
+    "Termos e condições de uso do site e da loja Zerbinatti — pedidos, entregas, trocas, propriedade intelectual e foro. Casa italiana, regras claras.",
   alternates: { canonical: "/termos" },
   openGraph: {
-    title: "Termos de uso — Zerbinatti Coffee",
-    description:
-      "Termos e condições de uso do site e da loja Zerbinatti Coffee.",
-    url: "/termos",
     type: "article",
+    locale: "pt_BR",
+    url: "/termos",
+    title: "Termos · Zerbinatti",
+    description:
+      "Termos e condições de uso do site e da loja Zerbinatti — pedidos, entregas e trocas.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Termos · Zerbinatti",
+    description: "Termos e condições de uso da Zerbinatti.",
   },
   robots: { index: true, follow: true },
 };
