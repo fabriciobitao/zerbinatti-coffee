@@ -1,6 +1,6 @@
 # Zerbinatti Coffee — Progresso
 
-**Última atualização:** 2026-05-03 (Ondas 1–4 fechadas, 5 em curso)
+**Última atualização:** 2026-05-03 (Ondas 1–5 fechadas, auditorias aplicadas)
 
 ## O que é
 E-commerce premium de café especial brasileiro com herança italiana (desde 1897). B2C + B2B + ecossistema editorial.
@@ -47,9 +47,20 @@ E-commerce premium de café especial brasileiro com herança italiana (desde 189
 - `/cafes` índice (estava 404)
 - Graceful degradation sem env vars (build CI passa)
 
-### Onda 5 — Security Wave 2 + Analytics + LGPD (em curso)
+### Onda 5 — Security Wave 2 + Analytics + LGPD
 - 5a (Security): rate limit Upstash, Turnstile, Sentry com PII filter, Dependabot, CSP refinement
 - 5b (Analytics+LGPD): GA4 + Meta Pixel com consent gating, banner LGPD, /privacidade, /termos
+
+### Auditoria final + fixes (commit 0f87bfa)
+- 3 audits paralelos: Code Review, A11y, Reality Check
+- 6 blockers visuais + 6 HIGH issues fechados em batch
+- Removidos placeholders Unsplash (Cafes, Story1897), fallbacks tipográficos
+- /entregas, /fazenda, /processo reescritas no padrão editorial + JSON-LD AboutPage
+- CartDrawer reescrito (paleta editorial, WhatsApp sem PII, order ID via crypto)
+- A11y: peer-focus-visible em radios sr-only, live region só no total, Footer h4→h3
+- Robustez: Zod no loadCart, warns de envs críticas em prod
+- SEO: sitemap real (sem 404), robots /studio bloqueado, OG auto por rota
+- Build verde, 31 rotas, type-check limpo
 
 ## Pendente
 
