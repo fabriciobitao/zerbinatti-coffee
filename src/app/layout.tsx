@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { siteConfig, gaId, metaPixelId, organizationSchema } from "@/lib/site";
@@ -10,7 +9,7 @@ import "./globals.css";
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -27,7 +26,7 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono-jb",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -109,16 +108,20 @@ export default function RootLayout({
           fetchPriority="high"
         />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
-        <Script
-          id="organization-schema"
+        <script
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema()),
           }}
         />
       </head>
       <body className="min-h-full flex flex-col font-sans">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-ink focus:text-bone focus:px-4 focus:py-2 focus:rounded"
+        >
+          Pular para o conteúdo
+        </a>
         <CartProvider>
           {children}
           <CartToasts />

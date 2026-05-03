@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CartButton } from "./CartDrawer";
@@ -17,6 +17,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const mobileNavRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -24,6 +26,59 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Mobile menu — Esc fecha, foco no primeiro link ao abrir,
+  // retorna foco ao botão hamburguer ao fechar, e trap de Tab dentro do menu.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const container = mobileNavRef.current;
+    const focusables = container
+      ? Array.from(container.querySelectorAll<HTMLElement>(focusableSelector))
+      : [];
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    // Foco no primeiro link
+    first?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || focusables.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey) {
+        if (active === first || !container?.contains(active)) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (active === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  // Quando fechar, retorna foco ao botão hamburguer
+  const prevMenuOpen = useRef(menuOpen);
+  useEffect(() => {
+    if (prevMenuOpen.current && !menuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevMenuOpen.current = menuOpen;
+  }, [menuOpen]);
 
   // No Hero (bone) com header transparente, queremos texto escuro.
   // Em outras páginas (que tipicamente já têm fundo escuro) ou após scroll,
@@ -85,9 +140,10 @@ export default function Header() {
         <div className="flex items-center gap-3 lg:hidden">
           <CartButton />
           <button
+            ref={menuButtonRef}
             className={menuBtnColor}
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Menu"
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
           >
@@ -118,7 +174,10 @@ export default function Header() {
 
       <div
         id="mobile-nav"
+        ref={mobileNavRef}
         role="navigation"
+        aria-label="Menu mobile"
+        aria-hidden={!menuOpen}
         className={`overflow-hidden border-t border-line-dark bg-ink/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
           menuOpen
             ? "max-h-96 px-5 py-6"

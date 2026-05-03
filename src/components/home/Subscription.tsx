@@ -109,7 +109,7 @@ export default function Subscription() {
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
           {/* Coluna esquerda */}
           <div className="flex flex-col justify-center">
-            <p className="eyebrow">O CARTÃO DA CASA</p>
+            <p className="eyebrow text-bone-soft">O CARTÃO DA CASA</p>
             <h2 id="assinatura-title" className="text-h1 mt-8 text-bone">
               A casa escolhe.
               <br />
@@ -227,7 +227,7 @@ export default function Subscription() {
                       <span className="text-[13px] font-medium">{p.label}</span>
                       <span
                         className={`font-mono text-[12px] ${
-                          active ? "text-ink-soft" : "text-ink-mute"
+                          active ? "text-ink-soft" : "text-bone-soft"
                         }`}
                       >
                         {formatBRL(p.price)}
@@ -251,7 +251,7 @@ export default function Subscription() {
                   {formatBRL(totalPerShipment)}
                 </span>
               </div>
-              <p className="mt-3 font-mono text-[12px] text-ink-mute">
+              <p className="mt-3 font-mono text-[12px] text-bone-soft">
                 {subtotalLabel}
               </p>
             </div>
@@ -266,7 +266,7 @@ export default function Subscription() {
 
             <p
               id="legal-caption"
-              className="mt-4 text-[12px] leading-[1.5] text-ink-mute"
+              className="mt-4 text-[12px] leading-[1.5] text-bone-soft"
             >
               Cobrança recorrente conforme frequência. Cancele a qualquer
               momento, sem perguntas.

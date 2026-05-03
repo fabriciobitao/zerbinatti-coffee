@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="page-fade-in">
+      <main id="main" className="page-fade-in">
         <Hero />
         <Cafes />
         <Subscription />

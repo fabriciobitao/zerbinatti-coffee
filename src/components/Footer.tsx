@@ -109,7 +109,7 @@ export default function Footer() {
             <div className="mt-6 flex gap-4">
               <a
                 href="#"
-                className="text-ink-mute transition-colors hover:text-olive"
+                className="text-bone-soft transition-colors hover:text-olive"
                 aria-label="Instagram"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-ink-mute transition-colors hover:text-olive"
+                className="text-bone-soft transition-colors hover:text-olive"
                 aria-label="YouTube"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -127,7 +127,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-ink-mute transition-colors hover:text-olive"
+                className="text-bone-soft transition-colors hover:text-olive"
                 aria-label="TikTok"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -141,10 +141,10 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-24 border-t border-line-dark pt-12">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-xs text-bone-soft/60">
+            <p className="text-xs text-bone-soft">
               &copy; 2026 Zerbinatti Coffee · Famiglia Zerbinatti, Brasil
             </p>
-            <div className="flex gap-6 text-xs text-bone-soft/60">
+            <div className="flex gap-6 text-xs text-bone-soft">
               <Link href="/termos" className="hover:text-olive">
                 Termos de uso
               </Link>

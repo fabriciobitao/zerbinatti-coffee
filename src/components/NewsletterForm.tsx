@@ -6,22 +6,30 @@ export function NewsletterForm() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
+    setError(null);
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: "newsletter", email }),
       });
+      if (!res.ok) {
+        throw new Error(`status ${res.status}`);
+      }
+      setSent(true);
     } catch {
-      // Fail silent — ainda marca como enviado para não bloquear UX
+      setError(
+        "Não conseguimos registrar sua inscrição agora. Tente novamente em instantes ou escreva para contato@zerbinatti.coffee."
+      );
+    } finally {
+      setLoading(false);
     }
-    setSent(true);
-    setLoading(false);
   };
 
   if (sent) {
@@ -35,20 +43,29 @@ export function NewsletterForm() {
     );
   }
 
+  const errorId = "newsletter-error";
+
   return (
     <>
       <label htmlFor="newsletter-email" className="sr-only">
         E-mail para newsletter
       </label>
-      <form onSubmit={handleSubmit} className="mt-4 flex gap-2">
+      <form onSubmit={handleSubmit} className="mt-4 flex gap-2" noValidate>
         <input
           id="newsletter-email"
           type="email"
           required
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+            if (error) setError(null);
+          }}
           placeholder="seu@email.com"
-          className="flex-1 border border-line-dark bg-ink-soft px-4 py-2.5 text-sm text-bone outline-none placeholder:text-ink-mute focus:border-olive"
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? errorId : undefined}
+          className={`flex-1 border bg-ink-soft px-4 py-2.5 text-sm text-bone outline-none placeholder:text-bone-soft focus:border-olive ${
+            error ? "border-red-400" : "border-line-dark"
+          }`}
         />
         <button
           type="submit"
@@ -58,6 +75,16 @@ export function NewsletterForm() {
           {loading ? "..." : "Assinar"}
         </button>
       </form>
+      {error && (
+        <p
+          id={errorId}
+          role="alert"
+          aria-live="assertive"
+          className="mt-3 border border-red-400/40 bg-red-400/5 px-4 py-3 text-sm text-bone"
+        >
+          {error}
+        </p>
+      )}
     </>
   );
 }
