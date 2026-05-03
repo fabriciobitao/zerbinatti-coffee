@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -20,12 +21,25 @@ export const metadata: Metadata = {
   },
 };
 
-const STEPS = [
+type Step = {
+  n: string;
+  title: string;
+  body: string;
+  photo?: string;
+  photoAlt?: string;
+  photoPosition?: string;
+};
+
+const STEPS: Step[] = [
   {
     n: "I",
     title: "Colheita seletiva",
     body:
       "Só cerejas maduras são colhidas, manualmente, em fases de maturação. A colheita acontece entre maio e setembro, na Serra do Cabral. O grão verde nunca entra no lote — vai pra apartação e segue caminho próprio.",
+    photo: "/images/farm/cafe-frutos-verdes.jpg",
+    photoAlt:
+      "Cachos de frutos verdes do café no pé, ainda em maturação — apenas cerejas maduras seguem para o lote",
+    photoPosition: "center center",
   },
   {
     n: "II",
@@ -38,6 +52,10 @@ const STEPS = [
     title: "Beneficiamento",
     body:
       "Separação por densidade, tamanho e cor. Defeitos vão para apartação. Só os grãos perfeitos seguem para o cupping — em geral, menos de setenta por cento da colheita bruta.",
+    photo: "/images/farm/peneira-cafe.jpg",
+    photoAlt:
+      "Mão calejada do trabalhador segurando peneira de palha tradicional usada na separação manual do café",
+    photoPosition: "center center",
   },
   {
     n: "IV",
@@ -143,7 +161,7 @@ export default function Processo() {
             className="container-editorial mx-auto"
             style={{ maxWidth: "720px" }}
           >
-            <ol className="space-y-12">
+            <ol className="space-y-16">
               {STEPS.map((step) => (
                 <li
                   key={step.n}
@@ -174,6 +192,25 @@ export default function Processo() {
                       {step.title}
                     </h2>
                     <p className="text-body mt-4 text-ink-soft">{step.body}</p>
+
+                    {step.photo ? (
+                      <figure className="mt-8">
+                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-bone sm:aspect-[3/4]">
+                          <Image
+                            src={step.photo}
+                            alt={step.photoAlt ?? ""}
+                            fill
+                            quality={82}
+                            sizes="(min-width: 720px) 640px, 100vw"
+                            className="object-cover"
+                            style={{
+                              objectPosition: step.photoPosition ?? "center center",
+                              filter: "saturate(0.92) contrast(1.04)",
+                            }}
+                          />
+                        </div>
+                      </figure>
+                    ) : null}
                   </div>
                 </li>
               ))}

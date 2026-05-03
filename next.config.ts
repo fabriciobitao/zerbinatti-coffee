@@ -164,6 +164,10 @@ const nextConfig: NextConfig = {
     // Default Next 16 ja inclui [16,32,48,64,96,128,256,384] — adicionamos
     // 200/300 para melhor fit em hero 60vw em telas 360-414px.
     imageSizes: [16, 32, 48, 64, 96, 128, 200, 256, 300, 384],
+    // Next 16: qualidades precisam ser whitelistadas explicitamente (security).
+    // Padronizamos 75 (icons/UI), 80 (cards), 82 (fotos editoriais),
+    // 84 (heroes fotograficos), 88 (logo/marca em alta).
+    qualities: [75, 80, 82, 84, 88],
     // Cache de imagens otimizadas no CDN do Vercel (1 ano para imagens com hash).
     minimumCacheTTL: 31536000,
     remotePatterns: [

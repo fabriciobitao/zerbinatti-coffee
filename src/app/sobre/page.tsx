@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -76,13 +77,25 @@ const BLOCOS = [
     h2Pre: "2026. A ",
     h2Italic: "quarta",
     h2Pos: " geração torra a próxima safra.",
+    // Foto real: peneira de palha tradicional, instrumento de ofício preservado.
+    photo: "/images/farm/peneira-cafe.jpg",
+    photoAlt:
+      "Mão calejada do trabalhador segurando peneira de palha tradicional usada na separação do café",
+    photoPosition: "center center",
     fallback: "Z",
     fallbackBg: "bg-bone-soft",
     fallbackSize: "text-[160px]",
     body: "A casa hoje é tocada pela quarta geração — netos de Carlo, bisnetos de Antonio, tataranetos de Giuseppe. A torrefação saiu da Mooca, mas continua em São Paulo. A moedeira de bronze segue funcionando — usamos para amostras de controle. Os cadernos italianos seguem na estante. O café que sai dos pacotes hoje é diferente do de 1897 — mais limpo, mais doce, com perfil mais definido — mas o gesto que produz é o mesmo: torrar pouco, torrar fresco, torrar para alguém que vai beber em casa, não em uma prateleira de supermercado. A diferença entre 1897 e 2026, do ponto de vista da casa, é só de logística. O café da xícara é a mesma promessa.",
-    caption: "MMXXVI · São Paulo. Quarta geração na torrefação.",
+    caption: "MMXXVI · Serra do Cabral. Peneira tradicional na separação do lote.",
   },
 ];
+
+// Tipagem inline pra permitir bloco com photo opcional sem quebrar os anteriores
+type Bloco = (typeof BLOCOS)[number] & {
+  photo?: string;
+  photoAlt?: string;
+  photoPosition?: string;
+};
 
 const PRINCIPIOS = [
   {
@@ -262,19 +275,36 @@ export default function SobrePage() {
                       <div
                         className={`relative aspect-[4/5] w-full overflow-hidden ${b.fallbackBg}`}
                       >
-                        <div className="flex h-full w-full items-center justify-center">
-                          <span
-                            className={`font-display ${b.fallbackSize} text-olive`}
+                        {(b as Bloco).photo ? (
+                          <Image
+                            src={(b as Bloco).photo as string}
+                            alt={(b as Bloco).photoAlt as string}
+                            fill
+                            quality={82}
+                            sizes="(min-width: 1024px) 680px, 100vw"
+                            className="object-cover"
                             style={{
-                              fontWeight: 400,
-                              filter: i < 3 ? "sepia(0.4) contrast(0.95)" : "none",
+                              objectPosition:
+                                (b as Bloco).photoPosition ?? "center center",
+                              filter: "saturate(0.92) contrast(1.04)",
                             }}
-                            aria-hidden="true"
-                            lang={b.fallback === "Z" ? undefined : "la"}
-                          >
-                            {b.fallback}
-                          </span>
-                        </div>
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center">
+                            <span
+                              className={`font-display ${b.fallbackSize} text-olive`}
+                              style={{
+                                fontWeight: 400,
+                                filter:
+                                  i < 3 ? "sepia(0.4) contrast(0.95)" : "none",
+                              }}
+                              aria-hidden="true"
+                              lang={b.fallback === "Z" ? undefined : "la"}
+                            >
+                              {b.fallback}
+                            </span>
+                          </div>
+                        )}
                       </div>
                       <figcaption
                         className="mt-3 text-[13px] italic text-ink-soft"
@@ -340,6 +370,75 @@ export default function SobrePage() {
                   </p>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* A MARCA DA FAMÍLIA — artefato histórico, não brand atual */}
+        <section
+          aria-labelledby="marca-familia-title"
+          className="bg-bone py-20 lg:py-32"
+        >
+          <div className="container-editorial">
+            <div className="mx-auto grid max-w-[1040px] gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+              {/* Logo histórico — apresentado como artefato */}
+              <figure className="order-2 lg:order-1">
+                <div
+                  className="relative mx-auto aspect-square w-full max-w-[420px] overflow-hidden border border-line bg-white"
+                  style={{ boxShadow: "0 1px 0 0 var(--line)" }}
+                >
+                  <Image
+                    src="/images/marca/logo-zerbinatti.jpg"
+                    alt="Marca registrada da Famiglia Zerbinatti — manuscrita em script marrom, com bandeiras Itália e Brasil, datas 1897 e 2023"
+                    fill
+                    quality={88}
+                    sizes="(min-width: 1024px) 420px, 100vw"
+                    className="object-contain p-8"
+                  />
+                </div>
+                <figcaption
+                  className="mt-4 text-center font-mono text-[11px] uppercase text-ink-mute"
+                  style={{ letterSpacing: "0.18em" }}
+                >
+                  Marca registrada · Famiglia Zerbinatti
+                </figcaption>
+              </figure>
+
+              {/* Texto editorial */}
+              <div className="order-1 lg:order-2">
+                <p className="eyebrow">A MARCA DA FAMÍLIA</p>
+                <h2
+                  id="marca-familia-title"
+                  className="text-h1 mt-6 text-ink"
+                >
+                  Dall&apos;Italia{" "}
+                  <em
+                    className="font-display italic"
+                    style={{ fontWeight: 400 }}
+                  >
+                    al Brasile
+                  </em>
+                  , dal 1897.
+                </h2>
+                <p className="text-body mt-8 text-ink-soft">
+                  A marca foi desenhada por Antonio Zerbinatti e segue em uso
+                  pela família — manuscrita, com a moldura italiana e o grão
+                  brasileiro. Aparece no carimbo dos sacos, no cartão que
+                  acompanha cada pacote da casa e no portão da torrefação.
+                </p>
+                <p className="text-body mt-4 text-ink-soft">
+                  É o que se entrega no aperto de mão. O que está no site é o
+                  vestido editorial em que a marca circula online — escolhido
+                  pela quarta geração para conversar com a mesa de quem assina.
+                  Os dois convivem, e cada um faz a sua parte.
+                </p>
+                <p
+                  className="mt-10 font-mono text-[11px] uppercase text-olive"
+                  style={{ letterSpacing: "0.18em" }}
+                >
+                  REG. MMXXIII · BRASIL
+                </p>
+              </div>
             </div>
           </div>
         </section>

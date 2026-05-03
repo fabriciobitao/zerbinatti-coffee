@@ -4,6 +4,10 @@ import Image from "next/image";
  * Hero — split editorial 60/40.
  * Tipografia à esquerda (60%), foto fullbleed à direita (40%) em desktop.
  * Mobile: stack vertical (texto em cima, foto embaixo).
+ *
+ * Foto: POV chegando à Fazenda Santa Rita pela estrada de terra,
+ * janela do veículo no canto inferior. Vertical 9:16 — preserva céu + chão.
+ * O leve overlay multiply em bone-soft suaviza o azul vivo sem matar o documental.
  */
 export default function Hero() {
   return (
@@ -55,19 +59,44 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Coluna direita — fotografia fullbleed */}
-        <div className="relative h-[60vw] max-h-[500px] w-full overflow-hidden lg:h-auto lg:max-h-none">
+        {/* Coluna direita — fotografia fullbleed (POV de chegada à fazenda) */}
+        <div className="relative h-[78vw] max-h-[640px] w-full overflow-hidden lg:h-auto lg:max-h-none">
           <Image
-            src="/images/hero-pacote-zerbinatti.jpg"
-            alt="Pacote de Café Zerbinatti em mesa de madeira, luz natural lateral"
+            src="/images/farm/fazenda-chegada.jpg"
+            alt="Estrada de terra entre fileiras de cafezeiros na Fazenda Santa Rita, Serra do Cabral, fotografada da janela do veículo"
             fill
             priority
             fetchPriority="high"
-            quality={80}
+            quality={82}
             sizes="(min-width: 1024px) 40vw, 100vw"
-            className="object-cover object-center"
-            style={{ filter: "saturate(0.7) contrast(1.05)" }}
+            className="object-cover"
+            style={{
+              objectPosition: "center 40%",
+              filter: "saturate(0.82) contrast(1.04)",
+            }}
           />
+          {/* Overlay editorial sutil — amarra o céu vivo à paleta bone */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 mix-blend-multiply"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(244,239,230,0.18) 0%, rgba(244,239,230,0) 35%, rgba(244,239,230,0) 100%)",
+            }}
+          />
+          {/* Caption sobre a foto, canto inferior — discreta */}
+          <figcaption
+            className="absolute bottom-5 left-5 right-5 font-mono text-[10px] uppercase text-bone lg:bottom-8 lg:left-8 lg:right-8"
+            style={{
+              letterSpacing: "0.22em",
+              textShadow: "0 1px 8px rgba(27,23,20,0.55)",
+            }}
+          >
+            <span className="block">Fazenda Santa Rita</span>
+            <span className="mt-1 block opacity-80">
+              Serra do Cabral · MMXXVI
+            </span>
+          </figcaption>
         </div>
       </div>
     </section>
