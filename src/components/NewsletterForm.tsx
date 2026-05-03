@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { TurnstileWidget } from "./TurnstileWidget";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -8,6 +9,10 @@ export function NewsletterForm() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const turnstileTokenRef = useRef<string | null>(null);
+  const handleToken = useCallback((t: string | null) => {
+    turnstileTokenRef.current = t;
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,16 +23,31 @@ export function NewsletterForm() {
       const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({
+          email,
+          website,
+          turnstileToken: turnstileTokenRef.current ?? undefined,
+        }),
       });
+      if (res.status === 429) {
+        const retry = res.headers.get("Retry-After");
+        throw new Error(`rate_limited:${retry ?? "60"}`);
+      }
       if (!res.ok) {
         throw new Error(`status ${res.status}`);
       }
       setSent(true);
-    } catch {
-      setError(
-        "Não conseguimos registrar sua inscrição agora. Tente novamente em instantes ou escreva para contato@zerbinatticoffee.com."
-      );
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "";
+      if (msg.startsWith("rate_limited")) {
+        setError(
+          "Muitas tentativas em pouco tempo. Aguarde um instante e tente de novo."
+        );
+      } else {
+        setError(
+          "Não conseguimos registrar sua inscrição agora. Tente novamente em instantes ou escreva para contato@zerbinatticoffee.com."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -52,6 +72,7 @@ export function NewsletterForm() {
       <label htmlFor="newsletter-email" className="sr-only">
         E-mail para newsletter
       </label>
+      <TurnstileWidget onToken={handleToken} action="newsletter" />
       <form onSubmit={handleSubmit} className="mt-4 flex gap-2" noValidate>
         {/* Honeypot — campo invisivel para humanos, bots preenchem */}
         <input

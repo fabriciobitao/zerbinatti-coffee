@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { contactPayloadSchema, type ContactPayload } from "@/lib/schemas/contact";
 import { sendEmail } from "@/lib/newsletter/resend";
 import { b2bNotificationEmail } from "@/lib/newsletter/templates";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 /**
  * POST /api/contact
@@ -44,6 +46,23 @@ function safeLog(level: "info" | "warn" | "error", event: string, data: Record<s
 }
 
 export async function POST(req: NextRequest) {
+  // 0. Rate limit por IP — 10 req/min via Upstash (graceful se sem env).
+  const rl = await checkRateLimit(req, "contact");
+  if (!rl.success) {
+    safeLog("warn", "rate_limited", { retryAfter: rl.retryAfter });
+    return NextResponse.json(
+      { error: "rate_limited" },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rl.retryAfter),
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+        },
+      },
+    );
+  }
+
   // 1. Limite de tamanho via Content-Length (defensivo — Vercel ja limita,
   //    mas bloqueamos cedo antes de fazer parse).
   const contentLength = req.headers.get("content-length");
@@ -65,6 +84,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
 
+  // 2.5. Extrai turnstileToken antes do Zod (não faz parte do schema oficial).
+  let turnstileToken: string | undefined;
+  if (raw && typeof raw === "object" && "turnstileToken" in raw) {
+    const t = (raw as Record<string, unknown>).turnstileToken;
+    if (typeof t === "string") turnstileToken = t;
+    delete (raw as Record<string, unknown>).turnstileToken;
+  }
+
   // 3. Validacao Zod (discriminated union)
   const parsed = contactPayloadSchema.safeParse(raw);
   if (!parsed.success) {
@@ -82,6 +109,13 @@ export async function POST(req: NextRequest) {
   if (payload._hp && payload._hp.length > 0) {
     safeLog("info", "honeypot_triggered", { type: payload.type });
     return NextResponse.json({ ok: true, queued: false });
+  }
+
+  // 4.5. Turnstile — validação anti-bot. Em dev (sem secret) é skip.
+  const ts = await verifyTurnstileToken(turnstileToken, getClientIp(req));
+  if (!ts.ok) {
+    safeLog("warn", "turnstile_failed", { errors: ts.errors });
+    return NextResponse.json({ error: "captcha_failed" }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;

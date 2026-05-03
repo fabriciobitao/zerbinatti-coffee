@@ -8,6 +8,8 @@ import {
 } from "@/lib/newsletter/resend";
 import { confirmationEmail } from "@/lib/newsletter/templates";
 import { siteConfig } from "@/lib/site";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { verifyTurnstileToken } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -18,6 +20,8 @@ const newsletterSchema = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
   // Honeypot — bots preenchem
   website: z.string().max(0).optional(),
+  // Token Turnstile (opcional em dev — server faz skip se sem secret)
+  turnstileToken: z.string().max(4096).optional(),
 });
 
 function safeLog(level: "info" | "warn" | "error", event: string, data: Record<string, unknown>) {
@@ -48,6 +52,23 @@ function safeLog(level: "info" | "warn" | "error", event: string, data: Record<s
  * Sem Resend configurado: log-only, retorna ok.
  */
 export async function POST(req: NextRequest) {
+  // Rate limit por IP (10/min). Sem env, libera com warning.
+  const rl = await checkRateLimit(req, "newsletter");
+  if (!rl.success) {
+    safeLog("warn", "rate_limited", { retryAfter: rl.retryAfter });
+    return NextResponse.json(
+      { error: "rate_limited" },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rl.retryAfter),
+          "X-RateLimit-Limit": String(rl.limit),
+          "X-RateLimit-Remaining": String(rl.remaining),
+        },
+      },
+    );
+  }
+
   const contentLength = req.headers.get("content-length");
   if (contentLength && Number.parseInt(contentLength, 10) > MAX_BODY_BYTES) {
     return NextResponse.json({ error: "payload_too_large" }, { status: 413 });
@@ -72,11 +93,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "invalid_payload" }, { status: 400 });
   }
 
-  const { email, website } = parsed.data;
+  const { email, website, turnstileToken } = parsed.data;
 
   if (website && website.length > 0) {
     safeLog("info", "honeypot_triggered", {});
     return NextResponse.json({ ok: true });
+  }
+
+  // Turnstile — verificação anti-bot. Skip em dev (sem secret).
+  const ts = await verifyTurnstileToken(turnstileToken, getClientIp(req));
+  if (!ts.ok) {
+    safeLog("warn", "turnstile_failed", { errors: ts.errors });
+    return NextResponse.json({ error: "captcha_failed" }, { status: 400 });
   }
 
   if (!isResendConfigured()) {

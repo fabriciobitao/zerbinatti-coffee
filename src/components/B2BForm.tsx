@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { buildWhatsAppUrl } from "@/lib/config";
+import { TurnstileWidget } from "./TurnstileWidget";
 
 type Volume =
   | ""
@@ -66,6 +67,11 @@ export default function B2BForm() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [busy, setBusy] = useState(false);
+  const turnstileTokenRef = useRef<string | null>(null);
+  const honeypotRef = useRef("");
+  const handleToken = useCallback((t: string | null) => {
+    turnstileTokenRef.current = t;
+  }, []);
 
   function validate(): FieldErrors {
     const e: FieldErrors = {};
@@ -80,12 +86,37 @@ export default function B2BForm() {
     return e;
   }
 
-  function onSubmit(ev: React.FormEvent) {
+  async function onSubmit(ev: React.FormEvent) {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
     if (Object.keys(e).length > 0) return;
     setBusy(true);
+
+    // Registra lead server-side (Resend + rate limit + Turnstile).
+    // Falhar aqui não bloqueia o WhatsApp — degrada gracioso.
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "b2b",
+          name: nome,
+          company: empresa,
+          cnpj: cnpj.replace(/\D/g, ""),
+          email,
+          phone: telefone,
+          message: mensagem
+            ? `${mensagem}\n\nVolume: ${volume}`
+            : `Volume: ${volume}`,
+          _hp: honeypotRef.current,
+          turnstileToken: turnstileTokenRef.current ?? undefined,
+        }),
+      });
+    } catch {
+      // silencioso — segue pro WhatsApp
+    }
+
     const msg = `Olá! Pedido de proposta B2B Zerbinatti:\n\n• Nome: ${nome}\n• Empresa: ${empresa}\n• CNPJ: ${cnpj}\n• E-mail: ${email}\n• Telefone: ${telefone}\n• Volume estimado: ${volume}${
       mensagem ? `\n• Mensagem: ${mensagem}` : ""
     }`;
@@ -163,6 +194,25 @@ export default function B2BForm() {
       aria-busy={busy}
       className="rounded-[2px] border border-ink-mute/40 bg-ink-soft p-6 sm:p-8 lg:p-12"
     >
+      <TurnstileWidget onToken={handleToken} action="b2b" />
+      {/* Honeypot anti-bot — invisível para humanos */}
+      <input
+        type="text"
+        name="_hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        defaultValue=""
+        onChange={(e) => (honeypotRef.current = e.target.value)}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      />
       <div className="space-y-6">
         <div>
           <label htmlFor="b2b-nome" className={labelClass}>

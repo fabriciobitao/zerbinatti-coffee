@@ -7,6 +7,7 @@ import {
 } from "@/lib/newsletter/resend";
 import { welcomeEmail } from "@/lib/newsletter/templates";
 import { siteConfig } from "@/lib/site";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -26,11 +27,24 @@ function log(level: "info" | "warn" | "error", event: string, extra: Record<stri
  * redireciona para /obrigado-newsletter.
  */
 export async function GET(req: NextRequest) {
-  const token = req.nextUrl.searchParams.get("token");
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || siteConfig.url;
   const successUrl = `${baseUrl}/obrigado-newsletter`;
   const errorUrl = `${baseUrl}/obrigado-newsletter?status=error`;
 
+  // Rate limit por IP — 5/min para evitar enumeração de tokens.
+  const rl = await checkRateLimit(req, "newsletter-confirm");
+  if (!rl.success) {
+    log("warn", "rate_limited", { retryAfter: rl.retryAfter });
+    return new NextResponse("rate_limited", {
+      status: 429,
+      headers: {
+        "Retry-After": String(rl.retryAfter),
+        "Content-Type": "text/plain",
+      },
+    });
+  }
+
+  const token = req.nextUrl.searchParams.get("token");
   if (!token) {
     log("warn", "missing_token");
     return NextResponse.redirect(errorUrl, 302);
