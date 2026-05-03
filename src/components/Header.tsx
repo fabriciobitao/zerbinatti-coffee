@@ -209,7 +209,7 @@ export default function Header() {
         ref={mobileNavRef}
         role="navigation"
         aria-label="Menu mobile"
-        aria-hidden={!menuOpen}
+        inert={!menuOpen}
         className={`overflow-hidden border-t border-line-dark bg-ink/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
           menuOpen
             ? "max-h-96 px-5 py-6"

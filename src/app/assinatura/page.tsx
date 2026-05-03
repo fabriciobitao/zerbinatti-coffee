@@ -186,7 +186,11 @@ const HERO_ICONS = [HeroIcons.flame, HeroIcons.pause, HeroIcons.ship, HeroIcons.
 
 function StarRow({ rating }: { rating: number }) {
   return (
-    <div className="flex gap-0.5" aria-label={`${rating} de 5 estrelas`}>
+    <div
+      className="flex gap-0.5"
+      role="img"
+      aria-label={`${rating} de 5 estrelas`}
+    >
       {Array.from({ length: 5 }).map((_, i) => (
         <svg
           key={i}
@@ -637,6 +641,7 @@ export default function AssinaturaPage() {
                 idPrefix="bottom-config"
                 intersectionId="bottom"
                 ctaLabel="Quero começar — frete grátis"
+                headingLevel={3}
               />
 
               {/* Texto a direita */}

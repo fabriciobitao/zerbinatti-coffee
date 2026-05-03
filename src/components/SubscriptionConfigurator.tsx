@@ -61,6 +61,8 @@ type Props = {
   idPrefix?: string;
   /** Marca o configurador para que o sticky CTA mobile o use como referencia (IntersectionObserver). */
   intersectionId?: string;
+  /** Nivel hierarquico do titulo sr-only (2 quando o configurador segue um h1; 3 quando segue um h2). Default 2. */
+  headingLevel?: 2 | 3;
 };
 
 function normalizePackage(value?: string): PackageId {
@@ -86,7 +88,9 @@ export default function SubscriptionConfigurator({
   initialFrequency,
   idPrefix = "config",
   intersectionId,
+  headingLevel = 2,
 }: Props) {
+  const HeadingTag = (headingLevel === 3 ? "h3" : "h2") as "h2" | "h3";
   const reactId = useId();
   const baseId = `${idPrefix}-${reactId.replace(/:/g, "")}`;
 
@@ -155,9 +159,9 @@ export default function SubscriptionConfigurator({
       data-total={total}
       className="rounded-[2px] border border-ink-mute/40 bg-ink-soft p-6 sm:p-8 lg:p-12"
     >
-      <h3 id={`${baseId}-title`} className="sr-only">
+      <HeadingTag id={`${baseId}-title`} className="sr-only">
         Configurar assinatura
-      </h3>
+      </HeadingTag>
 
       {/* Frequencia */}
       <fieldset>
@@ -266,7 +270,7 @@ export default function SubscriptionConfigurator({
         <p className="mt-3 font-mono text-[12px] text-[var(--ink-mute-on-dark)]">
           {subtotalLabel}
         </p>
-        <p className="mt-3 font-mono text-[12px] text-olive">
+        <p className="mt-3 font-mono text-[12px] text-olive-on-dark">
           1º envio com 15% off — sem fidelidade.
         </p>
       </div>
