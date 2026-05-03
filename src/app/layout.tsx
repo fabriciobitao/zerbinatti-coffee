@@ -94,12 +94,12 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
-        <link
-          rel="preload"
-          as="image"
-          href="/images/hero-pacote-zerbinatti.jpg"
-          fetchPriority="high"
-        />
+        {/*
+          Preload do hero foi removido daqui (era global, mas /assinatura e
+          /cafes/[slug] nao usam essa imagem — desperdicava ~238KB e atrasava
+          recursos criticos). O priority + fetchPriority no <Image> da home
+          ja sinaliza prioridade alta para o browser na rota correta.
+        */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

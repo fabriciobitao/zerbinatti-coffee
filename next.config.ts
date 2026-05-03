@@ -157,6 +157,15 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // Servir AVIF primeiro (menor) com fallback WebP. Browsers que nao suportam
+    // recebem o JPG/PNG original. Ordem importa: Next testa do primeiro ao ultimo.
+    formats: ["image/avif", "image/webp"],
+    // imageSizes mais granulares na faixa mobile/tablet onde o LCP dói.
+    // Default Next 16 ja inclui [16,32,48,64,96,128,256,384] — adicionamos
+    // 200/300 para melhor fit em hero 60vw em telas 360-414px.
+    imageSizes: [16, 32, 48, 64, 96, 128, 200, 256, 300, 384],
+    // Cache de imagens otimizadas no CDN do Vercel (1 ano para imagens com hash).
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "cdn.shopify.com" },

@@ -62,7 +62,9 @@ export default function Hero() {
             alt="Pacote de Café Zerbinatti em mesa de madeira, luz natural lateral"
             fill
             priority
-            sizes="(max-width: 1023px) 100vw, 40vw"
+            fetchPriority="high"
+            quality={80}
+            sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover object-center"
             style={{ filter: "saturate(0.7) contrast(1.05)" }}
           />
