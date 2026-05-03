@@ -1,35 +1,10 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import { buildWhatsAppUrl } from "@/lib/config";
+import SubscriptionConfigurator from "@/components/SubscriptionConfigurator";
 
 /**
- * Assinatura — fluxo único (não comparativo) com configurador inline.
- * Background --ink (única seção dark da Home).
+ * Assinatura na Home — bloco editorial split 50/50.
+ * Configurador delegado ao componente reutilizado por /assinatura.
  */
 
-type Frequency = "quinzenal" | "mensal";
-type PackageId = "500g-graos" | "250g-graos" | "250g-moido";
-
-type Pkg = {
-  id: PackageId;
-  label: string;
-  price: number;
-  pricePerKg: number;
-  weight: string;
-};
-
-const PACKAGES: Pkg[] = [
-  { id: "500g-graos", label: "500g grãos", price: 89.9, pricePerKg: 179.8, weight: "500g em grãos" },
-  { id: "250g-graos", label: "250g grãos", price: 49.9, pricePerKg: 199.6, weight: "250g em grãos" },
-  { id: "250g-moido", label: "250g moído", price: 49.9, pricePerKg: 199.6, weight: "250g moído" },
-];
-
-function formatBRL(v: number) {
-  return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-}
-
-// Ícones hairline (1px stroke) — desenhados na mão, não usar lucide/heroicons
 const Icons = {
   flame: (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -66,39 +41,6 @@ const GUARANTEES = [
 ];
 
 export default function Subscription() {
-  const [frequency, setFrequency] = useState<Frequency>("mensal");
-  const [packageId, setPackageId] = useState<PackageId>("500g-graos");
-
-  const selected = PACKAGES.find((p) => p.id === packageId)!;
-
-  // Total por envio com -15% (primeiro envio)
-  const totalPerShipment = useMemo(
-    () => Number((selected.price * 0.85).toFixed(2)),
-    [selected]
-  );
-  const pricePerKgFirst = useMemo(
-    () => Number((selected.pricePerKg * 0.85).toFixed(2)),
-    [selected]
-  );
-
-  const subtotalLabel = useMemo(() => {
-    if (frequency === "quinzenal") {
-      const monthly = Number((totalPerShipment * 2).toFixed(2));
-      return `Equivale a ${formatBRL(pricePerKgFirst)}/kg · 2 envios = ${formatBRL(monthly)}/mês`;
-    }
-    return `Equivale a ${formatBRL(pricePerKgFirst)}/kg · livre de frete`;
-  }, [frequency, totalPerShipment, pricePerKgFirst]);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    const msg = `Olá! Quero começar minha assinatura Zerbinatti:\n\n• Frequência: ${
-      frequency === "mensal" ? "Mensal" : "Quinzenal"
-    }\n• Pacote: ${selected.weight}\n• Total por envio (primeiro -15%): ${formatBRL(
-      totalPerShipment
-    )}\n\nComo prosseguimos?`;
-    window.open(buildWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
-  }
-
   return (
     <section
       id="assinatura"
@@ -144,7 +86,7 @@ export default function Subscription() {
             </ul>
 
             <a
-              href="#"
+              href="/quiz"
               className="mt-8 inline-block text-sm font-medium text-bone underline decoration-1 underline-offset-4 transition-colors hover:text-olive"
             >
               Não sabe qual escolher? Faça o teste em 30 segundos →
@@ -152,126 +94,7 @@ export default function Subscription() {
           </div>
 
           {/* Coluna direita — configurador */}
-          <form
-            onSubmit={handleSubmit}
-            aria-labelledby="config-title"
-            className="rounded-[2px] border border-ink-mute/40 bg-ink-soft p-6 sm:p-8 lg:p-12"
-          >
-            <h3 id="config-title" className="sr-only">
-              Configurar assinatura
-            </h3>
-
-            {/* Frequência */}
-            <fieldset>
-              <legend
-                className="font-mono text-[11px] font-medium uppercase text-bone-soft"
-                style={{ letterSpacing: "0.18em" }}
-              >
-                Frequência
-              </legend>
-              <div className="mt-4 flex gap-3">
-                {(["quinzenal", "mensal"] as Frequency[]).map((f) => {
-                  const active = frequency === f;
-                  return (
-                    <label
-                      key={f}
-                      className={`flex-1 cursor-pointer rounded-[2px] border px-6 py-3 text-center text-sm font-medium tracking-[0.04em] transition-colors duration-200 ${
-                        active
-                          ? "border-bone bg-bone text-ink"
-                          : "border-ink-mute/60 bg-transparent text-bone-soft hover:border-bone-soft"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="frequency"
-                        value={f}
-                        checked={active}
-                        onChange={() => setFrequency(f)}
-                        className="sr-only"
-                      />
-                      {f === "quinzenal" ? "Quinzenal" : "Mensal"}
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
-
-            {/* Pacote */}
-            <fieldset className="mt-8">
-              <legend
-                className="font-mono text-[11px] font-medium uppercase text-bone-soft"
-                style={{ letterSpacing: "0.18em" }}
-              >
-                Pacote
-              </legend>
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                {PACKAGES.map((p) => {
-                  const active = packageId === p.id;
-                  return (
-                    <label
-                      key={p.id}
-                      className={`flex cursor-pointer flex-col items-start gap-1 rounded-[2px] border px-4 py-4 transition-colors duration-200 ${
-                        active
-                          ? "border-bone bg-bone text-ink"
-                          : "border-ink-mute/60 bg-transparent text-bone-soft hover:border-bone-soft"
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="package"
-                        value={p.id}
-                        checked={active}
-                        onChange={() => setPackageId(p.id)}
-                        className="sr-only"
-                      />
-                      <span className="text-[13px] font-medium">{p.label}</span>
-                      <span
-                        className={`font-mono text-[12px] ${
-                          active ? "text-ink-soft" : "text-bone-soft"
-                        }`}
-                      >
-                        {formatBRL(p.price)}
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
-
-            <hr className="my-8 border-0 border-t border-ink-mute/30" />
-
-            {/* Total */}
-            <div aria-live="polite">
-              <div className="flex items-baseline justify-between gap-4">
-                <span className="text-sm text-bone-soft">Total por envio</span>
-                <span
-                  className="font-display text-[36px] text-bone"
-                  style={{ fontWeight: 400, lineHeight: 1 }}
-                >
-                  {formatBRL(totalPerShipment)}
-                </span>
-              </div>
-              <p className="mt-3 font-mono text-[12px] text-bone-soft">
-                {subtotalLabel}
-              </p>
-            </div>
-
-            <button
-              type="submit"
-              aria-describedby="legal-caption"
-              className="mt-8 w-full bg-olive px-8 py-4 text-xs font-medium uppercase tracking-[0.06em] text-bone transition-colors hover:bg-olive-deep"
-            >
-              Começar a receber
-            </button>
-
-            <p
-              id="legal-caption"
-              className="mt-4 text-[12px] leading-[1.5] text-bone-soft"
-            >
-              Cobrança recorrente conforme frequência. Cancele a qualquer
-              momento, sem perguntas.
-            </p>
-          </form>
+          <SubscriptionConfigurator idPrefix="home-config" />
         </div>
       </div>
     </section>

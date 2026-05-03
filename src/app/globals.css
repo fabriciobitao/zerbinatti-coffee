@@ -6,15 +6,16 @@
    ═══════════════════════════════════════════════════ */
 :root {
   /* Cores */
-  --bone:        #F4EFE6;
-  --bone-soft:   #EBE3D5;
-  --ink:         #1B1714;
-  --ink-soft:    #3A322C;
-  --ink-mute:    #736961;
-  --olive:       #4A5237;
-  --olive-deep:  #363D26;
-  --line:        #D9D0BE;
-  --line-dark:   #3A322C;
+  --bone:            #F4EFE6;
+  --bone-soft:       #EBE3D5;
+  --ink:             #1B1714;
+  --ink-soft:        #3A322C;
+  --ink-mute:        #736961;
+  --ink-mute-on-dark:#A39C92; /* meta/caption sobre fundo escuro — A11Y CRIT-01/02 */
+  --olive:           #4A5237;
+  --olive-deep:      #363D26;
+  --line:            #D9D0BE;
+  --line-dark:       #3A322C;
 
   /* Tipografia (variáveis injetadas pelo next/font no layout) */
   --font-display: var(--font-fraunces), 'Playfair Display', Georgia, serif;
@@ -56,6 +57,7 @@
   --color-ink:        #1B1714;
   --color-ink-soft:   #3A322C;
   --color-ink-mute:   #736961;
+  --color-ink-mute-on-dark: #A39C92;
   --color-olive:      #4A5237;
   --color-olive-deep: #363D26;
   --color-line:       #D9D0BE;

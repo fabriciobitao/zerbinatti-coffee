@@ -26,16 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Tier 1 — PDPs por slug (substitui o antigo /cafe?sku=)
-  // Hoje o produto unico tem slug "zerbinatti" + 3 SKUs. Quando virar catalogo
-  // multi-produto, basta iterar lista de produtos.
-  const pdpRoutes: MetadataRoute.Sitemap = [
-    {
-      url: `${base}/cafes/${product.slug}`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-  ];
+  // Hoje o produto unico tem 3 SKUs, cada SKU e uma PDP em /cafes/[slug].
+  // Quando virar catalogo multi-produto, iterar lista de produtos e SKUs.
+  const pdpRoutes: MetadataRoute.Sitemap = product.skus.map((sku) => ({
+    url: `${base}/cafes/${sku.id}`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 1.0,
+  }));
 
   // Tier 2 — confianca e marca
   const tier2: MetadataRoute.Sitemap = [
