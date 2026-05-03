@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
+import { blurFor } from "@/lib/photo-blur";
 
 export const metadata: Metadata = {
   title: "Do grão à xícara — Processo Zerbinatti Coffee",
@@ -200,7 +201,9 @@ export default function Processo() {
                             src={step.photo}
                             alt={step.photoAlt ?? ""}
                             fill
-                            quality={82}
+                            quality={75}
+                            placeholder="blur"
+                            blurDataURL={blurFor(step.photo)}
                             sizes="(min-width: 720px) 640px, 100vw"
                             className="object-cover"
                             style={{

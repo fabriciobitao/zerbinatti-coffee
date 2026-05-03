@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BLUR } from "@/lib/photo-blur";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -280,7 +281,9 @@ export default function SobrePage() {
                             src={(b as Bloco).photo as string}
                             alt={(b as Bloco).photoAlt as string}
                             fill
-                            quality={82}
+                            quality={75}
+                            placeholder="blur"
+                            blurDataURL={BLUR.peneiraCafe}
                             sizes="(min-width: 1024px) 680px, 100vw"
                             className="object-cover"
                             style={{

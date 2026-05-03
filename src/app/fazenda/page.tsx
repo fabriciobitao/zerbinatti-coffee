@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import { breadcrumbSchema } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
+import { BLUR } from "@/lib/photo-blur";
 
 export const metadata: Metadata = {
   title: "A fazenda — Serra do Cabral, Norte de Minas | Zerbinatti Coffee",
@@ -71,7 +72,9 @@ export default function Fazenda() {
               fill
               priority
               fetchPriority="high"
-              quality={84}
+              quality={75}
+              placeholder="blur"
+              blurDataURL={BLUR.fazendaLavoura}
               sizes="100vw"
               className="object-cover"
               style={{
@@ -174,7 +177,9 @@ export default function Fazenda() {
                   src="/images/farm/fazenda-chegada.jpg"
                   alt="Vista do interior do veículo chegando à fazenda, fileiras de cafezeiros ladeando a estrada de terra"
                   fill
-                  quality={82}
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL={BLUR.fazendaChegada}
                   sizes="(min-width: 720px) 720px, 100vw"
                   className="object-cover"
                   style={{
@@ -236,7 +241,9 @@ export default function Fazenda() {
                   src="/images/farm/cafe-frutos-verdes.jpg"
                   alt="Cachos de frutos verdes do café no pé, ainda em maturação, em meio à folhagem densa do cafezeiro"
                   fill
-                  quality={82}
+                  quality={75}
+                  placeholder="blur"
+                  blurDataURL={BLUR.cafeFrutosVerdes}
                   sizes="(min-width: 720px) 720px, 100vw"
                   className="object-cover"
                   style={{

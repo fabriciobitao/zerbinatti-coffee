@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BLUR } from "@/lib/photo-blur";
 
 /**
  * História 1897 — bloco editorial 40/60.
@@ -22,7 +23,9 @@ export default function Story1897() {
             src="/images/farm/peneira-cafe.jpg"
             alt="Mão calejada de trabalhador segurando peneira de palha tradicional usada na separação do café"
             fill
-            quality={82}
+            quality={78}
+            placeholder="blur"
+            blurDataURL={BLUR.peneiraCafe}
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
             style={{

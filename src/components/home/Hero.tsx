@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BLUR } from "@/lib/photo-blur";
 
 /**
  * Hero — split editorial 60/40.
@@ -68,6 +69,8 @@ export default function Hero() {
             priority
             fetchPriority="high"
             quality={75}
+            placeholder="blur"
+            blurDataURL={BLUR.fazendaChegada}
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
             style={{
