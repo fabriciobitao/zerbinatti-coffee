@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -14,10 +15,10 @@ export function NewsletterForm() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "newsletter", email }),
+        body: JSON.stringify({ email, website }),
       });
       if (!res.ok) {
         throw new Error(`status ${res.status}`);
@@ -25,7 +26,7 @@ export function NewsletterForm() {
       setSent(true);
     } catch {
       setError(
-        "Não conseguimos registrar sua inscrição agora. Tente novamente em instantes ou escreva para contato@zerbinatti.coffee."
+        "Não conseguimos registrar sua inscrição agora. Tente novamente em instantes ou escreva para contato@zerbinatticoffee.com."
       );
     } finally {
       setLoading(false);
@@ -38,7 +39,8 @@ export function NewsletterForm() {
         className="mt-4 border border-olive/30 bg-olive/5 px-4 py-3 text-sm text-bone"
         role="status"
       >
-        Inscrição recebida. Nosso primeiro envio chega em breve.
+        Confira sua caixa de entrada — mandamos um link para confirmar a
+        inscrição. Vale por 24 horas.
       </p>
     );
   }
@@ -51,6 +53,24 @@ export function NewsletterForm() {
         E-mail para newsletter
       </label>
       <form onSubmit={handleSubmit} className="mt-4 flex gap-2" noValidate>
+        {/* Honeypot — campo invisivel para humanos, bots preenchem */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+        />
         <input
           id="newsletter-email"
           type="email"

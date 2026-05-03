@@ -93,6 +93,14 @@ export default function Footer() {
                   Processo
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/revista"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
+                  Revista
+                </Link>
+              </li>
             </ul>
           </div>
 

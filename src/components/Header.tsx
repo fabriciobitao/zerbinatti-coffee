@@ -6,8 +6,9 @@ import { usePathname } from "next/navigation";
 import { CartButton } from "./CartDrawer";
 
 const NAV_LINKS: [string, string][] = [
-  ["/#cafes", "Pacotes"],
+  ["/cafes", "Pacotes"],
   ["/#assinatura", "Assinatura"],
+  ["/revista", "Revista"],
   ["/sobre", "História"],
   ["/para-empresas", "Empresas"],
 ];

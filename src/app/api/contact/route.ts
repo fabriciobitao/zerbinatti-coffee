@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { contactPayloadSchema, type ContactPayload } from "@/lib/schemas/contact";
+import { sendEmail } from "@/lib/newsletter/resend";
+import { b2bNotificationEmail } from "@/lib/newsletter/templates";
 
 /**
  * POST /api/contact
@@ -83,8 +85,10 @@ export async function POST(req: NextRequest) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const inbox = process.env.CONTACT_INBOX || "contato@zerbinatticoffee.com";
-  const from = process.env.CONTACT_FROM || "site@zerbinatticoffee.com";
+  const inbox =
+    process.env.CONTACT_NOTIFY_EMAIL ||
+    process.env.CONTACT_INBOX ||
+    "contato@zerbinatticoffee.com";
 
   // 5. Sem Resend — log-only sem PII
   if (!apiKey) {
@@ -98,54 +102,53 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, queued: false });
   }
 
-  // 6. Monta corpo do email (PII vai para o inbox interno, NAO para logs)
-  const subject = `[Zerbinatti] Novo contato — ${payload.type.toUpperCase()}`;
-  const lineParts: string[] = [`Tipo: ${payload.type}`];
-
-  if ("name" in payload && payload.name) lineParts.push(`Nome: ${payload.name}`);
-  if ("company" in payload && payload.company) lineParts.push(`Empresa: ${payload.company}`);
-  if ("cnpj" in payload && payload.cnpj) lineParts.push(`CNPJ: ${payload.cnpj}`);
-  if (payload.email) lineParts.push(`E-mail: ${payload.email}`);
-  if ("phone" in payload && payload.phone) lineParts.push(`Telefone: ${payload.phone}`);
-  if ("message" in payload && payload.message) {
-    lineParts.push(`\nMensagem:\n${payload.message}`);
-  }
-  if ("metadata" in payload && payload.metadata) {
-    lineParts.push(
-      `\nMetadata:\n${Object.entries(payload.metadata)
-        .map(([k, v]) => `  ${k}: ${v}`)
-        .join("\n")}`
-    );
-  }
-
-  const body = lineParts.join("\n");
-
+  // 6. Envia email pra inbox interno via Resend.
+  //    B2B: template editorial em HTML.
+  //    Outros tipos: texto puro (mais leve).
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from,
+    if (payload.type === "b2b") {
+      const { subject, html } = b2bNotificationEmail({
+        type: payload.type,
+        name: payload.name,
+        company: payload.company,
+        cnpj: payload.cnpj,
+        email: payload.email,
+        phone: payload.phone,
+        message: payload.message,
+      });
+      await sendEmail({
         to: inbox,
         subject,
-        text: body,
-        reply_to: payload.email,
-      }),
-    });
-
-    if (!res.ok) {
-      // NAO logar response body do Resend — pode conter PII reflectida
-      safeLog("error", "resend_failed", { status: res.status });
-      return NextResponse.json({ error: "send_failed" }, { status: 502 });
+        html,
+        replyTo: payload.email,
+      });
+    } else {
+      const lineParts: string[] = [`Tipo: ${payload.type}`];
+      if ("name" in payload && payload.name) lineParts.push(`Nome: ${payload.name}`);
+      if (payload.email) lineParts.push(`E-mail: ${payload.email}`);
+      if ("metadata" in payload && payload.metadata) {
+        lineParts.push(
+          `\nMetadata:\n${Object.entries(payload.metadata)
+            .map(([k, v]) => `  ${k}: ${v}`)
+            .join("\n")}`,
+        );
+      }
+      const html = `<pre style="font-family:monospace;font-size:13px;white-space:pre-wrap;">${lineParts
+        .join("\n")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")}</pre>`;
+      await sendEmail({
+        to: inbox,
+        subject: `[Zerbinatti] Novo contato — ${payload.type.toUpperCase()}`,
+        html,
+        replyTo: payload.email,
+      });
     }
 
     return NextResponse.json({ ok: true, queued: true });
   } catch (err) {
     safeLog("error", "resend_exception", {
-      // logar apenas tipo do erro, nunca a mensagem que pode vazar PII/network internals
       kind: err instanceof Error ? err.name : typeof err,
     });
     return NextResponse.json({ error: "internal" }, { status: 500 });
