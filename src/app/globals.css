@@ -14,6 +14,7 @@
   --ink-mute-on-dark:#A39C92; /* meta/caption sobre fundo escuro — A11Y CRIT-01/02 */
   --olive:           #4A5237;
   --olive-deep:      #363D26;
+  --olive-on-dark:   #A6B388; /* olive claro p/ texto pequeno sobre fundo escuro — WCAG AA (4.5:1+) */
   --line:            #D9D0BE;
   --line-dark:       #3A322C;
 
@@ -60,6 +61,7 @@
   --color-ink-mute-on-dark: #A39C92;
   --color-olive:      #4A5237;
   --color-olive-deep: #363D26;
+  --color-olive-on-dark: #A6B388;
   --color-line:       #D9D0BE;
   --color-line-dark:  #3A322C;
 

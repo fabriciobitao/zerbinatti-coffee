@@ -4,7 +4,7 @@ import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { siteConfig, gaId, metaPixelId } from "@/lib/site";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
 import { Analytics } from "@/components/Analytics";
-import CookieConsent from "@/components/CookieConsent";
+import CookieConsent from "@/components/CookieConsentLazy";
 import "./globals.css";
 
 // Fraunces — display serif italic dramático (assinatura tipográfica)

@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
 import SubscriptionConfigurator from "@/components/SubscriptionConfigurator";
 import EditorialFAQ from "@/components/EditorialFAQ";
-import StickySubscriptionCTA from "@/components/StickySubscriptionCTA";
+import StickySubscriptionCTA from "@/components/StickySubscriptionCTALazy";
 import {
   faqPageSchema,
   subscriptionOfferSchema,
@@ -261,7 +261,7 @@ export default function AssinaturaPage() {
               {/* Coluna esquerda */}
               <div className="flex flex-col justify-center">
                 <p
-                  className="font-sans text-[11px] font-medium uppercase text-olive"
+                  className="font-sans text-[11px] font-medium uppercase text-olive-on-dark"
                   style={{ letterSpacing: "0.28em" }}
                 >
                   ASSINATURA · DAL 1897
@@ -467,7 +467,7 @@ export default function AssinaturaPage() {
           <div className="container-editorial">
             <div className="mx-auto max-w-[880px] text-center">
               <p
-                className="font-sans text-[11px] font-medium uppercase text-olive"
+                className="font-sans text-[11px] font-medium uppercase text-olive-on-dark"
                 style={{ letterSpacing: "0.28em" }}
               >
                 TORRA → ENTREGA EM ATÉ 7 DIAS
@@ -642,7 +642,7 @@ export default function AssinaturaPage() {
               {/* Texto a direita */}
               <div className="flex flex-col justify-center">
                 <p
-                  className="font-sans text-[11px] font-medium uppercase text-olive"
+                  className="font-sans text-[11px] font-medium uppercase text-olive-on-dark"
                   style={{ letterSpacing: "0.28em" }}
                 >
                   JÁ INVESTIGOU? COMECE AGORA
@@ -762,7 +762,7 @@ export default function AssinaturaPage() {
               </div>
 
               <p
-                className="mt-12 font-mono text-[11px] uppercase text-olive"
+                className="mt-12 font-mono text-[11px] uppercase text-olive-on-dark"
                 style={{ letterSpacing: "0.18em" }}
               >
                 PRIMEIRO ENVIO COM 15% · FRETE GRÁTIS · SEM FIDELIDADE
