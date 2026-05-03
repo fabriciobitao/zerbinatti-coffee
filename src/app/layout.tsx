@@ -61,21 +61,12 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Café brasileiro, casa italiana, desde 1897`,
     description: siteConfig.description,
-    images: [
-      {
-        url: "/images/og-default.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Zerbinatti Coffee — café brasileiro, casa italiana, desde 1897",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} | Café brasileiro, casa italiana, desde 1897`,
     description: siteConfig.description,
     site: siteConfig.twitter,
-    images: ["/images/og-default.jpg"],
   },
   robots: {
     index: true,

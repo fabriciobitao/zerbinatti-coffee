@@ -104,7 +104,7 @@ export default async function ArticlePage({
     title: article.title,
     description: article.excerpt,
     slug,
-    image: coverUrl ?? `${siteConfig.url}/images/og-default.jpg`,
+    image: coverUrl ?? `${siteConfig.url}/revista/${slug}/opengraph-image`,
     datePublished: article.publishedAt,
     author: { name: article.author, jobTitle: "Editor" },
     section: CATEGORY_LABEL[article.category] ?? article.category,
