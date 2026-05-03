@@ -44,11 +44,11 @@ export const metadata: Metadata = {
     "specialty coffee",
     "café brasileiro",
     "Zerbinatti",
-    "café premium",
+    "café torrado sob demanda",
     "single origin",
     "Serra do Cabral",
     "assinatura de café",
-    "café gourmet",
+    "microlote",
   ],
   authors: [{ name: "Família Zerbinatti" }],
   creator: "Zerbinatti Coffee",
@@ -100,7 +100,6 @@ export default function RootLayout({
           href="/images/hero-pacote-zerbinatti.jpg"
           fetchPriority="high"
         />
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

@@ -364,7 +364,7 @@ function QuestionScreen({
             return (
               <label
                 key={opt.letter}
-                className={`block cursor-pointer p-5 sm:p-6 transition-colors duration-200 ${
+                className={`block cursor-pointer p-5 sm:p-6 transition-colors duration-200 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-olive ${
                   active
                     ? "border-2 border-olive bg-bone"
                     : "border border-line bg-bone-soft hover:border-olive"
@@ -377,7 +377,7 @@ function QuestionScreen({
                   value={opt.letter}
                   checked={active}
                   onChange={() => onSelect(opt.letter)}
-                  className="sr-only"
+                  className="peer sr-only"
                 />
                 <div className="flex items-baseline gap-3">
                   <span

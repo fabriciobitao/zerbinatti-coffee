@@ -1,9 +1,8 @@
-import Image from "next/image";
-
 /**
  * História 1897 — bloco editorial 40/60 invertido.
- * Foto à esquerda fullbleed, texto à direita.
- * Volta ao background --bone (depois do dark da Assinatura).
+ * Coluna esquerda: arte editorial (numeral romano MDCCCXCVII em Fraunces italic).
+ * Coluna direita: texto editorial.
+ * Background --bone (depois do dark da Assinatura — cria respiração).
  */
 export default function Story1897() {
   return (
@@ -13,16 +12,37 @@ export default function Story1897() {
       className="bg-bone py-20 lg:py-32"
     >
       <div className="lg:grid lg:grid-cols-[40%_60%] lg:items-center">
-        {/* Foto à esquerda — fullbleed */}
-        <div className="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:h-full lg:min-h-[560px]">
-          <Image
-            src="https://images.unsplash.com/photo-1442550528053-c431ecb55509?w=1200&q=70&auto=format&fit=crop"
-            alt="Detalhe do ofício de torra de café — herança italiana mantida em Minas Gerais"
-            fill
-            sizes="(max-width: 1023px) 100vw, 40vw"
-            className="object-cover"
-            style={{ filter: "sepia(0.15) saturate(0.75) contrast(1.05)" }}
-          />
+        {/* Coluna esquerda — fallback editorial (numeral romano) */}
+        <div
+          className="relative aspect-[4/5] w-full overflow-hidden bg-bone-soft lg:aspect-auto lg:h-full lg:min-h-[560px]"
+          role="img"
+          aria-label="Numeral romano MDCCCXCVII — ano de fundação da casa em Treviso"
+        >
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+            <span
+              className="font-display italic text-olive"
+              style={{
+                fontWeight: 400,
+                fontSize: "clamp(2.75rem, 8vw, 5.5rem)",
+                lineHeight: 1.05,
+                letterSpacing: "0.04em",
+              }}
+              aria-hidden="true"
+            >
+              MDCCCXCVII
+            </span>
+            <span
+              className="mt-6 block h-px w-16 bg-olive"
+              aria-hidden="true"
+            />
+            <span
+              className="mt-6 font-mono text-[11px] uppercase text-ink-mute"
+              style={{ letterSpacing: "0.28em" }}
+              aria-hidden="true"
+            >
+              TREVISO · ITÁLIA
+            </span>
+          </div>
         </div>
 
         {/* Texto à direita */}

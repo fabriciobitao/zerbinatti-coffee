@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { product } from "@/lib/data/products";
 import { buildWhatsAppUrl } from "@/lib/config";
 import WhatsAppLink from "@/components/WhatsAppLink";
@@ -6,7 +5,15 @@ import WhatsAppLink from "@/components/WhatsAppLink";
 /**
  * Seção CASA 01 / 02 / 03 — três SKUs do mesmo café.
  * Background bone-soft (cria ritmo após o bone do Hero).
+ *
+ * Imagens: fallback editorial (sem stock photo).
+ * Cada card usa um motivo tipográfico/numerário próprio do padrão das PDPs.
  */
+
+type Fallback =
+  | { kind: "monogram"; mark: string }
+  | { kind: "numeral"; mark: string; sub: string }
+  | { kind: "quote"; mark: string };
 
 type Card = {
   numeral: string;
@@ -16,7 +23,7 @@ type Card = {
   notes: string;
   price: string;
   pricePerKg: string;
-  image: string;
+  fallback: Fallback;
   imageAlt: string;
   skuId: string;
   weight: string;
@@ -33,10 +40,8 @@ const CARDS: Card[] = [
     notes: "Chocolate · Caramelo · Nozes · Final doce",
     price: "R$ 89,90",
     pricePerKg: "R$ 179,80 / kg",
-    image:
-      "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=900&q=70&auto=format&fit=crop",
-    imageAlt:
-      "Pacote 500g de Café Zerbinatti em grãos sobre mesa de madeira",
+    fallback: { kind: "monogram", mark: "Z" },
+    imageAlt: "Pacote 500g — em grãos, Bourbon e Catuaí",
     skuId: "zerbinatti-500g-graos",
     weight: "500g em grãos",
     priceValue: 89.9,
@@ -50,10 +55,8 @@ const CARDS: Card[] = [
     notes: "Chocolate · Caramelo · Nozes · Final doce",
     price: "R$ 49,90",
     pricePerKg: "R$ 199,60 / kg",
-    image:
-      "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=900&q=70&auto=format&fit=crop",
-    imageAlt:
-      "Pacote 250g de Café Zerbinatti em grãos com fundo desfocado",
+    fallback: { kind: "numeral", mark: "II", sub: "250g" },
+    imageAlt: "Pacote 250g — em grãos, Bourbon e Catuaí",
     skuId: "zerbinatti-250g-graos",
     weight: "250g em grãos",
     priceValue: 49.9,
@@ -67,10 +70,8 @@ const CARDS: Card[] = [
     notes: "Chocolate · Caramelo · Nozes · Final doce",
     price: "R$ 49,90",
     pricePerKg: "R$ 199,60 / kg",
-    image:
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=70&auto=format&fit=crop",
-    imageAlt:
-      "Pacote 250g de Café Zerbinatti moído ao lado de coador de pano e caneca branca",
+    fallback: { kind: "quote", mark: "“" },
+    imageAlt: "Pacote 250g — moído, moagem média universal",
     skuId: "zerbinatti-250g-moido",
     weight: "250g moído",
     priceValue: 49.9,
@@ -80,6 +81,74 @@ const CARDS: Card[] = [
 function buildBuyLink(card: Card): string {
   const msg = `Olá! Gostaria de comprar o ${card.name} (${card.weight}) — ${card.price}.`;
   return buildWhatsAppUrl(msg);
+}
+
+function FallbackArt({
+  fallback,
+  alt,
+}: {
+  fallback: Fallback;
+  alt: string;
+}) {
+  return (
+    <div
+      className="relative aspect-[4/5] w-full overflow-hidden bg-bone-soft sm:aspect-[16/10] lg:aspect-[4/5]"
+      role="img"
+      aria-label={alt}
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        {fallback.kind === "monogram" && (
+          <span
+            className="font-display italic text-olive"
+            style={{
+              fontWeight: 400,
+              fontSize: "clamp(8rem, 22vw, 14rem)",
+              lineHeight: 1,
+            }}
+            aria-hidden="true"
+          >
+            {fallback.mark}
+          </span>
+        )}
+        {fallback.kind === "numeral" && (
+          <div className="text-center">
+            <span
+              className="block font-display text-olive"
+              style={{
+                fontWeight: 400,
+                fontSize: "clamp(6rem, 16vw, 10rem)",
+                lineHeight: 1,
+                letterSpacing: "0.02em",
+              }}
+              aria-hidden="true"
+            >
+              {fallback.mark}
+            </span>
+            <span
+              className="mt-4 block font-mono text-[11px] uppercase text-ink-mute"
+              style={{ letterSpacing: "0.18em" }}
+              aria-hidden="true"
+            >
+              {fallback.sub}
+            </span>
+          </div>
+        )}
+        {fallback.kind === "quote" && (
+          <span
+            className="font-display italic text-olive"
+            style={{
+              fontWeight: 400,
+              fontSize: "clamp(12rem, 30vw, 18rem)",
+              lineHeight: 0.8,
+            }}
+            aria-hidden="true"
+          >
+            {fallback.mark}
+          </span>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default function Cafes() {
@@ -130,17 +199,8 @@ export default function Cafes() {
               role="listitem"
               className="group flex flex-col border border-line bg-bone transition-all duration-[250ms] hover:border-olive hover:shadow-[0_12px_32px_-16px_rgba(27,23,20,0.12)]"
             >
-              {/* Foto */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[16/10] lg:aspect-[4/5]">
-                <Image
-                  src={card.image}
-                  alt={card.imageAlt}
-                  fill
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-[400ms] ease-out group-hover:scale-[1.02]"
-                  style={{ filter: "saturate(0.75) contrast(1.05)" }}
-                />
-              </div>
+              {/* Fallback editorial */}
+              <FallbackArt fallback={card.fallback} alt={card.imageAlt} />
 
               {/* Texto */}
               <div className="flex flex-1 flex-col p-6 lg:p-8">

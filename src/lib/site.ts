@@ -2,6 +2,20 @@
  * Configuração central do site — URL canônica, branding, analytics.
  * Use process.env.NEXT_PUBLIC_SITE_URL em produção para setar domínio real.
  */
+
+// Validação não-bloqueante: avisa se NEXT_PUBLIC_SITE_URL não estiver setada
+// em produção (canonical/OG/sitemap dependem disso para apontar pro domínio real).
+if (
+  typeof process !== "undefined" &&
+  process.env.VERCEL_ENV === "production" &&
+  !process.env.NEXT_PUBLIC_SITE_URL
+) {
+  // eslint-disable-next-line no-console
+  console.warn(
+    "[site] NEXT_PUBLIC_SITE_URL ausente em produção — usando fallback do preview."
+  );
+}
+
 export const siteConfig = {
   name: "Zerbinatti Coffee",
   url:

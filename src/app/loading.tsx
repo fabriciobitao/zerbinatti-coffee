@@ -1,22 +1,39 @@
+/**
+ * Loading state global — monograma "Z" em Fraunces italic, fade in/out.
+ * Sem texto, sem spinner, respeita prefers-reduced-motion.
+ */
 export default function Loading() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-coffee-50">
-      <div className="flex flex-col items-center gap-4">
-        <svg
-          className="h-10 w-10 animate-spin text-gold-600"
-          viewBox="0 0 64 64"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          aria-label="Carregando"
-        >
-          <circle cx="32" cy="32" r="28" opacity="0.2" />
-          <path d="M32 4 a28 28 0 0 1 28 28" strokeLinecap="round" />
-        </svg>
-        <span className="text-xs font-semibold tracking-[0.3em] text-coffee-600 uppercase">
-          Zerbinatti · Carregando
-        </span>
-      </div>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-bone"
+      role="status"
+      aria-label="Carregando"
+    >
+      <span
+        className="loading-monogram font-display text-ink"
+        style={{
+          fontStyle: "italic",
+          fontWeight: 400,
+          fontSize: "120px",
+          lineHeight: 1,
+        }}
+        aria-hidden="true"
+      >
+        Z
+      </span>
+      <span className="sr-only">Carregando…</span>
+      <style>{`
+        @keyframes z-pulse {
+          0%, 100% { opacity: 0.3; }
+          50%      { opacity: 1.0; }
+        }
+        .loading-monogram {
+          animation: z-pulse 2s ease-in-out infinite;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .loading-monogram { animation: none; opacity: 0.85; }
+        }
+      `}</style>
     </div>
   );
 }

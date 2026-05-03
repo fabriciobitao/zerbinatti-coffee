@@ -173,7 +173,7 @@ export default function SubscriptionConfigurator({
             return (
               <label
                 key={f}
-                className={`flex-1 cursor-pointer rounded-[2px] border px-6 py-3 text-center text-sm font-medium tracking-[0.04em] transition-colors duration-200 ${
+                className={`flex-1 cursor-pointer rounded-[2px] border px-6 py-3 text-center text-sm font-medium tracking-[0.04em] transition-colors duration-200 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-bone ${
                   active
                     ? "border-bone bg-bone text-ink"
                     : "border-ink-mute/60 bg-transparent text-bone-soft hover:border-bone-soft"
@@ -185,7 +185,7 @@ export default function SubscriptionConfigurator({
                   value={f}
                   checked={active}
                   onChange={() => setFrequency(f)}
-                  className="sr-only"
+                  className="peer sr-only"
                 />
                 {f === "quinzenal" ? "Quinzenal" : "Mensal"}
               </label>
@@ -208,7 +208,7 @@ export default function SubscriptionConfigurator({
             return (
               <label
                 key={p.id}
-                className={`flex cursor-pointer items-center justify-between gap-4 rounded-[2px] border px-4 py-4 transition-colors duration-200 ${
+                className={`flex cursor-pointer items-center justify-between gap-4 rounded-[2px] border px-4 py-4 transition-colors duration-200 peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-bone ${
                   active
                     ? "border-bone bg-bone text-ink"
                     : "border-ink-mute/60 bg-transparent text-bone-soft hover:border-bone-soft"
@@ -220,7 +220,7 @@ export default function SubscriptionConfigurator({
                   value={p.id}
                   checked={active}
                   onChange={() => setPackageId(p.id)}
-                  className="sr-only"
+                  className="peer sr-only"
                 />
                 <div className="flex flex-col">
                   <span className="text-[14px] font-medium">
@@ -251,12 +251,14 @@ export default function SubscriptionConfigurator({
       <hr className="my-8 border-0 border-t border-ink-mute/30" />
 
       {/* Total */}
-      <div aria-live="polite" aria-atomic="true">
+      <div>
         <div className="flex items-baseline justify-between gap-4">
           <span className="text-sm text-bone-soft">Total por envio</span>
           <span
             className="font-display text-[36px] text-bone"
             style={{ fontWeight: 400, lineHeight: 1 }}
+            aria-live="polite"
+            aria-atomic="true"
           >
             {total}
           </span>

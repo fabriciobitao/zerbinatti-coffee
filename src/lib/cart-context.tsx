@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from "react";
+import { z } from "zod";
 
 export interface CartItem {
   id: string;
@@ -9,6 +10,17 @@ export interface CartItem {
   quantity: number;
   weight: string;
 }
+
+// Schema mínimo de validação — protege contra localStorage corrompido/manipulado.
+// Tudo que não bater é descartado silenciosamente para não quebrar a UI.
+const CartItemSchema = z.object({
+  id: z.string().min(1),
+  name: z.string().min(1),
+  price: z.number().positive(),
+  quantity: z.number().int().positive(),
+  weight: z.string().min(1),
+});
+const CartArraySchema = z.array(CartItemSchema);
 
 interface Toast {
   id: number;
@@ -35,7 +47,16 @@ function loadCart(): CartItem[] {
   if (typeof window === "undefined") return [];
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : [];
+    if (!saved) return [];
+    const parsed = JSON.parse(saved);
+    const result = CartArraySchema.safeParse(parsed);
+    if (!result.success) {
+      // Cart corrompido/incompatível — descarta e segue. Não quebra a UI.
+      console.warn("[cart] localStorage payload inválido — descartado", result.error.issues);
+      try { localStorage.removeItem(STORAGE_KEY); } catch {}
+      return [];
+    }
+    return result.data;
   } catch {
     return [];
   }
@@ -123,12 +144,14 @@ export function CartToasts() {
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className="toast-enter mb-2 flex items-center gap-3 rounded-full bg-coffee-900 px-5 py-3 shadow-xl"
+          className="toast-enter mb-2 flex items-center gap-3 bg-ink px-5 py-3 shadow-xl"
+          style={{ borderRadius: "2px" }}
+          role="status"
         >
-          <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <svg className="h-5 w-5 text-olive" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
           </svg>
-          <span className="text-sm font-medium text-coffee-50">{toast.message}</span>
+          <span className="text-sm font-medium text-bone">{toast.message}</span>
         </div>
       ))}
     </div>

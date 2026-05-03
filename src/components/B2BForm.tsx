@@ -172,7 +172,7 @@ export default function B2BForm() {
   }
 
   const fieldClass =
-    "w-full bg-transparent border-b border-ink-mute py-3 text-[15px] text-bone placeholder:text-[var(--ink-mute-on-dark)] focus:border-olive focus:outline-none transition-colors";
+    "w-full bg-transparent border-b border-bone-soft/40 py-3 text-[15px] text-bone placeholder:text-[var(--ink-mute-on-dark)] focus-visible:border-olive focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone focus:outline-none transition-colors";
   const labelClass =
     "block font-mono text-[11px] font-medium uppercase text-bone-soft pb-2";
   const errClass =
@@ -385,7 +385,7 @@ export default function B2BForm() {
             value={mensagem}
             onChange={(e) => setMensagem(e.target.value.slice(0, 500))}
             maxLength={500}
-            className="w-full bg-transparent border border-ink-mute p-3 text-[15px] text-bone placeholder:text-[var(--ink-mute-on-dark)] focus:border-olive focus:outline-none transition-colors min-h-[96px]"
+            className="w-full bg-transparent border border-bone-soft/40 p-3 text-[15px] text-bone placeholder:text-[var(--ink-mute-on-dark)] focus-visible:border-olive focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bone focus:outline-none transition-colors min-h-[96px]"
           />
         </div>
       </div>
