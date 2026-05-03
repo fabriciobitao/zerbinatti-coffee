@@ -36,28 +36,18 @@ export default function Footer() {
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="#cafes" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Todos os cafés
+                <Link href="/cafe" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Café Zerbinatti
                 </Link>
               </li>
               <li>
-                <Link href="#assinatura" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Assinaturas
+                <Link href="/#assinatura" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Assinatura
                 </Link>
               </li>
               <li>
-                <Link href="#quiz" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Quiz do café
-                </Link>
-              </li>
-              <li>
-                <Link href="/comparar" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Comparar os 3 cafés
-                </Link>
-              </li>
-              <li>
-                <Link href="/#kits" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Kits e presentes
+                <Link href="/#contato" className="text-sm text-coffee-300 hover:text-gold-400">
+                  Contato
                 </Link>
               </li>
             </ul>
@@ -69,7 +59,7 @@ export default function Footer() {
             </h4>
             <ul className="mt-4 space-y-3">
               <li>
-                <Link href="#origem" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link href="/#origem" className="text-sm text-coffee-300 hover:text-gold-400">
                   Nossa história
                 </Link>
               </li>
@@ -81,21 +71,6 @@ export default function Footer() {
               <li>
                 <Link href="/processo" className="text-sm text-coffee-300 hover:text-gold-400">
                   Processo
-                </Link>
-              </li>
-              <li>
-                <Link href="/para-empresas" className="text-sm text-coffee-300 hover:text-gold-400">
-                  B2B / parcerias
-                </Link>
-              </li>
-              <li>
-                <Link href="/safra/2026" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Diário da safra 2026
-                </Link>
-              </li>
-              <li>
-                <Link href="/revista" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Revista Zerbinatti
                 </Link>
               </li>
             </ul>

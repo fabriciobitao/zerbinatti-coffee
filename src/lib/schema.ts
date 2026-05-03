@@ -1,13 +1,20 @@
-import { Product } from "@/lib/data/products";
-import { Article } from "@/lib/data/articles";
+import { Product, SkuVariant } from "@/lib/data/products";
 import { siteConfig } from "@/lib/site";
 
+/**
+ * Schema.org Product com 3 ofertas (uma por SKU).
+ * O preco "de" usado para aggregateOffer eh o menor preco entre os SKUs.
+ */
 export function productSchema(product: Product) {
   const avgRating =
     product.reviews.length > 0
       ? product.reviews.reduce((s, r) => s + r.rating, 0) /
         product.reviews.length
       : undefined;
+
+  const offers = product.skus.map((sku) => skuOffer(product, sku));
+  const lowPrice = Math.min(...product.skus.map((s) => s.price)).toFixed(2);
+  const highPrice = Math.max(...product.skus.map((s) => s.price)).toFixed(2);
 
   return {
     "@context": "https://schema.org",
@@ -18,16 +25,12 @@ export function productSchema(product: Product) {
     sku: product.id,
     category: "Café especial",
     offers: {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       priceCurrency: "BRL",
-      price: product.price.toFixed(2),
-      availability: "https://schema.org/InStock",
-      url: `${siteConfig.url}/cafes/${product.slug}`,
-      priceValidUntil: new Date(
-        new Date().getFullYear() + 1,
-        11,
-        31
-      ).toISOString().split("T")[0],
+      lowPrice,
+      highPrice,
+      offerCount: product.skus.length,
+      offers,
     },
     ...(avgRating && {
       aggregateRating: {
@@ -58,31 +61,20 @@ export function productSchema(product: Product) {
   };
 }
 
-export function articleSchema(article: Article) {
+function skuOffer(product: Product, sku: SkuVariant) {
   return {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.title,
-    description: article.excerpt,
-    author: {
-      "@type": "Person",
-      name: article.author,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: siteConfig.name,
-      logo: {
-        "@type": "ImageObject",
-        url: `${siteConfig.url}/images/logo.png`,
-      },
-    },
-    datePublished: article.publishedAt,
-    dateModified: article.publishedAt,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${siteConfig.url}/revista/${article.slug}`,
-    },
-    articleSection: article.category,
+    "@type": "Offer",
+    sku: sku.id,
+    name: `${product.name} — ${sku.label}`,
+    priceCurrency: "BRL",
+    price: sku.price.toFixed(2),
+    availability: "https://schema.org/InStock",
+    url: `${siteConfig.url}/cafe?sku=${sku.id}`,
+    priceValidUntil: new Date(
+      new Date().getFullYear() + 1,
+      11,
+      31
+    ).toISOString().split("T")[0],
   };
 }
 

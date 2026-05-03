@@ -4,6 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CartButton } from "./CartDrawer";
 
+const NAV_LINKS: [string, string][] = [
+  ["/cafe", "Café"],
+  ["/#assinatura", "Assinatura"],
+  ["/#contato", "Contato"],
+];
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -32,13 +38,7 @@ export default function Header() {
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">
-          {[
-            ["/#cafes", "Cafés"],
-            ["/#assinatura", "Assinatura"],
-            ["/#quiz", "Descubra seu café"],
-            ["/revista", "Revista"],
-            ["/para-empresas", "B2B"],
-          ].map(([href, label]) => (
+          {NAV_LINKS.map(([href, label]) => (
             <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400">
               {label}
             </Link>
@@ -69,13 +69,7 @@ export default function Header() {
         }`}
       >
         <div className="flex flex-col gap-4">
-          {[
-            ["/#cafes", "Cafés"],
-            ["/#assinatura", "Assinatura"],
-            ["/#quiz", "Descubra seu café"],
-            ["/revista", "Revista"],
-            ["/para-empresas", "B2B"],
-          ].map(([href, label]) => (
+          {NAV_LINKS.map(([href, label]) => (
             <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 hover:text-gold-400" onClick={() => setMenuOpen(false)}>
               {label}
             </Link>

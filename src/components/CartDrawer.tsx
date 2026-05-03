@@ -8,12 +8,10 @@ function formatCurrency(value: number) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-// Cor de acento por SKU para diferenciar visualmente no carrinho
+// Cor de acento por formato de SKU (graos vs moido) para diferenciar visualmente no carrinho
 function getAccentColor(id: string): string {
-  if (id.startsWith("classico")) return "#6D4C41"; // coffee-600 (marrom classico)
-  if (id.startsWith("reserva")) return "#D4A017"; // gold-500 (dourado)
-  if (id.startsWith("microlote")) return "#2E5A3A"; // green-800 (verde micro-lote)
-  if (id.startsWith("kit")) return "#B8860B"; // gold-600 (combos)
+  if (id.endsWith("-moido")) return "#D4A017"; // gold-500 (moido pronto pra coar)
+  if (id.endsWith("-graos")) return "#6D4C41"; // coffee-600 (graos para moer)
   return "#8D6E63"; // coffee-500 fallback
 }
 
