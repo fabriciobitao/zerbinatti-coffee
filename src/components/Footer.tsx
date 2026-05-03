@@ -4,72 +4,92 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 
 export default function Footer() {
   return (
-    <footer className="bg-coffee-950 pt-16 pb-8">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <footer className="bg-ink pt-32 pb-16">
+      <div className="mx-auto max-w-[1280px] px-5 lg:px-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logo-white.png"
               alt="Zerbinatti Coffee"
               className="h-10"
             />
-            <div className="mt-5 flex items-center gap-3 text-gold-400">
+            <div className="mt-5 flex items-center gap-3 text-olive">
               <Monogram size={36} className="shrink-0" />
-              <div className="text-[10px] tracking-[0.3em] uppercase text-coffee-300">
+              <div className="font-mono text-[10px] tracking-[0.28em] uppercase text-bone-soft">
                 Dal 1897
-                <div className="font-serif text-sm tracking-normal normal-case text-coffee-200">
+                <div className="font-display text-sm tracking-normal normal-case text-bone">
                   Famiglia Zerbinatti
                 </div>
               </div>
             </div>
-            <p className="mt-5 text-sm leading-relaxed text-coffee-300">
-              Café especial brasileiro com herança italiana. Três gerações
-              de dedicação em cada xícara.
+            <p className="mt-5 text-sm leading-relaxed text-bone-soft">
+              Casa familiar de café, em ofício contínuo desde 1897. Treviso e
+              Serra do Cabral em cada pacote.
             </p>
           </div>
 
-          {/* Links */}
+          {/* Loja */}
           <div>
-            <h4 className="text-sm font-semibold tracking-wide text-coffee-200 uppercase">
+            <h4 className="font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-bone">
               Loja
             </h4>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 space-y-3">
               <li>
-                <Link href="/cafe" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Café Zerbinatti
+                <Link
+                  href="/#cafes"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
+                  Pacotes
                 </Link>
               </li>
               <li>
-                <Link href="/#assinatura" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link
+                  href="/#assinatura"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
                   Assinatura
                 </Link>
               </li>
               <li>
-                <Link href="/#contato" className="text-sm text-coffee-300 hover:text-gold-400">
-                  Contato
+                <Link
+                  href="/para-empresas"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
+                  Para empresas
                 </Link>
               </li>
             </ul>
           </div>
 
+          {/* Sobre */}
           <div>
-            <h4 className="text-sm font-semibold tracking-wide text-coffee-200 uppercase">
+            <h4 className="font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-bone">
               Sobre
             </h4>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-5 space-y-3">
               <li>
-                <Link href="/#origem" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link
+                  href="/sobre"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
                   Nossa história
                 </Link>
               </li>
               <li>
-                <Link href="/fazenda" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link
+                  href="/fazenda"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
                   A fazenda
                 </Link>
               </li>
               <li>
-                <Link href="/processo" className="text-sm text-coffee-300 hover:text-gold-400">
+                <Link
+                  href="/processo"
+                  className="text-sm text-bone-soft transition-colors hover:text-olive"
+                >
                   Processo
                 </Link>
               </li>
@@ -78,19 +98,18 @@ export default function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-sm font-semibold tracking-wide text-coffee-200 uppercase">
+            <h4 className="font-mono text-[11px] font-medium tracking-[0.18em] uppercase text-bone">
               Newsletter
             </h4>
-            <p className="mt-4 text-sm text-coffee-300">
-              Receba novidades sobre safras e lançamentos exclusivos.
+            <p className="mt-5 text-sm text-bone-soft">
+              Notas da casa, novas safras, rituais. Uma vez por mês, sem ruído.
             </p>
             <NewsletterForm />
 
-            {/* Social */}
             <div className="mt-6 flex gap-4">
               <a
                 href="#"
-                className="text-coffee-500 transition-colors hover:text-gold-400"
+                className="text-ink-mute transition-colors hover:text-olive"
                 aria-label="Instagram"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -99,7 +118,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-coffee-500 transition-colors hover:text-gold-400"
+                className="text-ink-mute transition-colors hover:text-olive"
                 aria-label="YouTube"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -108,7 +127,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-coffee-500 transition-colors hover:text-gold-400"
+                className="text-ink-mute transition-colors hover:text-olive"
                 aria-label="TikTok"
               >
                 <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -120,19 +139,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-16 border-t border-coffee-800 pt-8">
+        <div className="mt-24 border-t border-line-dark pt-12">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-xs text-coffee-400">
-              &copy; 2026 Zerbinatti Coffee. Todos os direitos reservados.
+            <p className="text-xs text-bone-soft/60">
+              &copy; 2026 Zerbinatti Coffee · Famiglia Zerbinatti, Brasil
             </p>
-            <div className="flex gap-6 text-xs text-coffee-400">
-              <Link href="/termos" className="hover:text-gold-400">
+            <div className="flex gap-6 text-xs text-bone-soft/60">
+              <Link href="/termos" className="hover:text-olive">
                 Termos de uso
               </Link>
-              <Link href="/privacidade" className="hover:text-gold-400">
+              <Link href="/privacidade" className="hover:text-olive">
                 Privacidade
               </Link>
-              <Link href="/entregas" className="hover:text-gold-400">
+              <Link href="/entregas" className="hover:text-olive">
                 Política de entregas
               </Link>
             </div>

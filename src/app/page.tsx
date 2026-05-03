@@ -1,24 +1,27 @@
+import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Hero from "@/components/home/Hero";
+import Cafes from "@/components/home/Cafes";
+import Subscription from "@/components/home/Subscription";
+import Story1897 from "@/components/home/Story1897";
 
-// Placeholder MINIMO durante reformulacao da Home.
-// O outro agente vai substituir este conteudo pela nova Home premium.
+export const metadata: Metadata = {
+  title: "Zerbinatti Coffee | Café especial brasileiro, casa italiana",
+  description:
+    "Casa familiar de café desde 1897. Bourbon Amarelo e Catuaí Vermelho da Serra do Cabral, torrados sob demanda. Receba um pacote a cada quinze dias — a curadoria fica por nossa conta.",
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   return (
     <>
       <Header />
-      <main className="bg-coffee-950 pt-24 min-h-screen">
-        <section className="mx-auto max-w-4xl px-6 py-32 text-center">
-          <p className="text-xs uppercase tracking-[0.4em] text-gold-400">
-            Em reformulação
-          </p>
-          <h1 className="mt-6 font-serif text-5xl font-bold text-coffee-50 sm:text-6xl">
-            Café Zerbinatti
-          </h1>
-          <p className="mt-6 text-lg text-coffee-300">
-            Nova home em construção. Volte em instantes.
-          </p>
-        </section>
+      <main className="page-fade-in">
+        <Hero />
+        <Cafes />
+        <Subscription />
+        <Story1897 />
       </main>
       <Footer />
     </>

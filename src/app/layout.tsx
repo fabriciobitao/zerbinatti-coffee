@@ -1,20 +1,33 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { siteConfig, gaId, metaPixelId, organizationSchema } from "@/lib/site";
 import { Analytics } from "@/components/Analytics";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+// Fraunces — display serif italic dramático (assinatura tipográfica)
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
+// Inter — sans humanista para corpo
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+// JetBrains Mono — números, lote, safra, eyebrows técnicos
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono-jb",
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -86,19 +99,13 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${playfair.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <link
           rel="preload"
           as="image"
           href="/images/hero-pacote-zerbinatti.jpg"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200&q=70&auto=format&fit=crop"
           fetchPriority="high"
         />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />

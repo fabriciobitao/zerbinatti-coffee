@@ -27,10 +27,10 @@ export function NewsletterForm() {
   if (sent) {
     return (
       <p
-        className="mt-4 rounded-lg border border-gold-500/30 bg-gold-500/5 px-4 py-3 text-sm text-gold-300"
+        className="mt-4 border border-olive/30 bg-olive/5 px-4 py-3 text-sm text-bone"
         role="status"
       >
-        ✓ Inscrição recebida. Nosso primeiro envio chega em breve.
+        Inscrição recebida. Nosso primeiro envio chega em breve.
       </p>
     );
   }
@@ -48,12 +48,12 @@ export function NewsletterForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="seu@email.com"
-          className="flex-1 rounded-lg border border-coffee-800 bg-coffee-900 px-4 py-2.5 text-sm text-coffee-100 outline-none placeholder:text-coffee-400 focus:border-gold-500"
+          className="flex-1 border border-line-dark bg-ink-soft px-4 py-2.5 text-sm text-bone outline-none placeholder:text-ink-mute focus:border-olive"
         />
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-gold-500 px-4 py-2.5 text-sm font-semibold text-coffee-950 transition-colors hover:bg-gold-400 disabled:opacity-60"
+          className="bg-olive px-4 py-2.5 text-xs font-medium uppercase tracking-[0.06em] text-bone transition-colors hover:bg-olive-deep disabled:opacity-60"
         >
           {loading ? "..." : "Assinar"}
         </button>
