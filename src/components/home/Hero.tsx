@@ -67,7 +67,7 @@ export default function Hero() {
             fill
             priority
             fetchPriority="high"
-            quality={82}
+            quality={75}
             sizes="(min-width: 1024px) 40vw, 100vw"
             className="object-cover"
             style={{
