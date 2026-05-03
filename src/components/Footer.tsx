@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Monogram } from "@/components/ui/Ornament";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { clearConsent } from "@/lib/consent";
 
 export default function Footer() {
   return (
@@ -152,7 +155,7 @@ export default function Footer() {
             <p className="text-xs text-bone-soft">
               &copy; 2026 Zerbinatti Coffee · Famiglia Zerbinatti, Brasil
             </p>
-            <div className="flex gap-6 text-xs text-bone-soft">
+            <div className="flex flex-wrap gap-6 text-xs text-bone-soft">
               <Link href="/termos" className="hover:text-olive">
                 Termos de uso
               </Link>
@@ -162,6 +165,14 @@ export default function Footer() {
               <Link href="/entregas" className="hover:text-olive">
                 Política de entregas
               </Link>
+              <button
+                type="button"
+                onClick={() => clearConsent()}
+                className="hover:text-olive"
+                aria-label="Reabrir preferências de cookies"
+              >
+                Cookies
+              </button>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/analytics/track";
 
 type Step = "intro" | "q1" | "q2" | "q3" | "result";
 type Choice = "A" | "B" | "C" | "D";
@@ -212,7 +213,11 @@ export default function QuizFlow() {
   function handleNext(qKey: "q1" | "q2" | "q3") {
     if (qKey === "q1") go("q2");
     else if (qKey === "q2") go("q3");
-    else go("result");
+    else {
+      const result = decideResult(answers);
+      track("quiz_completed", { result });
+      go("result");
+    }
   }
 
   function handleBack(current: "q1" | "q2" | "q3") {

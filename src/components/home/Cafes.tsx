@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { product } from "@/lib/data/products";
 import { buildWhatsAppUrl } from "@/lib/config";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 /**
  * Seção CASA 01 / 02 / 03 — três SKUs do mesmo café.
@@ -185,15 +186,15 @@ export default function Cafes() {
                       {card.pricePerKg}
                     </span>
                   </div>
-                  <a
+                  <WhatsAppLink
                     href={buildBuyLink(card)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Comprar ${card.name}, ${card.meta}`}
+                    source="home_cafes"
+                    sku={card.skuId}
+                    ariaLabel={`Comprar ${card.name}, ${card.meta}`}
                     className="link-text mt-6 inline-flex items-center gap-2"
                   >
                     Comprar <span aria-hidden="true">→</span>
-                  </a>
+                  </WhatsAppLink>
                 </div>
               </div>
             </article>

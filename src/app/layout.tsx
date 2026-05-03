@@ -3,6 +3,7 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { siteConfig, gaId, metaPixelId, organizationSchema } from "@/lib/site";
 import { Analytics } from "@/components/Analytics";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 // Fraunces — display serif italic dramático (assinatura tipográfica)
@@ -127,6 +128,7 @@ export default function RootLayout({
           <CartToasts />
         </CartProvider>
         <Analytics gaId={gaId} metaPixelId={metaPixelId} />
+        <CookieConsent />
       </body>
     </html>
   );

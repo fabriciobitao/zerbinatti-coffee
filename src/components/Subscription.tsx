@@ -3,6 +3,7 @@
 import { buildWhatsAppUrl } from "@/lib/config";
 import { FAQ } from "@/components/ui/FAQ";
 import { Ornament } from "@/components/ui/Ornament";
+import { track } from "@/lib/analytics/track";
 
 const faqItems = [
   {
@@ -185,6 +186,16 @@ export default function Subscription() {
                 href={subscribeUrl(plan.name, plan.price)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  track("subscribe_started", {
+                    source: "subscription_plans",
+                    plan: plan.name,
+                  });
+                  track("whatsapp_click", {
+                    source: "subscription",
+                    plan: plan.name,
+                  });
+                }}
                 className={`mt-auto block w-full rounded-full py-2.5 text-center text-sm font-semibold tracking-wide transition-all sm:py-3 ${
                   plan.highlight
                     ? "bg-gold-500 text-coffee-950 hover:bg-gold-400 hover:shadow-lg hover:shadow-gold-500/20"

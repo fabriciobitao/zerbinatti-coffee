@@ -7,6 +7,7 @@ import SensoryBars from "@/components/SensoryBars";
 import { product, getSkuById, type SkuVariant } from "@/lib/data/products";
 import { productSchema } from "@/lib/schema";
 import { buildWhatsAppUrl } from "@/lib/config";
+import WhatsAppLink from "@/components/WhatsAppLink";
 
 type Params = { slug: string };
 
@@ -220,16 +221,15 @@ export default async function CafePage({
 
                 {/* CTAs */}
                 <div className="mt-8 flex flex-col gap-3">
-                  <a
+                  <WhatsAppLink
                     href={buyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    source="pdp"
+                    sku={sku.id}
                     className="inline-block w-full bg-olive px-8 py-4 text-center text-xs font-medium uppercase tracking-[0.06em] text-bone transition-colors hover:bg-olive-deep sm:w-auto"
-                    style={{ borderRadius: "2px" }}
-                    aria-label={`Comprar ${product.name} ${sku.label} avulso pelo WhatsApp`}
+                    ariaLabel={`Comprar ${product.name} ${sku.label} avulso pelo WhatsApp`}
                   >
                     Comprar avulso
-                  </a>
+                  </WhatsAppLink>
                   <a
                     href={subscribeUrl}
                     className="link-text inline-flex items-center gap-2"

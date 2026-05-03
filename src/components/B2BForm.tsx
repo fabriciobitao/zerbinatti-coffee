@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import { buildWhatsAppUrl } from "@/lib/config";
 import { TurnstileWidget } from "./TurnstileWidget";
+import { track } from "@/lib/analytics/track";
 
 type Volume =
   | ""
@@ -116,6 +117,10 @@ export default function B2BForm() {
     } catch {
       // silencioso — segue pro WhatsApp
     }
+
+    // Tracking sem PII — apenas categoria/volume
+    track("b2b_form_submit", { volume });
+    track("whatsapp_click", { source: "b2b_form" });
 
     const msg = `Olá! Pedido de proposta B2B Zerbinatti:\n\n• Nome: ${nome}\n• Empresa: ${empresa}\n• CNPJ: ${cnpj}\n• E-mail: ${email}\n• Telefone: ${telefone}\n• Volume estimado: ${volume}${
       mensagem ? `\n• Mensagem: ${mensagem}` : ""

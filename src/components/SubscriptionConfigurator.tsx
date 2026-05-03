@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useState } from "react";
 import { buildWhatsAppUrl } from "@/lib/config";
+import { track } from "@/lib/analytics/track";
 
 export type Frequency = "quinzenal" | "mensal";
 export type PackageId = "500g-graos" | "250g-graos" | "250g-moido";
@@ -129,6 +130,12 @@ export default function SubscriptionConfigurator({
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    track("subscribe_started", {
+      source: "configurator",
+      package: selected.id,
+      frequency,
+    });
+    track("whatsapp_click", { source: "subscription_configurator" });
     const msg = `Olá! Quero começar minha assinatura Zerbinatti:\n\n• Frequência: ${
       frequency === "mensal" ? "Mensal" : "Quinzenal"
     }\n• Pacote: ${selected.weight}\n• Total por envio (primeiro -15%): ${formatBRL(

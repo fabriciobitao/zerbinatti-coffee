@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/analytics/track";
 
 /**
  * Sticky CTA mobile (decisao 4 do UX-ASSINATURA).
@@ -75,6 +76,7 @@ export default function StickySubscriptionCTA() {
   }, []);
 
   function scrollToConfigurator() {
+    track("whatsapp_click", { source: "sticky_cta" });
     const first = document.querySelector<HTMLElement>(
       "[data-subscription-configurator]"
     );

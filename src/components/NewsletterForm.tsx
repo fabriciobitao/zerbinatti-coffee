@@ -2,6 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { TurnstileWidget } from "./TurnstileWidget";
+import { track } from "@/lib/analytics/track";
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("");
@@ -36,6 +37,7 @@ export function NewsletterForm() {
       if (!res.ok) {
         throw new Error(`status ${res.status}`);
       }
+      track("newsletter_signup");
       setSent(true);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "";

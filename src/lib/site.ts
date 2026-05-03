@@ -15,7 +15,9 @@ export const siteConfig = {
   twitter: "@zerbinatticoffee",
 };
 
-export const gaId = process.env.NEXT_PUBLIC_GA_ID;
+// Aceita ambos os nomes (NEXT_PUBLIC_GA_MEASUREMENT_ID e NEXT_PUBLIC_GA_ID).
+export const gaId =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || process.env.NEXT_PUBLIC_GA_ID;
 export const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
 
 /**
