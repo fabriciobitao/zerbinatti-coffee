@@ -1,6 +1,6 @@
 # Zerbinatti Coffee — Progresso
 
-**Última atualização:** 2026-05-03 (Ondas 1–5 fechadas, auditorias aplicadas)
+**Última atualização:** 2026-05-03 (Ondas 1–5 fechadas, Lighthouse pós-otimização validado)
 
 ## O que é
 E-commerce premium de café especial brasileiro com herança italiana (desde 1897). B2C + B2B + ecossistema editorial.
@@ -50,6 +50,18 @@ E-commerce premium de café especial brasileiro com herança italiana (desde 189
 ### Onda 5 — Security Wave 2 + Analytics + LGPD
 - 5a (Security): rate limit Upstash, Turnstile, Sentry com PII filter, Dependabot, CSP refinement
 - 5b (Analytics+LGPD): GA4 + Meta Pixel com consent gating, banner LGPD, /privacidade, /termos
+
+### Validação Lighthouse pós-otimização (mediana 3 runs mobile)
+| Rota | Perf | A11y | LCP | CLS |
+|---|---|---|---|---|
+| / | 73 (+7) | 97 (+4) | 3,63s (-1,34s) | 0,000 |
+| /assinatura | 69 (+3) | 96 (+8) | 3,76s (-1,20s) | 0,000 |
+| /cafes/encerro | 68 (+8) | 98 (+3) | 3,81s (-1,23s) | 0,000 |
+
+- A11y >95 nas 3 rotas (mínimo go-live cruzado)
+- Perf >70 só na home; internas a 1-2 pts (ruído de mobile simulada)
+- LCP -25% após remover preload genérico do hero JPG
+- TBT continua alto (700-900ms) — próximo alvo se Onda 7
 
 ### Auditoria final + fixes (commit 0f87bfa)
 - 3 audits paralelos: Code Review, A11y, Reality Check
