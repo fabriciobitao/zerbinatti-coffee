@@ -18,16 +18,16 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-coffee-950/95 backdrop-blur-md shadow-lg shadow-black/10 py-2"
-          : "bg-transparent py-4"
+          ? "bg-bone/95 backdrop-blur-md shadow-sm shadow-ink/10 py-2"
+          : "bg-bone/80 backdrop-blur-sm py-4"
       }`}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8">
-        <Link href="/">
+        <Link href="/" aria-label="Zerbinatti Coffee — Início">
           <img
-            src="/images/logo-white.png"
+            src="/images/marca/logo-zerbinatti.jpg"
             alt="Zerbinatti Coffee"
-            className="h-8 md:h-10"
+            className="h-8 md:h-10 w-auto"
           />
         </Link>
 
@@ -39,7 +39,7 @@ export default function Header() {
             ["/revista", "Revista"],
             ["/para-empresas", "B2B"],
           ].map(([href, label]) => (
-            <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400">
+            <Link key={href} href={href} className="text-sm tracking-wide text-ink transition-colors hover:text-olive">
               {label}
             </Link>
           ))}
@@ -51,7 +51,7 @@ export default function Header() {
 
         <div className="flex items-center gap-3 lg:hidden">
           <CartButton />
-          <button className="text-coffee-50" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+          <button className="text-ink" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
               {menuOpen ? (
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -64,7 +64,7 @@ export default function Header() {
       </nav>
 
       <div
-        className={`overflow-hidden border-t border-coffee-800 bg-coffee-950/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
+        className={`overflow-hidden border-t border-line bg-bone/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
           menuOpen ? "max-h-80 px-6 py-6" : "max-h-0 px-6 py-0 border-t-transparent"
         }`}
       >
@@ -76,7 +76,7 @@ export default function Header() {
             ["/revista", "Revista"],
             ["/para-empresas", "B2B"],
           ].map(([href, label]) => (
-            <Link key={href} href={href} className="text-sm tracking-wide text-coffee-300 hover:text-gold-400" onClick={() => setMenuOpen(false)}>
+            <Link key={href} href={href} className="text-sm tracking-wide text-ink hover:text-olive" onClick={() => setMenuOpen(false)}>
               {label}
             </Link>
           ))}
