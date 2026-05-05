@@ -1,139 +1,234 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import dynamic from "next/dynamic";
+
+// CartButton: dynamic import + ssr:false. CartDrawer (drawer modal + cart-context UI)
+// só importa quando hidrata no client. Skeleton mantém layout (CLS=0).
+const CartButton = dynamic(
+  () => import("./CartDrawer").then((m) => m.CartButton),
+  {
+    ssr: false,
+    loading: () => (
+      <span
+        aria-hidden="true"
+        className="relative flex items-center gap-2 border border-line bg-bone px-4 py-2.5 text-sm text-ink"
+        style={{ borderRadius: "2px", minHeight: "42px", minWidth: "108px" }}
+      >
+        <svg
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+          />
+        </svg>
+        <span>Carrinho</span>
+      </span>
+    ),
+  }
+);
+
+const NAV_LINKS: [string, string][] = [
+  ["/cafes", "Pacotes"],
+  ["/#assinatura", "Assinatura"],
+  ["/revista", "Revista"],
+  ["/sobre", "História"],
+  ["/para-empresas", "Empresas"],
+];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const mobileNavRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Mobile menu — Esc fecha, foco no primeiro link ao abrir,
+  // retorna foco ao botão hamburguer ao fechar, e trap de Tab dentro do menu.
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    const container = mobileNavRef.current;
+    const focusables = container
+      ? Array.from(container.querySelectorAll<HTMLElement>(focusableSelector))
+      : [];
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    // Foco no primeiro link
+    first?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setMenuOpen(false);
+        return;
+      }
+      if (e.key !== "Tab" || focusables.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      if (e.shiftKey) {
+        if (active === first || !container?.contains(active)) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (active === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
+
+  // Quando fechar, retorna foco ao botão hamburguer
+  const prevMenuOpen = useRef(menuOpen);
+  useEffect(() => {
+    if (prevMenuOpen.current && !menuOpen) {
+      menuButtonRef.current?.focus();
+    }
+    prevMenuOpen.current = menuOpen;
+  }, [menuOpen]);
+
+  // No Hero (bone) com header transparente, queremos texto escuro.
+  // Em outras páginas (que tipicamente já têm fundo escuro) ou após scroll,
+  // o header fica ink e texto claro.
+  const headerOnLight = isHome && !scrolled;
+
+  const headerBg = scrolled
+    ? "bg-ink/95 backdrop-blur-md py-2"
+    : isHome
+      ? "bg-transparent py-4"
+      : "bg-ink/95 backdrop-blur-md py-2";
+
+  const navTextColor = headerOnLight
+    ? "text-ink-soft hover:text-olive"
+    : "text-bone-soft hover:text-olive";
+
+  const menuBtnColor = headerOnLight ? "text-ink" : "text-bone";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-coffee-950/95 backdrop-blur-sm">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <img
-            src="/images/logo-white.png"
-            alt="Zerbinatti Coffee"
-            className="h-10"
-          />
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
+    >
+      <nav className="mx-auto flex max-w-[1280px] items-center justify-between px-5 lg:px-16">
+        <Link href="/" aria-label="Zerbinatti Coffee, ir para a home">
+          {headerOnLight ? (
+            // Wordmark inline em ink — usado apenas no Hero antes do scroll
+            <span
+              className="font-display text-[22px] tracking-[-0.01em] text-ink md:text-[26px]"
+              style={{ fontWeight: 500 }}
+            >
+              Zerbinatti
+            </span>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src="/images/logo-white.png"
+              alt="Zerbinatti Coffee"
+              className="h-8 md:h-9"
+            />
+          )}
         </Link>
 
-        {/* Desktop nav */}
         <div className="hidden items-center gap-8 lg:flex">
-          <Link
-            href="#origem"
-            className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400"
-          >
-            Nossa História
-          </Link>
-          <Link
-            href="#cafes"
-            className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400"
-          >
-            Cafés
-          </Link>
-          <Link
-            href="#assinatura"
-            className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400"
-          >
-            Assinatura
-          </Link>
-          <Link
-            href="#quiz"
-            className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400"
-          >
-            Descubra Seu Café
-          </Link>
-          <Link
-            href="#contato"
-            className="text-sm tracking-wide text-coffee-300 transition-colors hover:text-gold-400"
-          >
-            B2B
-          </Link>
+          {NAV_LINKS.map(([href, label]) => (
+            <Link
+              key={href}
+              href={href}
+              className={`text-sm font-medium tracking-[0.04em] transition-colors ${navTextColor}`}
+            >
+              {label}
+            </Link>
+          ))}
         </div>
 
-        {/* CTA + Cart */}
-        <div className="hidden items-center gap-4 lg:flex">
-          <button className="rounded-full border border-gold-500 px-5 py-2 text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950">
-            Comprar
+        <div className="hidden items-center lg:flex">
+          <CartButton />
+        </div>
+
+        <div className="flex items-center gap-3 lg:hidden">
+          <CartButton />
+          <button
+            ref={menuButtonRef}
+            className={menuBtnColor}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav"
+          >
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+            >
+              {menuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              )}
+            </svg>
           </button>
         </div>
-
-        {/* Mobile menu button */}
-        <button
-          className="lg:hidden text-coffee-50"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-          >
-            {menuOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            )}
-          </svg>
-        </button>
       </nav>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div className="border-t border-coffee-800 bg-coffee-950 px-6 py-6 lg:hidden">
-          <div className="flex flex-col gap-4">
+      <div
+        id="mobile-nav"
+        ref={mobileNavRef}
+        role="navigation"
+        aria-label="Menu mobile"
+        inert={!menuOpen}
+        className={`overflow-hidden border-t border-line-dark bg-ink/95 backdrop-blur-md transition-all duration-300 lg:hidden ${
+          menuOpen
+            ? "max-h-96 px-5 py-6"
+            : "max-h-0 px-5 py-0 border-t-transparent"
+        }`}
+      >
+        <div className="flex flex-col gap-4">
+          {NAV_LINKS.map(([href, label]) => (
             <Link
-              href="#origem"
-              className="text-sm tracking-wide text-coffee-300 hover:text-gold-400"
+              key={href}
+              href={href}
+              className="text-sm font-medium tracking-[0.04em] text-bone-soft hover:text-olive"
               onClick={() => setMenuOpen(false)}
             >
-              Nossa História
+              {label}
             </Link>
-            <Link
-              href="#cafes"
-              className="text-sm tracking-wide text-coffee-300 hover:text-gold-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              Cafés
-            </Link>
-            <Link
-              href="#assinatura"
-              className="text-sm tracking-wide text-coffee-300 hover:text-gold-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              Assinatura
-            </Link>
-            <Link
-              href="#quiz"
-              className="text-sm tracking-wide text-coffee-300 hover:text-gold-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              Descubra Seu Café
-            </Link>
-            <Link
-              href="#contato"
-              className="text-sm tracking-wide text-coffee-300 hover:text-gold-400"
-              onClick={() => setMenuOpen(false)}
-            >
-              B2B
-            </Link>
-            <button className="mt-2 rounded-full border border-gold-500 px-5 py-2 text-sm font-medium text-gold-400 transition-all hover:bg-gold-500 hover:text-coffee-950">
-              Comprar
-            </button>
-          </div>
+          ))}
         </div>
-      )}
+      </div>
     </header>
   );
 }
