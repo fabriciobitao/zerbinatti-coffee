@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Zerbinatti Caffè · Para Empresas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg-0:#0E0907;
+    --bg-1:#15100C;
+    --bg-2:#1F1813;
+    --bg-3:#2A1F18;
+    --line:rgba(201,169,97,.15);
+    --line-strong:rgba(201,169,97,.35);
+    --ink-0:#F4ECD8;
+    --ink-1:#E8DEC8;
+    --ink-2:#B9AC8E;
+    --ink-3:#7C7160;
+    --gold:#C9A961;
+    --gold-soft:#E6BE44;
+    --gold-glow:rgba(201,169,97,.55);
+    --accent:#3D7A4F;
+    --serif:'Cormorant Garamond','Playfair Display',Georgia,serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --mono:'JetBrains Mono','IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+  body{background:var(--bg-0);color:var(--ink-1);font-family:var(--sans);font-weight:300;line-height:1.5;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px;}
+  body::after{content:"";position:fixed;inset:0;z-index:9997;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.45) 100%);}
+  ::selection{background:var(--gold);color:var(--bg-0);}
+
+  .display{font-family:var(--serif);font-weight:400;line-height:.95;letter-spacing:-.02em;color:var(--ink-0);}
+  .display em{font-style:italic;color:var(--gold);}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);}
+  .label{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);}
+
+  /* HEADER (idêntico ao index) */
+  .header{position:fixed;inset:0 0 auto 0;z-index:100;padding:12px 32px;height:62px;display:flex;align-items:center;justify-content:space-between;transition:background .5s ease,height .4s ease,border-color .5s ease;border-bottom:1px solid transparent;}
+  .header.scrolled{background:rgba(14,9,7,.82);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);height:54px;border-bottom-color:var(--line);}
+  .header-logo{display:inline-flex;align-items:center;gap:12px;color:var(--ink-0);text-decoration:none;line-height:1;}
+  .header-logo .monogram{width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-style:italic;font-weight:500;color:var(--gold);font-size:15px;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+  .header-logo:hover .monogram{transform:rotate(360deg);}
+  .header-logo .stack{display:inline-flex;flex-direction:column;line-height:1;}
+  .header-logo .word{font-family:var(--serif);font-size:17px;letter-spacing:.04em;color:var(--ink-0);white-space:nowrap;}
+  .header-logo .sub{font-family:var(--mono);font-size:8px;letter-spacing:.32em;color:var(--ink-3);text-transform:uppercase;margin-top:4px;white-space:nowrap;}
+  .header-nav{display:flex;gap:36px;align-items:center;}
+  .header-nav a{color:var(--ink-2);font-size:13px;letter-spacing:.04em;text-decoration:none;position:relative;padding:6px 0;transition:color .25s;}
+  .header-nav a.active{color:var(--gold);}
+  .header-nav a::after{content:"";position:absolute;left:50%;bottom:0;width:0;height:1px;background:var(--gold);transition:width .3s ease,left .3s ease;}
+  .header-nav a.active::after{width:100%;left:0;}
+  .header-nav a:hover{color:var(--gold);}
+  .header-nav a:hover::after{width:100%;left:0;}
+  .header-actions{display:flex;align-items:center;gap:18px;}
+  .icon-btn{width:38px;height:38px;border:1px solid var(--line);background:transparent;border-radius:50%;color:var(--ink-1);cursor:pointer;display:grid;place-items:center;transition:border-color .25s,color .25s;}
+  .icon-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .menu-btn{display:none;}
+
+  /* HERO B2B */
+  .hero{position:relative;min-height:88vh;min-height:88svh;overflow:hidden;background:var(--bg-0);isolation:isolate;display:flex;align-items:center;}
+  .hero-bg{position:absolute;inset:-5%;background:url('assets/hero-bg.jpg') center/cover no-repeat;z-index:0;animation:kenburns 22s ease-out infinite alternate;}
+  @keyframes kenburns{0%{transform:scale(1.06);}100%{transform:scale(1.18) translate(-2%,-1%);}}
+  .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(14,9,7,.82) 0%,rgba(14,9,7,.7) 50%,rgba(14,9,7,.95) 100%),radial-gradient(ellipse 90% 60% at 30% 50%,transparent 0%,rgba(14,9,7,.6) 70%);}
+  .hero-amber-glow{position:absolute;right:-10%;top:50%;transform:translateY(-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(217,165,77,.22) 0%,rgba(217,165,77,.08) 35%,transparent 65%);z-index:1;pointer-events:none;filter:blur(80px);}
+  .hero-inner{position:relative;z-index:5;max-width:1320px;margin:0 auto;padding:140px 48px 80px;width:100%;}
+  .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid var(--line-strong);background:rgba(14,9,7,.5);backdrop-filter:blur(8px);border-radius:100px;margin-bottom:32px;}
+  .hero-badge .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2.5s ease-in-out infinite;box-shadow:0 0 10px var(--gold);}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);}}
+  .hero-title{font-family:var(--serif);font-weight:400;font-size:clamp(44px,6.4vw,92px);line-height:.96;letter-spacing:-.02em;color:var(--ink-0);max-width:920px;}
+  .hero-title em{font-style:italic;background:linear-gradient(180deg,var(--gold-soft) 0%,var(--gold) 60%,#8B6914 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero-desc{margin-top:28px;font-size:18px;line-height:1.65;color:var(--ink-0);max-width:620px;font-weight:400;text-shadow:0 1px 8px rgba(14,9,7,.8);}
+  .hero-stats-row{margin-top:48px;display:flex;flex-wrap:wrap;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:760px;}
+  .hero-stats-row > div{flex:1;min-width:140px;padding:18px 24px;border-right:1px solid var(--line);}
+  .hero-stats-row > div:last-child{border-right:none;}
+  .hero-stats-row .v{font-family:var(--serif);font-size:26px;color:var(--ink-0);line-height:1;}
+  .hero-stats-row .l{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-2);margin-top:6px;}
+  .hero-cta{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;border:none;cursor:pointer;text-decoration:none;transition:transform .2s,background .2s,color .2s,box-shadow .25s;border-radius:100px;}
+  .btn-gold{background:var(--gold);color:var(--bg-0);}
+  .btn-gold:hover{background:var(--gold-soft);box-shadow:0 12px 36px rgba(217,165,77,.28);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--ink-1);border:1px solid var(--line-strong);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+  .btn .arrow{transition:transform .2s;}
+  .btn:hover .arrow{transform:translateX(4px);}
+
+  /* SECTION SHELL */
+  .section{padding:120px 0;position:relative;}
+  .section-inner{max-width:1320px;margin:0 auto;padding:0 48px;}
+  .section-head{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;margin-bottom:64px;align-items:end;}
+  .section-head .display{font-size:clamp(38px,4.6vw,68px);}
+  .section-head p{font-size:17px;line-height:1.6;color:var(--ink-1);max-width:520px;}
+  .section-head .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:24px;}
+  .section-head .meta > div{display:flex;flex-direction:column;gap:4px;}
+  .section-head .meta .k{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);}
+  .section-head .meta .v{font-family:var(--serif);font-size:18px;color:var(--ink-0);}
+
+  /* SEGMENTOS */
+  .segmentos{background:linear-gradient(180deg,var(--bg-0) 0%,var(--bg-1) 100%);}
+  .segmentos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .seg-card{position:relative;background:var(--bg-1);border:1px solid var(--line);padding:44px 40px;overflow:hidden;transition:border-color .35s ease,transform .35s ease;}
+  .seg-card::before{content:"";position:absolute;top:0;left:0;width:48px;height:1px;background:var(--gold);transition:width .4s ease;}
+  .seg-card:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .seg-card:hover::before{width:100%;}
+  .seg-card .num{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--gold);letter-spacing:.18em;margin-bottom:16px;}
+  .seg-card h3{font-family:var(--serif);font-weight:500;font-size:30px;line-height:1.1;color:var(--ink-0);margin-bottom:14px;}
+  .seg-card .desc{font-size:15px;line-height:1.7;color:var(--ink-1);margin-bottom:24px;max-width:440px;}
+  .seg-card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .seg-card ul li{font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-2);display:flex;gap:12px;align-items:center;}
+  .seg-card ul li::before{content:"";width:18px;height:1px;background:var(--gold);flex-shrink:0;}
+
+  /* PILARES */
+  .pilares{background:var(--bg-0);}
+  .pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .pilar{padding:48px 40px;border-right:1px solid var(--line);position:relative;}
+  .pilar:last-child{border-right:none;}
+  .pilar .icon{width:64px;height:64px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);margin-bottom:28px;}
+  .pilar .num{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--gold);letter-spacing:.18em;margin-bottom:8px;}
+  .pilar h3{font-family:var(--serif);font-weight:500;font-size:26px;color:var(--ink-0);margin-bottom:14px;}
+  .pilar p{font-size:15px;line-height:1.65;color:var(--ink-1);}
+
+  /* CLIENTES TICKER */
+  .clientes{background:var(--bg-1);padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .clientes-head{text-align:center;margin-bottom:36px;}
+  .clientes-head .label{display:block;}
+  .ticker{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .ticker-track{display:flex;gap:64px;animation:ticker 38s linear infinite;width:max-content;align-items:center;}
+  .ticker-item{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--ink-1);white-space:nowrap;letter-spacing:.02em;}
+  .ticker-item .dot{display:inline-block;width:6px;height:6px;background:var(--gold);border-radius:50%;margin:0 32px;vertical-align:middle;}
+  @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  .clientes-foot{text-align:center;margin-top:32px;font-size:12px;color:var(--ink-3);}
+
+  /* FORM */
+  .formulario{background:linear-gradient(180deg,var(--bg-1) 0%,var(--bg-0) 100%);}
+  .formulario-shell{max-width:760px;margin:0 auto;padding:0 48px;text-align:center;}
+  .formulario .display{font-size:clamp(40px,4.4vw,64px);}
+  .formulario p{margin-top:18px;color:var(--ink-1);font-size:17px;line-height:1.6;}
+  .form-grid{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:18px;text-align:left;}
+  .form-row{display:flex;flex-direction:column;gap:8px;}
+  .form-row.full{grid-column:1/-1;}
+  .form-row label{font-family:var(--mono);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);}
+  .form-row input,.form-row select,.form-row textarea{background:var(--bg-2);border:1px solid var(--line);color:var(--ink-0);font-family:var(--sans);font-size:15px;padding:14px 16px;border-radius:6px;outline:none;transition:border-color .25s;}
+  .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--gold);}
+  .form-row textarea{min-height:120px;resize:vertical;}
+  .form-actions{margin-top:32px;display:flex;justify-content:center;gap:14px;}
+  .form-note{margin-top:18px;font-size:12px;color:var(--ink-3);}
+
+  /* FOOTER */
+  .footer{background:var(--bg-0);border-top:1px solid var(--line);padding:80px 0 40px;color:var(--ink-2);}
+  .footer-inner{max-width:1320px;margin:0 auto;padding:0 48px;}
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:64px;margin-bottom:60px;}
+  .footer-brand .word{font-family:var(--serif);font-size:32px;color:var(--ink-0);}
+  .footer-brand .word em{color:var(--gold);font-style:normal;}
+  .footer-brand .label{margin:8px 0 18px;}
+  .footer-brand p{font-size:13px;line-height:1.65;max-width:280px;}
+  .footer h4{font-family:var(--mono);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;}
+  .footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .footer ul a{color:var(--ink-2);text-decoration:none;font-size:14px;transition:color .25s;}
+  .footer ul a:hover{color:var(--gold);}
+  .footer-bottom{display:flex;justify-content:space-between;padding-top:32px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3);}
+  .footer-bottom a{color:var(--ink-3);text-decoration:none;}
+  .footer-bottom a:hover{color:var(--gold);}
+
+  /* MOBILE */
+  @media (max-width:1024px){
+    .header{padding:14px 20px;}
+    .header.scrolled{padding:10px 20px;}
+    .header-nav{display:none;}
+    .menu-btn{display:grid;}
+    .hero-inner{padding:120px 24px 60px;}
+    .section{padding:80px 0;}
+    .section-inner{padding:0 24px;}
+    .section-head{grid-template-columns:1fr;gap:24px;margin-bottom:40px;}
+    .segmentos-grid{grid-template-columns:1fr;gap:14px;}
+    .seg-card{padding:32px 24px;}
+    .seg-card h3{font-size:24px;}
+    .pilares-grid{grid-template-columns:1fr;border-top:none;}
+    .pilar{padding:40px 24px;border-right:none;border-top:1px solid var(--line);}
+    .pilar:first-child{border-top:none;}
+    .formulario-shell{padding:0 24px;}
+    .form-grid{grid-template-columns:1fr;}
+    .footer-inner{padding:0 24px;}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:40px;}
+    .footer-brand{grid-column:1/-1;}
+    .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+    .ticker-item{font-size:18px;}
+    .ticker-item .dot{margin:0 22px;}
+  }
+  @media (max-width:640px){
+    .hero{min-height:80vh;}
+    .hero-stats-row{flex-direction:column;}
+    .hero-stats-row > div{border-right:none;border-bottom:1px solid var(--line);}
+    .hero-stats-row > div:last-child{border-bottom:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <a href="index.html" class="header-logo">
+    <span class="monogram">Z</span>
+    <span class="stack">
+      <span class="word">Zerbinatti</span>
+      <span class="sub">Caffè · Dal 1897</span>
+    </span>
+  </a>
+  <nav class="header-nav">
+    <a href="index.html#cafes">Cafés</a>
+    <a href="index.html#processo">Processo</a>
+    <a href="index.html#assinatura">Assinatura</a>
+    <a href="para-empresas.html" class="active">Para Empresas</a>
+    <a href="index.html#historia">História</a>
+  </nav>
+  <div class="header-actions">
+    <button class="icon-btn" aria-label="Buscar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></button>
+    <button class="icon-btn menu-btn" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-amber-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      <span class="eyebrow" style="font-size:10px;">Zerbinatti · B2B</span>
+    </div>
+    <h1 class="hero-title">Café especial do <em>produtor</em><br/>direto para o seu <em>negócio</em>.</h1>
+    <p class="hero-desc">Três gerações de cafeicultura familiar em Carmo do Paranaíba — Serra do Cabral, MG. Atendemos cafeterias, restaurantes, torrefações, hotéis e escritórios que não abrem mão de rastreabilidade e qualidade.</p>
+    <div class="hero-stats-row">
+      <div><div class="v">1897</div><div class="l">Desde</div></div>
+      <div><div class="v">85+</div><div class="l">SCA Cupping</div></div>
+      <div><div class="v">III</div><div class="l">Gerações</div></div>
+      <div><div class="v">24m</div><div class="l">Contrato</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#formulario" class="btn btn-gold">Falar com o comercial <span class="arrow">→</span></a>
+      <a href="#segmentos" class="btn btn-ghost">Ver segmentos atendidos</a>
+    </div>
+  </div>
+</section>
+
+<!-- SEGMENTOS -->
+<section class="section segmentos" id="segmentos">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Segmentos atendidos</span>
+        <h2 class="display" style="margin-top:14px;">Cada negócio,<br/>um <em>programa</em><br/>sob medida.</h2>
+      </div>
+      <div>
+        <p>Quatro modelos de parceria, todos com origem rastreada, entregas recorrentes e suporte direto da fazenda. Você compra do dono — não de intermediário.</p>
+        <div class="meta">
+          <div><span class="k">Origem</span><span class="v">Serra do Cabral · MG</span></div>
+          <div><span class="k">Entrega</span><span class="v">Brasil inteiro</span></div>
+          <div><span class="k">Mínimo</span><span class="v">10kg/mês</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="segmentos-grid">
+      <div class="seg-card">
+        <div class="num">N° 01</div>
+        <h3>Cafeterias <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em></h3>
+        <p class="desc">Grãos torrados sob demanda, selos exclusivos por barista, suporte técnico de calibragem e troca de perfil conforme sua persona.</p>
+        <ul>
+          <li>Grão torrado em 1kg ou 500g</li>
+          <li>Rótulo co-branding possível</li>
+          <li>Troca de lote mensal</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <div class="num">N° 02</div>
+        <h3>Restaurantes <em style="font-style:italic;color:var(--gold);">&amp; hotéis</em></h3>
+        <p class="desc">Blend desenhado para o perfil do seu cliente e da sua cozinha. Entregas recorrentes e consultoria de apresentação.</p>
+        <ul>
+          <li>Blend exclusivo a partir de 10kg/mês</li>
+          <li>Treinamento para brigada</li>
+          <li>Embalagem personalizada</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <div class="num">N° 03</div>
+        <h3>Torrefações <em style="font-style:italic;color:var(--gold);">parceiras</em></h3>
+        <p class="desc">Venda de verde em lotes rastreados, direto da Fazenda Santa Rita. Transparência total de origem e preço.</p>
+        <ul>
+          <li>Verde por lote rastreado</li>
+          <li>Contratos de até 24 meses</li>
+          <li>Visita à fazenda disponível</li>
+        </ul>
+      </div>
+      <div class="seg-card">
+        <div class="num">N° 04</div>
+        <h3>Escritórios <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em></h3>
+        <p class="desc">Programa corporativo. Seu time bebe café de especialidade e você deixa de ser refém das cápsulas caras.</p>
+        <ul>
+          <li>Entregas quinzenais ou mensais</li>
+          <li>Kit de equipamentos opcional</li>
+          <li>Faturamento CNPJ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section class="clientes">
+  <div class="clientes-head">
+    <span class="label" style="color:var(--gold);">Alguns parceiros que já servem Zerbinatti</span>
+  </div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Padaria Artesanal SP</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Hotel Fasano Rio</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Café Dona Deôla</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Coworking Trampos</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Brasserie Mendonça</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Suplicy Cafés</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Padaria Artesanal SP</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Hotel Fasano Rio</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Café Dona Deôla</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Coworking Trampos</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Brasserie Mendonça</span><span class="ticker-item dot"></span>
+      <span class="ticker-item">Suplicy Cafés</span><span class="ticker-item dot"></span>
+    </div>
+  </div>
+  <p class="clientes-foot">* Nomes ilustrativos — lista real disponível sob NDA.</p>
+</section>
+
+<!-- PILARES -->
+<section class="section pilares" id="pilares">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Por que Zerbinatti</span>
+        <h2 class="display" style="margin-top:14px;">Produtor, torrador<br/>e <em>parceiro</em> na<br/>mesma mesa.</h2>
+      </div>
+      <div>
+        <p>Sem intermediários. Sem surpresas. Cada lote sai da fazenda com nome, ficha técnica e nota de cupping — e chega no seu balcão na próxima semana.</p>
+      </div>
+    </div>
+
+    <div class="pilares-grid">
+      <div class="pilar">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></div>
+        <div class="num">I.</div>
+        <h3>Fazenda própria</h3>
+        <p>Somos produtores desde 1897. Você compra do dono, não de intermediário — preço justo, alocação garantida.</p>
+      </div>
+      <div class="pilar">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg></div>
+        <div class="num">II.</div>
+        <h3>Q-Graders na mesa</h3>
+        <p>Toda safra passa por cupping SCA. Só lotes 85+ saem da fazenda. Ficha técnica completa em cada entrega.</p>
+      </div>
+      <div class="pilar">
+        <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h2M14 15h4"/></svg></div>
+        <div class="num">III.</div>
+        <h3>Contrato anual</h3>
+        <p>Preço travado, alocação garantida, previsibilidade para você operar — sem flutuação de bolsa surpreendendo seu fluxo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section class="section formulario" id="formulario">
+  <div class="formulario-shell">
+    <span class="eyebrow">Pedido de orçamento</span>
+    <h2 class="display" style="margin-top:14px;">Conte sobre<br/>o seu <em>projeto</em>.</h2>
+    <p>Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.</p>
+
+    <form class="form-grid" onsubmit="event.preventDefault(); alert('Recebido — entraremos em contato em até 1 dia útil.');">
+      <div class="form-row">
+        <label>Nome</label>
+        <input type="text" required placeholder="Seu nome completo" />
+      </div>
+      <div class="form-row">
+        <label>Empresa / CNPJ</label>
+        <input type="text" required placeholder="Razão social ou CNPJ" />
+      </div>
+      <div class="form-row">
+        <label>E-mail</label>
+        <input type="email" required placeholder="contato@empresa.com" />
+      </div>
+      <div class="form-row">
+        <label>WhatsApp</label>
+        <input type="tel" required placeholder="(11) 99999-0000" />
+      </div>
+      <div class="form-row full">
+        <label>Segmento</label>
+        <select required>
+          <option value="">Selecione o segmento</option>
+          <option>Cafeteria / coffee shop</option>
+          <option>Restaurante / hotel</option>
+          <option>Torrefação parceira</option>
+          <option>Escritório / coworking</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-row full">
+        <label>Volume estimado (kg/mês)</label>
+        <input type="text" placeholder="Ex.: 30kg de torrado por mês" />
+      </div>
+      <div class="form-row full">
+        <label>Mensagem</label>
+        <textarea placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
+      </div>
+      <div class="form-row full form-actions">
+        <button type="submit" class="btn btn-gold">Enviar pedido <span class="arrow">→</span></button>
+      </div>
+    </form>
+    <p class="form-note">Resposta em até 1 dia útil — direto do time comercial da fazenda.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="word">Zerbinatti<em>.</em></div>
+        <div class="label" style="color:var(--gold);">Caffè · Dal 1897</div>
+        <p>Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.</p>
+      </div>
+      <div>
+        <h4>Loja</h4>
+        <ul>
+          <li><a href="index.html#cafes">Todos os Cafés</a></li>
+          <li><a href="index.html#assinatura">Assinaturas</a></li>
+          <li><a href="#">Kits e Presentes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sobre</h4>
+        <ul>
+          <li><a href="index.html#historia">Nossa História</a></li>
+          <li><a href="index.html#processo">Processo</a></li>
+          <li><a href="para-empresas.html">B2B</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato comercial</h4>
+        <ul>
+          <li><a href="#formulario">Pedido de orçamento</a></li>
+          <li><a href="mailto:b2b@zerbinatticoffee.com">b2b@zerbinatticoffee.com</a></li>
+          <li><a href="#">+55 (11) 99999-0000</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Zerbinatti Coffee · Dal 1897</span>
+      <div style="display:flex;gap:24px;">
+        <a href="#">Termos</a>
+        <a href="#">Privacidade</a>
+        <a href="#">Entregas</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  });
+</script>
+
+</body>
+</html>
