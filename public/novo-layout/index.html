@@ -2200,11 +2200,11 @@
     </span>
   </a>
   <nav class="header-nav">
-    <a href="/#cafes" data-i18n="nav.cafes">Cafés</a>
-    <a href="/#processo" data-i18n="nav.processo">Processo</a>
-    <a href="/#assinatura" data-i18n="nav.assinatura">Assinatura</a>
+    <a href="/cafes" data-i18n="nav.cafes">Cafés</a>
+    <a href="/processo" data-i18n="nav.processo">Processo</a>
+    <a href="/assinatura" data-i18n="nav.assinatura">Assinatura</a>
     <a href="/para-empresas" data-i18n="nav.empresas">Para Empresas</a>
-    <a href="/#historia" data-i18n="nav.historia">História</a>
+    <a href="/historia" data-i18n="nav.historia">História</a>
   </nav>
   <div class="header-actions">
     <div class="lang-switch" role="group" aria-label="Idioma">
@@ -2827,8 +2827,8 @@
       <div>
         <h4 data-i18n="footer.shop">Loja</h4>
         <ul>
-          <li><a href="/#cafes" data-i18n="footer.allCoffees">Todos os Cafés</a></li>
-          <li><a href="/#assinatura" data-i18n="footer.subs">Assinaturas</a></li>
+          <li><a href="/cafes" data-i18n="footer.allCoffees">Todos os Cafés</a></li>
+          <li><a href="/assinatura" data-i18n="footer.subs">Assinaturas</a></li>
           <li><a href="#" data-i18n="footer.gifts">Kits e Presentes</a></li>
           <li><a href="#" data-i18n="footer.accessories">Acessórios</a></li>
         </ul>
@@ -2836,8 +2836,8 @@
       <div>
         <h4 data-i18n="footer.about">Sobre</h4>
         <ul>
-          <li><a href="/#historia" data-i18n="footer.story">Nossa História</a></li>
-          <li><a href="/#processo" data-i18n="nav.processo">Processo</a></li>
+          <li><a href="/historia" data-i18n="footer.story">Nossa História</a></li>
+          <li><a href="/processo" data-i18n="nav.processo">Processo</a></li>
           <li><a href="#" data-i18n="footer.farm">A Fazenda</a></li>
           <li><a href="/para-empresas" data-i18n="nav.empresas">Para Empresas</a></li>
         </ul>
@@ -3557,6 +3557,37 @@
     });
   }
 
+  function initPathScroll() {
+    const PATH_TO_SECTION = {
+      '/cafes':'cafes', '/cafes/':'cafes',
+      '/processo':'processo', '/processo/':'processo',
+      '/assinatura':'assinatura', '/assinatura/':'assinatura',
+      '/historia':'historia', '/historia/':'historia',
+    };
+    const target = PATH_TO_SECTION[location.pathname];
+    if (!target) return;
+    const el = document.getElementById(target);
+    if (!el) return;
+    // Forca .in/.in-view nos descendentes da secao antes do scroll, caso o IntersectionObserver
+    // nao dispare por scroll programatico (acontece em alguns engines)
+    if (el.classList.contains('reveal')) el.classList.add('in');
+    if (el.classList.contains('feature')) el.classList.add('in-view');
+    if (el.classList.contains('cupping')) el.classList.add('in-view');
+    el.querySelectorAll('.reveal, .feature, .cupping, .g-item').forEach(child => {
+      child.classList.add('in');
+      if (child.classList.contains('feature')) child.classList.add('in-view');
+      if (child.classList.contains('cupping')) child.classList.add('in-view');
+      if (child.classList.contains('g-item')) child.classList.add('in-view');
+    });
+    requestAnimationFrame(() => {
+      const html = document.documentElement;
+      const prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto';
+      el.scrollIntoView({ block: 'start' });
+      html.style.scrollBehavior = prev;
+    });
+  }
+
   function boot() {
     try { initRevealObserver(); } catch (e) { console.error('[boot] reveal', e); }
     try { applyI18n();          } catch (e) { console.error('[boot] i18n', e); }
@@ -3567,6 +3598,7 @@
     try { initRadar();          } catch (e) { console.error('[boot] radar', e); }
     try { initCart();           } catch (e) { console.error('[boot] cart', e); }
     try { initMobileMenu();     } catch (e) { console.error('[boot] menu', e); }
+    try { initPathScroll();     } catch (e) { console.error('[boot] pathscroll', e); }
   }
 
   // ===== FASE 4: UNICO PONTO DE EXECUCAO (no fim do IIFE) =====
