@@ -1,20 +1,20 @@
 /**
  * Ornamento italiano usado para dividir seções.
- * Signature visual da marca 1897.
+ * Substitui o `h-px w-16 bg-gold-500` genérico — signature visual da marca 1897.
  */
 export function Ornament({
-  color = "olive",
+  color = "gold",
   className = "",
 }: {
-  color?: "olive" | "ink" | "line";
+  color?: "gold" | "coffee" | "light";
   className?: string;
 }) {
   const strokeClass =
-    color === "olive"
-      ? "text-olive"
-      : color === "ink"
-      ? "text-ink"
-      : "text-line";
+    color === "gold"
+      ? "text-gold-500"
+      : color === "coffee"
+      ? "text-coffee-700"
+      : "text-coffee-200";
   return (
     <div
       className={`mx-auto flex items-center justify-center gap-2 ${className}`}

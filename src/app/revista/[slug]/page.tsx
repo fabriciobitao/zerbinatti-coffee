@@ -1,31 +1,29 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import Breadcrumb from "@/components/Breadcrumb";
-import { PortableTextRenderer } from "@/components/PortableTextRenderer";
-import ArticleShareButtons from "@/components/ArticleShareButtons";
-import {
-  getAllArticleSlugs,
-  getArticleBySlug,
-  getRelatedArticles,
-} from "@/lib/sanity/queries";
-import { urlForImage } from "@/lib/sanity/client";
-import { siteConfig } from "@/lib/site";
-import { articleSchema } from "@/lib/schema";
+import { articles, getArticleBySlug } from "@/lib/data/articles";
+import { Ornament } from "@/components/ui/Ornament";
 
-export const revalidate = 60;
+export async function generateStaticParams() {
+  return articles.map((a) => ({ slug: a.slug }));
+}
 
-const CATEGORY_LABEL: Record<string, string> = {
-  tecnica: "Tecnica",
-  historia: "Historia",
-  receitas: "Receitas",
-  lugares: "Lugares",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const article = getArticleBySlug(slug);
+  if (!article) return { title: "Artigo não encontrado — Revista Zerbinatti" };
+  return {
+    title: `${article.title} — Revista Zerbinatti`,
+    description: article.excerpt,
+  };
+}
 
-function formatDateBR(iso: string) {
+function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "long",
@@ -33,252 +31,105 @@ function formatDateBR(iso: string) {
   });
 }
 
-export async function generateStaticParams() {
-  const slugs = await getAllArticleSlugs();
-  return slugs.map((slug) => ({ slug }));
-}
-
-type Params = { slug: string };
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const article = await getArticleBySlug(slug);
-  if (!article) return {};
-
-  const baseTitle = article.seo?.metaTitle ?? article.title;
-  // Garante padrao "Titulo · Zerbinatti" sem duplicar marca
-  const title = baseTitle.toLowerCase().includes("zerbinatti")
-    ? baseTitle
-    : `${baseTitle} · Zerbinatti`;
-  const description = article.seo?.metaDescription ?? article.excerpt;
-  const ogImage = article.coverImage?.asset?._ref
-    ? urlForImage(article.coverImage).width(1200).height(630).fit("crop").url()
-    : undefined;
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/revista/${slug}` },
-    openGraph: {
-      type: "article",
-      locale: "pt_BR",
-      title,
-      description,
-      url: `/revista/${slug}`,
-      ...(ogImage && {
-        images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
-      }),
-      publishedTime: article.publishedAt,
-      authors: [article.author],
-      section: article.category,
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      ...(ogImage && { images: [ogImage] }),
-    },
-  };
-}
-
 export default async function ArticlePage({
   params,
 }: {
-  params: Promise<Params>;
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
+  const article = getArticleBySlug(slug);
   if (!article) notFound();
 
-  const related = await getRelatedArticles(article.category, slug, 3);
-  const url = `${siteConfig.url}/revista/${slug}`;
-  const coverUrl = article.coverImage?.asset?._ref
-    ? urlForImage(article.coverImage).width(1600).height(900).fit("crop").url()
-    : null;
-
-  const schema = articleSchema({
-    title: article.title,
-    description: article.excerpt,
-    slug,
-    image: coverUrl ?? `${siteConfig.url}/revista/${slug}/opengraph-image`,
-    datePublished: article.publishedAt,
-    author: { name: article.author, jobTitle: "Editor" },
-    section: CATEGORY_LABEL[article.category] ?? article.category,
-  });
+  const related = articles.filter((a) => a.slug !== slug).slice(0, 2);
 
   return (
     <>
       <Header />
-      <main id="main" className="page-fade-in bg-bone">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
+      <main className="bg-coffee-50">
+        <article className="pt-28 pb-16">
+          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+            <nav className="text-xs text-coffee-600" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-coffee-900">
+                Início
+              </Link>
+              <span className="mx-2">›</span>
+              <Link href="/revista" className="hover:text-coffee-900">
+                Revista
+              </Link>
+              <span className="mx-2">›</span>
+              <span className="text-coffee-800">{article.category}</span>
+            </nav>
 
-        <div className="pt-[100px] lg:pt-[120px]">
-          <Breadcrumb
-            items={[
-              { label: "Inicio", href: "/" },
-              { label: "Revista", href: "/revista" },
-              { label: article.title },
-            ]}
-          />
-        </div>
-
-        {/* HERO do artigo — meta + titulo */}
-        <header className="bg-bone pt-8 pb-12 lg:pt-16 lg:pb-20">
-          <div className="container-editorial" style={{ maxWidth: "880px" }}>
-            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-olive">
-              {CATEGORY_LABEL[article.category] ?? article.category}
-              {" · "}
-              {formatDateBR(article.publishedAt)}
-              {" · "}
-              {article.readingTime} min
-            </p>
-            <h1
-              className="text-display mt-8 text-ink"
-              style={{ fontSize: "clamp(2.25rem, 5vw, 3.75rem)" }}
-            >
+            <span className="mt-10 block text-xs font-semibold tracking-[0.3em] text-gold-600 uppercase">
+              {article.category}
+            </span>
+            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-coffee-900 sm:text-5xl">
               {article.title}
             </h1>
-            <p
-              className="text-lede mt-8 text-ink-soft"
-              style={{ maxWidth: "720px" }}
-            >
-              {article.excerpt}
-            </p>
-            <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
-              Por {article.author}
-            </p>
-          </div>
-        </header>
-
-        {/* COVER */}
-        {coverUrl && (
-          <figure className="bg-bone">
-            <div className="container-editorial">
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-bone-soft">
-                <Image
-                  src={coverUrl}
-                  alt={article.coverImage?.alt ?? article.title}
-                  fill
-                  sizes="(max-width: 1280px) 100vw, 1280px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              {article.coverImage?.caption && (
-                <figcaption
-                  className="mt-3 font-mono text-[12px] uppercase tracking-[0.05em] text-ink-mute"
-                  style={{ maxWidth: "880px" }}
-                >
-                  {article.coverImage.caption}
-                </figcaption>
-              )}
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-coffee-600">
+              <span>Por {article.author}</span>
+              <span>·</span>
+              <span>{formatDate(article.publishedAt)}</span>
+              <span>·</span>
+              <span>{article.readingTime} de leitura</span>
             </div>
-          </figure>
-        )}
 
-        {/* CORPO */}
-        <article className="bg-bone py-20 lg:py-32">
-          <div
-            className="container-editorial"
-            style={{ maxWidth: "720px" }}
-          >
-            <PortableTextRenderer value={article.body} />
+            <Ornament className="my-10" />
 
-            <hr className="mt-24 mb-12 border-0 border-t border-line" />
-
-            {/* Footer do artigo: autor + share */}
-            <footer className="grid gap-8 sm:grid-cols-2 sm:items-center">
-              <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
-                  Texto da casa
+            <div className="space-y-6 font-serif text-[17px] leading-relaxed text-coffee-800 sm:text-lg">
+              {article.body.map((p, i) => (
+                <p
+                  key={i}
+                  className={i === 0 ? "first-letter:float-left first-letter:font-serif first-letter:text-5xl first-letter:font-bold first-letter:leading-[0.85] first-letter:mr-2 first-letter:mt-1 first-letter:text-gold-600" : ""}
+                >
+                  {p}
                 </p>
-                <p className="mt-3 font-display text-[20px] italic text-ink">
-                  {article.author}
-                </p>
-              </div>
-              <div className="sm:justify-self-end">
-                <ArticleShareButtons url={url} title={article.title} />
-              </div>
-            </footer>
+              ))}
+            </div>
+
+            <Ornament className="my-12" />
+
+            <div className="rounded-2xl border border-coffee-200 bg-white p-6">
+              <p className="font-serif text-lg text-coffee-900">
+                Gostou desta leitura?
+              </p>
+              <p className="mt-2 text-sm text-coffee-700">
+                Assinantes recebem ensaios inéditos antes de qualquer um — e
+                bilhetes escritos à mão pelo torrador a cada caixa.
+              </p>
+              <Link
+                href="/#assinatura"
+                className="mt-4 inline-block rounded-full bg-coffee-900 px-6 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-700"
+              >
+                Conhecer planos de assinatura
+              </Link>
+            </div>
           </div>
         </article>
 
-        {/* RELACIONADOS */}
         {related.length > 0 && (
-          <section
-            aria-labelledby="relacionados"
-            className="bg-bone-soft py-20 lg:py-32"
-          >
-            <div className="container-editorial">
-              <header className="max-w-[640px]">
-                <p className="eyebrow">Continue lendo</p>
-                <h2
-                  id="relacionados"
-                  className="text-h1 mt-6 text-ink"
-                  style={{ fontSize: "clamp(1.75rem, 3vw, 2.25rem)" }}
-                >
-                  Outros ensaios em{" "}
-                  <em
-                    className="font-display italic"
-                    style={{ fontWeight: 400 }}
+          <section className="bg-white py-16">
+            <div className="mx-auto max-w-5xl px-6 lg:px-8">
+              <h2 className="font-serif text-2xl font-bold text-coffee-900">
+                Continue lendo
+              </h2>
+              <div className="mt-8 grid gap-6 md:grid-cols-2">
+                {related.map((a) => (
+                  <Link
+                    key={a.slug}
+                    href={`/revista/${a.slug}`}
+                    className="group rounded-xl border border-coffee-100 p-6 transition-all hover:border-coffee-300 hover:bg-coffee-50"
                   >
-                    {(CATEGORY_LABEL[article.category] ?? article.category).toLowerCase()}
-                  </em>
-                  .
-                </h2>
-              </header>
-
-              <ul
-                className="mt-12 grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
-                role="list"
-              >
-                {related.map((r) => (
-                  <li key={r._id}>
-                    <Link
-                      href={`/revista/${r.slug}`}
-                      className="group block"
-                    >
-                      <div className="relative aspect-[4/3] w-full overflow-hidden bg-bone">
-                        {r.coverImage?.asset?._ref ? (
-                          <Image
-                            src={urlForImage(r.coverImage)
-                              .width(800)
-                              .height(600)
-                              .fit("crop")
-                              .url()}
-                            alt={r.coverImage.alt ?? r.title}
-                            fill
-                            sizes="(max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center">
-                            <span
-                              className="font-display text-[64px] text-olive/30"
-                              aria-hidden="true"
-                            >
-                              Z
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                      <h3 className="mt-6 font-display text-[20px] leading-[1.25] text-ink group-hover:text-olive transition-colors">
-                        {r.title}
-                      </h3>
-                      <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-mute">
-                        {formatDateBR(r.publishedAt)} · {r.readingTime} min
-                      </p>
-                    </Link>
-                  </li>
+                    <span className="text-xs font-semibold tracking-[0.2em] text-gold-600 uppercase">
+                      {a.category}
+                    </span>
+                    <h3 className="mt-3 font-serif text-lg font-bold text-coffee-900 group-hover:text-coffee-700">
+                      {a.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-coffee-700">{a.excerpt}</p>
+                  </Link>
                 ))}
-              </ul>
+              </div>
             </div>
           </section>
         )}
