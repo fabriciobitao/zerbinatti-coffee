@@ -55,7 +55,12 @@
   .header-nav a.active::after{width:100%;left:0;}
   .header-nav a:hover{color:var(--gold);}
   .header-nav a:hover::after{width:100%;left:0;}
-  .header-actions{display:flex;align-items:center;gap:18px;}
+  .header-actions{display:flex;align-items:center;gap:14px;}
+  .lang-switch{display:flex;gap:6px;padding-right:6px;border-right:1px solid var(--line);margin-right:4px;}
+  .lang-btn{width:28px;height:20px;border:1px solid var(--line);background:transparent;cursor:pointer;border-radius:3px;padding:0;overflow:hidden;opacity:.55;transition:opacity .25s,border-color .25s;display:grid;place-items:center;}
+  .lang-btn:hover{opacity:1;border-color:var(--gold);}
+  .lang-btn.active{opacity:1;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;}
+  .lang-btn svg{display:block;}
   .icon-btn{width:38px;height:38px;border:1px solid var(--line);background:transparent;border-radius:50%;color:var(--ink-1);cursor:pointer;display:grid;place-items:center;transition:border-color .25s,color .25s;}
   .icon-btn:hover{border-color:var(--gold);color:var(--gold);}
   .menu-btn{display:none;}
@@ -211,13 +216,18 @@
     </span>
   </a>
   <nav class="header-nav">
-    <a href="index.html#cafes">Cafés</a>
-    <a href="index.html#processo">Processo</a>
-    <a href="index.html#assinatura">Assinatura</a>
-    <a href="para-empresas.html" class="active">Para Empresas</a>
-    <a href="index.html#historia">História</a>
+    <a href="index.html#cafes" data-i18n="nav.cafes">Cafés</a>
+    <a href="index.html#processo" data-i18n="nav.processo">Processo</a>
+    <a href="index.html#assinatura" data-i18n="nav.assinatura">Assinatura</a>
+    <a href="para-empresas.html" class="active" data-i18n="nav.empresas">Para Empresas</a>
+    <a href="index.html#historia" data-i18n="nav.historia">História</a>
   </nav>
   <div class="header-actions">
+    <div class="lang-switch" role="group" aria-label="Idioma">
+      <button class="lang-btn" data-lang="pt" title="Português" aria-label="Português"><svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#009739"/><polygon points="11,2 20,8 11,14 2,8" fill="#FEDD00"/><circle cx="11" cy="8" r="3.4" fill="#012169"/></svg></button>
+      <button class="lang-btn" data-lang="en" title="English" aria-label="English"><svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#B22234"/><path d="M0 2h22M0 4.5h22M0 7h22M0 9.5h22M0 12h22M0 14.5h22" stroke="#fff" stroke-width="1.2"/><rect width="9" height="7" fill="#3C3B6E"/></svg></button>
+      <button class="lang-btn" data-lang="es" title="Español" aria-label="Español"><svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#AA151B"/><rect y="4" width="22" height="8" fill="#F1BF00"/></svg></button>
+    </div>
     <button class="icon-btn" aria-label="Buscar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg></button>
     <button class="icon-btn menu-btn" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
   </div>
@@ -232,17 +242,17 @@
       <span class="dot"></span>
       <span class="eyebrow" style="font-size:10px;">Zerbinatti · B2B</span>
     </div>
-    <h1 class="hero-title">Café especial do <em>produtor</em><br/>direto para o seu <em>negócio</em>.</h1>
-    <p class="hero-desc">Três gerações de cafeicultura familiar em Carmo do Paranaíba — Serra do Cabral, MG. Atendemos cafeterias, restaurantes, torrefações, hotéis e escritórios que não abrem mão de rastreabilidade e qualidade.</p>
+    <h1 class="hero-title" data-i18n-html="b2b.hero.title">Café especial do <em>produtor</em><br/>direto para o seu <em>negócio</em>.</h1>
+    <p class="hero-desc" data-i18n="b2b.hero.desc">Três gerações de cafeicultura familiar em Carmo do Paranaíba — Serra do Cabral, MG. Atendemos cafeterias, restaurantes, torrefações, hotéis e escritórios que não abrem mão de rastreabilidade e qualidade.</p>
     <div class="hero-stats-row">
-      <div><div class="v">1897</div><div class="l">Desde</div></div>
+      <div><div class="v">1897</div><div class="l" data-i18n="b2b.stat.since">Desde</div></div>
       <div><div class="v">85+</div><div class="l">SCA Cupping</div></div>
-      <div><div class="v">III</div><div class="l">Gerações</div></div>
-      <div><div class="v">24m</div><div class="l">Contrato</div></div>
+      <div><div class="v">III</div><div class="l" data-i18n="hero.stats.gen">Gerações</div></div>
+      <div><div class="v">24m</div><div class="l" data-i18n="b2b.stat.contract">Contrato</div></div>
     </div>
     <div class="hero-cta">
-      <a href="#formulario" class="btn btn-gold">Falar com o comercial <span class="arrow">→</span></a>
-      <a href="#segmentos" class="btn btn-ghost">Ver segmentos atendidos</a>
+      <a href="#formulario" class="btn btn-gold" data-i18n-html="b2b.cta.commercial">Falar com o comercial <span class="arrow">→</span></a>
+      <a href="#segmentos" class="btn btn-ghost" data-i18n="b2b.cta.segments">Ver segmentos atendidos</a>
     </div>
   </div>
 </section>
@@ -252,15 +262,15 @@
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <span class="eyebrow">Segmentos atendidos</span>
-        <h2 class="display" style="margin-top:14px;">Cada negócio,<br/>um <em>programa</em><br/>sob medida.</h2>
+        <span class="eyebrow" data-i18n="b2b.seg.eyebrow">Segmentos atendidos</span>
+        <h2 class="display" style="margin-top:14px;" data-i18n-html="b2b.seg.title">Cada negócio,<br/>um <em>programa</em><br/>sob medida.</h2>
       </div>
       <div>
-        <p>Quatro modelos de parceria, todos com origem rastreada, entregas recorrentes e suporte direto da fazenda. Você compra do dono — não de intermediário.</p>
+        <p data-i18n="b2b.seg.desc">Quatro modelos de parceria, todos com origem rastreada, entregas recorrentes e suporte direto da fazenda. Você compra do dono — não de intermediário.</p>
         <div class="meta">
-          <div><span class="k">Origem</span><span class="v">Serra do Cabral · MG</span></div>
-          <div><span class="k">Entrega</span><span class="v">Brasil inteiro</span></div>
-          <div><span class="k">Mínimo</span><span class="v">10kg/mês</span></div>
+          <div><span class="k" data-i18n="meta.origem">Origem</span><span class="v">Serra do Cabral · MG</span></div>
+          <div><span class="k" data-i18n="b2b.delivery">Entrega</span><span class="v" data-i18n="b2b.deliveryV">Brasil inteiro</span></div>
+          <div><span class="k" data-i18n="b2b.min">Mínimo</span><span class="v">10kg/mês</span></div>
         </div>
       </div>
     </div>
@@ -268,42 +278,42 @@
     <div class="segmentos-grid">
       <div class="seg-card">
         <div class="num">N° 01</div>
-        <h3>Cafeterias <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em></h3>
-        <p class="desc">Grãos torrados sob demanda, selos exclusivos por barista, suporte técnico de calibragem e troca de perfil conforme sua persona.</p>
+        <h3 data-i18n-html="b2b.seg1.h">Cafeterias <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em></h3>
+        <p class="desc" data-i18n="b2b.seg1.d">Grãos torrados sob demanda, selos exclusivos por barista, suporte técnico de calibragem e troca de perfil conforme sua persona.</p>
         <ul>
-          <li>Grão torrado em 1kg ou 500g</li>
-          <li>Rótulo co-branding possível</li>
-          <li>Troca de lote mensal</li>
+          <li data-i18n="b2b.seg1.b1">Grão torrado em 1kg ou 500g</li>
+          <li data-i18n="b2b.seg1.b2">Rótulo co-branding possível</li>
+          <li data-i18n="b2b.seg1.b3">Troca de lote mensal</li>
         </ul>
       </div>
       <div class="seg-card">
         <div class="num">N° 02</div>
-        <h3>Restaurantes <em style="font-style:italic;color:var(--gold);">&amp; hotéis</em></h3>
-        <p class="desc">Blend desenhado para o perfil do seu cliente e da sua cozinha. Entregas recorrentes e consultoria de apresentação.</p>
+        <h3 data-i18n-html="b2b.seg2.h">Restaurantes <em style="font-style:italic;color:var(--gold);">&amp; hotéis</em></h3>
+        <p class="desc" data-i18n="b2b.seg2.d">Blend desenhado para o perfil do seu cliente e da sua cozinha. Entregas recorrentes e consultoria de apresentação.</p>
         <ul>
-          <li>Blend exclusivo a partir de 10kg/mês</li>
-          <li>Treinamento para brigada</li>
-          <li>Embalagem personalizada</li>
+          <li data-i18n="b2b.seg2.b1">Blend exclusivo a partir de 10kg/mês</li>
+          <li data-i18n="b2b.seg2.b2">Treinamento para brigada</li>
+          <li data-i18n="b2b.seg2.b3">Embalagem personalizada</li>
         </ul>
       </div>
       <div class="seg-card">
         <div class="num">N° 03</div>
-        <h3>Torrefações <em style="font-style:italic;color:var(--gold);">parceiras</em></h3>
-        <p class="desc">Venda de verde em lotes rastreados, direto da Fazenda Santa Rita. Transparência total de origem e preço.</p>
+        <h3 data-i18n-html="b2b.seg3.h">Torrefações <em style="font-style:italic;color:var(--gold);">parceiras</em></h3>
+        <p class="desc" data-i18n="b2b.seg3.d">Venda de verde em lotes rastreados, direto da Fazenda Santa Rita. Transparência total de origem e preço.</p>
         <ul>
-          <li>Verde por lote rastreado</li>
-          <li>Contratos de até 24 meses</li>
-          <li>Visita à fazenda disponível</li>
+          <li data-i18n="b2b.seg3.b1">Verde por lote rastreado</li>
+          <li data-i18n="b2b.seg3.b2">Contratos de até 24 meses</li>
+          <li data-i18n="b2b.seg3.b3">Visita à fazenda disponível</li>
         </ul>
       </div>
       <div class="seg-card">
         <div class="num">N° 04</div>
-        <h3>Escritórios <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em></h3>
-        <p class="desc">Programa corporativo. Seu time bebe café de especialidade e você deixa de ser refém das cápsulas caras.</p>
+        <h3 data-i18n-html="b2b.seg4.h">Escritórios <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em></h3>
+        <p class="desc" data-i18n="b2b.seg4.d">Programa corporativo. Seu time bebe café de especialidade e você deixa de ser refém das cápsulas caras.</p>
         <ul>
-          <li>Entregas quinzenais ou mensais</li>
-          <li>Kit de equipamentos opcional</li>
-          <li>Faturamento CNPJ</li>
+          <li data-i18n="b2b.seg4.b1">Entregas quinzenais ou mensais</li>
+          <li data-i18n="b2b.seg4.b2">Kit de equipamentos opcional</li>
+          <li data-i18n="b2b.seg4.b3">Faturamento CNPJ</li>
         </ul>
       </div>
     </div>
@@ -313,7 +323,7 @@
 <!-- CLIENTES -->
 <section class="clientes">
   <div class="clientes-head">
-    <span class="label" style="color:var(--gold);">Alguns parceiros que já servem Zerbinatti</span>
+    <span class="label" style="color:var(--gold);" data-i18n="b2b.clients.label">Alguns parceiros que já servem Zerbinatti</span>
   </div>
   <div class="ticker">
     <div class="ticker-track">
@@ -331,7 +341,7 @@
       <span class="ticker-item">Suplicy Cafés</span><span class="ticker-item dot"></span>
     </div>
   </div>
-  <p class="clientes-foot">* Nomes ilustrativos — lista real disponível sob NDA.</p>
+  <p class="clientes-foot" data-i18n="b2b.clients.foot">* Nomes ilustrativos — lista real disponível sob NDA.</p>
 </section>
 
 <!-- PILARES -->
@@ -339,11 +349,11 @@
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <span class="eyebrow">Por que Zerbinatti</span>
-        <h2 class="display" style="margin-top:14px;">Produtor, torrador<br/>e <em>parceiro</em> na<br/>mesma mesa.</h2>
+        <span class="eyebrow" data-i18n="b2b.pil.eyebrow">Por que Zerbinatti</span>
+        <h2 class="display" style="margin-top:14px;" data-i18n-html="b2b.pil.title">Produtor, torrador<br/>e <em>parceiro</em> na<br/>mesma mesa.</h2>
       </div>
       <div>
-        <p>Sem intermediários. Sem surpresas. Cada lote sai da fazenda com nome, ficha técnica e nota de cupping — e chega no seu balcão na próxima semana.</p>
+        <p data-i18n="b2b.pil.desc">Sem intermediários. Sem surpresas. Cada lote sai da fazenda com nome, ficha técnica e nota de cupping — e chega no seu balcão na próxima semana.</p>
       </div>
     </div>
 
@@ -351,20 +361,20 @@
       <div class="pilar">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg></div>
         <div class="num">I.</div>
-        <h3>Fazenda própria</h3>
-        <p>Somos produtores desde 1897. Você compra do dono, não de intermediário — preço justo, alocação garantida.</p>
+        <h3 data-i18n="b2b.pil1.h">Fazenda própria</h3>
+        <p data-i18n="b2b.pil1.d">Somos produtores desde 1897. Você compra do dono, não de intermediário — preço justo, alocação garantida.</p>
       </div>
       <div class="pilar">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-5"/></svg></div>
         <div class="num">II.</div>
-        <h3>Q-Graders na mesa</h3>
-        <p>Toda safra passa por cupping SCA. Só lotes 85+ saem da fazenda. Ficha técnica completa em cada entrega.</p>
+        <h3 data-i18n="b2b.pil2.h">Q-Graders na mesa</h3>
+        <p data-i18n="b2b.pil2.d">Toda safra passa por cupping SCA. Só lotes 85+ saem da fazenda. Ficha técnica completa em cada entrega.</p>
       </div>
       <div class="pilar">
         <div class="icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h2M14 15h4"/></svg></div>
         <div class="num">III.</div>
-        <h3>Contrato anual</h3>
-        <p>Preço travado, alocação garantida, previsibilidade para você operar — sem flutuação de bolsa surpreendendo seu fluxo.</p>
+        <h3 data-i18n="b2b.pil3.h">Contrato anual</h3>
+        <p data-i18n="b2b.pil3.d">Preço travado, alocação garantida, previsibilidade para você operar — sem flutuação de bolsa surpreendendo seu fluxo.</p>
       </div>
     </div>
   </div>
@@ -373,51 +383,51 @@
 <!-- FORMULÁRIO -->
 <section class="section formulario" id="formulario">
   <div class="formulario-shell">
-    <span class="eyebrow">Pedido de orçamento</span>
-    <h2 class="display" style="margin-top:14px;">Conte sobre<br/>o seu <em>projeto</em>.</h2>
-    <p>Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.</p>
+    <span class="eyebrow" data-i18n="b2b.form.eyebrow">Pedido de orçamento</span>
+    <h2 class="display" style="margin-top:14px;" data-i18n-html="b2b.form.title">Conte sobre<br/>o seu <em>projeto</em>.</h2>
+    <p data-i18n-html="b2b.form.desc">Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.</p>
 
-    <form class="form-grid" onsubmit="event.preventDefault(); alert('Recebido — entraremos em contato em até 1 dia útil.');">
+    <form class="form-grid" onsubmit="event.preventDefault(); alert((window.t && window.t('b2b.form.received')) || 'Recebido — entraremos em contato em até 1 dia útil.');">
       <div class="form-row">
-        <label>Nome</label>
-        <input type="text" required placeholder="Seu nome completo" />
+        <label data-i18n="b2b.form.name">Nome</label>
+        <input type="text" required data-i18n-attr="placeholder:b2b.form.namePh" placeholder="Seu nome completo" />
       </div>
       <div class="form-row">
-        <label>Empresa / CNPJ</label>
-        <input type="text" required placeholder="Razão social ou CNPJ" />
+        <label data-i18n="b2b.form.company">Empresa / CNPJ</label>
+        <input type="text" required data-i18n-attr="placeholder:b2b.form.companyPh" placeholder="Razão social ou CNPJ" />
       </div>
       <div class="form-row">
-        <label>E-mail</label>
+        <label data-i18n="b2b.form.email">E-mail</label>
         <input type="email" required placeholder="contato@empresa.com" />
       </div>
       <div class="form-row">
-        <label>WhatsApp</label>
+        <label data-i18n="b2b.form.phone">WhatsApp</label>
         <input type="tel" required placeholder="(11) 99999-0000" />
       </div>
       <div class="form-row full">
-        <label>Segmento</label>
+        <label data-i18n="b2b.form.segment">Segmento</label>
         <select required>
-          <option value="">Selecione o segmento</option>
-          <option>Cafeteria / coffee shop</option>
-          <option>Restaurante / hotel</option>
-          <option>Torrefação parceira</option>
-          <option>Escritório / coworking</option>
-          <option>Outro</option>
+          <option value="" data-i18n="b2b.form.segmentSel">Selecione o segmento</option>
+          <option data-i18n="b2b.form.s1">Cafeteria / coffee shop</option>
+          <option data-i18n="b2b.form.s2">Restaurante / hotel</option>
+          <option data-i18n="b2b.form.s3">Torrefação parceira</option>
+          <option data-i18n="b2b.form.s4">Escritório / coworking</option>
+          <option data-i18n="b2b.form.s5">Outro</option>
         </select>
       </div>
       <div class="form-row full">
-        <label>Volume estimado (kg/mês)</label>
-        <input type="text" placeholder="Ex.: 30kg de torrado por mês" />
+        <label data-i18n="b2b.form.volume">Volume estimado (kg/mês)</label>
+        <input type="text" data-i18n-attr="placeholder:b2b.form.volumePh" placeholder="Ex.: 30kg de torrado por mês" />
       </div>
       <div class="form-row full">
-        <label>Mensagem</label>
-        <textarea placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
+        <label data-i18n="b2b.form.message">Mensagem</label>
+        <textarea data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
       </div>
       <div class="form-row full form-actions">
-        <button type="submit" class="btn btn-gold">Enviar pedido <span class="arrow">→</span></button>
+        <button type="submit" class="btn btn-gold" data-i18n-html="b2b.form.send">Enviar pedido <span class="arrow">→</span></button>
       </div>
     </form>
-    <p class="form-note">Resposta em até 1 dia útil — direto do time comercial da fazenda.</p>
+    <p class="form-note" data-i18n="b2b.form.note">Resposta em até 1 dia útil — direto do time comercial da fazenda.</p>
   </div>
 </section>
 
@@ -428,28 +438,28 @@
       <div class="footer-brand">
         <div class="word">Zerbinatti<em>.</em></div>
         <div class="label" style="color:var(--gold);">Caffè · Dal 1897</div>
-        <p>Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.</p>
+        <p data-i18n="footer.brandDesc">Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.</p>
       </div>
       <div>
-        <h4>Loja</h4>
+        <h4 data-i18n="footer.shop">Loja</h4>
         <ul>
-          <li><a href="index.html#cafes">Todos os Cafés</a></li>
-          <li><a href="index.html#assinatura">Assinaturas</a></li>
-          <li><a href="#">Kits e Presentes</a></li>
+          <li><a href="index.html#cafes" data-i18n="footer.allCoffees">Todos os Cafés</a></li>
+          <li><a href="index.html#assinatura" data-i18n="footer.subs">Assinaturas</a></li>
+          <li><a href="#" data-i18n="footer.gifts">Kits e Presentes</a></li>
         </ul>
       </div>
       <div>
-        <h4>Sobre</h4>
+        <h4 data-i18n="footer.about">Sobre</h4>
         <ul>
-          <li><a href="index.html#historia">Nossa História</a></li>
-          <li><a href="index.html#processo">Processo</a></li>
-          <li><a href="para-empresas.html">B2B</a></li>
+          <li><a href="index.html#historia" data-i18n="footer.story">Nossa História</a></li>
+          <li><a href="index.html#processo" data-i18n="nav.processo">Processo</a></li>
+          <li><a href="para-empresas.html" data-i18n="nav.empresas">Para Empresas</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contato comercial</h4>
+        <h4 data-i18n="b2b.footer.contact">Contato comercial</h4>
         <ul>
-          <li><a href="#formulario">Pedido de orçamento</a></li>
+          <li><a href="#formulario" data-i18n="b2b.footer.quote">Pedido de orçamento</a></li>
           <li><a href="mailto:b2b@zerbinatticoffee.com">b2b@zerbinatticoffee.com</a></li>
           <li><a href="#">+55 (11) 99999-0000</a></li>
         </ul>
@@ -458,20 +468,263 @@
     <div class="footer-bottom">
       <span>© 2026 Zerbinatti Coffee · Dal 1897</span>
       <div style="display:flex;gap:24px;">
-        <a href="#">Termos</a>
-        <a href="#">Privacidade</a>
-        <a href="#">Entregas</a>
+        <a href="#" data-i18n="footer.terms">Termos</a>
+        <a href="#" data-i18n="footer.privacy">Privacidade</a>
+        <a href="#" data-i18n="footer.delivery">Entregas</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 60) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  });
+(function () {
+  'use strict';
+
+  // ===== FASE 1: DADOS PUROS =====
+  const I18N = {
+    pt: {
+      'nav.cafes':'Cafés','nav.processo':'Processo','nav.assinatura':'Assinatura','nav.empresas':'Para Empresas','nav.historia':'História',
+      'meta.origem':'Origem',
+      'b2b.hero.title':'Café especial do <em>produtor</em><br/>direto para o seu <em>negócio</em>.',
+      'b2b.hero.desc':'Três gerações de cafeicultura familiar em Carmo do Paranaíba — Serra do Cabral, MG. Atendemos cafeterias, restaurantes, torrefações, hotéis e escritórios que não abrem mão de rastreabilidade e qualidade.',
+      'b2b.stat.since':'Desde','b2b.stat.contract':'Contrato',
+      'b2b.cta.commercial':'Falar com o comercial <span class="arrow">→</span>','b2b.cta.segments':'Ver segmentos atendidos',
+      'b2b.seg.eyebrow':'Segmentos atendidos','b2b.seg.title':'Cada negócio,<br/>um <em>programa</em><br/>sob medida.',
+      'b2b.seg.desc':'Quatro modelos de parceria, todos com origem rastreada, entregas recorrentes e suporte direto da fazenda. Você compra do dono — não de intermediário.',
+      'b2b.delivery':'Entrega','b2b.deliveryV':'Brasil inteiro','b2b.min':'Mínimo',
+      'b2b.seg1.h':'Cafeterias <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em>',
+      'b2b.seg1.d':'Grãos torrados sob demanda, selos exclusivos por barista, suporte técnico de calibragem e troca de perfil conforme sua persona.',
+      'b2b.seg1.b1':'Grão torrado em 1kg ou 500g','b2b.seg1.b2':'Rótulo co-branding possível','b2b.seg1.b3':'Troca de lote mensal',
+      'b2b.seg2.h':'Restaurantes <em style="font-style:italic;color:var(--gold);">&amp; hotéis</em>',
+      'b2b.seg2.d':'Blend desenhado para o perfil do seu cliente e da sua cozinha. Entregas recorrentes e consultoria de apresentação.',
+      'b2b.seg2.b1':'Blend exclusivo a partir de 10kg/mês','b2b.seg2.b2':'Treinamento para brigada','b2b.seg2.b3':'Embalagem personalizada',
+      'b2b.seg3.h':'Torrefações <em style="font-style:italic;color:var(--gold);">parceiras</em>',
+      'b2b.seg3.d':'Venda de verde em lotes rastreados, direto da Fazenda Santa Rita. Transparência total de origem e preço.',
+      'b2b.seg3.b1':'Verde por lote rastreado','b2b.seg3.b2':'Contratos de até 24 meses','b2b.seg3.b3':'Visita à fazenda disponível',
+      'b2b.seg4.h':'Escritórios <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em>',
+      'b2b.seg4.d':'Programa corporativo. Seu time bebe café de especialidade e você deixa de ser refém das cápsulas caras.',
+      'b2b.seg4.b1':'Entregas quinzenais ou mensais','b2b.seg4.b2':'Kit de equipamentos opcional','b2b.seg4.b3':'Faturamento CNPJ',
+      'b2b.clients.label':'Alguns parceiros que já servem Zerbinatti',
+      'b2b.clients.foot':'* Nomes ilustrativos — lista real disponível sob NDA.',
+      'b2b.pil.eyebrow':'Por que Zerbinatti','b2b.pil.title':'Produtor, torrador<br/>e <em>parceiro</em> na<br/>mesma mesa.',
+      'b2b.pil.desc':'Sem intermediários. Sem surpresas. Cada lote sai da fazenda com nome, ficha técnica e nota de cupping — e chega no seu balcão na próxima semana.',
+      'b2b.pil1.h':'Fazenda própria','b2b.pil1.d':'Somos produtores desde 1897. Você compra do dono, não de intermediário — preço justo, alocação garantida.',
+      'b2b.pil2.h':'Q-Graders na mesa','b2b.pil2.d':'Toda safra passa por cupping SCA. Só lotes 85+ saem da fazenda. Ficha técnica completa em cada entrega.',
+      'b2b.pil3.h':'Contrato anual','b2b.pil3.d':'Preço travado, alocação garantida, previsibilidade para você operar — sem flutuação de bolsa surpreendendo seu fluxo.',
+      'b2b.form.eyebrow':'Pedido de orçamento','b2b.form.title':'Conte sobre<br/>o seu <em>projeto</em>.',
+      'b2b.form.desc':'Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.',
+      'b2b.form.name':'Nome','b2b.form.namePh':'Seu nome completo',
+      'b2b.form.company':'Empresa / CNPJ','b2b.form.companyPh':'Razão social ou CNPJ',
+      'b2b.form.email':'E-mail','b2b.form.phone':'WhatsApp',
+      'b2b.form.segment':'Segmento','b2b.form.segmentSel':'Selecione o segmento',
+      'b2b.form.s1':'Cafeteria / coffee shop','b2b.form.s2':'Restaurante / hotel','b2b.form.s3':'Torrefação parceira','b2b.form.s4':'Escritório / coworking','b2b.form.s5':'Outro',
+      'b2b.form.volume':'Volume estimado (kg/mês)','b2b.form.volumePh':'Ex.: 30kg de torrado por mês',
+      'b2b.form.message':'Mensagem','b2b.form.messagePh':'Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades.',
+      'b2b.form.send':'Enviar pedido <span class="arrow">→</span>',
+      'b2b.form.note':'Resposta em até 1 dia útil — direto do time comercial da fazenda.',
+      'b2b.form.received':'Recebido — entraremos em contato em até 1 dia útil.',
+      'b2b.footer.contact':'Contato comercial','b2b.footer.quote':'Pedido de orçamento',
+      'hero.stats.gen':'Gerações',
+      'footer.brandDesc':'Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.',
+      'footer.shop':'Loja','footer.allCoffees':'Todos os Cafés','footer.subs':'Assinaturas','footer.gifts':'Kits e Presentes',
+      'footer.about':'Sobre','footer.story':'Nossa História',
+      'footer.terms':'Termos','footer.privacy':'Privacidade','footer.delivery':'Entregas',
+    },
+    en: {
+      'nav.cafes':'Coffees','nav.processo':'Process','nav.assinatura':'Subscription','nav.empresas':'For Business','nav.historia':'Story',
+      'meta.origem':'Origin',
+      'b2b.hero.title':'Specialty coffee straight from the <em>grower</em><br/>to your <em>business</em>.',
+      'b2b.hero.desc':'Three generations of family coffee farming in Carmo do Paranaíba — Serra do Cabral, MG. We serve cafés, restaurants, roasters, hotels and offices that demand traceability and quality.',
+      'b2b.stat.since':'Since','b2b.stat.contract':'Contract',
+      'b2b.cta.commercial':'Talk to sales <span class="arrow">→</span>','b2b.cta.segments':'See segments served',
+      'b2b.seg.eyebrow':'Segments served','b2b.seg.title':'Each business,<br/>a tailored <em>program</em>.',
+      'b2b.seg.desc':'Four partnership models, all with traceable origin, recurring deliveries and direct support from the farm. You buy from the owner — not the middleman.',
+      'b2b.delivery':'Delivery','b2b.deliveryV':'Nationwide (Brazil)','b2b.min':'Minimum',
+      'b2b.seg1.h':'Cafés <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em>',
+      'b2b.seg1.d':'Roasted on demand, exclusive seals per barista, calibration support and profile changes to match your audience.',
+      'b2b.seg1.b1':'Roasted bean in 1kg or 500g','b2b.seg1.b2':'Co-branded label option','b2b.seg1.b3':'Monthly lot rotation',
+      'b2b.seg2.h':'Restaurants <em style="font-style:italic;color:var(--gold);">&amp; hotels</em>',
+      'b2b.seg2.d':'Blend designed for your guest profile and your kitchen. Recurring deliveries and presentation consulting.',
+      'b2b.seg2.b1':'Exclusive blend from 10kg/month','b2b.seg2.b2':'Brigade training','b2b.seg2.b3':'Custom packaging',
+      'b2b.seg3.h':'Roasters <em style="font-style:italic;color:var(--gold);">partners</em>',
+      'b2b.seg3.d':'Green coffee in traceable lots, straight from Fazenda Santa Rita. Full transparency on origin and pricing.',
+      'b2b.seg3.b1':'Green coffee per traceable lot','b2b.seg3.b2':'Contracts up to 24 months','b2b.seg3.b3':'Farm visit available',
+      'b2b.seg4.h':'Offices <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em>',
+      'b2b.seg4.d':"Corporate program. Your team drinks specialty coffee and you stop being hostage to expensive pods.",
+      'b2b.seg4.b1':'Biweekly or monthly deliveries','b2b.seg4.b2':'Optional equipment kit','b2b.seg4.b3':'Corporate invoicing',
+      'b2b.clients.label':'A few partners already serving Zerbinatti',
+      'b2b.clients.foot':'* Illustrative names — full list available under NDA.',
+      'b2b.pil.eyebrow':'Why Zerbinatti','b2b.pil.title':'Grower, roaster<br/>and <em>partner</em> at<br/>the same table.',
+      'b2b.pil.desc':'No middlemen. No surprises. Every lot leaves the farm with a name, a tech sheet and a cupping score — and reaches your counter the next week.',
+      'b2b.pil1.h':'Own farm','b2b.pil1.d':'We have been growers since 1897. You buy from the owner, not the middleman — fair price, guaranteed allocation.',
+      'b2b.pil2.h':'Q-Graders at the table','b2b.pil2.d':'Every crop goes through SCA cupping. Only 85+ lots leave the farm. Full tech sheet with every delivery.',
+      'b2b.pil3.h':'Annual contract','b2b.pil3.d':"Locked-in price, guaranteed allocation, predictability for your operation — no market swings hitting your cash flow.",
+      'b2b.form.eyebrow':'Quote request','b2b.form.title':'Tell us about<br/>your <em>project</em>.',
+      'b2b.form.desc':'Fill in the form and we will send a proposal with pricing, logistics and a <strong style="color:var(--gold);font-weight:400;">free sample for testing</strong>.',
+      'b2b.form.name':'Name','b2b.form.namePh':'Your full name',
+      'b2b.form.company':'Company / Tax ID','b2b.form.companyPh':'Legal name or tax ID',
+      'b2b.form.email':'Email','b2b.form.phone':'WhatsApp',
+      'b2b.form.segment':'Segment','b2b.form.segmentSel':'Select your segment',
+      'b2b.form.s1':'Café / coffee shop','b2b.form.s2':'Restaurant / hotel','b2b.form.s3':'Partner roaster','b2b.form.s4':'Office / coworking','b2b.form.s5':'Other',
+      'b2b.form.volume':'Estimated volume (kg/month)','b2b.form.volumePh':'e.g. 30kg of roasted per month',
+      'b2b.form.message':'Message','b2b.form.messagePh':"Tell us what you're looking for — sensory profile, deadline, budget, specifics.",
+      'b2b.form.send':'Send request <span class="arrow">→</span>',
+      'b2b.form.note':'Reply within 1 business day — straight from the farm sales team.',
+      'b2b.form.received':"Received — we'll reach out within 1 business day.",
+      'b2b.footer.contact':'Sales contact','b2b.footer.quote':'Quote request',
+      'hero.stats.gen':'Generations',
+      'footer.brandDesc':'Brazilian specialty coffee with Italian heritage. Three generations of dedication in every cup.',
+      'footer.shop':'Shop','footer.allCoffees':'All Coffees','footer.subs':'Subscriptions','footer.gifts':'Kits & Gifts',
+      'footer.about':'About','footer.story':'Our Story',
+      'footer.terms':'Terms','footer.privacy':'Privacy','footer.delivery':'Shipping',
+    },
+    es: {
+      'nav.cafes':'Cafés','nav.processo':'Proceso','nav.assinatura':'Suscripción','nav.empresas':'Para Empresas','nav.historia':'Historia',
+      'meta.origem':'Origen',
+      'b2b.hero.title':'Café especial del <em>productor</em><br/>directo a tu <em>negocio</em>.',
+      'b2b.hero.desc':'Tres generaciones de cafeicultura familiar en Carmo do Paranaíba — Serra do Cabral, MG. Atendemos cafeterías, restaurantes, tostadores, hoteles y oficinas que no renuncian a trazabilidad y calidad.',
+      'b2b.stat.since':'Desde','b2b.stat.contract':'Contrato',
+      'b2b.cta.commercial':'Hablar con ventas <span class="arrow">→</span>','b2b.cta.segments':'Ver segmentos atendidos',
+      'b2b.seg.eyebrow':'Segmentos atendidos','b2b.seg.title':'Cada negocio,<br/>un <em>programa</em><br/>a medida.',
+      'b2b.seg.desc':'Cuatro modelos de alianza, todos con origen rastreado, entregas recurrentes y soporte directo de la finca. Compras al dueño — no al intermediario.',
+      'b2b.delivery':'Entrega','b2b.deliveryV':'Todo Brasil','b2b.min':'Mínimo',
+      'b2b.seg1.h':'Cafeterías <em style="font-style:italic;color:var(--gold);">&amp; coffee shops</em>',
+      'b2b.seg1.d':'Granos tostados a pedido, sellos exclusivos por barista, soporte técnico de calibración y cambio de perfil según tu persona.',
+      'b2b.seg1.b1':'Grano tostado en 1kg o 500g','b2b.seg1.b2':'Etiqueta co-branding posible','b2b.seg1.b3':'Cambio de lote mensual',
+      'b2b.seg2.h':'Restaurantes <em style="font-style:italic;color:var(--gold);">&amp; hoteles</em>',
+      'b2b.seg2.d':'Blend diseñado para el perfil de tu cliente y tu cocina. Entregas recurrentes y consultoría de presentación.',
+      'b2b.seg2.b1':'Blend exclusivo desde 10kg/mes','b2b.seg2.b2':'Capacitación para la brigada','b2b.seg2.b3':'Empaque personalizado',
+      'b2b.seg3.h':'Tostadores <em style="font-style:italic;color:var(--gold);">socios</em>',
+      'b2b.seg3.d':'Venta de café verde en lotes rastreados, directo de la Fazenda Santa Rita. Transparencia total de origen y precio.',
+      'b2b.seg3.b1':'Verde por lote rastreado','b2b.seg3.b2':'Contratos de hasta 24 meses','b2b.seg3.b3':'Visita a la finca disponible',
+      'b2b.seg4.h':'Oficinas <em style="font-style:italic;color:var(--gold);">&amp; coworkings</em>',
+      'b2b.seg4.d':'Programa corporativo. Tu equipo bebe café de especialidad y dejas de ser rehén de cápsulas caras.',
+      'b2b.seg4.b1':'Entregas quincenales o mensuales','b2b.seg4.b2':'Kit de equipos opcional','b2b.seg4.b3':'Facturación corporativa',
+      'b2b.clients.label':'Algunos socios que ya sirven Zerbinatti',
+      'b2b.clients.foot':'* Nombres ilustrativos — lista real disponible bajo NDA.',
+      'b2b.pil.eyebrow':'Por qué Zerbinatti','b2b.pil.title':'Productor, tostador<br/>y <em>socio</em> en<br/>la misma mesa.',
+      'b2b.pil.desc':'Sin intermediarios. Sin sorpresas. Cada lote sale de la finca con nombre, ficha técnica y nota de cupping — y llega a tu mostrador la próxima semana.',
+      'b2b.pil1.h':'Finca propia','b2b.pil1.d':'Somos productores desde 1897. Compras al dueño, no al intermediario — precio justo, asignación garantizada.',
+      'b2b.pil2.h':'Q-Graders en la mesa','b2b.pil2.d':'Cada zafra pasa por cupping SCA. Solo lotes 85+ salen de la finca. Ficha técnica completa en cada entrega.',
+      'b2b.pil3.h':'Contrato anual','b2b.pil3.d':'Precio fijo, asignación garantizada, previsibilidad para operar — sin fluctuaciones de bolsa sorprendiendo tu flujo.',
+      'b2b.form.eyebrow':'Solicitud de presupuesto','b2b.form.title':'Cuéntanos sobre<br/>tu <em>proyecto</em>.',
+      'b2b.form.desc':'Llena el formulario y enviaremos una propuesta con precio, logística y <strong style="color:var(--gold);font-weight:400;">muestra gratis para prueba</strong>.',
+      'b2b.form.name':'Nombre','b2b.form.namePh':'Tu nombre completo',
+      'b2b.form.company':'Empresa / CNPJ','b2b.form.companyPh':'Razón social o CNPJ',
+      'b2b.form.email':'E-mail','b2b.form.phone':'WhatsApp',
+      'b2b.form.segment':'Segmento','b2b.form.segmentSel':'Selecciona el segmento',
+      'b2b.form.s1':'Cafetería / coffee shop','b2b.form.s2':'Restaurante / hotel','b2b.form.s3':'Tostador socio','b2b.form.s4':'Oficina / coworking','b2b.form.s5':'Otro',
+      'b2b.form.volume':'Volumen estimado (kg/mes)','b2b.form.volumePh':'Ej.: 30kg de tostado por mes',
+      'b2b.form.message':'Mensaje','b2b.form.messagePh':'Cuéntanos qué buscas — perfil sensorial, plazo, presupuesto, particularidades.',
+      'b2b.form.send':'Enviar solicitud <span class="arrow">→</span>',
+      'b2b.form.note':'Respuesta en hasta 1 día hábil — directo del equipo comercial de la finca.',
+      'b2b.form.received':'Recibido — te contactaremos en hasta 1 día hábil.',
+      'b2b.footer.contact':'Contacto comercial','b2b.footer.quote':'Solicitud de presupuesto',
+      'hero.stats.gen':'Generaciones',
+      'footer.brandDesc':'Café especial brasileño con herencia italiana. Tres generaciones de dedicación en cada taza.',
+      'footer.shop':'Tienda','footer.allCoffees':'Todos los Cafés','footer.subs':'Suscripciones','footer.gifts':'Kits y Regalos',
+      'footer.about':'Sobre','footer.story':'Nuestra Historia',
+      'footer.terms':'Términos','footer.privacy':'Privacidad','footer.delivery':'Envíos',
+    },
+  };
+
+  const SUPPORTED_LANGS = ['pt','en','es'];
+  const DEFAULT_LANG = 'pt';
+  const HTML_LANG_MAP = { pt:'pt-BR', en:'en', es:'es' };
+
+  // ===== FASE 2: ESTADO MUTAVEL =====
+  let currentLang = DEFAULT_LANG;
+
+  // ===== FASE 3: FUNCTION DECLARATIONS =====
+
+  function t(key) {
+    const dict = I18N[currentLang] || I18N.pt;
+    if (dict[key] != null) return dict[key];
+    if (I18N.pt[key] != null) return I18N.pt[key];
+    if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+      console.warn('[i18n] missing:', key, 'lang:', currentLang);
+    }
+    return key;
+  }
+
+  function readStoredLang() {
+    try {
+      const params = new URLSearchParams(location.search);
+      const fromQuery = params.get('lang');
+      if (fromQuery && SUPPORTED_LANGS.includes(fromQuery)) return fromQuery;
+    } catch (_) {}
+    try {
+      const stored = localStorage.getItem('lang');
+      if (stored && SUPPORTED_LANGS.includes(stored)) return stored;
+    } catch (_) {}
+    return DEFAULT_LANG;
+  }
+
+  function applyI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      try {
+        const key = el.dataset.i18n;
+        const v = t(key);
+        if (v !== key) el.textContent = v;
+      } catch (_) {}
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      try {
+        const key = el.dataset.i18nHtml;
+        const v = t(key);
+        if (v !== key) el.innerHTML = v;
+      } catch (_) {}
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      try {
+        const spec = el.dataset.i18nAttr;
+        if (!spec || !spec.includes(':')) return;
+        const [attr, key] = spec.split(':');
+        const v = t(key);
+        if (v !== key && attr) el.setAttribute(attr, v);
+      } catch (_) {}
+    });
+    document.documentElement.lang = HTML_LANG_MAP[currentLang] || 'pt-BR';
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+  }
+
+  function setLang(lang) {
+    if (!SUPPORTED_LANGS.includes(lang)) return;
+    try { localStorage.setItem('lang', lang); } catch (_) {}
+    currentLang = lang;
+    applyI18n();
+  }
+
+  function initLangButtons() {
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLang(btn.dataset.lang));
+    });
+  }
+
+  function initHeaderScroll() {
+    const header = document.getElementById('header');
+    if (!header) return;
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive:true });
+  }
+
+  function boot() {
+    try { applyI18n();        } catch (e) { console.error('[boot] i18n', e); }
+    try { initLangButtons();  } catch (e) { console.error('[boot] langbtn', e); }
+    try { initHeaderScroll(); } catch (e) { console.error('[boot] header', e); }
+  }
+
+  // ===== FASE 4: UNICO PONTO DE EXECUCAO =====
+  currentLang = readStoredLang();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot, { once:true });
+  } else {
+    boot();
+  }
+})();
 </script>
 
 </body>
