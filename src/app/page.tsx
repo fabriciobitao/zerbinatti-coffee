@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import TrustBar from "@/components/TrustBar";
+import VideoFeature from "@/components/VideoFeature";
 import BestSellers from "@/components/BestSellers";
 import Story from "@/components/Story";
 import Products from "@/components/Products";
@@ -17,6 +18,7 @@ export default function Home() {
       <main>
         <Hero />
         <TrustBar />
+        <VideoFeature />
         <Products />
         <BestSellers />
         <Combos />
