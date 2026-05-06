@@ -15,8 +15,26 @@ export function middleware(request: NextRequest) {
       new URL("/novo-layout/para-empresas.html", request.url),
     );
   }
+
+  if (pathname === "/para-empresas.html") {
+    return NextResponse.rewrite(
+      new URL("/novo-layout/para-empresas.html", request.url),
+    );
+  }
+
+  if (pathname.startsWith("/assets/")) {
+    return NextResponse.rewrite(
+      new URL(`/novo-layout${pathname}`, request.url),
+    );
+  }
 }
 
 export const config = {
-  matcher: ["/", "/para-empresas", "/para-empresas/"],
+  matcher: [
+    "/",
+    "/para-empresas",
+    "/para-empresas/",
+    "/para-empresas.html",
+    "/assets/:path*",
+  ],
 };
