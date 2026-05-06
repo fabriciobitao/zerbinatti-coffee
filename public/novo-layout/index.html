@@ -167,7 +167,23 @@
   }
   .header-nav a:hover{color:var(--gold);}
   .header-nav a:hover::after{width:100%; left:0;}
-  .header-actions{display:flex; align-items:center; gap:18px;}
+  .header-actions{display:flex; align-items:center; gap:14px;}
+  .lang-switch{display:flex; gap:6px; padding-right:6px; border-right:1px solid var(--line); margin-right:4px;}
+  .lang-btn{
+    width:28px; height:20px;
+    border:1px solid var(--line);
+    background:transparent;
+    cursor:pointer;
+    border-radius:3px;
+    padding:0;
+    overflow:hidden;
+    opacity:.55;
+    transition:opacity .25s, border-color .25s, transform .2s;
+    display:grid; place-items:center;
+  }
+  .lang-btn:hover{opacity:1; border-color:var(--gold);}
+  .lang-btn.active{opacity:1; border-color:var(--gold); box-shadow:0 0 0 1px var(--gold) inset;}
+  .lang-btn svg{display:block;}
   .icon-btn{
     width:38px; height:38px;
     border:1px solid var(--line);
@@ -2182,13 +2198,24 @@
     </span>
   </a>
   <nav class="header-nav">
-    <a href="#cafes">Cafés</a>
-    <a href="#processo">Processo</a>
-    <a href="#assinatura">Assinatura</a>
-    <a href="para-empresas.html">Para Empresas</a>
-    <a href="#historia">História</a>
+    <a href="#cafes" data-i18n="nav.cafes">Cafés</a>
+    <a href="#processo" data-i18n="nav.processo">Processo</a>
+    <a href="#assinatura" data-i18n="nav.assinatura">Assinatura</a>
+    <a href="para-empresas.html" data-i18n="nav.empresas">Para Empresas</a>
+    <a href="#historia" data-i18n="nav.historia">História</a>
   </nav>
   <div class="header-actions">
+    <div class="lang-switch" role="group" aria-label="Idioma">
+      <button class="lang-btn" data-lang="pt" aria-label="Português" title="Português">
+        <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#009739"/><polygon points="11,2 20,8 11,14 2,8" fill="#FEDD00"/><circle cx="11" cy="8" r="3.4" fill="#012169"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="en" aria-label="English" title="English">
+        <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#B22234"/><path d="M0 2h22M0 4.5h22M0 7h22M0 9.5h22M0 12h22M0 14.5h22" stroke="#fff" stroke-width="1.2"/><rect width="9" height="7" fill="#3C3B6E"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="es" aria-label="Español" title="Español">
+        <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#AA151B"/><rect y="4" width="22" height="8" fill="#F1BF00"/></svg>
+      </button>
+    </div>
     <button class="icon-btn" aria-label="Buscar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
     </button>
@@ -2217,18 +2244,18 @@
     <div class="hero-inner">
       <div class="hero-badge reveal">
         <span class="dot"></span>
-        <span class="label" style="color:var(--gold);">Colheita Limitada · Safra 2026</span>
+        <span class="label" style="color:var(--gold);" data-i18n="hero.badge">Colheita Limitada · Safra 2026</span>
       </div>
-      <h1 class="hero-title reveal">Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span></h1>
-      <p class="hero-desc reveal">Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Serra do Cabral, secagem natural ao sol, torra artesanal em pequenos lotes.</p>
+      <h1 class="hero-title reveal" data-i18n-html="hero.title">Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span></h1>
+      <p class="hero-desc reveal" data-i18n="hero.desc">Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Serra do Cabral, secagem natural ao sol, torra artesanal em pequenos lotes.</p>
       <div class="hero-stats reveal">
-        <div><div class="v">640<span style="font-size:14px; color:var(--ink-3);">–760m</span></div><div class="l">Altitude</div></div>
+        <div><div class="v">640<span style="font-size:14px; color:var(--ink-3);">–760m</span></div><div class="l" data-i18n="hero.stats.alt">Altitude</div></div>
         <div><div class="v">88<span style="font-size:14px; color:var(--ink-3);">/100</span></div><div class="l">SCA</div></div>
-        <div><div class="v">III</div><div class="l">Gerações</div></div>
+        <div><div class="v">III</div><div class="l" data-i18n="hero.stats.gen">Gerações</div></div>
       </div>
       <div class="hero-cta reveal">
-        <a href="#cafes" class="btn btn-gold">Comprar agora <span class="arrow">→</span></a>
-        <a href="#assinatura" class="btn btn-ghost">Assinar mensal</a>
+        <a href="#cafes" class="btn btn-gold" data-i18n-html="hero.cta.shop">Comprar agora <span class="arrow">→</span></a>
+        <a href="#assinatura" class="btn btn-ghost" data-i18n="hero.cta.sub">Assinar mensal</a>
       </div>
     </div>
   </div>
@@ -2242,11 +2269,11 @@
   <div class="hero-side-meta">
     <div><span class="key">Lat</span> 18°S</div>
     <div><span class="key">Lot</span> 042 / 2025</div>
-    <div><span class="key">Roast</span> Média Clara</div>
+    <div><span class="key">Roast</span> <span data-i18n="hero.roast">Média Clara</span></div>
   </div>
 
   <div class="scroll-indicator">
-    <span>Explore</span>
+    <span data-i18n="hero.scroll">Explore</span>
     <div class="line"></div>
   </div>
 </section>
@@ -2261,14 +2288,14 @@
 <!-- ──────── EDITORIAL FEATURES (3 cafés) ──────── -->
 <section class="features" id="cafes">
   <div class="section-intro reveal">
-    <span class="eyebrow">A Coleção</span>
-    <h2 class="display">Três cafés. <em>Uma assinatura.</em></h2>
+    <span class="eyebrow" data-i18n="cafes.eyebrow">A Coleção</span>
+    <h2 class="display" data-i18n-html="cafes.title">Três cafés. <em>Uma assinatura.</em></h2>
     <svg class="ornament" viewBox="0 0 120 24" fill="none">
       <line x1="0" y1="12" x2="48" y2="12" stroke="currentColor" stroke-width=".5"/>
       <circle cx="60" cy="12" r="3" fill="currentColor"/>
       <line x1="72" y1="12" x2="120" y2="12" stroke="currentColor" stroke-width=".5"/>
     </svg>
-    <p class="body-lg" style="margin-top:24px;">Três expressões da mesma fazenda, três mundos sensoriais. Do blend que atravessa gerações ao Geisha de competição.</p>
+    <p class="body-lg" style="margin-top:24px;" data-i18n="cafes.desc">Três expressões da mesma fazenda, três mundos sensoriais. Do blend que atravessa gerações ao Geisha de competição.</p>
   </div>
 </section>
 
@@ -2276,35 +2303,35 @@
   <div class="feature-bg" style="background-image:url('https://images.unsplash.com/photo-1442550528053-c431ecb55509?w=1600&q=85');"></div>
   <div class="feature-grid">
     <div class="feature-text">
-      <div class="num">N° 01 — Mais vendido</div>
+      <div class="num" data-i18n="feat.classico.num">N° 01 — Mais vendido</div>
       <h3 class="title">Clássico <em>Zerbinatti</em></h3>
-      <div class="tagline">O blend da família desde 1897.</div>
-      <p class="desc">Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.</p>
+      <div class="tagline" data-i18n="feat.classico.tag">O blend da família desde 1897.</div>
+      <p class="desc" data-i18n="feat.classico.desc">Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.</p>
 
       <div class="feature-meta">
-        <div><div class="k">Origem</div><div class="v">Serra do Cabral, MG</div></div>
-        <div><div class="k">Variedade</div><div class="v">Catuaí + Mundo Novo</div></div>
-        <div><div class="k">Processo</div><div class="v">Natural</div></div>
-        <div><div class="k">Torra</div><div class="v">Média</div></div>
+        <div><div class="k" data-i18n="meta.origem">Origem</div><div class="v">Serra do Cabral, MG</div></div>
+        <div><div class="k" data-i18n="meta.var">Variedade</div><div class="v">Catuaí + Mundo Novo</div></div>
+        <div><div class="k" data-i18n="meta.proc">Processo</div><div class="v" data-i18n="proc.natural">Natural</div></div>
+        <div><div class="k" data-i18n="meta.torra">Torra</div><div class="v" data-i18n="torra.media">Média</div></div>
       </div>
 
       <div class="feature-notes">
-        <span class="chip">Chocolate ao leite</span>
-        <span class="chip">Caramelo</span>
-        <span class="chip">Nozes</span>
-        <span class="chip">Final doce</span>
+        <span class="chip" data-i18n="note.chocoLeite">Chocolate ao leite</span>
+        <span class="chip" data-i18n="note.caramelo">Caramelo</span>
+        <span class="chip" data-i18n="note.nozes">Nozes</span>
+        <span class="chip" data-i18n="note.finalDoce">Final doce</span>
       </div>
 
       <div class="feature-sensory">
-        <div class="sensory-row"><span class="name">Doçura</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
-        <div class="sensory-row"><span class="name">Acidez</span><span class="bar" style="--w:40%"></span><span class="num">2/5</span></div>
-        <div class="sensory-row"><span class="name">Corpo</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
-        <div class="sensory-row"><span class="name">Complex.</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.docura">Doçura</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.acidez">Acidez</span><span class="bar" style="--w:40%"></span><span class="num">2/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.corpo">Corpo</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.complex">Complex.</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
       </div>
 
       <div class="feature-buy">
         <div class="price">R$ 69,90<span class="small">500g</span></div>
-        <button class="btn btn-gold" data-add="classico-500g">Adicionar <span class="arrow">→</span></button>
+        <button class="btn btn-gold" data-add="classico-500g" data-i18n-html="btn.add">Adicionar <span class="arrow">→</span></button>
       </div>
     </div>
     <div class="feature-pkg">
@@ -2319,35 +2346,35 @@
   <div class="feature-bg" style="background-image:url('https://images.unsplash.com/photo-1518057111178-44a106bad636?w=1600&q=85');"></div>
   <div class="feature-grid">
     <div class="feature-text">
-      <div class="num">N° 02 — Edição limitada</div>
+      <div class="num" data-i18n="feat.reserva.num">N° 02 — Edição limitada</div>
       <h3 class="title">Reserva <em>Especial</em></h3>
-      <div class="tagline">Single origin, colheita seletiva.</div>
-      <p class="desc">Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. O processo cereja-descascado revela a doçura do fruto e a acidez fina característica do Yellow Bourbon.</p>
+      <div class="tagline" data-i18n="feat.reserva.tag">Single origin, colheita seletiva.</div>
+      <p class="desc" data-i18n="feat.reserva.desc">Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. O processo cereja-descascado revela a doçura do fruto e a acidez fina característica do Yellow Bourbon.</p>
 
       <div class="feature-meta">
-        <div><div class="k">Altitude</div><div class="v">640–760m</div></div>
-        <div><div class="k">Variedade</div><div class="v">Yellow Bourbon</div></div>
-        <div><div class="k">Processo</div><div class="v">Cereja descascado</div></div>
-        <div><div class="k">Torra</div><div class="v">Média Clara</div></div>
+        <div><div class="k" data-i18n="meta.alt">Altitude</div><div class="v">640–760m</div></div>
+        <div><div class="k" data-i18n="meta.var">Variedade</div><div class="v">Yellow Bourbon</div></div>
+        <div><div class="k" data-i18n="meta.proc">Processo</div><div class="v" data-i18n="proc.pulped">Cereja descascado</div></div>
+        <div><div class="k" data-i18n="meta.torra">Torra</div><div class="v" data-i18n="torra.mediaClara">Média Clara</div></div>
       </div>
 
       <div class="feature-notes">
-        <span class="chip">Frutas vermelhas</span>
-        <span class="chip">Mel silvestre</span>
-        <span class="chip">Acidez cítrica</span>
-        <span class="chip">Corpo sedoso</span>
+        <span class="chip" data-i18n="note.fruVerm">Frutas vermelhas</span>
+        <span class="chip" data-i18n="note.melSilv">Mel silvestre</span>
+        <span class="chip" data-i18n="note.acidCit">Acidez cítrica</span>
+        <span class="chip" data-i18n="note.corpoSed">Corpo sedoso</span>
       </div>
 
       <div class="feature-sensory">
-        <div class="sensory-row"><span class="name">Doçura</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
-        <div class="sensory-row"><span class="name">Acidez</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
-        <div class="sensory-row"><span class="name">Corpo</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
-        <div class="sensory-row"><span class="name">Complex.</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.docura">Doçura</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.acidez">Acidez</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.corpo">Corpo</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.complex">Complex.</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
       </div>
 
       <div class="feature-buy">
         <div class="price">R$ 89,90<span class="small">500g</span></div>
-        <button class="btn btn-gold" data-add="reserva-500g">Adicionar <span class="arrow">→</span></button>
+        <button class="btn btn-gold" data-add="reserva-500g" data-i18n-html="btn.add">Adicionar <span class="arrow">→</span></button>
       </div>
     </div>
     <div class="feature-pkg">
@@ -2362,35 +2389,35 @@
   <div class="feature-bg" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600&q=85');"></div>
   <div class="feature-grid">
     <div class="feature-text">
-      <div class="num">N° 03 — Raridade da safra</div>
+      <div class="num" data-i18n="feat.micro.num">N° 03 — Raridade da safra</div>
       <h3 class="title">Micro-Lote <em>Geisha</em></h3>
-      <div class="tagline">SCA 90+. Apenas 400kg na safra.</div>
-      <p class="desc">Talhão específico da parte mais alta da Serra, variedade Geisha plantada em 2018. O primeiro lote a atingir maturidade comercial em 2025. Para baristas e amantes obsessivos por cafés de competição.</p>
+      <div class="tagline" data-i18n="feat.micro.tag">SCA 90+. Apenas 400kg na safra.</div>
+      <p class="desc" data-i18n="feat.micro.desc">Talhão específico da parte mais alta da Serra, variedade Geisha plantada em 2018. O primeiro lote a atingir maturidade comercial em 2025. Para baristas e amantes obsessivos por cafés de competição.</p>
 
       <div class="feature-meta">
-        <div><div class="k">Altitude</div><div class="v">640–760m</div></div>
-        <div><div class="k">Variedade</div><div class="v">Geisha</div></div>
-        <div><div class="k">Processo</div><div class="v">Lavado</div></div>
-        <div><div class="k">Torra</div><div class="v">Clara</div></div>
+        <div><div class="k" data-i18n="meta.alt">Altitude</div><div class="v">640–760m</div></div>
+        <div><div class="k" data-i18n="meta.var">Variedade</div><div class="v">Geisha</div></div>
+        <div><div class="k" data-i18n="meta.proc">Processo</div><div class="v" data-i18n="proc.washed">Lavado</div></div>
+        <div><div class="k" data-i18n="meta.torra">Torra</div><div class="v" data-i18n="torra.clara">Clara</div></div>
       </div>
 
       <div class="feature-notes">
-        <span class="chip">Jasmim</span>
-        <span class="chip">Bergamota</span>
-        <span class="chip">Mel de laranjeira</span>
-        <span class="chip">Final floral</span>
+        <span class="chip" data-i18n="note.jasmim">Jasmim</span>
+        <span class="chip" data-i18n="note.bergamota">Bergamota</span>
+        <span class="chip" data-i18n="note.melLaranja">Mel de laranjeira</span>
+        <span class="chip" data-i18n="note.finalFloral">Final floral</span>
       </div>
 
       <div class="feature-sensory">
-        <div class="sensory-row"><span class="name">Doçura</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
-        <div class="sensory-row"><span class="name">Acidez</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
-        <div class="sensory-row"><span class="name">Corpo</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
-        <div class="sensory-row"><span class="name">Complex.</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.docura">Doçura</span><span class="bar" style="--w:80%"></span><span class="num">4/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.acidez">Acidez</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.corpo">Corpo</span><span class="bar" style="--w:60%"></span><span class="num">3/5</span></div>
+        <div class="sensory-row"><span class="name" data-i18n="sens.complex">Complex.</span><span class="bar" style="--w:100%"></span><span class="num">5/5</span></div>
       </div>
 
       <div class="feature-buy">
         <div class="price">R$ 119,90<span class="small">500g</span></div>
-        <button class="btn btn-gold" data-add="microlote-500g">Adicionar <span class="arrow">→</span></button>
+        <button class="btn btn-gold" data-add="microlote-500g" data-i18n-html="btn.add">Adicionar <span class="arrow">→</span></button>
       </div>
     </div>
     <div class="feature-pkg">
@@ -2406,50 +2433,50 @@
   <div class="processo-bg"></div>
   <div class="processo-inner">
     <div class="processo-head reveal">
-      <span class="eyebrow">Da Terra à Xícara</span>
-      <h2 class="display">Quatro <em>rituais.</em></h2>
+      <span class="eyebrow" data-i18n="proc.eyebrow">Da Terra à Xícara</span>
+      <h2 class="display" data-i18n-html="proc.title">Quatro <em>rituais.</em></h2>
     </div>
     <div class="processo-grid reveal">
       <div class="step">
         <div class="num">01</div>
-        <h3 class="title">Cultivo</h3>
-        <p class="desc">Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Serra do Cabral.</p>
+        <h3 class="title" data-i18n="proc.cultivo">Cultivo</h3>
+        <p class="desc" data-i18n="proc.cultivo.desc">Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Serra do Cabral.</p>
         <div class="meta">
-          <div class="meta-row"><span class="k">Altitude</span><span class="v">640–760m</span></div>
-          <div class="meta-row"><span class="k">Solo</span><span class="v">Vulcânico</span></div>
+          <div class="meta-row"><span class="k" data-i18n="meta.alt">Altitude</span><span class="v">640–760m</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.solo">Solo</span><span class="v" data-i18n="proc.solo.v">Vulcânico</span></div>
         </div>
       </div>
       <div class="step">
         <div class="num">02</div>
-        <h3 class="title">Colheita</h3>
-        <p class="desc">Seletiva, à mão, somente em grão cereja maduro. Sem pressa, sem máquina, do jeito que o nonno ensinou.</p>
+        <h3 class="title" data-i18n="proc.colheita">Colheita</h3>
+        <p class="desc" data-i18n="proc.colheita.desc">Seletiva, à mão, somente em grão cereja maduro. Sem pressa, sem máquina, do jeito que o nonno ensinou.</p>
         <div class="meta">
-          <div class="meta-row"><span class="k">Janela</span><span class="v">Mai – Set</span></div>
-          <div class="meta-row"><span class="k">Método</span><span class="v">Manual</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.janela">Janela</span><span class="v" data-i18n="proc.janela.v">Mai – Set</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.metodo">Método</span><span class="v" data-i18n="proc.metodo.v">Manual</span></div>
         </div>
       </div>
       <div class="step">
         <div class="num">03</div>
-        <h3 class="title">Secagem</h3>
-        <p class="desc">Natural ao sol, em terreiro suspenso. Vinte e cinco dias revolvendo grão a grão até o ponto exato.</p>
+        <h3 class="title" data-i18n="proc.secagem">Secagem</h3>
+        <p class="desc" data-i18n="proc.secagem.desc">Natural ao sol, em terreiro suspenso. Vinte e cinco dias revolvendo grão a grão até o ponto exato.</p>
         <div class="meta">
-          <div class="meta-row"><span class="k">Tempo</span><span class="v">25 dias</span></div>
-          <div class="meta-row"><span class="k">Umidade final</span><span class="v">11%</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.tempo">Tempo</span><span class="v" data-i18n="proc.tempo.v">25 dias</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.umidade">Umidade final</span><span class="v">11%</span></div>
         </div>
       </div>
       <div class="step">
         <div class="num">04</div>
-        <h3 class="title">Torra</h3>
-        <p class="desc">Pequenos lotes, torrefador artesanal, perfis ajustados a cada microlote. Embalado em até 48h após a torra.</p>
+        <h3 class="title" data-i18n="proc.torra">Torra</h3>
+        <p class="desc" data-i18n="proc.torra.desc">Pequenos lotes, torrefador artesanal, perfis ajustados a cada microlote. Embalado em até 48h após a torra.</p>
         <div class="meta">
-          <div class="meta-row"><span class="k">Lote</span><span class="v">≤ 12kg</span></div>
-          <div class="meta-row"><span class="k">Frescor</span><span class="v">48h</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.lote">Lote</span><span class="v">≤ 12kg</span></div>
+          <div class="meta-row"><span class="k" data-i18n="proc.frescor">Frescor</span><span class="v">48h</span></div>
         </div>
       </div>
     </div>
     <div class="processo-quote reveal">
-      <blockquote>O segredo do café perfeito é não ter pressa. A terra ensina, o sol decide, a gente apenas observa.</blockquote>
-      <div class="who">— Tomás Zerbinatti, terceira geração</div>
+      <blockquote data-i18n="proc.quote">O segredo do café perfeito é não ter pressa. A terra ensina, o sol decide, a gente apenas observa.</blockquote>
+      <div class="who" data-i18n="proc.who">— Tomás Zerbinatti, terceira geração</div>
     </div>
   </div>
 </section>
@@ -2458,9 +2485,9 @@
 <section class="video-feature" id="video">
   <div class="video-feature-inner">
     <div class="video-feature-head reveal">
-      <span class="eyebrow">Nosso café em movimento</span>
-      <h2 class="display">Da Fazenda <em>para o Mundo</em></h2>
-      <p>Mais de um século de tradição em cada grão. Conheça a história que se transforma em café a cada colheita.</p>
+      <span class="eyebrow" data-i18n="video.eyebrow">Nosso café em movimento</span>
+      <h2 class="display" data-i18n-html="video.title">Da Fazenda <em>para o Mundo</em></h2>
+      <p data-i18n="video.desc">Mais de um século de tradição em cada grão. Conheça a história que se transforma em café a cada colheita.</p>
     </div>
 
     <div class="video-stage reveal">
@@ -2482,8 +2509,8 @@
     </div>
 
     <div class="video-feature-foot reveal">
-      <span class="label" style="color:var(--ink-2);">Colheita 2026 já disponível</span>
-      <a href="#cafes" class="btn btn-gold">Provar nosso café <span class="arrow">→</span></a>
+      <span class="label" style="color:var(--ink-2);" data-i18n="video.label">Colheita 2026 já disponível</span>
+      <a href="#cafes" class="btn btn-gold" data-i18n-html="video.cta">Provar nosso café <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -2493,14 +2520,14 @@
   <div class="galeria-inner">
     <div class="galeria-head reveal">
       <div class="galeria-head-left">
-        <span class="eyebrow">Galeria · Vida na Fazenda</span>
-        <h2 class="display">A terra, as <em>mãos,</em><br/>o tempo.</h2>
+        <span class="eyebrow" data-i18n="gal.eyebrow">Galeria · Vida na Fazenda</span>
+        <h2 class="display" data-i18n-html="gal.title">A terra, as <em>mãos,</em><br/>o tempo.</h2>
       </div>
       <div class="galeria-head-right">
-        <p>Fotografias do dia-a-dia em Carmo do Paranaíba — a colheita, a secagem, os terreiros, e quem faz tudo acontecer.</p>
+        <p data-i18n="gal.desc">Fotografias do dia-a-dia em Carmo do Paranaíba — a colheita, a secagem, os terreiros, e quem faz tudo acontecer.</p>
         <div class="galeria-meta">
-          <div><span class="k">Local</span><span class="v">Serra do Cabral · MG</span></div>
-          <div><span class="k">Safra</span><span class="v">2025 / 2026</span></div>
+          <div><span class="k" data-i18n="gal.local">Local</span><span class="v">Serra do Cabral · MG</span></div>
+          <div><span class="k" data-i18n="gal.safra">Safra</span><span class="v">2025 / 2026</span></div>
         </div>
       </div>
     </div>
@@ -2508,37 +2535,37 @@
     <div class="galeria-grid">
       <figure class="g-item g-tall reveal" data-src="assets/galeria/1.webp">
         <img src="assets/galeria/1.webp" alt="Composição da marca Zerbinatti com selos de qualidade" loading="lazy"/>
-        <figcaption><span class="num">01</span> A herança · Dall'Italia al Brasile</figcaption>
+        <figcaption><span class="num">01</span> <span data-i18n="gal.cap.1">A herança · Dall'Italia al Brasile</span></figcaption>
       </figure>
       <figure class="g-item g-wide reveal" data-src="assets/galeria/2.webp">
         <img src="assets/galeria/2.webp" alt="Cerejas amarelas maduras no pé de café" loading="lazy"/>
-        <figcaption><span class="num">02</span> Cerejas amarelas · ponto de colheita</figcaption>
+        <figcaption><span class="num">02</span> <span data-i18n="gal.cap.2">Cerejas amarelas · ponto de colheita</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/3.webp" style="grid-column:span 4; grid-row:span 2;">
         <img src="assets/galeria/3.webp" alt="Cafezal florido ao pôr-do-sol na Serra do Cabral" loading="lazy"/>
-        <figcaption><span class="num">03</span> Florada · pôr-do-sol no cafezal</figcaption>
+        <figcaption><span class="num">03</span> <span data-i18n="gal.cap.3">Florada · pôr-do-sol no cafezal</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/4.webp" style="grid-column:span 4; grid-row:span 2;">
         <img src="assets/galeria/4.webp" alt="Pacotes Zerbinatti 250g enfileirados" loading="lazy"/>
-        <figcaption><span class="num">04</span> Linha 250g · do campo à mesa</figcaption>
+        <figcaption><span class="num">04</span> <span data-i18n="gal.cap.4">Linha 250g · do campo à mesa</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/5.webp" style="grid-column:span 4; grid-row:span 2;">
         <img src="assets/galeria/5.webp" alt="Mudas de café em viveiro com sombreamento" loading="lazy"/>
-        <figcaption><span class="num">05</span> Viveiro · onde tudo começa</figcaption>
+        <figcaption><span class="num">05</span> <span data-i18n="gal.cap.5">Viveiro · onde tudo começa</span></figcaption>
       </figure>
       <figure class="g-item g-wide reveal" data-src="assets/galeria/6.webp">
         <img src="assets/galeria/6.webp" alt="Terreiro de secagem natural com árvore icônica" loading="lazy"/>
-        <figcaption><span class="num">06</span> Terreiro · secagem natural ao sol</figcaption>
+        <figcaption><span class="num">06</span> <span data-i18n="gal.cap.6">Terreiro · secagem natural ao sol</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/7.webp" style="grid-column:span 4; grid-row:span 3;">
         <img src="assets/galeria/7.webp" alt="Plantio jovem de café em terra vermelha" loading="lazy"/>
-        <figcaption><span class="num">07</span> Plantio jovem · próximas safras</figcaption>
+        <figcaption><span class="num">07</span> <span data-i18n="gal.cap.7">Plantio jovem · próximas safras</span></figcaption>
       </figure>
     </div>
 
     <div class="galeria-foot reveal">
       <span class="line"></span>
-      <span class="t">07 frames · capturados em campo · 2025–2026</span>
+      <span class="t" data-i18n="gal.foot">07 frames · capturados em campo · 2025–2026</span>
       <span class="line"></span>
     </div>
   </div>
@@ -2560,9 +2587,9 @@
   <div class="cupping-grain"></div>
   <div class="cupping-inner">
     <div class="cupping-head reveal">
-      <span class="eyebrow">Laudo Sensorial · Q-Grader Certificado</span>
-      <h2 class="display">Cada lote tem <em>nota.</em></h2>
-      <p class="body-lg" style="margin:24px auto 0; max-width:620px;">Toda safra Zerbinatti passa por análise sensorial às cegas no protocolo SCA — 10 dimensões avaliadas, score final aberto. Veja o laudo do nosso lote em destaque.</p>
+      <span class="eyebrow" data-i18n="cup.eyebrow">Laudo Sensorial · Q-Grader Certificado</span>
+      <h2 class="display" data-i18n-html="cup.title">Cada lote tem <em>nota.</em></h2>
+      <p class="body-lg" style="margin:24px auto 0; max-width:620px;" data-i18n="cup.desc">Toda safra Zerbinatti passa por análise sensorial às cegas no protocolo SCA — 10 dimensões avaliadas, score final aberto. Veja o laudo do nosso lote em destaque.</p>
     </div>
 
     <div class="cupping-card reveal">
@@ -2573,23 +2600,23 @@
           <div class="cupping-name">Wilson · Arara Natural</div>
         </div>
         <div class="cupping-attrs">
-          <div><div class="k">Espécie</div><div class="v">Arábica</div></div>
-          <div><div class="k">Variedade</div><div class="v">Arara</div></div>
-          <div><div class="k">Processo</div><div class="v">Natural</div></div>
-          <div><div class="k">Origem</div><div class="v">Brasil</div></div>
-          <div><div class="k">Safra</div><div class="v">2025</div></div>
-          <div><div class="k">Análise</div><div class="v">18 jun 2025</div></div>
+          <div><div class="k" data-i18n="cup.species">Espécie</div><div class="v">Arábica</div></div>
+          <div><div class="k" data-i18n="meta.var">Variedade</div><div class="v">Arara</div></div>
+          <div><div class="k" data-i18n="meta.proc">Processo</div><div class="v" data-i18n="proc.natural">Natural</div></div>
+          <div><div class="k" data-i18n="meta.origem">Origem</div><div class="v" data-i18n="cup.brasil">Brasil</div></div>
+          <div><div class="k" data-i18n="gal.safra">Safra</div><div class="v">2025</div></div>
+          <div><div class="k" data-i18n="cup.analysis">Análise</div><div class="v" data-i18n="cup.analysisDate">18 jun 2025</div></div>
         </div>
         <div class="cupping-descriptors">
-          <div class="label" style="margin-bottom:10px;">Descritores do cupper</div>
+          <div class="label" style="margin-bottom:10px;" data-i18n="cup.descriptors">Descritores do cupper</div>
           <div class="feature-notes">
-            <span class="chip">Limpo</span>
-            <span class="chip">Doce</span>
-            <span class="chip">Bom corpo</span>
-            <span class="chip">Macio</span>
-            <span class="chip">Caramelo</span>
-            <span class="chip">Acidez média</span>
-            <span class="chip">Nibs de cacau</span>
+            <span class="chip" data-i18n="cup.note.limpo">Limpo</span>
+            <span class="chip" data-i18n="cup.note.doce">Doce</span>
+            <span class="chip" data-i18n="cup.note.bomCorpo">Bom corpo</span>
+            <span class="chip" data-i18n="cup.note.macio">Macio</span>
+            <span class="chip" data-i18n="note.caramelo">Caramelo</span>
+            <span class="chip" data-i18n="cup.note.acidezMed">Acidez média</span>
+            <span class="chip" data-i18n="cup.note.nibsCacau">Nibs de cacau</span>
           </div>
         </div>
       </div>
@@ -2597,7 +2624,7 @@
       <div class="cupping-radar">
         <div class="cupping-score-badge">
           <div class="num">84.75</div>
-          <div class="lbl">Total Score · SCA</div>
+          <div class="lbl" data-i18n="cup.total">Total Score · SCA</div>
         </div>
         <svg id="radarSvg" viewBox="0 0 520 520" aria-label="Radar sensorial">
           <defs>
@@ -2619,13 +2646,13 @@
     <div class="cupping-foot reveal">
       <div class="cupping-quote">
         <div class="cupping-q-mark">"</div>
-        <p>Limpo, doce, bom corpo, macio, caramelo, acidez média, nibs de cacau.</p>
-        <div class="who">— Cupper 1, sessão 18.06.2025</div>
+        <p data-i18n="cup.quote">Limpo, doce, bom corpo, macio, caramelo, acidez média, nibs de cacau.</p>
+        <div class="who" data-i18n="cup.who">— Cupper 1, sessão 18.06.2025</div>
       </div>
       <div class="cupping-cta">
-        <span class="label" style="color:var(--gold);">Disponível na coleção</span>
-        <h3 class="display" style="font-size:32px; margin:14px 0 18px;">Prove o lote Wilson.</h3>
-        <a href="#cafes" class="btn btn-gold">Adquirir agora <span class="arrow">→</span></a>
+        <span class="label" style="color:var(--gold);" data-i18n="cup.cta.label">Disponível na coleção</span>
+        <h3 class="display" style="font-size:32px; margin:14px 0 18px;" data-i18n="cup.cta.title">Prove o lote Wilson.</h3>
+        <a href="#cafes" class="btn btn-gold" data-i18n-html="cup.cta.btn">Adquirir agora <span class="arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -2636,38 +2663,38 @@
   <div class="shop-inner">
     <div class="shop-head reveal">
       <div>
-        <span class="eyebrow">Compra Rápida</span>
-        <h2 class="display">Escolha seu <em>café.</em></h2>
+        <span class="eyebrow" data-i18n="shop.eyebrow">Compra Rápida</span>
+        <h2 class="display" data-i18n-html="shop.title">Escolha seu <em>café.</em></h2>
       </div>
       <div class="right">
-        <span class="label">Frete grátis acima de R$ 150</span>
+        <span class="label" data-i18n="shop.freight">Frete grátis acima de R$ 150</span>
       </div>
     </div>
     <div class="shop-grid">
       <div class="product-card reveal">
         <div class="pc-image">
-          <span class="tag">Mais Vendido</span>
+          <span class="tag" data-i18n="shop.tag.best">Mais Vendido</span>
           <img src="assets/pacote-zerbinatti-2026.webp" alt="Clássico" />
         </div>
         <div class="pc-body">
           <div>
             <div class="pc-name">Clássico <em>Zerbinatti</em></div>
-            <div class="pc-tag">Blend de família · 500g</div>
+            <div class="pc-tag" data-i18n="shop.classico.tag">Blend de família · 500g</div>
           </div>
           <div class="pc-notes">
-            <span class="chip">Chocolate</span>
-            <span class="chip">Caramelo</span>
-            <span class="chip">Nozes</span>
+            <span class="chip" data-i18n="note.choco">Chocolate</span>
+            <span class="chip" data-i18n="note.caramelo">Caramelo</span>
+            <span class="chip" data-i18n="note.nozes">Nozes</span>
           </div>
           <div class="pc-foot">
             <div class="pc-price">R$ 69,90</div>
-            <button class="add-btn" data-add="classico-500g">+ Carrinho</button>
+            <button class="add-btn" data-add="classico-500g" data-i18n="btn.cart">+ Carrinho</button>
           </div>
         </div>
       </div>
       <div class="product-card reveal">
         <div class="pc-image">
-          <span class="tag">Edição Limitada</span>
+          <span class="tag" data-i18n="shop.tag.limited">Edição Limitada</span>
           <img src="assets/pacote-v3.webp" alt="Reserva" />
         </div>
         <div class="pc-body">
@@ -2676,19 +2703,19 @@
             <div class="pc-tag">Yellow Bourbon · 500g</div>
           </div>
           <div class="pc-notes">
-            <span class="chip">Frutas vermelhas</span>
-            <span class="chip">Mel</span>
-            <span class="chip">Cítrico</span>
+            <span class="chip" data-i18n="note.fruVermShort">Frutas vermelhas</span>
+            <span class="chip" data-i18n="note.mel">Mel</span>
+            <span class="chip" data-i18n="note.citrico">Cítrico</span>
           </div>
           <div class="pc-foot">
             <div class="pc-price">R$ 89,90</div>
-            <button class="add-btn" data-add="reserva-500g">+ Carrinho</button>
+            <button class="add-btn" data-add="reserva-500g" data-i18n="btn.cart">+ Carrinho</button>
           </div>
         </div>
       </div>
       <div class="product-card reveal">
         <div class="pc-image">
-          <span class="tag">Raridade</span>
+          <span class="tag" data-i18n="shop.tag.rare">Raridade</span>
           <img src="assets/pacote-zerbinatti-2026.webp" alt="Micro-Lote" />
         </div>
         <div class="pc-body">
@@ -2697,13 +2724,13 @@
             <div class="pc-tag">SCA 90+ · 500g</div>
           </div>
           <div class="pc-notes">
-            <span class="chip">Jasmim</span>
-            <span class="chip">Bergamota</span>
-            <span class="chip">Floral</span>
+            <span class="chip" data-i18n="note.jasmim">Jasmim</span>
+            <span class="chip" data-i18n="note.bergamota">Bergamota</span>
+            <span class="chip" data-i18n="note.floral">Floral</span>
           </div>
           <div class="pc-foot">
             <div class="pc-price">R$ 119,90</div>
-            <button class="add-btn" data-add="microlote-500g">+ Carrinho</button>
+            <button class="add-btn" data-add="microlote-500g" data-i18n="btn.cart">+ Carrinho</button>
           </div>
         </div>
       </div>
@@ -2715,47 +2742,47 @@
 <section class="subscribe-section" id="assinatura">
   <div class="sub-inner">
     <div class="sub-text reveal">
-      <span class="eyebrow">Assinatura Mensal</span>
-      <h2 class="display">Café fresco, todo mês, na sua porta.</h2>
-      <p class="body-lg">Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.</p>
-      <a href="#" class="btn btn-gold">Começar assinatura <span class="arrow">→</span></a>
+      <span class="eyebrow" data-i18n="sub.eyebrow">Assinatura Mensal</span>
+      <h2 class="display" data-i18n="sub.title">Café fresco, todo mês, na sua porta.</h2>
+      <p class="body-lg" data-i18n="sub.desc">Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.</p>
+      <a href="#" class="btn btn-gold" data-i18n-html="sub.cta">Começar assinatura <span class="arrow">→</span></a>
     </div>
     <div class="sub-cards reveal">
       <div class="plan">
         <div class="num">I</div>
         <div class="info">
           <div class="name">Apreciador</div>
-          <div class="freq">1 pacote · mensal</div>
-          <div class="desc">Para quem está começando a explorar cafés especiais.</div>
+          <div class="freq" data-i18n="sub.plan1.freq">1 pacote · mensal</div>
+          <div class="desc" data-i18n="sub.plan1.desc">Para quem está começando a explorar cafés especiais.</div>
         </div>
         <div class="price-col">
           <div class="price">R$ 59,41</div>
-          <div class="price-sub">/mês · 15% off</div>
+          <div class="price-sub" data-i18n="sub.priceMonthOff">/mês · 15% off</div>
         </div>
       </div>
       <div class="plan featured">
         <div class="num">II</div>
         <div class="info">
           <div class="name">Sommelier</div>
-          <div class="freq">2 pacotes · mensal</div>
-          <div class="desc">O blend clássico + um café rotativo da safra. Mais popular.</div>
-          <div class="badge">Mais escolhido</div>
+          <div class="freq" data-i18n="sub.plan2.freq">2 pacotes · mensal</div>
+          <div class="desc" data-i18n="sub.plan2.desc">O blend clássico + um café rotativo da safra. Mais popular.</div>
+          <div class="badge" data-i18n="sub.plan2.badge">Mais escolhido</div>
         </div>
         <div class="price-col">
           <div class="price">R$ 119,90</div>
-          <div class="price-sub">/mês</div>
+          <div class="price-sub" data-i18n="sub.priceMonth">/mês</div>
         </div>
       </div>
       <div class="plan">
         <div class="num">III</div>
         <div class="info">
           <div class="name">Herdeiro</div>
-          <div class="freq">3 pacotes · mensal</div>
-          <div class="desc">Acesso prioritário a microlotes e lançamentos limitados.</div>
+          <div class="freq" data-i18n="sub.plan3.freq">3 pacotes · mensal</div>
+          <div class="desc" data-i18n="sub.plan3.desc">Acesso prioritário a microlotes e lançamentos limitados.</div>
         </div>
         <div class="price-col">
           <div class="price">R$ 169,90</div>
-          <div class="price-sub">/mês</div>
+          <div class="price-sub" data-i18n="sub.priceMonth">/mês</div>
         </div>
       </div>
     </div>
@@ -2768,19 +2795,19 @@
     <div class="story-image reveal">
       <div class="overlay-stamp">
         <div class="y">1897</div>
-        <div class="l">Famiglia · Dal</div>
+        <div class="l" data-i18n="story.stamp">Famiglia · Dal</div>
       </div>
     </div>
     <div class="story-text reveal">
-      <span class="eyebrow">Nossa História</span>
-      <h2 class="display">Da Itália ao <em>coração</em> do Brasil.</h2>
-      <p class="body-lg">A família Zerbinatti trouxe da Itália não apenas uma tradição agrícola, mas uma filosofia: o café perfeito nasce da terra, do tempo e do cuidado de quem planta.</p>
-      <p class="body">Cada grão é cultivado com dedicação artesanal. Colheita seletiva, secagem natural ao sol, torra precisa — cada etapa é um ritual de qualidade transmitido por três gerações.</p>
-      <p class="body">Nosso café não é produzido em massa. É uma edição limitada da natureza, com terroir único e notas que contam a história de cada safra.</p>
+      <span class="eyebrow" data-i18n="story.eyebrow">Nossa História</span>
+      <h2 class="display" data-i18n-html="story.title">Da Itália ao <em>coração</em> do Brasil.</h2>
+      <p class="body-lg" data-i18n="story.p1">A família Zerbinatti trouxe da Itália não apenas uma tradição agrícola, mas uma filosofia: o café perfeito nasce da terra, do tempo e do cuidado de quem planta.</p>
+      <p class="body" data-i18n="story.p2">Cada grão é cultivado com dedicação artesanal. Colheita seletiva, secagem natural ao sol, torra precisa — cada etapa é um ritual de qualidade transmitido por três gerações.</p>
+      <p class="body" data-i18n="story.p3">Nosso café não é produzido em massa. É uma edição limitada da natureza, com terroir único e notas que contam a história de cada safra.</p>
       <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; padding-top:32px; border-top:1px solid var(--line);">
         <div><div style="font-family:var(--serif); font-size:32px; color:var(--gold);">100%</div><div class="label" style="margin-top:6px;">Arábica</div></div>
-        <div><div style="font-family:var(--serif); font-size:32px; color:var(--gold);">III</div><div class="label" style="margin-top:6px;">Gerações</div></div>
-        <div><div style="font-family:var(--serif); font-size:32px; color:var(--gold);">128</div><div class="label" style="margin-top:6px;">Anos</div></div>
+        <div><div style="font-family:var(--serif); font-size:32px; color:var(--gold);">III</div><div class="label" style="margin-top:6px;" data-i18n="hero.stats.gen">Gerações</div></div>
+        <div><div style="font-family:var(--serif); font-size:32px; color:var(--gold);">128</div><div class="label" style="margin-top:6px;" data-i18n="story.years">Anos</div></div>
       </div>
     </div>
   </div>
@@ -2793,32 +2820,32 @@
       <div class="footer-brand">
         <div class="word">Zerbinatti<em>.</em></div>
         <div class="label" style="color:var(--gold);">Caffè · Dal 1897</div>
-        <p>Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.</p>
+        <p data-i18n="footer.brandDesc">Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.</p>
       </div>
       <div>
-        <h4>Loja</h4>
+        <h4 data-i18n="footer.shop">Loja</h4>
         <ul>
-          <li><a href="#cafes">Todos os Cafés</a></li>
-          <li><a href="#assinatura">Assinaturas</a></li>
-          <li><a href="#">Kits e Presentes</a></li>
-          <li><a href="#">Acessórios</a></li>
+          <li><a href="#cafes" data-i18n="footer.allCoffees">Todos os Cafés</a></li>
+          <li><a href="#assinatura" data-i18n="footer.subs">Assinaturas</a></li>
+          <li><a href="#" data-i18n="footer.gifts">Kits e Presentes</a></li>
+          <li><a href="#" data-i18n="footer.accessories">Acessórios</a></li>
         </ul>
       </div>
       <div>
-        <h4>Sobre</h4>
+        <h4 data-i18n="footer.about">Sobre</h4>
         <ul>
-          <li><a href="#historia">Nossa História</a></li>
-          <li><a href="#processo">Processo</a></li>
-          <li><a href="#">A Fazenda</a></li>
-          <li><a href="#">B2B</a></li>
+          <li><a href="#historia" data-i18n="footer.story">Nossa História</a></li>
+          <li><a href="#processo" data-i18n="nav.processo">Processo</a></li>
+          <li><a href="#" data-i18n="footer.farm">A Fazenda</a></li>
+          <li><a href="para-empresas.html" data-i18n="nav.empresas">Para Empresas</a></li>
         </ul>
       </div>
       <div>
-        <h4>Newsletter</h4>
-        <p style="font-size:13px; color:var(--ink-2); margin-bottom:18px;">Novidades, microlotes e safras exclusivas no seu e-mail.</p>
-        <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Inscrito ✓';">
-          <input type="email" placeholder="seu@email.com" required />
-          <button>Assinar</button>
+        <h4 data-i18n="footer.newsletter">Newsletter</h4>
+        <p style="font-size:13px; color:var(--ink-2); margin-bottom:18px;" data-i18n="footer.newsDesc">Novidades, microlotes e safras exclusivas no seu e-mail.</p>
+        <form class="newsletter" onsubmit="event.preventDefault(); this.querySelector('button').textContent = (window.t && window.t('footer.subscribed')) || 'Inscrito ✓';">
+          <input type="email" placeholder="seu@email.com" required data-i18n-attr="placeholder:footer.emailPlaceholder" />
+          <button data-i18n="footer.subscribe">Assinar</button>
         </form>
         <div style="display:flex; gap:14px; margin-top:24px;">
           <a href="#" aria-label="Instagram" style="color:var(--ink-3);"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 0 4.1.1 1 0 1.7.2 2.3.4.6.2 1.1.5 1.6 1s.8 1 1 1.6c.2.6.4 1.3.4 2.3.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c0 1-.2 1.7-.4 2.3-.2.6-.5 1.1-1 1.6s-1 .8-1.6 1c-.6.2-1.3.4-2.3.4-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-1 0-1.7-.2-2.3-.4-.6-.2-1.1-.5-1.6-1s-.8-1-1-1.6c-.2-.6-.4-1.3-.4-2.3-.1-1.1-.1-1.4-.1-4.1s0-3 .1-4.1c0-1 .2-1.7.4-2.3.2-.6.5-1.1 1-1.6s1-.8 1.6-1c.6-.2 1.3-.4 2.3-.4C9 2 9.3 2 12 2zm0 5c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm6.5-.5c-.7 0-1.2.5-1.2 1.2s.5 1.2 1.2 1.2 1.2-.5 1.2-1.2-.5-1.2-1.2-1.2zM12 9c1.7 0 3 1.3 3 3s-1.3 3-3 3-3-1.3-3-3 1.3-3 3-3z"/></svg></a>
@@ -2829,9 +2856,9 @@
     <div class="footer-bottom">
       <span>© 2026 Zerbinatti Coffee · Dal 1897</span>
       <div style="display:flex; gap:24px;">
-        <a href="#">Termos</a>
-        <a href="#">Privacidade</a>
-        <a href="#">Entregas</a>
+        <a href="#" data-i18n="footer.terms">Termos</a>
+        <a href="#" data-i18n="footer.privacy">Privacidade</a>
+        <a href="#" data-i18n="footer.delivery">Entregas</a>
       </div>
     </div>
   </div>
@@ -2842,7 +2869,7 @@
 <aside class="cart-drawer" id="cartDrawer">
   <div class="cart-head">
     <div>
-      <div class="title">Carrinho</div>
+      <div class="title" data-i18n="cart.title">Carrinho</div>
       <div class="label" style="margin-top:4px;" id="cartItemsLabel">0 itens</div>
     </div>
     <button class="icon-btn" id="cartClose" aria-label="Fechar">
@@ -2853,8 +2880,8 @@
     <div class="cart-empty" id="cartEmpty">
       <div>
         <div class="ico">∅</div>
-        <div class="label" style="color:var(--ink-2);">Seu carrinho está vazio.</div>
-        <p style="margin-top:14px; font-size:13px;">Comece pelo Clássico — você não vai se arrepender.</p>
+        <div class="label" style="color:var(--ink-2);" data-i18n="cart.empty">Seu carrinho está vazio.</div>
+        <p style="margin-top:14px; font-size:13px;" data-i18n="cart.emptyDesc">Comece pelo Clássico — você não vai se arrepender.</p>
       </div>
     </div>
   </div>
@@ -2866,13 +2893,13 @@
       </div>
       <div class="track"><div class="fill" id="freightFill" style="width:0%;"></div></div>
     </div>
-    <div class="row"><span>Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
-    <div class="row"><span>Frete</span><span id="cartShipping">a calcular</span></div>
+    <div class="row"><span data-i18n="cart.subtotal">Subtotal</span><span id="cartSubtotal">R$ 0,00</span></div>
+    <div class="row"><span data-i18n="cart.shipping">Frete</span><span id="cartShipping" data-i18n="cart.shipping.calc">a calcular</span></div>
     <div class="total">
-      <span class="l">Total</span>
+      <span class="l" data-i18n="cart.total">Total</span>
       <span class="v" id="cartTotal">R$ 0,00</span>
     </div>
-    <button class="btn btn-gold">Finalizar compra <span class="arrow">→</span></button>
+    <button class="btn btn-gold" data-i18n-html="cart.checkout">Finalizar compra <span class="arrow">→</span></button>
   </div>
 </aside>
 
@@ -2884,6 +2911,311 @@
 <script type="text/babel" src="tweaks.jsx"></script>
 
 <script>
+  // ─── i18n (PT default, EN, ES) ───
+  const I18N = {
+    pt: {
+      'nav.cafes':'Cafés','nav.processo':'Processo','nav.assinatura':'Assinatura','nav.empresas':'Para Empresas','nav.historia':'História',
+      'hero.badge':'Colheita Limitada · Safra 2026',
+      'hero.title':'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
+      'hero.desc':'Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Serra do Cabral, secagem natural ao sol, torra artesanal em pequenos lotes.',
+      'hero.stats.alt':'Altitude','hero.stats.gen':'Gerações',
+      'hero.cta.shop':'Comprar agora <span class="arrow">→</span>','hero.cta.sub':'Assinar mensal',
+      'hero.roast':'Média Clara','hero.scroll':'Explore',
+      'cafes.eyebrow':'A Coleção','cafes.title':'Três cafés. <em>Uma assinatura.</em>',
+      'cafes.desc':'Três expressões da mesma fazenda, três mundos sensoriais. Do blend que atravessa gerações ao Geisha de competição.',
+      'feat.classico.num':'N° 01 — Mais vendido','feat.classico.tag':'O blend da família desde 1897.',
+      'feat.classico.desc':'Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.',
+      'feat.reserva.num':'N° 02 — Edição limitada','feat.reserva.tag':'Single origin, colheita seletiva.',
+      'feat.reserva.desc':'Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. O processo cereja-descascado revela a doçura do fruto e a acidez fina característica do Yellow Bourbon.',
+      'feat.micro.num':'N° 03 — Raridade da safra','feat.micro.tag':'SCA 90+. Apenas 400kg na safra.',
+      'feat.micro.desc':'Talhão específico da parte mais alta da Serra, variedade Geisha plantada em 2018. O primeiro lote a atingir maturidade comercial em 2025. Para baristas e amantes obsessivos por cafés de competição.',
+      'meta.origem':'Origem','meta.var':'Variedade','meta.proc':'Processo','meta.torra':'Torra','meta.alt':'Altitude',
+      'proc.natural':'Natural','proc.washed':'Lavado','proc.pulped':'Cereja descascado',
+      'torra.media':'Média','torra.mediaClara':'Média Clara','torra.clara':'Clara',
+      'note.chocoLeite':'Chocolate ao leite','note.choco':'Chocolate','note.caramelo':'Caramelo','note.nozes':'Nozes','note.finalDoce':'Final doce',
+      'note.fruVerm':'Frutas vermelhas','note.fruVermShort':'Frutas vermelhas','note.melSilv':'Mel silvestre','note.acidCit':'Acidez cítrica','note.corpoSed':'Corpo sedoso',
+      'note.jasmim':'Jasmim','note.bergamota':'Bergamota','note.melLaranja':'Mel de laranjeira','note.finalFloral':'Final floral',
+      'note.mel':'Mel','note.citrico':'Cítrico','note.floral':'Floral',
+      'sens.docura':'Doçura','sens.acidez':'Acidez','sens.corpo':'Corpo','sens.complex':'Complex.',
+      'btn.add':'Adicionar <span class="arrow">→</span>','btn.cart':'+ Carrinho',
+      'proc.eyebrow':'Da Terra à Xícara','proc.title':'Quatro <em>rituais.</em>',
+      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Serra do Cabral.',
+      'proc.solo':'Solo','proc.solo.v':'Vulcânico',
+      'proc.colheita':'Colheita','proc.colheita.desc':'Seletiva, à mão, somente em grão cereja maduro. Sem pressa, sem máquina, do jeito que o nonno ensinou.',
+      'proc.janela':'Janela','proc.janela.v':'Mai – Set','proc.metodo':'Método','proc.metodo.v':'Manual',
+      'proc.secagem':'Secagem','proc.secagem.desc':'Natural ao sol, em terreiro suspenso. Vinte e cinco dias revolvendo grão a grão até o ponto exato.',
+      'proc.tempo':'Tempo','proc.tempo.v':'25 dias','proc.umidade':'Umidade final',
+      'proc.torra':'Torra','proc.torra.desc':'Pequenos lotes, torrefador artesanal, perfis ajustados a cada microlote. Embalado em até 48h após a torra.',
+      'proc.lote':'Lote','proc.frescor':'Frescor',
+      'proc.quote':'O segredo do café perfeito é não ter pressa. A terra ensina, o sol decide, a gente apenas observa.',
+      'proc.who':'— Tomás Zerbinatti, terceira geração',
+      'video.eyebrow':'Nosso café em movimento','video.title':'Da Fazenda <em>para o Mundo</em>',
+      'video.desc':'Mais de um século de tradição em cada grão. Conheça a história que se transforma em café a cada colheita.',
+      'video.label':'Colheita 2026 já disponível','video.cta':'Provar nosso café <span class="arrow">→</span>',
+      'gal.eyebrow':'Galeria · Vida na Fazenda','gal.title':'A terra, as <em>mãos,</em><br/>o tempo.',
+      'gal.desc':'Fotografias do dia-a-dia em Carmo do Paranaíba — a colheita, a secagem, os terreiros, e quem faz tudo acontecer.',
+      'gal.local':'Local','gal.safra':'Safra',
+      'gal.cap.1':"A herança · Dall'Italia al Brasile",'gal.cap.2':'Cerejas amarelas · ponto de colheita',
+      'gal.cap.3':'Florada · pôr-do-sol no cafezal','gal.cap.4':'Linha 250g · do campo à mesa',
+      'gal.cap.5':'Viveiro · onde tudo começa','gal.cap.6':'Terreiro · secagem natural ao sol',
+      'gal.cap.7':'Plantio jovem · próximas safras',
+      'gal.foot':'07 frames · capturados em campo · 2025–2026',
+      'cup.eyebrow':'Laudo Sensorial · Q-Grader Certificado','cup.title':'Cada lote tem <em>nota.</em>',
+      'cup.desc':'Toda safra Zerbinatti passa por análise sensorial às cegas no protocolo SCA — 10 dimensões avaliadas, score final aberto. Veja o laudo do nosso lote em destaque.',
+      'cup.species':'Espécie','cup.brasil':'Brasil','cup.analysis':'Análise','cup.analysisDate':'18 jun 2025',
+      'cup.descriptors':'Descritores do cupper','cup.total':'Total Score · SCA',
+      'cup.note.limpo':'Limpo','cup.note.doce':'Doce','cup.note.bomCorpo':'Bom corpo','cup.note.macio':'Macio',
+      'cup.note.acidezMed':'Acidez média','cup.note.nibsCacau':'Nibs de cacau',
+      'cup.quote':'Limpo, doce, bom corpo, macio, caramelo, acidez média, nibs de cacau.',
+      'cup.who':'— Cupper 1, sessão 18.06.2025',
+      'cup.cta.label':'Disponível na coleção','cup.cta.title':'Prove o lote Wilson.','cup.cta.btn':'Adquirir agora <span class="arrow">→</span>',
+      'shop.eyebrow':'Compra Rápida','shop.title':'Escolha seu <em>café.</em>','shop.freight':'Frete grátis acima de R$ 150',
+      'shop.tag.best':'Mais Vendido','shop.tag.limited':'Edição Limitada','shop.tag.rare':'Raridade',
+      'shop.classico.tag':'Blend de família · 500g',
+      'sub.eyebrow':'Assinatura Mensal','sub.title':'Café fresco, todo mês, na sua porta.',
+      'sub.desc':'Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.',
+      'sub.cta':'Começar assinatura <span class="arrow">→</span>',
+      'sub.plan1.freq':'1 pacote · mensal','sub.plan1.desc':'Para quem está começando a explorar cafés especiais.',
+      'sub.plan2.freq':'2 pacotes · mensal','sub.plan2.desc':'O blend clássico + um café rotativo da safra. Mais popular.','sub.plan2.badge':'Mais escolhido',
+      'sub.plan3.freq':'3 pacotes · mensal','sub.plan3.desc':'Acesso prioritário a microlotes e lançamentos limitados.',
+      'sub.priceMonth':'/mês','sub.priceMonthOff':'/mês · 15% off',
+      'story.stamp':'Famiglia · Dal','story.eyebrow':'Nossa História','story.title':'Da Itália ao <em>coração</em> do Brasil.',
+      'story.p1':'A família Zerbinatti trouxe da Itália não apenas uma tradição agrícola, mas uma filosofia: o café perfeito nasce da terra, do tempo e do cuidado de quem planta.',
+      'story.p2':'Cada grão é cultivado com dedicação artesanal. Colheita seletiva, secagem natural ao sol, torra precisa — cada etapa é um ritual de qualidade transmitido por três gerações.',
+      'story.p3':'Nosso café não é produzido em massa. É uma edição limitada da natureza, com terroir único e notas que contam a história de cada safra.',
+      'story.years':'Anos',
+      'footer.brandDesc':'Café especial brasileiro com herança italiana. Três gerações de dedicação em cada xícara.',
+      'footer.shop':'Loja','footer.allCoffees':'Todos os Cafés','footer.subs':'Assinaturas','footer.gifts':'Kits e Presentes','footer.accessories':'Acessórios',
+      'footer.about':'Sobre','footer.story':'Nossa História','footer.farm':'A Fazenda',
+      'footer.newsletter':'Newsletter','footer.newsDesc':'Novidades, microlotes e safras exclusivas no seu e-mail.',
+      'footer.subscribe':'Assinar','footer.subscribed':'Inscrito ✓','footer.emailPlaceholder':'seu@email.com',
+      'footer.terms':'Termos','footer.privacy':'Privacidade','footer.delivery':'Entregas',
+      'cart.title':'Carrinho','cart.itemSing':'item','cart.itemPlur':'itens',
+      'cart.empty':'Seu carrinho está vazio.','cart.emptyDesc':'Comece pelo Clássico — você não vai se arrepender.',
+      'cart.subtotal':'Subtotal','cart.shipping':'Frete','cart.shipping.calc':'a calcular',
+      'cart.total':'Total','cart.checkout':'Finalizar compra <span class="arrow">→</span>','cart.free':'Grátis',
+      'freight.got':'✓ Você ganhou frete grátis','freight.miss':'Faltam {v} para frete grátis',
+      'ticker.1':'Frete grátis acima de R$ 150','ticker.2':'Safra 2026 disponível','ticker.3':'Torra fresca em até 48h',
+      'ticker.4':'III gerações desde 1897','ticker.5':'Colheita seletiva à mão','ticker.6':'100% Arábica · SCA 85+',
+      'ticker.7':'Pague em 6× sem juros','ticker.8':'Embalagem 500g',
+    },
+    en: {
+      'nav.cafes':'Coffees','nav.processo':'Process','nav.assinatura':'Subscription','nav.empresas':'For Business','nav.historia':'Story',
+      'hero.badge':'Limited Harvest · 2026 Crop',
+      'hero.title':'From our<br><em>legacy</em><br>to your table.<span class="since">— Famiglia Zerbinatti, since 1897</span>',
+      'hero.desc':'Brazilian specialty coffee, Italian heritage. 100% Arabica grown at 640–760m in Serra do Cabral, sun-dried naturally, artisan-roasted in small batches.',
+      'hero.stats.alt':'Altitude','hero.stats.gen':'Generations',
+      'hero.cta.shop':'Shop now <span class="arrow">→</span>','hero.cta.sub':'Subscribe monthly',
+      'hero.roast':'Medium light','hero.scroll':'Explore',
+      'cafes.eyebrow':'The Collection','cafes.title':'Three coffees. <em>One signature.</em>',
+      'cafes.desc':'Three expressions of the same farm, three sensory worlds. From the blend that crosses generations to the competition Geisha.',
+      'feat.classico.num':'N° 01 — Best seller','feat.classico.tag':'The family blend since 1897.',
+      'feat.classico.desc':'Born in Giuseppe Zerbinatti\u2019s first roast, this blend has crossed three generations without losing its soul. Balance of sweetness, round body and a persistent finish.',
+      'feat.reserva.num':'N° 02 — Limited edition','feat.reserva.tag':'Single origin, selective picking.',
+      'feat.reserva.desc':'A lot selected from the highest parts of the farm, picked exclusively as ripe cherry. The pulped natural process reveals fruit sweetness and the fine acidity characteristic of Yellow Bourbon.',
+      'feat.micro.num':'N° 03 — Crop rarity','feat.micro.tag':'SCA 90+. Just 400kg this crop.',
+      'feat.micro.desc':'A specific plot in the highest part of the Serra, Geisha planted in 2018. The first lot to reach commercial maturity in 2025. For baristas and obsessive lovers of competition coffees.',
+      'meta.origem':'Origin','meta.var':'Variety','meta.proc':'Process','meta.torra':'Roast','meta.alt':'Altitude',
+      'proc.natural':'Natural','proc.washed':'Washed','proc.pulped':'Pulped natural',
+      'torra.media':'Medium','torra.mediaClara':'Medium light','torra.clara':'Light',
+      'note.chocoLeite':'Milk chocolate','note.choco':'Chocolate','note.caramelo':'Caramel','note.nozes':'Nuts','note.finalDoce':'Sweet finish',
+      'note.fruVerm':'Red fruits','note.fruVermShort':'Red fruits','note.melSilv':'Wild honey','note.acidCit':'Citric acidity','note.corpoSed':'Silky body',
+      'note.jasmim':'Jasmine','note.bergamota':'Bergamot','note.melLaranja':'Orange blossom honey','note.finalFloral':'Floral finish',
+      'note.mel':'Honey','note.citrico':'Citric','note.floral':'Floral',
+      'sens.docura':'Sweetness','sens.acidez':'Acidity','sens.corpo':'Body','sens.complex':'Complex.',
+      'btn.add':'Add to cart <span class="arrow">→</span>','btn.cart':'+ Cart',
+      'proc.eyebrow':'From earth to cup','proc.title':'Four <em>rituals.</em>',
+      'proc.cultivo':'Cultivation','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon and Geisha planted by hand on natural terraces of Serra do Cabral.',
+      'proc.solo':'Soil','proc.solo.v':'Volcanic',
+      'proc.colheita':'Harvest','proc.colheita.desc':'Selective, by hand, only ripe cherry. No rush, no machine — the way the nonno taught us.',
+      'proc.janela':'Window','proc.janela.v':'May – Sep','proc.metodo':'Method','proc.metodo.v':'Manual',
+      'proc.secagem':'Drying','proc.secagem.desc':'Natural sun-drying on raised beds. Twenty-five days turning bean by bean to the perfect point.',
+      'proc.tempo':'Time','proc.tempo.v':'25 days','proc.umidade':'Final moisture',
+      'proc.torra':'Roast','proc.torra.desc':'Small batches, artisan roaster, profiles tuned to each microlot. Bagged within 48h of roast.',
+      'proc.lote':'Batch','proc.frescor':'Freshness',
+      'proc.quote':'The secret to perfect coffee is not rushing. The land teaches, the sun decides — we just observe.',
+      'proc.who':'— Tomás Zerbinatti, third generation',
+      'video.eyebrow':'Our coffee in motion','video.title':'From the Farm <em>to the World</em>',
+      'video.desc':'More than a century of tradition in every bean. Meet the story that becomes coffee at every harvest.',
+      'video.label':'2026 crop available now','video.cta':'Taste our coffee <span class="arrow">→</span>',
+      'gal.eyebrow':'Gallery · Life on the Farm','gal.title':'The land, the <em>hands,</em><br/>the time.',
+      'gal.desc':'Photographs of daily life in Carmo do Paranaíba — the harvest, the drying, the patios, and those who make it all happen.',
+      'gal.local':'Location','gal.safra':'Crop',
+      'gal.cap.1':"The heritage · Dall'Italia al Brasile",'gal.cap.2':'Yellow cherries · harvest point',
+      'gal.cap.3':'Bloom · sunset over the coffee fields','gal.cap.4':'250g line · from field to table',
+      'gal.cap.5':'Nursery · where it all begins','gal.cap.6':'Patio · natural sun-drying',
+      'gal.cap.7':'Young planting · future crops',
+      'gal.foot':'07 frames · captured in the field · 2025–2026',
+      'cup.eyebrow':'Sensory Report · Certified Q-Grader','cup.title':'Every lot has a <em>score.</em>',
+      'cup.desc':'Every Zerbinatti crop passes blind sensory analysis under SCA protocol — 10 dimensions evaluated, final score open. See the report for our featured lot.',
+      'cup.species':'Species','cup.brasil':'Brazil','cup.analysis':'Analysis','cup.analysisDate':'Jun 18, 2025',
+      'cup.descriptors':"Cupper's descriptors",'cup.total':'Total Score · SCA',
+      'cup.note.limpo':'Clean','cup.note.doce':'Sweet','cup.note.bomCorpo':'Good body','cup.note.macio':'Soft',
+      'cup.note.acidezMed':'Medium acidity','cup.note.nibsCacau':'Cocoa nibs',
+      'cup.quote':'Clean, sweet, good body, soft, caramel, medium acidity, cocoa nibs.',
+      'cup.who':'— Cupper 1, session 06.18.2025',
+      'cup.cta.label':'Available in the collection','cup.cta.title':'Try the Wilson lot.','cup.cta.btn':'Buy now <span class="arrow">→</span>',
+      'shop.eyebrow':'Quick Shop','shop.title':'Choose your <em>coffee.</em>','shop.freight':'Free shipping over R$ 150',
+      'shop.tag.best':'Best Seller','shop.tag.limited':'Limited Edition','shop.tag.rare':'Rarity',
+      'shop.classico.tag':'Family blend · 500g',
+      'sub.eyebrow':'Monthly Subscription','sub.title':'Fresh coffee, every month, at your door.',
+      'sub.desc':"Receive the month's roast picked by our master roaster. Pause, switch or cancel any time. No commitment, just pleasure.",
+      'sub.cta':'Start subscription <span class="arrow">→</span>',
+      'sub.plan1.freq':'1 bag · monthly','sub.plan1.desc':'For those starting to explore specialty coffee.',
+      'sub.plan2.freq':'2 bags · monthly','sub.plan2.desc':'The classic blend + a rotating crop coffee. Most popular.','sub.plan2.badge':'Most chosen',
+      'sub.plan3.freq':'3 bags · monthly','sub.plan3.desc':'Priority access to microlots and limited releases.',
+      'sub.priceMonth':'/month','sub.priceMonthOff':'/month · 15% off',
+      'story.stamp':'Famiglia · Since','story.eyebrow':'Our Story','story.title':'From Italy to the <em>heart</em> of Brazil.',
+      'story.p1':'The Zerbinatti family brought from Italy not only an agricultural tradition, but a philosophy: perfect coffee comes from the land, time, and the care of those who plant.',
+      'story.p2':'Every bean is grown with artisan dedication. Selective harvest, natural sun-drying, precise roasting — each step is a quality ritual passed down through three generations.',
+      'story.p3':'Our coffee is not mass produced. It is a limited edition of nature, with unique terroir and notes that tell the story of each crop.',
+      'story.years':'Years',
+      'footer.brandDesc':'Brazilian specialty coffee with Italian heritage. Three generations of dedication in every cup.',
+      'footer.shop':'Shop','footer.allCoffees':'All Coffees','footer.subs':'Subscriptions','footer.gifts':'Kits & Gifts','footer.accessories':'Accessories',
+      'footer.about':'About','footer.story':'Our Story','footer.farm':'The Farm',
+      'footer.newsletter':'Newsletter','footer.newsDesc':'News, microlots and exclusive crops in your inbox.',
+      'footer.subscribe':'Subscribe','footer.subscribed':'Subscribed ✓','footer.emailPlaceholder':'your@email.com',
+      'footer.terms':'Terms','footer.privacy':'Privacy','footer.delivery':'Shipping',
+      'cart.title':'Cart','cart.itemSing':'item','cart.itemPlur':'items',
+      'cart.empty':'Your cart is empty.','cart.emptyDesc':"Start with the Clássico — you won't regret it.",
+      'cart.subtotal':'Subtotal','cart.shipping':'Shipping','cart.shipping.calc':'to calculate',
+      'cart.total':'Total','cart.checkout':'Checkout <span class="arrow">→</span>','cart.free':'Free',
+      'freight.got':'✓ You got free shipping','freight.miss':'{v} away from free shipping',
+      'ticker.1':'Free shipping over R$ 150','ticker.2':'2026 crop available','ticker.3':'Fresh roast within 48h',
+      'ticker.4':'III generations since 1897','ticker.5':'Hand-picked harvest','ticker.6':'100% Arabica · SCA 85+',
+      'ticker.7':'6× interest-free','ticker.8':'500g packaging',
+    },
+    es: {
+      'nav.cafes':'Cafés','nav.processo':'Proceso','nav.assinatura':'Suscripción','nav.empresas':'Para Empresas','nav.historia':'Historia',
+      'hero.badge':'Cosecha Limitada · Zafra 2026',
+      'hero.title':'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
+      'hero.desc':'Café especial brasileño, herencia italiana. 100% Arábica cultivado a 640–760m en Serra do Cabral, secado natural al sol, tostado artesanal en lotes pequeños.',
+      'hero.stats.alt':'Altitud','hero.stats.gen':'Generaciones',
+      'hero.cta.shop':'Comprar ahora <span class="arrow">→</span>','hero.cta.sub':'Suscribirse mensual',
+      'hero.roast':'Medio claro','hero.scroll':'Explora',
+      'cafes.eyebrow':'La Colección','cafes.title':'Tres cafés. <em>Una firma.</em>',
+      'cafes.desc':'Tres expresiones de la misma finca, tres mundos sensoriales. Del blend que cruza generaciones al Geisha de competición.',
+      'feat.classico.num':'N° 01 — Más vendido','feat.classico.tag':'El blend de la familia desde 1897.',
+      'feat.classico.desc':'Nacido en el primer tueste de Giuseppe Zerbinatti, este blend atravesó tres generaciones sin perder el alma. Equilibrio entre dulzor, cuerpo redondo y final persistente.',
+      'feat.reserva.num':'N° 02 — Edición limitada','feat.reserva.tag':'Origen único, recolección selectiva.',
+      'feat.reserva.desc':'Lote seleccionado de las partes más altas de la finca, recogido exclusivamente en grano cereza maduro. El proceso pulped natural revela el dulzor del fruto y la acidez fina característica del Yellow Bourbon.',
+      'feat.micro.num':'N° 03 — Rareza de la zafra','feat.micro.tag':'SCA 90+. Solo 400kg en la zafra.',
+      'feat.micro.desc':'Parcela específica de la parte más alta de la Serra, variedad Geisha plantada en 2018. El primer lote en alcanzar madurez comercial en 2025. Para baristas y amantes obsesivos de cafés de competición.',
+      'meta.origem':'Origen','meta.var':'Variedad','meta.proc':'Proceso','meta.torra':'Tueste','meta.alt':'Altitud',
+      'proc.natural':'Natural','proc.washed':'Lavado','proc.pulped':'Pulped natural',
+      'torra.media':'Medio','torra.mediaClara':'Medio claro','torra.clara':'Claro',
+      'note.chocoLeite':'Chocolate con leche','note.choco':'Chocolate','note.caramelo':'Caramelo','note.nozes':'Nueces','note.finalDoce':'Final dulce',
+      'note.fruVerm':'Frutos rojos','note.fruVermShort':'Frutos rojos','note.melSilv':'Miel silvestre','note.acidCit':'Acidez cítrica','note.corpoSed':'Cuerpo sedoso',
+      'note.jasmim':'Jazmín','note.bergamota':'Bergamota','note.melLaranja':'Miel de azahar','note.finalFloral':'Final floral',
+      'note.mel':'Miel','note.citrico':'Cítrico','note.floral':'Floral',
+      'sens.docura':'Dulzor','sens.acidez':'Acidez','sens.corpo':'Cuerpo','sens.complex':'Compl.',
+      'btn.add':'Añadir <span class="arrow">→</span>','btn.cart':'+ Carrito',
+      'proc.eyebrow':'De la tierra a la taza','proc.title':'Cuatro <em>rituales.</em>',
+      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon y Geisha plantados a mano en terrazas naturales de Serra do Cabral.',
+      'proc.solo':'Suelo','proc.solo.v':'Volcánico',
+      'proc.colheita':'Cosecha','proc.colheita.desc':'Selectiva, a mano, solo en grano cereza maduro. Sin prisa, sin máquina, como enseñó el nonno.',
+      'proc.janela':'Ventana','proc.janela.v':'May – Sep','proc.metodo':'Método','proc.metodo.v':'Manual',
+      'proc.secagem':'Secado','proc.secagem.desc':'Natural al sol, en patios elevados. Veinticinco días removiendo grano a grano hasta el punto exacto.',
+      'proc.tempo':'Tiempo','proc.tempo.v':'25 días','proc.umidade':'Humedad final',
+      'proc.torra':'Tueste','proc.torra.desc':'Pequeños lotes, tostadora artesanal, perfiles ajustados a cada microlote. Embolsado en hasta 48h tras el tueste.',
+      'proc.lote':'Lote','proc.frescor':'Frescor',
+      'proc.quote':'El secreto del café perfecto es no tener prisa. La tierra enseña, el sol decide, nosotros solo observamos.',
+      'proc.who':'— Tomás Zerbinatti, tercera generación',
+      'video.eyebrow':'Nuestro café en movimiento','video.title':'De la Finca <em>al Mundo</em>',
+      'video.desc':'Más de un siglo de tradición en cada grano. Conoce la historia que se convierte en café en cada cosecha.',
+      'video.label':'Cosecha 2026 ya disponible','video.cta':'Probar nuestro café <span class="arrow">→</span>',
+      'gal.eyebrow':'Galería · Vida en la Finca','gal.title':'La tierra, las <em>manos,</em><br/>el tiempo.',
+      'gal.desc':'Fotografías del día a día en Carmo do Paranaíba — la cosecha, el secado, los patios, y quienes hacen todo posible.',
+      'gal.local':'Lugar','gal.safra':'Zafra',
+      'gal.cap.1':"La herencia · Dall'Italia al Brasile",'gal.cap.2':'Cerezas amarillas · punto de cosecha',
+      'gal.cap.3':'Floración · atardecer en el cafetal','gal.cap.4':'Línea 250g · del campo a la mesa',
+      'gal.cap.5':'Vivero · donde todo comienza','gal.cap.6':'Patio · secado natural al sol',
+      'gal.cap.7':'Plantío joven · próximas zafras',
+      'gal.foot':'07 frames · capturados en campo · 2025–2026',
+      'cup.eyebrow':'Informe Sensorial · Q-Grader Certificado','cup.title':'Cada lote tiene <em>nota.</em>',
+      'cup.desc':'Cada zafra Zerbinatti pasa por análisis sensorial a ciegas en protocolo SCA — 10 dimensiones evaluadas, puntuación final abierta. Mira el informe de nuestro lote destacado.',
+      'cup.species':'Especie','cup.brasil':'Brasil','cup.analysis':'Análisis','cup.analysisDate':'18 jun 2025',
+      'cup.descriptors':'Descriptores del cupper','cup.total':'Puntuación Total · SCA',
+      'cup.note.limpo':'Limpio','cup.note.doce':'Dulce','cup.note.bomCorpo':'Buen cuerpo','cup.note.macio':'Suave',
+      'cup.note.acidezMed':'Acidez media','cup.note.nibsCacau':'Nibs de cacao',
+      'cup.quote':'Limpio, dulce, buen cuerpo, suave, caramelo, acidez media, nibs de cacao.',
+      'cup.who':'— Cupper 1, sesión 18.06.2025',
+      'cup.cta.label':'Disponible en la colección','cup.cta.title':'Prueba el lote Wilson.','cup.cta.btn':'Comprar ahora <span class="arrow">→</span>',
+      'shop.eyebrow':'Compra Rápida','shop.title':'Elige tu <em>café.</em>','shop.freight':'Envío gratis sobre R$ 150',
+      'shop.tag.best':'Más Vendido','shop.tag.limited':'Edición Limitada','shop.tag.rare':'Rareza',
+      'shop.classico.tag':'Blend de familia · 500g',
+      'sub.eyebrow':'Suscripción Mensual','sub.title':'Café fresco, todos los meses, en tu puerta.',
+      'sub.desc':'Recibe el tueste del mes seleccionado por nuestro maestro tostador. Pausa, cambia o cancela cuando quieras. Sin compromiso, solo placer.',
+      'sub.cta':'Empezar suscripción <span class="arrow">→</span>',
+      'sub.plan1.freq':'1 bolsa · mensual','sub.plan1.desc':'Para quien empieza a explorar cafés especiales.',
+      'sub.plan2.freq':'2 bolsas · mensual','sub.plan2.desc':'El blend clásico + un café rotativo de la zafra. El más popular.','sub.plan2.badge':'Más elegido',
+      'sub.plan3.freq':'3 bolsas · mensual','sub.plan3.desc':'Acceso prioritario a microlotes y lanzamientos limitados.',
+      'sub.priceMonth':'/mes','sub.priceMonthOff':'/mes · 15% off',
+      'story.stamp':'Famiglia · Desde','story.eyebrow':'Nuestra Historia','story.title':'De Italia al <em>corazón</em> de Brasil.',
+      'story.p1':'La familia Zerbinatti trajo de Italia no solo una tradición agrícola, sino una filosofía: el café perfecto nace de la tierra, del tiempo y del cuidado de quien planta.',
+      'story.p2':'Cada grano se cultiva con dedicación artesanal. Cosecha selectiva, secado natural al sol, tueste preciso — cada etapa es un ritual de calidad transmitido por tres generaciones.',
+      'story.p3':'Nuestro café no se produce en masa. Es una edición limitada de la naturaleza, con terroir único y notas que cuentan la historia de cada zafra.',
+      'story.years':'Años',
+      'footer.brandDesc':'Café especial brasileño con herencia italiana. Tres generaciones de dedicación en cada taza.',
+      'footer.shop':'Tienda','footer.allCoffees':'Todos los Cafés','footer.subs':'Suscripciones','footer.gifts':'Kits y Regalos','footer.accessories':'Accesorios',
+      'footer.about':'Sobre','footer.story':'Nuestra Historia','footer.farm':'La Finca',
+      'footer.newsletter':'Newsletter','footer.newsDesc':'Novedades, microlotes y zafras exclusivas en tu correo.',
+      'footer.subscribe':'Suscribirse','footer.subscribed':'Suscrito ✓','footer.emailPlaceholder':'tu@email.com',
+      'footer.terms':'Términos','footer.privacy':'Privacidad','footer.delivery':'Envíos',
+      'cart.title':'Carrito','cart.itemSing':'artículo','cart.itemPlur':'artículos',
+      'cart.empty':'Tu carrito está vacío.','cart.emptyDesc':'Empieza por el Clássico — no te arrepentirás.',
+      'cart.subtotal':'Subtotal','cart.shipping':'Envío','cart.shipping.calc':'a calcular',
+      'cart.total':'Total','cart.checkout':'Finalizar compra <span class="arrow">→</span>','cart.free':'Gratis',
+      'freight.got':'✓ ¡Conseguiste envío gratis!','freight.miss':'Faltan {v} para envío gratis',
+      'ticker.1':'Envío gratis sobre R$ 150','ticker.2':'Zafra 2026 disponible','ticker.3':'Tueste fresco en hasta 48h',
+      'ticker.4':'III generaciones desde 1897','ticker.5':'Cosecha selectiva a mano','ticker.6':'100% Arábica · SCA 85+',
+      'ticker.7':'Paga en 6× sin intereses','ticker.8':'Empaque 500g',
+    },
+  };
+
+  let currentLang = (typeof localStorage !== 'undefined' && localStorage.getItem('lang')) || 'pt';
+  if (!I18N[currentLang]) currentLang = 'pt';
+
+  window.t = function(key) {
+    const dict = I18N[currentLang] || I18N.pt;
+    return (dict[key] != null) ? dict[key] : (I18N.pt[key] != null ? I18N.pt[key] : key);
+  };
+
+  function applyI18n() {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = window.t(el.dataset.i18n);
+      if (v != null) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = window.t(el.dataset.i18nHtml);
+      if (v != null) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-attr]').forEach(el => {
+      const spec = el.dataset.i18nAttr;
+      const [attr, key] = spec.split(':');
+      const v = window.t(key);
+      if (v != null) el.setAttribute(attr, v);
+    });
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+    if (typeof window.buildTicker === 'function') window.buildTicker();
+    if (typeof window.renderCart === 'function') window.renderCart();
+  }
+
+  window.setLang = function(lang) {
+    if (!I18N[lang]) return;
+    currentLang = lang;
+    try { localStorage.setItem('lang', lang); } catch(e){}
+    applyI18n();
+  };
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => window.setLang(btn.dataset.lang));
+  });
+  applyI18n();
+
   // ─── Header scroll ───
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
@@ -2920,15 +3252,13 @@
 
   // ─── Ticker (duplicate for infinite scroll) ───
   const ticker = document.getElementById('tickerTrack');
-  const tickerItems = [
-    'Frete grátis acima de R$ 150', 'Safra 2026 disponível', 'Torra fresca em até 48h',
-    'III gerações desde 1897', 'Colheita seletiva à mão', '100% Arábica · SCA 85+',
-    'Pague em 6× sem juros', 'Embalagem 500g',
-  ];
+  const tickerKeys = ['ticker.1','ticker.2','ticker.3','ticker.4','ticker.5','ticker.6','ticker.7','ticker.8'];
   function buildTicker() {
-    const html = tickerItems.map(t => `<span class="ticker-item"><span class="star">✦</span>${t}</span>`).join('');
+    const items = tickerKeys.map(k => (window.t ? window.t(k) : k));
+    const html = items.map(t => `<span class="ticker-item"><span class="star">✦</span>${t}</span>`).join('');
     ticker.innerHTML = html + html + html + html;
   }
+  window.buildTicker = buildTicker;
   buildTicker();
 
   // ─── Lightbox Galeria ───
@@ -3076,11 +3406,13 @@
   function fmt(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); }
 
   function renderCart(){
+    if (typeof cart === 'undefined') return;
     const ids = Object.keys(cart);
     const count = ids.reduce((a,id) => a + cart[id].qty, 0);
     document.getElementById('cartCount').style.display = count ? 'grid' : 'none';
     document.getElementById('cartCount').textContent = count;
-    document.getElementById('cartItemsLabel').textContent = count + (count === 1 ? ' item' : ' itens');
+    const itemWord = window.t ? window.t(count === 1 ? 'cart.itemSing' : 'cart.itemPlur') : (count === 1 ? 'item' : 'itens');
+    document.getElementById('cartItemsLabel').textContent = count + ' ' + itemWord;
 
     const empty = document.getElementById('cartEmpty');
     const foot = document.getElementById('cartFoot');
@@ -3120,17 +3452,20 @@
 
     const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 18.90;
     document.getElementById('cartSubtotal').textContent = fmt(subtotal);
+    const freeWord = window.t ? window.t('cart.free') : 'Grátis';
     document.getElementById('cartShipping').innerHTML = shipping === 0
-      ? '<span style="color:var(--gold);">Grátis</span>'
+      ? `<span style="color:var(--gold);">${freeWord}</span>`
       : fmt(shipping);
     document.getElementById('cartTotal').textContent = fmt(subtotal + shipping);
 
     const pct = Math.min(100, (subtotal/FREE_SHIPPING_THRESHOLD) * 100);
     document.getElementById('freightFill').style.width = pct + '%';
     document.getElementById('freightProgress').textContent = Math.round(pct) + '%';
+    const gotIt = window.t ? window.t('freight.got') : '✓ Você ganhou frete grátis';
+    const missTpl = window.t ? window.t('freight.miss') : 'Faltam {v} para frete grátis';
     document.getElementById('freightLabel').textContent = subtotal >= FREE_SHIPPING_THRESHOLD
-      ? '✓ Você ganhou frete grátis'
-      : `Faltam ${fmt(FREE_SHIPPING_THRESHOLD - subtotal)} para frete grátis`;
+      ? gotIt
+      : missTpl.replace('{v}', fmt(FREE_SHIPPING_THRESHOLD - subtotal));
   }
 
   function addToCart(id){
@@ -3158,6 +3493,7 @@
       renderCart();
     }
   });
+  window.renderCart = renderCart;
 
   function openCart(){
     document.getElementById('cartDrawer').classList.add('open');
