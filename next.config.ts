@@ -48,6 +48,7 @@ const cspDirectives: Record<string, string[]> = {
     "wss://*.api.sanity.io",
     "https://player.vimeo.com",
     "https://*.vimeocdn.com",
+    "https://*.cloudfunctions.net",
     isDev ? "ws://localhost:*" : "",
   ].filter(Boolean),
   "frame-src": [

@@ -1,0 +1,184 @@
+/* ===== GRUTA FOOTER BADGE ===== */
+.gruta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 8px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  line-height: 1;
+  user-select: none;
+  cursor: pointer;
+  --gruta-fg: #c4cc7c;
+  --gruta-accent: #e8ecc4;
+  color: var(--gruta-fg);
+  transition: color 0.2s;
+}
+.gruta-badge[data-theme="light"] {
+  --gruta-fg: #384818;
+  --gruta-accent: #0f1a0a;
+}
+.gruta-badge canvas {
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  width: 32px; height: 32px;
+}
+.gruta-badge .gruta-text {
+  display: inline-flex;
+  align-items: center;
+  width: 165px;
+  white-space: pre;
+  font-feature-settings: "tnum";
+  overflow: hidden;
+}
+.gruta-badge .gruta-cursor {
+  display: inline-block;
+  width: 6px; height: 9px;
+  margin-left: 3px;
+  background: var(--gruta-fg);
+  animation: gruta-blink 0.5s steps(2) infinite;
+}
+.gruta-badge:hover { color: var(--gruta-accent); }
+.gruta-badge:hover .gruta-cursor { background: var(--gruta-accent); }
+@keyframes gruta-blink { 50% { opacity: 0; } }
+
+/* ===== GRUTA MODAL ===== */
+.gruta-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 26, 10, 0.78);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: gruta-fade-in 0.2s ease;
+}
+.gruta-modal-overlay.open { display: flex; }
+@keyframes gruta-fade-in { from { opacity: 0; } to { opacity: 1; } }
+.gruta-modal {
+  position: relative;
+  background: #14180e;
+  color: #c4cc7c;
+  border: 1px solid #384818;
+  border-radius: 8px;
+  max-width: 520px; width: 100%;
+  padding: 32px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  animation: gruta-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh; overflow-y: auto;
+}
+@keyframes gruta-slide-up { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.gruta-modal-close {
+  position: absolute; top: 16px; right: 18px;
+  background: transparent; color: #7c8a3c; border: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px; cursor: pointer;
+  transition: color 0.15s;
+}
+.gruta-modal-close:hover { color: #e8ecc4; }
+.gruta-modal-header {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  color: #7c8a3c; margin-bottom: 16px;
+  position: relative;
+}
+.gruta-modal h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 16px; line-height: 1.4; letter-spacing: 1px;
+  color: #e8ecc4; margin: 0 0 12px;
+}
+.gruta-modal p.intro {
+  color: #c4cc7c; font-size: 13px; line-height: 1.55; margin-bottom: 24px;
+}
+.gruta-form { display: flex; flex-direction: column; gap: 14px; }
+.gruta-form input, .gruta-form textarea {
+  background: #0a0d06;
+  color: #e8ecc4;
+  border: 1px solid #384818;
+  border-radius: 4px;
+  padding: 11px 13px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.gruta-form input:focus, .gruta-form textarea:focus {
+  border-color: #c4cc7c;
+  box-shadow: 0 0 0 3px rgba(196, 204, 124, 0.15);
+}
+.gruta-form textarea { resize: vertical; min-height: 96px; }
+.gruta-form .field { display: flex; flex-direction: column; gap: 6px; position: relative; }
+.gruta-form .field-error {
+  color: #e89a9e; font-size: 11px;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  letter-spacing: 0;
+  margin-top: -2px;
+  display: none;
+}
+.gruta-form .field.invalid input,
+.gruta-form .field.invalid textarea {
+  border-color: #e89a9e;
+  box-shadow: 0 0 0 3px rgba(232, 154, 158, 0.12);
+}
+.gruta-form .field.invalid .field-error { display: block; }
+.gruta-form .field-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px; letter-spacing: 2px;
+  color: #7c8a3c;
+}
+.gruta-honeypot { position: absolute; left: -9999px; opacity: 0; pointer-events: none; }
+.gruta-submit {
+  background: #c4cc7c;
+  color: #0f1a0a;
+  border: none;
+  padding: 14px 20px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px; letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 8px;
+  transition: background 0.15s, transform 0.1s;
+}
+.gruta-submit:hover:not(:disabled) { background: #e8ecc4; }
+.gruta-submit:active:not(:disabled) { transform: translateY(1px); }
+.gruta-submit:disabled { opacity: 0.5; cursor: wait; }
+.gruta-error {
+  color: #e89a9e; font-size: 12px;
+  background: rgba(232, 154, 158, 0.1);
+  border: 1px solid rgba(232, 154, 158, 0.3);
+  border-radius: 4px;
+  padding: 10px 12px;
+  display: none;
+}
+.gruta-error.show { display: block; }
+.gruta-success {
+  text-align: center; padding: 20px 0;
+}
+.gruta-success .check {
+  width: 64px; height: 64px;
+  margin: 0 auto 20px;
+  border: 3px solid #c4cc7c;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 24px;
+  color: #c4cc7c;
+  animation: gruta-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes gruta-pop { from { transform: scale(0); } to { transform: scale(1); } }
+.gruta-success h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px; letter-spacing: 1px;
+  color: #e8ecc4; margin: 0 0 12px;
+}
+.gruta-success p {
+  color: #c4cc7c; font-size: 13px; line-height: 1.55;
+}
