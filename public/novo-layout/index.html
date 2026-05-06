@@ -1789,11 +1789,16 @@
   .cart-item .img{
     width:80px; height:100px;
     background:var(--bg-2);
-    display:grid; place-items:center;
+    display:flex; align-items:center; justify-content:center;
     overflow:hidden;
+    border-radius:6px;
   }
-  .cart-item img{
-    height:90%; object-fit:contain;
+  .cart-item .img img{
+    max-width:90%;
+    max-height:90%;
+    width:auto;
+    height:auto;
+    object-fit:contain;
     filter:drop-shadow(0 8px 12px rgba(0,0,0,.6));
   }
   .cart-item .name{
