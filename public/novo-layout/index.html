@@ -886,6 +886,115 @@
     color:var(--gold);
   }
 
+  /* ───────── VIDEO FEATURE ───────── */
+  .video-feature{
+    position:relative;
+    overflow:hidden;
+    background:var(--bg-0);
+    padding:140px 0 160px;
+    border-top:1px solid var(--line);
+    isolation:isolate;
+  }
+  .video-feature::before{
+    content:"";
+    position:absolute;
+    top:-15%; left:50%;
+    transform:translateX(-50%);
+    width:1400px; height:900px;
+    background:radial-gradient(ellipse, rgba(217,165,77,.18) 0%, rgba(217,165,77,.06) 35%, transparent 65%);
+    z-index:0;
+    pointer-events:none;
+    filter:blur(120px);
+  }
+  .video-feature::after{
+    content:"";
+    position:absolute;
+    bottom:-10%; right:-10%;
+    width:700px; height:700px;
+    background:radial-gradient(circle, rgba(139,105,20,.18) 0%, transparent 60%);
+    z-index:0;
+    pointer-events:none;
+    filter:blur(100px);
+  }
+  .video-feature-inner{
+    position:relative;
+    z-index:2;
+    max-width:1600px;
+    margin:0 auto;
+    padding:0 48px;
+  }
+  .video-feature-head{
+    text-align:center;
+    margin-bottom:64px;
+  }
+  .video-feature-head .display{
+    font-size:clamp(40px, 5vw, 80px);
+    margin-top:16px;
+  }
+  .video-feature-head p{
+    margin:24px auto 0;
+    max-width:560px;
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ink-1);
+  }
+  .video-stage{
+    position:relative;
+    max-width:1400px;
+    margin:0 auto;
+  }
+  .video-stage-glow{
+    position:absolute;
+    inset:-12px;
+    border-radius:24px;
+    background:linear-gradient(135deg, rgba(201,169,97,.4) 0%, rgba(217,165,77,.15) 50%, rgba(201,169,97,.35) 100%);
+    filter:blur(28px);
+    z-index:0;
+  }
+  .video-frame{
+    position:relative;
+    z-index:1;
+    overflow:hidden;
+    border-radius:18px;
+    border:1px solid var(--line-strong);
+    background:#000;
+    box-shadow:
+      0 60px 120px -20px rgba(0,0,0,.95),
+      0 30px 60px -15px rgba(217,165,77,.18),
+      inset 0 0 0 1px rgba(217,165,77,.08);
+  }
+  .video-frame .ratio{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+  }
+  .video-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%; height:100%;
+    border:0;
+  }
+  .video-corner{
+    position:absolute;
+    width:44px; height:44px;
+    border:2px solid var(--gold);
+    z-index:2;
+    pointer-events:none;
+    opacity:.7;
+  }
+  .video-corner.tl{top:-6px; left:-6px; border-right:none; border-bottom:none;}
+  .video-corner.tr{top:-6px; right:-6px; border-left:none; border-bottom:none;}
+  .video-corner.bl{bottom:-6px; left:-6px; border-right:none; border-top:none;}
+  .video-corner.br{bottom:-6px; right:-6px; border-left:none; border-top:none;}
+  .video-feature-foot{
+    margin-top:56px;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+  }
+
   /* ───────── GALERIA ───────── */
   .galeria{
     position:relative;
@@ -1094,6 +1203,12 @@
   .lb-counter span{ color:var(--gold); }
 
   @media (max-width: 1024px){
+    .video-feature{padding:80px 0 100px;}
+    .video-feature-inner{padding:0 24px;}
+    .video-feature-head{margin-bottom:40px;}
+    .video-corner{width:30px; height:30px;}
+    .video-feature-foot{margin-top:36px;}
+
     .galeria{padding:80px 0;}
     .galeria-inner{padding:0 0 0 24px;}
     .galeria-head{grid-template-columns:1fr; gap:32px; margin-bottom:40px; padding-right:24px;}
@@ -2335,6 +2450,40 @@
     <div class="processo-quote reveal">
       <blockquote>O segredo do café perfeito é não ter pressa. A terra ensina, o sol decide, a gente apenas observa.</blockquote>
       <div class="who">— Tomás Zerbinatti, terceira geração</div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── VIDEO FEATURE ──────── -->
+<section class="video-feature" id="video">
+  <div class="video-feature-inner">
+    <div class="video-feature-head reveal">
+      <span class="eyebrow">Nosso café em movimento</span>
+      <h2 class="display">Da Fazenda <em>para o Mundo</em></h2>
+      <p>Mais de um século de tradição em cada grão. Conheça a história que se transforma em café a cada colheita.</p>
+    </div>
+
+    <div class="video-stage reveal">
+      <div class="video-stage-glow"></div>
+      <span class="video-corner tl"></span>
+      <span class="video-corner tr"></span>
+      <span class="video-corner bl"></span>
+      <span class="video-corner br"></span>
+      <div class="video-frame">
+        <div class="ratio">
+          <iframe
+            src="https://player.vimeo.com/video/1171854594?autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0"
+            title="Zerbinatti Coffee — Da Fazenda para o Mundo"
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+            allowfullscreen
+            loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-feature-foot reveal">
+      <span class="label" style="color:var(--ink-2);">Colheita 2026 já disponível</span>
+      <a href="#cafes" class="btn btn-gold">Provar nosso café <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
