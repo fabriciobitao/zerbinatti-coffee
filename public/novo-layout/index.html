@@ -1504,25 +1504,28 @@
   }
   .shop-head{
     display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
     margin-bottom:64px;
-    gap:32px;
-    flex-wrap:wrap;
+    gap:14px;
   }
   .shop-head .display{
     font-size:clamp(40px, 5vw, 72px);
     margin-top:14px;
-    max-width:600px;
+    max-width:780px;
   }
   .shop-head .right{
     display:flex; gap:14px;
     align-items:center;
+    margin-top:6px;
   }
   .shop-grid{
     display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:24px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:32px;
+    max-width:880px;
+    margin:0 auto;
   }
   .product-card{
     position:relative;
@@ -2662,6 +2665,58 @@
 </section>
 
 <!-- ──────── SHOP GRID (compra rápida) ──────── -->
+<!-- ──────── ASSINATURA ──────── -->
+<section class="subscribe-section" id="assinatura">
+  <div class="sub-inner">
+    <div class="sub-text reveal">
+      <span class="eyebrow" data-i18n="sub.eyebrow">Assinatura Mensal</span>
+      <h2 class="display" data-i18n="sub.title">Café fresco, todo mês, na sua porta.</h2>
+      <p class="body-lg" data-i18n="sub.desc">Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.</p>
+      <a href="#" class="btn btn-gold" data-i18n-html="sub.cta">Começar assinatura <span class="arrow">→</span></a>
+    </div>
+    <div class="sub-cards reveal">
+      <div class="plan">
+        <div class="num">I</div>
+        <div class="info">
+          <div class="name"><em>Quotidiano</em></div>
+          <div class="freq" data-i18n="sub.plan1.freq">3× moído · 250g · mensal</div>
+          <div class="desc" data-i18n="sub.plan1.desc">Café pronto pra cafeteira. Para o ritual diário sem complicação.</div>
+        </div>
+        <div class="price-col">
+          <div class="price">R$ 107,73</div>
+          <div class="price-sub" data-i18n="sub.priceMonthOff">/mês · 10% off</div>
+        </div>
+      </div>
+      <div class="plan featured">
+        <div class="num">II</div>
+        <div class="info">
+          <div class="name"><em>Doppio Rituale</em></div>
+          <div class="freq" data-i18n="sub.plan2.freq">1 moído 250g + 1 grãos 500g · mensal</div>
+          <div class="desc" data-i18n="sub.plan2.desc">Os dois mundos na mesma assinatura. Praticidade e ritual de barista, lado a lado.</div>
+          <div class="badge" data-i18n="sub.plan2.badge">Mais escolhido</div>
+        </div>
+        <div class="price-col">
+          <div class="price">R$ 98,82</div>
+          <div class="price-sub" data-i18n="sub.priceMonthOff">/mês · 10% off</div>
+        </div>
+      </div>
+      <div class="plan">
+        <div class="num">III</div>
+        <div class="info">
+          <div class="name"><em>Maestro</em></div>
+          <div class="freq" data-i18n="sub.plan3.freq">3× grãos · 500g · mensal</div>
+          <div class="desc" data-i18n="sub.plan3.desc">Para quem mói fresco antes de cada xícara. O ritual completo do barista em casa.</div>
+        </div>
+        <div class="price-col">
+          <div class="price">R$ 188,73</div>
+          <div class="price-sub" data-i18n="sub.priceMonthOff">/mês · 10% off</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────── COMPRA RÁPIDA ──────── -->
 <section class="shop" id="shop">
   <div class="shop-inner">
     <div class="shop-head reveal">
@@ -2695,7 +2750,7 @@
           </div>
         </div>
       </div>
-<div class="product-card reveal">
+      <div class="product-card reveal">
         <div class="pc-image">
           <span class="tag" data-i18n="shop.tag.beans">Em grãos</span>
           <img src="assets/pacote-zerbinatti-2026.webp" alt="Clássico Zerbinatti — Em Grãos" />
@@ -2714,57 +2769,6 @@
             <div class="pc-price">R$ 69,90</div>
             <button class="add-btn" data-add="classico-graos-500g" data-i18n="btn.cart">+ Carrinho</button>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ──────── ASSINATURA ──────── -->
-<section class="subscribe-section" id="assinatura">
-  <div class="sub-inner">
-    <div class="sub-text reveal">
-      <span class="eyebrow" data-i18n="sub.eyebrow">Assinatura Mensal</span>
-      <h2 class="display" data-i18n="sub.title">Café fresco, todo mês, na sua porta.</h2>
-      <p class="body-lg" data-i18n="sub.desc">Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.</p>
-      <a href="#" class="btn btn-gold" data-i18n-html="sub.cta">Começar assinatura <span class="arrow">→</span></a>
-    </div>
-    <div class="sub-cards reveal">
-      <div class="plan">
-        <div class="num">I</div>
-        <div class="info">
-          <div class="name">Apreciador</div>
-          <div class="freq" data-i18n="sub.plan1.freq">1 pacote · mensal</div>
-          <div class="desc" data-i18n="sub.plan1.desc">Para quem está começando a explorar cafés especiais.</div>
-        </div>
-        <div class="price-col">
-          <div class="price">R$ 59,41</div>
-          <div class="price-sub" data-i18n="sub.priceMonthOff">/mês · 15% off</div>
-        </div>
-      </div>
-      <div class="plan featured">
-        <div class="num">II</div>
-        <div class="info">
-          <div class="name">Sommelier</div>
-          <div class="freq" data-i18n="sub.plan2.freq">2 pacotes · mensal</div>
-          <div class="desc" data-i18n="sub.plan2.desc">O blend clássico + um café rotativo da safra. Mais popular.</div>
-          <div class="badge" data-i18n="sub.plan2.badge">Mais escolhido</div>
-        </div>
-        <div class="price-col">
-          <div class="price">R$ 119,90</div>
-          <div class="price-sub" data-i18n="sub.priceMonth">/mês</div>
-        </div>
-      </div>
-      <div class="plan">
-        <div class="num">III</div>
-        <div class="info">
-          <div class="name">Herdeiro</div>
-          <div class="freq" data-i18n="sub.plan3.freq">3 pacotes · mensal</div>
-          <div class="desc" data-i18n="sub.plan3.desc">Acesso prioritário a microlotes e lançamentos limitados.</div>
-        </div>
-        <div class="price-col">
-          <div class="price">R$ 169,90</div>
-          <div class="price-sub" data-i18n="sub.priceMonth">/mês</div>
         </div>
       </div>
     </div>
@@ -2962,10 +2966,10 @@
       'sub.eyebrow':'Assinatura Mensal','sub.title':'Café fresco, todo mês, na sua porta.',
       'sub.desc':'Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.',
       'sub.cta':'Começar assinatura <span class="arrow">→</span>',
-      'sub.plan1.freq':'1 pacote · mensal','sub.plan1.desc':'Para quem está começando a explorar cafés especiais.',
-      'sub.plan2.freq':'2 pacotes · mensal','sub.plan2.desc':'O blend clássico + um café rotativo da safra. Mais popular.','sub.plan2.badge':'Mais escolhido',
-      'sub.plan3.freq':'3 pacotes · mensal','sub.plan3.desc':'Acesso prioritário a microlotes e lançamentos limitados.',
-      'sub.priceMonth':'/mês','sub.priceMonthOff':'/mês · 15% off',
+      'sub.plan1.freq':'3× moído · 250g · mensal','sub.plan1.desc':'Café pronto pra cafeteira. Para o ritual diário sem complicação.',
+      'sub.plan2.freq':'1 moído 250g + 1 grãos 500g · mensal','sub.plan2.desc':'Os dois mundos na mesma assinatura. Praticidade e ritual de barista, lado a lado.','sub.plan2.badge':'Mais escolhido',
+      'sub.plan3.freq':'3× grãos · 500g · mensal','sub.plan3.desc':'Para quem mói fresco antes de cada xícara. O ritual completo do barista em casa.',
+      'sub.priceMonth':'/mês','sub.priceMonthOff':'/mês · 10% off',
       'story.stamp':'Famiglia · Dal','story.eyebrow':'Nossa História','story.title':'Da Itália ao <em>coração</em> do Brasil.',
       'story.p1':'A família Zerbinatti trouxe da Itália não apenas uma tradição agrícola, mas uma filosofia: o café perfeito nasce da terra, do tempo e do cuidado de quem planta.',
       'story.p2':'Cada grão é cultivado com dedicação artesanal. Colheita seletiva, secagem natural ao sol, torra precisa — cada etapa é um ritual de qualidade transmitido por três gerações.',
@@ -3046,9 +3050,9 @@
       'sub.eyebrow':'Monthly Subscription','sub.title':'Fresh coffee, every month, at your door.',
       'sub.desc':"Receive the month's roast picked by our master roaster. Pause, switch or cancel any time. No commitment, just pleasure.",
       'sub.cta':'Start subscription <span class="arrow">→</span>',
-      'sub.plan1.freq':'1 bag · monthly','sub.plan1.desc':'For those starting to explore specialty coffee.',
-      'sub.plan2.freq':'2 bags · monthly','sub.plan2.desc':'The classic blend + a rotating crop coffee. Most popular.','sub.plan2.badge':'Most chosen',
-      'sub.plan3.freq':'3 bags · monthly','sub.plan3.desc':'Priority access to microlots and limited releases.',
+      'sub.plan1.freq':'3× ground · 250g · monthly','sub.plan1.desc':'Coffee ready for your machine. For the daily ritual, no fuss.',
+      'sub.plan2.freq':'1 ground 250g + 1 whole beans 500g · monthly','sub.plan2.desc':'Both worlds in one subscription. Convenience and barista ritual, side by side.','sub.plan2.badge':'Most chosen',
+      'sub.plan3.freq':'3× whole beans · 500g · monthly','sub.plan3.desc':'For those who grind fresh before every cup. The full barista ritual at home.',
       'sub.priceMonth':'/month','sub.priceMonthOff':'/month · 15% off',
       'story.stamp':'Famiglia · Since','story.eyebrow':'Our Story','story.title':'From Italy to the <em>heart</em> of Brazil.',
       'story.p1':'The Zerbinatti family brought from Italy not only an agricultural tradition, but a philosophy: perfect coffee comes from the land, time, and the care of those who plant.',
@@ -3130,9 +3134,9 @@
       'sub.eyebrow':'Suscripción Mensual','sub.title':'Café fresco, todos los meses, en tu puerta.',
       'sub.desc':'Recibe el tueste del mes seleccionado por nuestro maestro tostador. Pausa, cambia o cancela cuando quieras. Sin compromiso, solo placer.',
       'sub.cta':'Empezar suscripción <span class="arrow">→</span>',
-      'sub.plan1.freq':'1 bolsa · mensual','sub.plan1.desc':'Para quien empieza a explorar cafés especiales.',
-      'sub.plan2.freq':'2 bolsas · mensual','sub.plan2.desc':'El blend clásico + un café rotativo de la zafra. El más popular.','sub.plan2.badge':'Más elegido',
-      'sub.plan3.freq':'3 bolsas · mensual','sub.plan3.desc':'Acceso prioritario a microlotes y lanzamientos limitados.',
+      'sub.plan1.freq':'3× molido · 250g · mensual','sub.plan1.desc':'Café listo para tu cafetera. Para el ritual diario sin complicaciones.',
+      'sub.plan2.freq':'1 molido 250g + 1 granos 500g · mensual','sub.plan2.desc':'Los dos mundos en una sola suscripción. Practicidad y ritual de barista, lado a lado.','sub.plan2.badge':'Más elegido',
+      'sub.plan3.freq':'3× granos · 500g · mensual','sub.plan3.desc':'Para quien muele fresco antes de cada taza. El ritual completo del barista en casa.',
       'sub.priceMonth':'/mes','sub.priceMonthOff':'/mes · 15% off',
       'story.stamp':'Famiglia · Desde','story.eyebrow':'Nuestra Historia','story.title':'De Italia al <em>corazón</em> de Brasil.',
       'story.p1':'La familia Zerbinatti trajo de Italia no solo una tradición agrícola, sino una filosofía: el café perfecto nace de la tierra, del tiempo y del cuidado de quien planta.',
