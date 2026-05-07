@@ -622,20 +622,19 @@
     margin-bottom:8px;
   }
   .feature-text .title em{font-style:italic; color:var(--gold);}
-  .feature-text .title em.brand,
-  .pc-name em.brand{
-    font-family:var(--script);
-    font-style:normal;
-    font-weight:400;
-    letter-spacing:.005em;
-    line-height:1;
-    color:var(--gold);
-  }
-  .feature-text .title em.brand{
-    font-size:1.18em;
+  .brand-mark{
     display:inline-block;
-    transform:translateY(.06em);
-    padding:0 .04em;
+    height:1.55em;
+    width:auto;
+    vertical-align:-.32em;
+    margin:0 .04em 0 .12em;
+    filter:drop-shadow(0 4px 14px rgba(201,169,97,.25));
+  }
+  .pc-name .brand-mark{
+    height:1.45em;
+    vertical-align:-.30em;
+    margin:0 .02em 0 .08em;
+    filter:none;
   }
   .feature-text .tagline{
     font-family:var(--serif);
@@ -2277,7 +2276,7 @@
         <span class="label" style="color:var(--gold);" data-i18n="hero.badge">Colheita Limitada · Safra 2026</span>
       </div>
       <h1 class="hero-title reveal" data-i18n-html="hero.title">Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span></h1>
-      <p class="hero-desc reveal" data-i18n="hero.desc">Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Serra do Cabral, secagem natural ao sol, torra artesanal em pequenos lotes.</p>
+      <p class="hero-desc reveal" data-i18n="hero.desc">Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Valim Farm, secagem natural ao sol, torra artesanal em pequenos lotes.</p>
       <div class="hero-stats reveal">
         <div><div class="v">640<span style="font-size:14px; color:var(--ink-3);">–760m</span></div><div class="l" data-i18n="hero.stats.alt">Altitude</div></div>
         <div><div class="v">88<span style="font-size:14px; color:var(--ink-3);">/100</span></div><div class="l">SCA</div></div>
@@ -2333,13 +2332,13 @@
   <div class="feature-grid">
     <div class="feature-text">
       <div class="num" data-i18n="feat.classico.num">N° 01 — Mais vendido</div>
-      <h3 class="title">Clássico <em class="brand">Zerbinatti</em></h3>
+      <h3 class="title">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"></h3>
       <div class="tagline" data-i18n="feat.classico.tag">O blend da família desde 1897.</div>
-      <div style="font-family:var(--mono); font-size:11px; letter-spacing:.32em; color:var(--gold); text-transform:uppercase; margin-top:14px;" data-i18n="feat.classico.specs">Moído · 250g · Torra Média</div>
+      <div style="font-family:var(--mono); font-size:14px; font-weight:500; letter-spacing:.28em; color:var(--gold-soft); text-transform:uppercase; margin-top:18px; text-shadow:0 1px 4px rgba(0,0,0,.5);" data-i18n="feat.classico.specs">Moído · 250g · Torra Média</div>
       <p class="desc" data-i18n="feat.classico.desc">Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.</p>
 
       <div class="feature-meta">
-        <div><div class="k" data-i18n="meta.origem">Origem</div><div class="v">Serra do Cabral, MG</div></div>
+        <div><div class="k" data-i18n="meta.origem">Origem</div><div class="v">Valim Farm</div></div>
         <div><div class="k" data-i18n="meta.var">Variedade</div><div class="v">Arara</div></div>
         <div><div class="k" data-i18n="meta.proc">Processo</div><div class="v" data-i18n="proc.natural">Natural</div></div>
         <div><div class="k" data-i18n="meta.torra">Torra</div><div class="v" data-i18n="torra.media">Média</div></div>
@@ -2470,7 +2469,7 @@
       <div class="step">
         <div class="num">01</div>
         <h3 class="title" data-i18n="proc.cultivo">Cultivo</h3>
-        <p class="desc" data-i18n="proc.cultivo.desc">Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Serra do Cabral.</p>
+        <p class="desc" data-i18n="proc.cultivo.desc">Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Valim Farm.</p>
         <div class="meta">
           <div class="meta-row"><span class="k" data-i18n="meta.alt">Altitude</span><span class="v">640–760m</span></div>
           <div class="meta-row"><span class="k" data-i18n="proc.solo">Solo</span><span class="v" data-i18n="proc.solo.v">Vulcânico</span></div>
@@ -2571,7 +2570,7 @@
         <figcaption><span class="num">02</span> <span data-i18n="gal.cap.2">Cerejas amarelas · ponto de colheita</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/3.webp" style="grid-column:span 4; grid-row:span 2;">
-        <img src="assets/galeria/3.webp" alt="Cafezal florido ao pôr-do-sol na Serra do Cabral" loading="lazy"/>
+        <img src="assets/galeria/3.webp" alt="Cafezal florido ao pôr-do-sol na Valim Farm" loading="lazy"/>
         <figcaption><span class="num">03</span> <span data-i18n="gal.cap.3">Florada · pôr-do-sol no cafezal</span></figcaption>
       </figure>
       <figure class="g-item reveal" data-src="assets/galeria/4.webp" style="grid-column:span 4; grid-row:span 2;">
@@ -2695,7 +2694,7 @@
         </div>
         <div class="pc-body">
           <div>
-            <div class="pc-name">Clássico <em class="brand">Zerbinatti</em></div>
+            <div class="pc-name">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"></div>
             <div class="pc-tag" data-i18n="shop.classico.tag">Blend de família · 500g</div>
           </div>
           <div class="pc-notes">
@@ -2941,7 +2940,7 @@
       'nav.cafes':'Cafés','nav.processo':'Processo','nav.assinatura':'Assinatura','nav.empresas':'Para Empresas','nav.historia':'História',
       'hero.badge':'Colheita Limitada · Safra 2026',
       'hero.title':'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
-      'hero.desc':'Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Serra do Cabral, secagem natural ao sol, torra artesanal em pequenos lotes.',
+      'hero.desc':'Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Valim Farm, secagem natural ao sol, torra artesanal em pequenos lotes.',
       'hero.stats.alt':'Altitude','hero.stats.gen':'Gerações',
       'hero.cta.shop':'Comprar agora <span class="arrow">→</span>','hero.cta.sub':'Assinar mensal',
       'hero.roast':'Média Clara','hero.scroll':'Explore',
@@ -2963,7 +2962,7 @@
       'sens.docura':'Doçura','sens.acidez':'Acidez','sens.corpo':'Corpo','sens.complex':'Complex.',
       'btn.add':'Adicionar <span class="arrow">→</span>','btn.cart':'+ Carrinho',
       'proc.eyebrow':'Da Terra à Xícara','proc.title':'Quatro <em>rituais.</em>',
-      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Serra do Cabral.',
+      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon e Geisha plantados manualmente em terraços naturais da Valim Farm.',
       'proc.solo':'Solo','proc.solo.v':'Vulcânico',
       'proc.colheita':'Colheita','proc.colheita.desc':'Seletiva, à mão, somente em grão cereja maduro. Sem pressa, sem máquina, do jeito que o nonno ensinou.',
       'proc.janela':'Janela','proc.janela.v':'Mai – Set','proc.metodo':'Método','proc.metodo.v':'Manual',
@@ -3027,7 +3026,7 @@
       'nav.cafes':'Coffees','nav.processo':'Process','nav.assinatura':'Subscription','nav.empresas':'For Business','nav.historia':'Story',
       'hero.badge':'Limited Harvest · 2026 Crop',
       'hero.title':'From our<br><em>legacy</em><br>to your table.<span class="since">— Famiglia Zerbinatti, since 1897</span>',
-      'hero.desc':'Brazilian specialty coffee, Italian heritage. 100% Arabica grown at 640–760m in Serra do Cabral, sun-dried naturally, artisan-roasted in small batches.',
+      'hero.desc':'Brazilian specialty coffee, Italian heritage. 100% Arabica grown at 640–760m in Valim Farm, sun-dried naturally, artisan-roasted in small batches.',
       'hero.stats.alt':'Altitude','hero.stats.gen':'Generations',
       'hero.cta.shop':'Shop now <span class="arrow">→</span>','hero.cta.sub':'Subscribe monthly',
       'hero.roast':'Medium light','hero.scroll':'Explore',
@@ -3049,7 +3048,7 @@
       'sens.docura':'Sweetness','sens.acidez':'Acidity','sens.corpo':'Body','sens.complex':'Complex.',
       'btn.add':'Add to cart <span class="arrow">→</span>','btn.cart':'+ Cart',
       'proc.eyebrow':'From earth to cup','proc.title':'Four <em>rituals.</em>',
-      'proc.cultivo':'Cultivation','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon and Geisha planted by hand on natural terraces of Serra do Cabral.',
+      'proc.cultivo':'Cultivation','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon and Geisha planted by hand on natural terraces of Valim Farm.',
       'proc.solo':'Soil','proc.solo.v':'Volcanic',
       'proc.colheita':'Harvest','proc.colheita.desc':'Selective, by hand, only ripe cherry. No rush, no machine — the way the nonno taught us.',
       'proc.janela':'Window','proc.janela.v':'May – Sep','proc.metodo':'Method','proc.metodo.v':'Manual',
@@ -3113,7 +3112,7 @@
       'nav.cafes':'Cafés','nav.processo':'Proceso','nav.assinatura':'Suscripción','nav.empresas':'Para Empresas','nav.historia':'Historia',
       'hero.badge':'Cosecha Limitada · Zafra 2026',
       'hero.title':'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
-      'hero.desc':'Café especial brasileño, herencia italiana. 100% Arábica cultivado a 640–760m en Serra do Cabral, secado natural al sol, tostado artesanal en lotes pequeños.',
+      'hero.desc':'Café especial brasileño, herencia italiana. 100% Arábica cultivado a 640–760m en Valim Farm, secado natural al sol, tostado artesanal en lotes pequeños.',
       'hero.stats.alt':'Altitud','hero.stats.gen':'Generaciones',
       'hero.cta.shop':'Comprar ahora <span class="arrow">→</span>','hero.cta.sub':'Suscribirse mensual',
       'hero.roast':'Medio claro','hero.scroll':'Explora',
@@ -3135,7 +3134,7 @@
       'sens.docura':'Dulzor','sens.acidez':'Acidez','sens.corpo':'Cuerpo','sens.complex':'Compl.',
       'btn.add':'Añadir <span class="arrow">→</span>','btn.cart':'+ Carrito',
       'proc.eyebrow':'De la tierra a la taza','proc.title':'Cuatro <em>rituales.</em>',
-      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon y Geisha plantados a mano en terrazas naturales de Serra do Cabral.',
+      'proc.cultivo':'Cultivo','proc.cultivo.desc':'Catuaí, Mundo Novo, Yellow Bourbon y Geisha plantados a mano en terrazas naturales de Valim Farm.',
       'proc.solo':'Suelo','proc.solo.v':'Volcánico',
       'proc.colheita':'Cosecha','proc.colheita.desc':'Selectiva, a mano, solo en grano cereza maduro. Sin prisa, sin máquina, como enseñó el nonno.',
       'proc.janela':'Ventana','proc.janela.v':'May – Sep','proc.metodo':'Método','proc.metodo.v':'Manual',
