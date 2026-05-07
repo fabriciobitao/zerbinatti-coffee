@@ -1912,6 +1912,64 @@
   .footer-bottom a{color:var(--ink-3); text-decoration:none; transition:color .25s; display:inline-block; padding:10px 4px; min-height:44px; line-height:24px;}
   .footer-bottom a:hover{color:var(--gold);}
 
+  /* ───────── MOBILE MENU DRAWER ───────── */
+  .menu-overlay{
+    position:fixed; inset:0;
+    background:rgba(26,17,8,.55);
+    backdrop-filter:blur(4px);
+    z-index:198;
+    opacity:0; pointer-events:none;
+    transition:opacity .35s;
+  }
+  .menu-overlay.open{opacity:1; pointer-events:auto;}
+  .menu-drawer{
+    position:fixed; top:0; left:0;
+    width:min(360px, 88vw);
+    height:100vh; height:100svh;
+    background:var(--bg-1);
+    border-right:1px solid var(--line);
+    z-index:199;
+    transform:translateX(-100%);
+    transition:transform .45s cubic-bezier(.4,0,.2,1);
+    display:flex; flex-direction:column;
+    padding:84px 28px 32px;
+  }
+  .menu-drawer.open{transform:translateX(0);}
+  .menu-drawer .close{
+    position:absolute; top:18px; right:18px;
+    width:44px; height:44px;
+    display:grid; place-items:center;
+    background:transparent; border:1px solid var(--line);
+    border-radius:50%; color:var(--ink-1); cursor:pointer;
+  }
+  .menu-drawer nav{display:flex; flex-direction:column; gap:4px;}
+  .menu-drawer nav a{
+    display:block;
+    padding:14px 0;
+    font-family:var(--serif);
+    font-size:22px;
+    color:var(--ink-0);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:color .25s, padding-left .25s;
+  }
+  .menu-drawer nav a:hover, .menu-drawer nav a:focus{color:var(--gold); padding-left:6px;}
+  .menu-drawer .menu-lang{
+    margin-top:28px;
+    display:flex; gap:10px;
+  }
+  .menu-drawer .menu-lang button{
+    width:44px; height:32px;
+    border:1px solid var(--line);
+    background:transparent;
+    border-radius:4px; padding:0; overflow:hidden;
+    opacity:.55; cursor:pointer;
+    display:grid; place-items:center;
+    transition:opacity .25s, border-color .25s;
+  }
+  .menu-drawer .menu-lang button.active,
+  .menu-drawer .menu-lang button:hover{opacity:1; border-color:var(--gold);}
+
   /* ───────── CART DRAWER ───────── */
   .cart-overlay{
     position:fixed;
@@ -2252,7 +2310,7 @@
     .step .num{font-size:48px;}
     .lang-switch{display:none;}
     .header-actions{gap:6px;}
-    .icon-btn{width:40px; height:40px;}
+    .icon-btn{width:44px; height:44px;}
     .add-btn{min-height:44px; padding:0 18px;}
   }
 </style>
@@ -2300,6 +2358,32 @@
     </button>
   </div>
 </header>
+
+<!-- ──────── MOBILE MENU ──────── -->
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="menu-drawer" id="menuDrawer" aria-hidden="true">
+  <button class="close" id="menuClose" aria-label="Fechar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6l-12 12"/></svg>
+  </button>
+  <nav>
+    <a href="/cafes" data-i18n="nav.cafes">Cafés</a>
+    <a href="/processo" data-i18n="nav.processo">Processo</a>
+    <a href="#assinatura" data-i18n="nav.assinatura">Assinatura</a>
+    <a href="/para-empresas" data-i18n="nav.empresas">Para Empresas</a>
+    <a href="/historia" data-i18n="nav.historia">História</a>
+  </nav>
+  <div class="menu-lang" role="group" aria-label="Idioma">
+    <button class="lang-btn" data-lang="pt" aria-label="Português" title="Português">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#009739"/><polygon points="11,2 20,8 11,14 2,8" fill="#FEDD00"/><circle cx="11" cy="8" r="3.4" fill="#012169"/></svg>
+    </button>
+    <button class="lang-btn" data-lang="en" aria-label="English" title="English">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#B22234"/><path d="M0 2h22M0 4.5h22M0 7h22M0 9.5h22M0 12h22M0 14.5h22" stroke="#fff" stroke-width="1.2"/><rect width="9" height="7" fill="#3C3B6E"/></svg>
+    </button>
+    <button class="lang-btn" data-lang="es" aria-label="Español" title="Español">
+      <svg width="22" height="16" viewBox="0 0 22 16"><rect width="22" height="16" fill="#AA151B"/><rect y="4" width="22" height="8" fill="#F1BF00"/></svg>
+    </button>
+  </div>
+</aside>
 
 <!-- ──────── HERO ──────── -->
 <section class="hero" id="hero">
@@ -3559,9 +3643,28 @@
 
   function initMobileMenu() {
     const btn = document.getElementById('menuBtn');
-    if (!btn) return;
-    btn.addEventListener('click', () => {
-      alert('Menu mobile — em breve');
+    const drawer = document.getElementById('menuDrawer');
+    const overlay = document.getElementById('menuOverlay');
+    const closeBtn = document.getElementById('menuClose');
+    if (!btn || !drawer) return;
+    function open(){
+      drawer.classList.add('open');
+      if (overlay) overlay.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      drawer.classList.remove('open');
+      if (overlay) overlay.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+    btn.addEventListener('click', open);
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (overlay) overlay.addEventListener('click', close);
+    drawer.querySelectorAll('nav a').forEach(a => a.addEventListener('click', close));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
     });
   }
 
