@@ -13,21 +13,24 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 OUT = "/Users/fabricio/dev/cafe/docs/CONCORRENTES-CAFE-ESPECIAL-2026-05-07.xlsx"
 
 # Ordem de colunas: Zerbinatti primeiro, depois concorrentes em ordem do relatório
-BRANDS = [
-    "Zerbinatti",      # nosso
-    "Coffee Lab",
-    "Octavio Café",
-    "Suplicy",
-    "Orfeu",
-    "Daterra",
-    "Wolff",
-    "Lucca",
-    "UM Coffee Co",
-    "3 Corações",
-    "Academia do Café",
-    "Moka Clube",
-    "Coffee++",
+# (nome, url do site)
+BRANDS_WITH_URL = [
+    ("Zerbinatti",       "https://cafe-alpha-five.vercel.app/"),
+    ("Coffee Lab",       "https://loja.coffeelab.com.br/"),
+    ("Octavio Café",     "https://octaviocafe.com.br/"),
+    ("Suplicy",          "https://www.suplicycafes.com.br/"),
+    ("Orfeu",            "https://www.cafeorfeu.com.br/"),
+    ("Daterra",          "https://daterracoffee.com.br/"),
+    ("Wolff",            "https://www.wolffcafe.com.br/"),
+    ("Lucca",            "https://www.luccacafesespeciais.com.br/"),
+    ("UM Coffee Co",     "https://www.umcoffeeco.com/"),
+    ("3 Corações",       "https://www.3coracoes.com.br/marca/cafes-especiais/"),
+    ("Academia do Café", "https://www.academiadocafe.com.br/"),
+    ("Moka Clube",       "https://www.mokaclube.com.br/"),
+    ("Coffee++",         "https://coffeemais.com/"),
 ]
+BRANDS = [b[0] for b in BRANDS_WITH_URL]
+BRAND_URLS = {b[0]: b[1] for b in BRANDS_WITH_URL}
 
 # Cada feature: (categoria, feature, [valor_por_marca_na_ordem_acima])
 # Use "✓" / "✗" / "—" (N/D) ou texto literal (preços, prazos, etc).
@@ -327,9 +330,31 @@ ws.cell(row=HEADER_ROW, column=2).alignment = center
 ws.cell(row=HEADER_ROW, column=1).border = border
 ws.cell(row=HEADER_ROW, column=2).border = border
 
+# === Linha de URLs (logo abaixo do cabeçalho de marcas) ===
+URL_ROW = HEADER_ROW + 1
+ws.cell(row=URL_ROW, column=1, value="Link do site").font = Font(italic=True, size=9, color="666666")
+ws.cell(row=URL_ROW, column=1).fill = PatternFill("solid", fgColor=COLOR_ALT)
+ws.cell(row=URL_ROW, column=1).alignment = center
+ws.cell(row=URL_ROW, column=1).border = border
+ws.cell(row=URL_ROW, column=2, value="").fill = PatternFill("solid", fgColor=COLOR_ALT)
+ws.cell(row=URL_ROW, column=2).border = border
+
+for col_idx, brand in enumerate(BRANDS, start=3):
+    url = BRAND_URLS[brand]
+    # exibe domínio limpo, mantém URL completa no hyperlink
+    display = url.replace("https://", "").replace("http://", "").rstrip("/")
+    cell = ws.cell(row=URL_ROW, column=col_idx, value=display)
+    cell.hyperlink = url
+    cell.font = Font(size=8, color="0563C1", underline="single")
+    cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    cell.border = border
+    cell.fill = PatternFill("solid", fgColor=COLOR_ALT)
+
+ws.row_dimensions[URL_ROW].height = 28
+
 # === Linhas de dados ===
 current_category = None
-row_idx = HEADER_ROW + 1
+row_idx = URL_ROW + 1
 
 for category, feature, values in ROWS:
     # Cabeçalho de categoria (uma linha grossa quando muda categoria)
@@ -401,8 +426,8 @@ for col_idx, brand in enumerate(BRANDS, start=3):
     letter = get_column_letter(col_idx)
     ws.column_dimensions[letter].width = 18 if brand != "Zerbinatti" else 22
 
-# Congelar painel após cabeçalho + colunas categoria/feature
-ws.freeze_panes = "C5"
+# Congelar painel após cabeçalho + linha de URL + colunas categoria/feature
+ws.freeze_panes = "C6"
 
 # === Aba 2: Resumo de scoring ===
 ws2 = wb.create_sheet("Scoring por Marca")
@@ -424,10 +449,11 @@ ws2.cell(row=2, column=1, value="Calculado sobre todas as features booleanas/com
 ws2.merge_cells(start_row=2, start_column=1, end_row=2, end_column=4)
 
 ws2.cell(row=4, column=1, value="Marca").font = header_font
-ws2.cell(row=4, column=2, value="Pontos").font = header_font
-ws2.cell(row=4, column=3, value="Total possível").font = header_font
-ws2.cell(row=4, column=4, value="% de cobertura").font = header_font
-for c in range(1, 5):
+ws2.cell(row=4, column=2, value="Site").font = header_font
+ws2.cell(row=4, column=3, value="Pontos").font = header_font
+ws2.cell(row=4, column=4, value="Total possível").font = header_font
+ws2.cell(row=4, column=5, value="% de cobertura").font = header_font
+for c in range(1, 6):
     ws2.cell(row=4, column=c).fill = PatternFill("solid", fgColor=COLOR_HEADER)
     ws2.cell(row=4, column=c).alignment = center
     ws2.cell(row=4, column=c).border = border
@@ -443,21 +469,32 @@ scores_sorted = [scores[0]] + sorted(scores[1:], key=lambda x: -x[1])
 
 for i, (brand, s, t, pct) in enumerate(scores_sorted, start=5):
     ws2.cell(row=i, column=1, value=brand)
-    ws2.cell(row=i, column=2, value=round(s, 1))
-    ws2.cell(row=i, column=3, value=t)
-    ws2.cell(row=i, column=4, value=f"{pct:.1f}%")
-    for c in range(1, 5):
+    url = BRAND_URLS[brand]
+    display = url.replace("https://", "").replace("http://", "").rstrip("/")
+    link_cell = ws2.cell(row=i, column=2, value=display)
+    link_cell.hyperlink = url
+    link_cell.font = Font(color="0563C1", underline="single", size=10)
+    ws2.cell(row=i, column=3, value=round(s, 1))
+    ws2.cell(row=i, column=4, value=t)
+    ws2.cell(row=i, column=5, value=f"{pct:.1f}%")
+    for c in range(1, 6):
         ws2.cell(row=i, column=c).alignment = center
         ws2.cell(row=i, column=c).border = border
     if brand == "Zerbinatti":
-        for c in range(1, 5):
+        for c in range(1, 6):
             ws2.cell(row=i, column=c).fill = PatternFill("solid", fgColor=COLOR_NOSSO)
-            ws2.cell(row=i, column=c).font = Font(bold=True, color="FFFFFF")
+        # mantém link clicável mesmo com fundo escuro
+        ws2.cell(row=i, column=1).font = Font(bold=True, color="FFFFFF")
+        ws2.cell(row=i, column=2).font = Font(color="FFE082", underline="single", size=10, bold=True)
+        ws2.cell(row=i, column=3).font = Font(bold=True, color="FFFFFF")
+        ws2.cell(row=i, column=4).font = Font(bold=True, color="FFFFFF")
+        ws2.cell(row=i, column=5).font = Font(bold=True, color="FFFFFF")
 
 ws2.column_dimensions["A"].width = 22
-ws2.column_dimensions["B"].width = 14
-ws2.column_dimensions["C"].width = 16
-ws2.column_dimensions["D"].width = 18
+ws2.column_dimensions["B"].width = 38
+ws2.column_dimensions["C"].width = 14
+ws2.column_dimensions["D"].width = 16
+ws2.column_dimensions["E"].width = 18
 
 # === Aba 3: Gaps Zerbinatti ===
 ws3 = wb.create_sheet("Gaps do Zerbinatti")
