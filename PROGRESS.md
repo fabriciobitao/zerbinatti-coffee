@@ -1,6 +1,6 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-04-16 (Ondas 2+3 UX/CX)
+**Ultima atualizacao:** 2026-05-07 (QA mobile, separador ornamental, copy Wilson Valim)
 
 ## O que e
 E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). Opcao C: marca completa com B2C + B2B + ecossistema de conteudo.
@@ -15,6 +15,25 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 - **Analytics:** GA4 + Meta Pixel + Vercel Analytics
 
 ## O que foi feito
+- [x] **Sessao 2026-05-07 — Polimento landing /novo-layout/ + QA mobile**
+  - Catalogo final: N01 Classico 250g moido R$39,90 + N02 Classico em Graos 500g R$69,90 (Geisha removido)
+  - Selos: SCA 84.75 (gerado em PIL), Cafe Organico da Fazenda orbital, Organic Coffee no hero (1024x1024)
+  - Assinatura reformulada em 3 planos: Quotidiano (3x moido), Doppio Rituale (1+1 mescla, "Mais escolhido"), Maestro (3x graos)
+  - Shop centralizado e movido para DEPOIS da assinatura
+  - Galeria: Carmo do Paranaiba -> Valim Farms; descricao com nome correto
+  - Separador ornamental com fleuron dourado entre os dois cafes (gradiente suave + glow)
+  - Hero stats com destaque na altitude maxima 760m (640 menor, mesma cor) e 88/100 SCA mesma cor
+  - Copy: padronizacao Valim Farms (com s) em PT/EN/ES (23 ocorrencias)
+  - Copy: terceira geracao agora e Wilson Valim Zerbinatti (PT/EN/ES)
+  - **QA mobile completo** (auditoria com Evidence Collector em 360/390/414):
+    - Body overflow-x:hidden + max-width 100vw (sem scroll horizontal)
+    - icon-btn 44x44 WCAG, add-btn min-height 44px
+    - Mobile menu drawer real (alert "em breve" -> drawer com nav, ESC, overlay, scroll lock)
+    - Header lang-switch oculto em <=640, padding header reduzido
+    - href="#" do "Comecar assinatura" agora aponta para #planos com scroll suave
+    - Footer: links reais para /termos /privacidade /entregas /fazenda; remove links sem pagina (Kits, Acessorios) e icones sociais sem conta
+    - Hero CTA acima da fold em 360x640 (padding reduzido, breakpoint extra <=380px)
+    - React/Babel/tweaks JSX so carregam em localhost ou ?dev=1 (sem CSP errors em prod)
 - [x] Projeto Next.js criado e buildando sem erros
 - [x] Homepage premium com 8 secoes: Header, Hero, TrustBar, Products, BestSellers, Subscription, Story, Quiz, B2B, Footer
 - [x] Identidade visual: paleta coffee/gold/green, Playfair Display + Inter
@@ -56,11 +75,31 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
   - Focus-visible global (acessibilidade WCAG / Lei Brasileira de Inclusao)
   - Contrastes corrigidos em Products, Footer, CartDrawer (coffee-400 -> 500/600)
 
+## Decisao de stack e-commerce (2026-05-07)
+**Recomendacao do especialista:** abandonar caminho Shopify Headless (memorizado anteriormente) e adotar:
+- **Yampi Avancado** (R$99/mes) com checkout transparente BR + Yampi Clube nativo para assinatura
+- **Pagar.me (Stone)** como adquirente: PIX 0,99%, cartao 3,19% + 2,49%/parcela, boleto R$3,49
+- **Melhor Envio** (Jadlog .Package + PAC fallback) — sem mensalidade, cotacao no checkout
+- **Bling Cobre** (R$33/mes) para ERP + emissao NF-e
+- **Klaviyo** (Free ate 250 contatos)
+- Front Next.js atual mantido como vitrine institucional; CTAs apontam para subdominio loja.zerbinatti.com.br
+- **Custo ano 1 estimado: ~R$8k** (vs ~R$16k Shopify Basic + Recharge)
+- Roadmap 4 semanas: PJ digital + A1 (sem 1) -> setup Yampi+Pagar.me+ME (sem 2) -> Yampi Clube assinatura (sem 3) -> Bling NF-e end-to-end (sem 4)
+- Atencao fiscal: SP/MG tem ST sobre cafe torrado, validar com contador antes de precificar
+- Alternativa B: Shopify Basic + Subscriptions se planeja cross-border em 12-18 meses
+
 ## Pendente
-- [ ] Criar Shopify dev store e conectar
-- [ ] Integrar Sanity CMS
-- [ ] Checkout real (Shopify)
-- [ ] Sistema de assinatura real (Shopify Subscriptions) + area do cliente
+- [ ] **Decidir e iniciar stack e-commerce (recomendacao acima)**
+  - [ ] Abrir conta PJ digital (Cora ou Inter)
+  - [ ] Certificado digital A1 e-CNPJ (~R$200, Certisign)
+  - [ ] Criar trial Yampi e configurar 2 SKUs
+  - [ ] Subdominio loja.zerbinatti.com.br via DNS
+  - [ ] Pagar.me sandbox -> producao
+  - [ ] Melhor Envio integracao + saldo pre-pago
+  - [ ] Bling integrado a Yampi para NF-e
+  - [ ] Yampi Clube assinatura (3 planos)
+  - [ ] Klaviyo regua de email
+- [ ] Integrar Sanity CMS (revisar necessidade pos-Yampi)
 - [ ] i18n (PT/EN)
 - [ ] Fotos reais da fazenda (substituir placeholders Unsplash e mockup CSS do pacote)
 - [ ] Integracao email do Quiz com Klaviyo/Resend (hoje grava em localStorage)
