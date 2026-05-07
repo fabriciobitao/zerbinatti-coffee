@@ -35,10 +35,11 @@
     --gold-soft:#E6BE44;
     --gold-glow:rgba(201,169,97,.55);
     --accent:#3D7A4F;
-    --serif:'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-    --script:'Allura', 'Pinyon Script', cursive;
-    --sans:'Inter', system-ui, sans-serif;
-    --mono:'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    --serif: var(--font-cormorant), 'Cormorant Garamond', var(--font-playfair), 'Playfair Display', Georgia, serif;
+    --script: var(--font-allura), 'Allura', 'Pinyon Script', cursive;
+    --sans: var(--font-inter), 'Inter', system-ui, sans-serif;
+    --mono: var(--font-jetbrains), 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
+    --pixel: var(--font-press-start), 'Press Start 2P', monospace;
   }
 
   .novo-layout, .novo-layout *{box-sizing:border-box; margin:0; padding:0;}

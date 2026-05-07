@@ -24,6 +24,7 @@ import Subscription from '@/components/home/Subscription';
 import Historia from '@/components/home/Historia';
 import HomeFooter from '@/components/home/HomeFooter';
 import CartDrawer from '@/components/home/CartDrawer';
+import RevealObserver from '@/components/home/RevealObserver';
 
 export default async function HomePage() {
   return (
@@ -39,6 +40,7 @@ export default async function HomePage() {
       <Historia />
       <HomeFooter />
       <CartDrawer />
+      <RevealObserver />
     </main>
   );
 }

@@ -1,6 +1,50 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-07 (QA mobile, separador ornamental, copy Wilson Valim)
+**Ultima atualizacao:** 2026-05-07 (branch `site-shopify` — fluxo E2E validado; bloqueador unico no Shopify Admin)
+
+## Sessao 2026-05-07 — Migracao para Shopify Headless (branch `site-shopify`)
+
+### Decisao revertida
+A recomendacao Yampi (mais abaixo neste arquivo, sessao anterior) foi **abandonada**. O user optou por **Shopify Headless** porque (i) ja atende as premissas do projeto, (ii) so falta adaptar o template novo-layout existente, (iii) Claude Code consegue implementar sozinho.
+
+### Stack final em uso
+- **Front:** Next.js 16 App Router (Server + Client Components, Zustand cart, i18n via Context)
+- **Backend e-commerce:** Shopify Storefront API (loja `zerbinatticoffee.myshopify.com`, public token em `.env.local`)
+- **Pagamento:** Shopify Payments (a configurar — ver Bloqueadores)
+- **CMS produto:** Shopify admin (descricao, fotos, variantes refletem em real-time no front)
+- **Hosting:** Vercel atual (`cafe-alpha-five.vercel.app`)
+
+### O que esta funcionando (validado E2E via puppeteer)
+- [x] Home composta dinamicamente em `src/app/(home)/page.tsx` — espelha 100% do `public/novo-layout/index.html`
+- [x] Wave A: i18n dictionary 186 keys x 3 locales (PT/EN/ES), Storefront API client, Zustand cart store + Server Actions, CSS extraido para `src/app/(home)/novo-layout.css`
+- [x] Wave B: 23 componentes home (Header, Hero, Cafes, Processo, Video, Galeria, Cupping, Subscription, Historia, Footer, CartDrawer, FeatureCard, SensoryBars, FlavorChips, etc) + PDP `/cafes/[slug]` migrado para Zustand
+- [x] Wave C: home composta + middleware podado (so `/para-empresas` rewrite) + redirects 308 de URLs legacy (`/cafes`, `/processo`, `/assinatura`, `/historia` -> `/#anchor`)
+- [x] Produtos importados via CSV: Classico Zerbinatti com 2 variantes (250g moido R$98, 500g graos R$188) — variantes mapeadas por slotKey em `src/lib/products.ts`
+- [x] Cart end-to-end testado: clicar Add -> drawer abre -> Shopify cria cart -> retorna `checkoutUrl` valido
+- [x] **Layout pixel-perfect com Vercel original** — adicionadas fontes Cormorant Garamond, Allura, JetBrains Mono, Press Start 2P via `next/font/google` (antes so Playfair+Inter, fazia titulos quebrarem largo)
+- [x] **RevealObserver** (`src/components/home/RevealObserver.tsx`) — replica `initRevealObserver()` do static; sem ele todas as secoes ficavam `opacity:0`. Tem fallback de scroll listener para casos de fast-scroll onde IO falha
+- [x] Scripts de QA puppeteer: `scripts/snap.mjs` (fullpage com slow scroll), `scripts/snap-hero.mjs` (viewport hero), `scripts/flow-checkout.mjs` (E2E add-to-cart -> checkoutUrl -> Shopify)
+
+### Bloqueador unico para fechar pedido real
+🔴 **Loja Shopify ainda em modo "Opening soon" (password protection ativa).** Validado via `scripts/flow-checkout.mjs`: cart criado com sucesso, mas `checkoutUrl` redireciona para `/password`. Para destravar (apenas o dono pode no Shopify Admin):
+1. **Abrir loja:** `Settings -> Online Store -> Preferences` -> desmarcar "Restrict access to visitors with password"
+2. **Pagamento:** `Settings -> Payments` -> ativar provider (Mercado Pago / PagSeguro / Stripe), ou Bogus Gateway pra testar sem cobrar
+3. **Frete:** `Settings -> Shipping and delivery` -> criar zona Brasil com pelo menos 1 rate
+
+### Pendente nesta migracao
+- [ ] Wave D — migrar `public/novo-layout/para-empresas.html` -> `src/app/para-empresas/page.tsx`, deletar `public/novo-layout/`, decidir fate do legacy `src/lib/data/products.ts`
+- [ ] Wave E (deferred) — ISR + webhook revalidation em `/api/revalidate`
+- [ ] Configurar Shopify Markets (BR, US, LATAM) — admin
+- [ ] Address image aspect-ratio warning em `HomeHeader.tsx:102` (`/assets/zerbinatti-wordmark-gold.png`)
+- [ ] Renomear `middleware.ts` -> `proxy.ts` (Next.js 16 deprecation warning)
+
+---
+
+## Sessao anterior 2026-05-07 — Polimento landing /novo-layout/ + QA mobile
+
+(Conteudo abaixo eh historico anterior a decisao Shopify Headless)
+
+
 
 ## O que e
 E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). Opcao C: marca completa com B2C + B2B + ecossistema de conteudo.
