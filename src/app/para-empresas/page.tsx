@@ -202,8 +202,8 @@ export default function ParaEmpresas() {
                 Conte sobre o seu projeto
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-coffee-700">
-                Preencha o formulário e enviaremos uma proposta com preço,
-                logística e amostra grátis para teste.
+                Preencha o formulário e enviaremos uma proposta com preço
+                e logística.
               </p>
             </div>
             <div className="mt-10">
