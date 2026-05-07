@@ -102,6 +102,17 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    // Links externos antigos (/cafes, /processo, /assinatura, /historia) viram
+    // ancoras na home unica. Step 11/13. NB: source eh exact match — nao captura
+    // /cafes/[slug] (PDPs, rota dinamica real).
+    return [
+      { source: "/cafes", destination: "/#cafes", permanent: true },
+      { source: "/processo", destination: "/#processo", permanent: true },
+      { source: "/assinatura", destination: "/#assinatura", permanent: true },
+      { source: "/historia", destination: "/#historia", permanent: true },
+    ];
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
