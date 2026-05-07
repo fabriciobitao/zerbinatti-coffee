@@ -679,6 +679,22 @@
     margin-bottom:8px;
   }
   .feature-text .title em{font-style:italic; color:var(--gold);}
+  @keyframes ctaPulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(212,175,55,0), 0 12px 28px rgba(0,0,0,.3); transform:translateY(0) scale(1); }
+    35%{ box-shadow:0 0 0 14px rgba(212,175,55,.45), 0 18px 36px rgba(0,0,0,.4); transform:translateY(-2px) scale(1.04); }
+    70%{ box-shadow:0 0 0 24px rgba(212,175,55,0), 0 12px 28px rgba(0,0,0,.3); transform:translateY(0) scale(1); }
+  }
+  .cta-pulse{ animation: ctaPulse 1.6s ease-out 3 !important; }
+  @media (prefers-reduced-motion: reduce){
+    .cta-pulse{ animation:none !important; outline:3px solid var(--gold); outline-offset:6px; }
+  }
+  .feature-text .title .em-particle,
+  .product-card .pc-name .em-particle{
+    font-size:.5em; font-style:italic; color:var(--gold);
+    font-family:var(--serif); font-weight:400;
+    letter-spacing:.02em; text-transform:lowercase;
+    vertical-align:.18em; margin:0 .04em 0 .18em;
+  }
   .brand-mark{
     display:inline-block;
     height:1.55em;
@@ -2550,7 +2566,7 @@
 
       <div class="feature-buy">
         <div class="price">R$ 39,90<span class="small">250g</span></div>
-        <button class="btn btn-gold" data-add="classico-250g" data-i18n-html="btn.add">Adicionar <span class="arrow">→</span></button>
+        <button id="classico-add" class="btn btn-gold" data-add="classico-250g" data-i18n-html="btn.add">Adicionar <span class="arrow">→</span></button>
       </div>
     </div>
     <div class="feature-pkg">
@@ -2579,7 +2595,7 @@
   <div class="feature-grid">
     <div class="feature-text">
       <div class="num" data-i18n="feat.micro.num">N° 02 — Versão em grãos</div>
-      <h3 class="title">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"> <em>Em Grãos</em></h3>
+      <h3 class="title">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"> <small class="em-particle">Em</small> <em>Grãos</em></h3>
       <div class="tagline" data-i18n="feat.micro.tag">O mesmo blend, agora em grãos.</div>
       <div style="font-family:var(--mono); font-size:14px; font-weight:500; letter-spacing:.28em; color:var(--gold-soft); text-transform:uppercase; margin-top:18px; text-shadow:0 1px 4px rgba(0,0,0,.5);" data-i18n="feat.micro.specs">Em grãos · 500g · Torra Média</div>
       <p class="desc" data-i18n="feat.micro.desc">A mesma alma do Clássico Zerbinatti Moído, agora em grãos inteiros. Para quem prefere moer fresco antes de cada xícara e preservar todo o aroma da torra média. Pacote 500g.</p>
@@ -2700,7 +2716,7 @@
 
     <div class="video-feature-foot reveal">
       <span class="label" style="color:var(--ink-2);" data-i18n="video.label">Colheita 2026 já disponível</span>
-      <a href="#cafes" class="btn btn-gold" data-i18n-html="video.cta">Provar nosso café <span class="arrow">→</span></a>
+      <a href="#classico-add" class="btn btn-gold" data-cta-target="classico-add" data-i18n-html="video.cta">Provar nosso café <span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -2928,7 +2944,7 @@
         </div>
         <div class="pc-body">
           <div>
-            <div class="pc-name">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"> <em>Em Grãos</em></div>
+            <div class="pc-name">Clássico <img class="brand-mark" src="assets/zerbinatti-wordmark-gold.png" alt="Zerbinatti"> <small class="em-particle">Em</small> <em>Grãos</em></div>
             <div class="pc-tag" data-i18n="shop.microlote.tag">SCA 84.75 · 500g grãos</div>
           </div>
           <div class="pc-notes">
@@ -3767,6 +3783,21 @@
     });
   }
 
+  function initCtaTargets() {
+    document.querySelectorAll('[data-cta-target]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.getElementById(link.dataset.ctaTarget);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior:'smooth', block:'center' });
+        target.classList.remove('cta-pulse');
+        void target.offsetWidth;
+        target.classList.add('cta-pulse');
+        setTimeout(() => target.classList.remove('cta-pulse'), 5200);
+      });
+    });
+  }
+
   function boot() {
     try { initRevealObserver(); } catch (e) { console.error('[boot] reveal', e); }
     try { applyI18n();          } catch (e) { console.error('[boot] i18n', e); }
@@ -3778,6 +3809,7 @@
     try { initCart();           } catch (e) { console.error('[boot] cart', e); }
     try { initMobileMenu();     } catch (e) { console.error('[boot] menu', e); }
     try { initPathScroll();     } catch (e) { console.error('[boot] pathscroll', e); }
+    try { initCtaTargets();     } catch (e) { console.error('[boot] cta', e); }
   }
 
   // ===== FASE 4: UNICO PONTO DE EXECUCAO (no fim do IIFE) =====
