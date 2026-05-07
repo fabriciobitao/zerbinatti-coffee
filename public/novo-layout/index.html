@@ -2145,6 +2145,9 @@
     .header.scrolled{padding:10px 20px;}
     .header-nav{display:none;}
     .menu-btn{display:grid;}
+    .header-actions{gap:8px;}
+    .lang-switch{gap:4px; padding-right:4px; margin-right:0;}
+    .lang-btn{width:32px; height:24px;}
 
     .hero-content{
       padding:120px 24px 40px;
@@ -2241,10 +2244,15 @@
     .footer-grid{grid-template-columns:1fr;}
     .step{padding:32px 24px;}
     .step .num{font-size:48px;}
+    .lang-switch{display:none;}
+    .header-actions{gap:6px;}
+    .icon-btn{width:40px; height:40px;}
+    .add-btn{min-height:44px; padding:0 18px;}
   }
 </style>
 </head>
 <body data-palette="espresso" data-density="comfortable">
+<style>html,body{overflow-x:hidden;max-width:100vw;}html{scroll-behavior:smooth;}#planos{scroll-margin-top:80px;}</style>
 
 <!-- ──────── HEADER ──────── -->
 <header class="header" id="header">
@@ -2672,9 +2680,9 @@
       <span class="eyebrow" data-i18n="sub.eyebrow">Assinatura Mensal</span>
       <h2 class="display" data-i18n="sub.title">Café fresco, todo mês, na sua porta.</h2>
       <p class="body-lg" data-i18n="sub.desc">Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.</p>
-      <a href="#" class="btn btn-gold" data-i18n-html="sub.cta">Começar assinatura <span class="arrow">→</span></a>
+      <a href="#planos" class="btn btn-gold" data-i18n-html="sub.cta">Começar assinatura <span class="arrow">→</span></a>
     </div>
-    <div class="sub-cards reveal">
+    <div class="sub-cards reveal" id="planos">
       <div class="plan">
         <div class="num">I</div>
         <div class="info">
