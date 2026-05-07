@@ -11,15 +11,7 @@ const API_VERSION = "2024-10";
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "";
 
-// No server, prefere o private token (rate limit maior). No client, usa o public.
 function getToken(): string {
-  if (typeof window === "undefined") {
-    return (
-      process.env.SHOPIFY_STOREFRONT_PRIVATE_TOKEN ||
-      process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN ||
-      ""
-    );
-  }
   return process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN || "";
 }
 

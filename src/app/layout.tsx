@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
+import { CartHydrator } from "@/lib/cart/CartHydrator";
+import { LocaleProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -61,10 +63,13 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-screen flex flex-col font-sans">
-        <CartProvider>
-          {children}
-          <CartToasts />
-        </CartProvider>
+        <LocaleProvider>
+          <CartProvider>
+            <CartHydrator />
+            {children}
+            <CartToasts />
+          </CartProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

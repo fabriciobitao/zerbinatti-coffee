@@ -34,12 +34,6 @@ export function middleware(request: NextRequest) {
       new URL("/novo-layout/para-empresas.html", request.url),
     );
   }
-
-  if (pathname.startsWith("/assets/")) {
-    return NextResponse.rewrite(
-      new URL(`/novo-layout${pathname}`, request.url),
-    );
-  }
 }
 
 export const config = {
@@ -56,6 +50,5 @@ export const config = {
     "/para-empresas",
     "/para-empresas/",
     "/para-empresas.html",
-    "/assets/:path*",
   ],
 };
