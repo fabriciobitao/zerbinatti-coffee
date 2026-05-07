@@ -8,7 +8,7 @@
 <title>Zerbinatti Caffè · Dal 1897</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="/gruta.css" />
 <style>
   :root{
@@ -28,6 +28,7 @@
     --gold-glow:rgba(201,169,97,.55);
     --accent:#3D7A4F;
     --serif:'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --script:'Allura', 'Pinyon Script', cursive;
     --sans:'Inter', system-ui, sans-serif;
     --mono:'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
   }
@@ -621,6 +622,21 @@
     margin-bottom:8px;
   }
   .feature-text .title em{font-style:italic; color:var(--gold);}
+  .feature-text .title em.brand,
+  .pc-name em.brand{
+    font-family:var(--script);
+    font-style:normal;
+    font-weight:400;
+    letter-spacing:.005em;
+    line-height:1;
+    color:var(--gold);
+  }
+  .feature-text .title em.brand{
+    font-size:1.18em;
+    display:inline-block;
+    transform:translateY(.06em);
+    padding:0 .04em;
+  }
   .feature-text .tagline{
     font-family:var(--serif);
     font-style:italic;
@@ -2317,7 +2333,7 @@
   <div class="feature-grid">
     <div class="feature-text">
       <div class="num" data-i18n="feat.classico.num">N° 01 — Mais vendido</div>
-      <h3 class="title">Clássico <em>Zerbinatti</em></h3>
+      <h3 class="title">Clássico <em class="brand">Zerbinatti</em></h3>
       <div class="tagline" data-i18n="feat.classico.tag">O blend da família desde 1897.</div>
       <div style="font-family:var(--mono); font-size:11px; letter-spacing:.32em; color:var(--gold); text-transform:uppercase; margin-top:14px;" data-i18n="feat.classico.specs">Moído · 250g · Torra Média</div>
       <p class="desc" data-i18n="feat.classico.desc">Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.</p>
@@ -2679,7 +2695,7 @@
         </div>
         <div class="pc-body">
           <div>
-            <div class="pc-name">Clássico <em>Zerbinatti</em></div>
+            <div class="pc-name">Clássico <em class="brand">Zerbinatti</em></div>
             <div class="pc-tag" data-i18n="shop.classico.tag">Blend de família · 500g</div>
           </div>
           <div class="pc-notes">
