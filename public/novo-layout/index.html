@@ -572,8 +572,42 @@
     position:relative;
     min-height:90vh;
     overflow:hidden;
-    border-top:1px solid var(--line);
     isolation:isolate;
+  }
+  .feature-divider{
+    background:var(--bg-0);
+    padding:8px 16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .feature-divider .ornament-rule{
+    position:relative;
+    width:80px;
+    height:1px;
+    transform:scaleY(.5);
+    background:linear-gradient(90deg,
+      rgba(201,169,97,.18) 0,
+      rgba(201,169,97,.18) calc(50% - 8px),
+      transparent calc(50% - 8px),
+      transparent calc(50% + 8px),
+      rgba(201,169,97,.18) calc(50% + 8px),
+      rgba(201,169,97,.18) 100%);
+  }
+  .feature-divider .ornament-rule::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scaleY(2);
+    width:2px;
+    height:2px;
+    border-radius:50%;
+    background:rgba(201,169,97,.35);
+  }
+  @media (max-width:720px){
+    .feature-divider{ padding:6px 16px; }
+    .feature-divider .ornament-rule{ width:60px; }
   }
   .feature-bg{
     position:absolute;
@@ -2507,6 +2541,9 @@
   </div>
 </article>
 
+<div class="feature-divider" aria-hidden="true">
+  <div class="ornament-rule"></div>
+</div>
 
 <article class="feature reveal" data-feature="classico-graos">
   <div class="feature-bg" style="background-image:url('https://images.unsplash.com/photo-1442550528053-c431ecb55509?w=1600&q=85');"></div>
