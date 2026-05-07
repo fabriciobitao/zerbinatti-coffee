@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { products, getProductBySlug } from "@/lib/data/products";
+import { getProductByHandle } from "@/lib/products";
 import { SensoryProfile } from "@/components/ui/SensoryProfile";
 import { Reviews } from "@/components/ui/Reviews";
 import { Badge } from "@/components/ui/Badge";
@@ -34,6 +35,16 @@ function formatCurrency(value: number) {
   });
 }
 
+/**
+ * Mapeia slug legado (do dataset estatico) para o handle real do Shopify.
+ * Slugs nao listados aqui sao tratados como ainda-nao-migrados — a PDP renderiza
+ * com editorial legado e CTA "Em breve". Mover pra Shopify metafields
+ * conforme cada produto for migrado em waves futuras.
+ */
+const LEGACY_SLUG_TO_SHOPIFY_HANDLE: Record<string, string> = {
+  classico: "classico-zerbinatti",
+};
+
 export default async function ProductPage({
   params,
 }: {
@@ -42,6 +53,29 @@ export default async function ProductPage({
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
+
+  // Soft migration: pull variantId + availableForSale do Shopify quando o
+  // slug legado mapeia pra um handle Shopify; cai pro legado (variantId: null,
+  // indisponivel) caso contrario. Editorial (sensory, reviews, longDescription)
+  // continua vindo do dataset estatico ate ser migrado pra metafields.
+  const shopifyHandle = LEGACY_SLUG_TO_SHOPIFY_HANDLE[slug] ?? null;
+  let shopifyProduct: Awaited<ReturnType<typeof getProductByHandle>> = null;
+  if (shopifyHandle) {
+    try {
+      shopifyProduct = await getProductByHandle(shopifyHandle);
+    } catch (err) {
+      console.error(
+        `[PDP] Shopify lookup falhou para handle="${shopifyHandle}":`,
+        err,
+      );
+    }
+  }
+  const defaultVariant =
+    shopifyProduct?.variants.find((v) => v.availableForSale) ??
+    shopifyProduct?.variants[0] ??
+    null;
+  const variantId = defaultVariant?.variantId ?? null;
+  const availableForSale = defaultVariant?.availableForSale ?? false;
 
   const pix = product.price * 0.9;
   const related = products.filter((p) => p.slug !== slug);
@@ -150,10 +184,8 @@ export default async function ProductPage({
 
                 <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                   <AddToCartButton
-                    id={product.id}
-                    name={product.name}
-                    price={product.price}
-                    weight={product.weight}
+                    variantId={variantId}
+                    availableForSale={availableForSale}
                   />
                   <Link
                     href="/#assinatura"

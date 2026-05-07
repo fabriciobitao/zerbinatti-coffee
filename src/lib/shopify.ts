@@ -110,7 +110,6 @@ export const GET_ALL_PRODUCTS = /* GraphQL */ `
                 title
                 sku
                 availableForSale
-                quantityAvailable
                 price {
                   amount
                   currencyCode
@@ -176,7 +175,6 @@ export const GET_PRODUCT_BY_HANDLE = /* GraphQL */ `
             title
             sku
             availableForSale
-            quantityAvailable
             price {
               amount
               currencyCode

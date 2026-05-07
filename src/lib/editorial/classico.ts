@@ -53,10 +53,10 @@ export const editorialClassico: EditorialProduct = {
   handle: "classico-zerbinatti",
 
   flavorChipsKeys: [
-    "note.chocolate",
-    "note.caramel",
-    "note.nuts",
-    "note.sweet-finish",
+    "note.chocoLeite",
+    "note.caramelo",
+    "note.nozes",
+    "note.finalDoce",
   ],
 
   sensory: {

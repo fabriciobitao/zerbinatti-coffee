@@ -157,17 +157,30 @@ export const dictionary = {
     'sub.desc':
       'Receba a torra do mês selecionada pelo nosso mestre torrefador. Pause, troque ou cancele quando quiser. Sem compromisso, só prazer.',
     'sub.cta': 'Começar assinatura <span class="arrow">→</span>',
+    'sub.plan1.title': 'Quotidiano',
     'sub.plan1.freq': '3× moído · 250g · mensal',
     'sub.plan1.desc': 'Café pronto pra cafeteira. Para o ritual diário sem complicação.',
+    'sub.plan1.price': 'R$ 107,73',
+    'sub.plan2.title': 'Doppio Rituale',
     'sub.plan2.freq': '1 moído 250g + 1 grãos 500g · mensal',
     'sub.plan2.desc':
       'Os dois mundos na mesma assinatura. Praticidade e ritual de barista, lado a lado.',
+    'sub.plan2.price': 'R$ 98,82',
     'sub.plan2.badge': 'Mais escolhido',
+    'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× grãos · 500g · mensal',
     'sub.plan3.desc':
       'Para quem mói fresco antes de cada xícara. O ritual completo do barista em casa.',
+    'sub.plan3.price': 'R$ 188,73',
     'sub.priceMonth': '/mês',
     'sub.priceMonthOff': '/mês · 10% off',
+    'sub.whatsapp.msg.plan1':
+      'Olá! Quero assinar o plano Quotidiano (3× moído 250g · mensal). Pode me ajudar?',
+    'sub.whatsapp.msg.plan2':
+      'Olá! Quero assinar o plano Doppio Rituale (1 moído 250g + 1 grãos 500g · mensal). Pode me ajudar?',
+    'sub.whatsapp.msg.plan3':
+      'Olá! Quero assinar o plano Maestro (3× grãos 500g · mensal). Pode me ajudar?',
+    'sub.plan.cta': 'Assinar plano',
     'story.stamp': 'Famiglia · Dal',
     'story.eyebrow': 'Nossa História',
     'story.title': 'Da Itália ao <em>coração</em> do Brasil.',
@@ -365,16 +378,29 @@ export const dictionary = {
     'sub.desc':
       "Receive the month's roast picked by our master roaster. Pause, switch or cancel any time. No commitment, just pleasure.",
     'sub.cta': 'Start subscription <span class="arrow">→</span>',
+    'sub.plan1.title': 'Quotidiano',
     'sub.plan1.freq': '3× ground · 250g · monthly',
     'sub.plan1.desc': 'Coffee ready for your machine. For the daily ritual, no fuss.',
+    'sub.plan1.price': 'R$ 107,73',
+    'sub.plan2.title': 'Doppio Rituale',
     'sub.plan2.freq': '1 ground 250g + 1 whole beans 500g · monthly',
     'sub.plan2.desc':
       'Both worlds in one subscription. Convenience and barista ritual, side by side.',
+    'sub.plan2.price': 'R$ 98,82',
     'sub.plan2.badge': 'Most chosen',
+    'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× whole beans · 500g · monthly',
     'sub.plan3.desc': 'For those who grind fresh before every cup. The full barista ritual at home.',
+    'sub.plan3.price': 'R$ 188,73',
     'sub.priceMonth': '/month',
     'sub.priceMonthOff': '/month · 15% off',
+    'sub.whatsapp.msg.plan1':
+      "Hi! I'd like to subscribe to the Quotidiano plan (3× ground 250g · monthly). Can you help?",
+    'sub.whatsapp.msg.plan2':
+      "Hi! I'd like to subscribe to the Doppio Rituale plan (1 ground 250g + 1 whole beans 500g · monthly). Can you help?",
+    'sub.whatsapp.msg.plan3':
+      "Hi! I'd like to subscribe to the Maestro plan (3× whole beans 500g · monthly). Can you help?",
+    'sub.plan.cta': 'Subscribe to plan',
     'story.stamp': 'Famiglia · Since',
     'story.eyebrow': 'Our Story',
     'story.title': 'From Italy to the <em>heart</em> of Brazil.',
@@ -572,17 +598,30 @@ export const dictionary = {
     'sub.desc':
       'Recibe el tueste del mes seleccionado por nuestro maestro tostador. Pausa, cambia o cancela cuando quieras. Sin compromiso, solo placer.',
     'sub.cta': 'Empezar suscripción <span class="arrow">→</span>',
+    'sub.plan1.title': 'Quotidiano',
     'sub.plan1.freq': '3× molido · 250g · mensual',
     'sub.plan1.desc': 'Café listo para tu cafetera. Para el ritual diario sin complicaciones.',
+    'sub.plan1.price': 'R$ 107,73',
+    'sub.plan2.title': 'Doppio Rituale',
     'sub.plan2.freq': '1 molido 250g + 1 granos 500g · mensual',
     'sub.plan2.desc':
       'Los dos mundos en una sola suscripción. Practicidad y ritual de barista, lado a lado.',
+    'sub.plan2.price': 'R$ 98,82',
     'sub.plan2.badge': 'Más elegido',
+    'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× granos · 500g · mensual',
     'sub.plan3.desc':
       'Para quien muele fresco antes de cada taza. El ritual completo del barista en casa.',
+    'sub.plan3.price': 'R$ 188,73',
     'sub.priceMonth': '/mes',
     'sub.priceMonthOff': '/mes · 15% off',
+    'sub.whatsapp.msg.plan1':
+      '¡Hola! Quiero suscribirme al plan Quotidiano (3× molido 250g · mensual). ¿Pueden ayudarme?',
+    'sub.whatsapp.msg.plan2':
+      '¡Hola! Quiero suscribirme al plan Doppio Rituale (1 molido 250g + 1 granos 500g · mensual). ¿Pueden ayudarme?',
+    'sub.whatsapp.msg.plan3':
+      '¡Hola! Quiero suscribirme al plan Maestro (3× granos 500g · mensual). ¿Pueden ayudarme?',
+    'sub.plan.cta': 'Suscribirse al plan',
     'story.stamp': 'Famiglia · Desde',
     'story.eyebrow': 'Nuestra Historia',
     'story.title': 'De Italia al <em>corazón</em> de Brasil.',
