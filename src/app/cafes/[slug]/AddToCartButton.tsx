@@ -1,18 +1,8 @@
-"use client";
-
 /**
- * PDP Add-to-Cart button.
- * Wired to the new Zustand cart store + Shopify Server Actions.
- *
- * Receives a Shopify variantId (gid://shopify/ProductVariant/...) from the
- * server component (page.tsx) and calls `addItem(variantId, 1)` on click.
- * The store optimistically opens the drawer for instant feedback.
- *
- * If `variantId` is null (slug nao mapeado para produto Shopify) ou
- * `availableForSale` for false, o botao renderiza disabled como "Em breve".
+ * PDP CTA — desativado temporariamente.
+ * Renderiza um badge nao-interativo "Em breve" no lugar do botao de carrinho
+ * enquanto a loja ainda nao esta liberada para vendas.
  */
-
-import { useCartStore } from "@/lib/cart/store";
 
 export function AddToCartButton({
   variantId,
@@ -21,30 +11,15 @@ export function AddToCartButton({
   variantId: string | null;
   availableForSale: boolean;
 }) {
-  const addItem = useCartStore((s) => s.addItem);
-  const isLoading = useCartStore((s) => s.isLoading);
-
-  const disabled = !variantId || !availableForSale || isLoading;
-
-  const label = !variantId || !availableForSale
-    ? "Em breve"
-    : isLoading
-      ? "Adicionando..."
-      : "Adicionar ao carrinho";
-
   return (
-    <button
-      type="button"
+    <span
+      aria-disabled="true"
+      data-coming-soon="true"
       data-variant-id={variantId ?? ""}
       data-available={availableForSale ? "true" : "false"}
-      onClick={() => {
-        if (!variantId || !availableForSale) return;
-        void addItem(variantId, 1);
-      }}
-      disabled={disabled}
-      className="flex-1 rounded-full bg-coffee-900 px-5 py-3 text-sm font-semibold text-coffee-50 transition-all hover:bg-coffee-700 hover:shadow-lg active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:bg-coffee-900 disabled:hover:shadow-none disabled:active:scale-100"
+      className="flex-1 inline-flex items-center justify-center rounded-full bg-coffee-900 px-5 py-3 text-sm font-semibold text-coffee-50 opacity-60 cursor-not-allowed"
     >
-      {label}
-    </button>
+      Em breve
+    </span>
   );
 }
