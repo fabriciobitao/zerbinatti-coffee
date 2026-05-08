@@ -12,6 +12,7 @@ import "server-only";
 import {
   GET_ALL_PRODUCTS,
   GET_PRODUCT_BY_HANDLE,
+  isShopifyConfigured,
   shopifyFetch,
 } from "./shopify";
 import {
@@ -203,6 +204,7 @@ function mapProduct(node: ShopifyProduct): HomeProduct {
  * `revalidateTag('shopify-products')` from a webhook.
  */
 export async function getHomeProducts(): Promise<HomeProduct[]> {
+  if (!isShopifyConfigured()) return [];
   const data = await shopifyFetch<GetAllProductsResponse>({
     query: GET_ALL_PRODUCTS,
     variables: { first: 20 },
@@ -219,6 +221,7 @@ export async function getHomeProducts(): Promise<HomeProduct[]> {
 export async function getProductByHandle(
   handle: string,
 ): Promise<HomeProduct | null> {
+  if (!isShopifyConfigured()) return null;
   const data = await shopifyFetch<GetProductByHandleResponse>({
     query: GET_PRODUCT_BY_HANDLE,
     variables: { handle },
