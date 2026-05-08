@@ -102,11 +102,11 @@ export default function HomeHeader() {
             <Image
               src="/assets/zerbinatti-wordmark-gold.png"
               alt="Zerbinatti"
-              width={140}
-              height={20}
+              width={196}
+              height={28}
               priority
               className="word"
-              style={{ height: 'auto', width: 'auto', maxHeight: 20 }}
+              style={{ height: 'auto', width: 'auto', maxHeight: 28 }}
             />
             <span className="sub">Caffè · Desde 1897</span>
           </span>
