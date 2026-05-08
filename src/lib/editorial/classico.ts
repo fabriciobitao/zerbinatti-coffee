@@ -97,12 +97,10 @@ export const editorialClassico: EditorialProduct = {
     {
       slotKey: "classico-250g",
       matchOption: { name: "Tamanho", value: "250g" },
-      priceOverrideBRL: 49.9,
     },
     {
       slotKey: "classico-500g",
       matchOption: { name: "Tamanho", value: "500g" },
-      priceOverrideBRL: 79.9,
     },
   ],
 };
