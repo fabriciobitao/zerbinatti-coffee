@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 export const runtime = "nodejs";
@@ -39,6 +39,12 @@ export async function POST(req: NextRequest) {
   revalidateTag("shopify-products", "default");
   if (payload.handle) {
     revalidateTag(`shopify-product:${payload.handle}`, "default");
+  }
+
+  revalidatePath("/", "page");
+  revalidatePath("/", "layout");
+  if (payload.handle) {
+    revalidatePath(`/cafes/${payload.handle}`, "page");
   }
 
   return NextResponse.json({
