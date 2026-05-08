@@ -8,17 +8,9 @@
 // disparar request ate aproximar do viewport.
 
 import { T } from '@/lib/i18n';
-import { getHomeProducts } from '@/lib/products';
 import { VideoCtaButton } from './VideoCtaButton';
 
-const CLASSICO_HANDLE = 'classico-zerbinatti';
-const MOIDO_SLOT = 'classico-250g';
-
-export default async function VideoFeature() {
-  const products = await getHomeProducts();
-  const classico = products.find((p) => p.handle === CLASSICO_HANDLE) ?? null;
-  const moido = classico?.variants.find((v) => v.slotKey === MOIDO_SLOT) ?? null;
-
+export default function VideoFeature() {
   return (
     <section className="video-feature" id="video">
       <div className="video-feature-inner">
@@ -51,16 +43,7 @@ export default async function VideoFeature() {
           <span className="label" style={{ color: 'var(--ink-2)' }}>
             <T k="video.label" />
           </span>
-          {moido ? (
-            <VideoCtaButton
-              variantId={moido.variantId}
-              available={moido.availableForSale}
-            />
-          ) : (
-            <a href="#cafes" className="btn btn-gold">
-              <T k="video.cta" html as="span" />
-            </a>
-          )}
+          <VideoCtaButton />
         </div>
       </div>
     </section>

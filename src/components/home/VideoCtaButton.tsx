@@ -1,39 +1,24 @@
 'use client';
 
 import { useT } from '@/lib/i18n/useT';
-import { useCartStore } from '@/lib/cart/store';
 
-type Props = {
-  variantId: string;
-  available: boolean;
-};
-
-export function VideoCtaButton({ variantId, available }: Props) {
+export function VideoCtaButton() {
   const t = useT();
-  const addItem = useCartStore((s) => s.addItem);
-  const isLoading = useCartStore((s) => s.isLoading);
-
-  const disabled = !available || isLoading;
   const labelHtml = t.html('video.cta');
 
   return (
-    <button
-      type="button"
+    <a
+      href="#cafes"
       className="btn btn-gold"
-      data-variant-id={variantId}
-      data-add="true"
-      aria-busy={isLoading || undefined}
-      disabled={disabled}
-      onClick={() => {
-        if (disabled) return;
-        void addItem(variantId, 1);
+      onClick={(e) => {
+        const target = document.querySelector(
+          '[data-feature="classico-250g"] .feature-buy',
+        );
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }}
-    >
-      {isLoading ? (
-        <span className="add-spinner" aria-hidden="true" />
-      ) : (
-        <span dangerouslySetInnerHTML={labelHtml} />
-      )}
-    </button>
+      dangerouslySetInnerHTML={labelHtml}
+    />
   );
 }
