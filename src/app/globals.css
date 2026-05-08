@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #EDEDED;
-  --color-foreground: #141414;
+  --color-background: #0A0A0A;
+  --color-foreground: #ECECEC;
 
-  /* Brand colors — Graphite gray scale */
-  --color-coffee-950: #0E0E0E;
-  --color-coffee-900: #1A1A1A;
-  --color-coffee-800: #262626;
-  --color-coffee-700: #363636;
-  --color-coffee-600: #4A4A4A;
-  --color-coffee-500: #666666;
-  --color-coffee-400: #8A8A8A;
-  --color-coffee-300: #A8A8A8;
-  --color-coffee-200: #C8C8C8;
-  --color-coffee-100: #E0E0E0;
-  --color-coffee-50: #F2F2F2;
+  /* Brand colors — Dark graphite with cream accents */
+  --color-coffee-950: #050505;
+  --color-coffee-900: #0E0E0E;
+  --color-coffee-800: #1A1A1A;
+  --color-coffee-700: #262626;
+  --color-coffee-600: #363636;
+  --color-coffee-500: #4A4A4A;
+  --color-coffee-400: #666666;
+  --color-coffee-300: #8A8A8A;
+  --color-coffee-200: #B0B0B0;
+  --color-coffee-100: #D4D4D4;
+  --color-coffee-50: #ECECEC;
 
-  /* Platinum/silver accents (replacing gold) */
-  --color-gold-600: #6E6E6E;
-  --color-gold-500: #909090;
-  --color-gold-400: #B0B0B0;
-  --color-gold-300: #D0D0D0;
+  /* Cream/champagne accents (Gruta vibe) */
+  --color-gold-600: #C8B58E;
+  --color-gold-500: #DDC8A0;
+  --color-gold-400: #E8D5B0;
+  --color-gold-300: #F0E0C0;
 
   --color-green-800: #2E5A3A;
   --color-green-700: #3D7A4F;
@@ -34,12 +34,12 @@
 body {
   color: var(--color-foreground);
   background:
-    radial-gradient(1300px 900px at 15% -10%, #FCFCFC 0%, transparent 55%),
-    radial-gradient(1000px 700px at 95% 10%, #F0F0F0 0%, transparent 60%),
-    radial-gradient(900px 600px at 50% 50%, #F5F5F5 0%, transparent 70%),
-    radial-gradient(1100px 800px at 5% 90%, #ECECEC 0%, transparent 60%),
-    radial-gradient(1200px 900px at 100% 100%, #E2E2E2 0%, transparent 65%),
-    linear-gradient(180deg, #FAFAFA 0%, #F2F2F2 35%, #E8E8E8 70%, #DCDCDC 100%);
+    radial-gradient(1400px 900px at 15% -10%, rgba(80,80,80,0.45) 0%, transparent 55%),
+    radial-gradient(1100px 700px at 95% 15%, rgba(60,60,60,0.40) 0%, transparent 60%),
+    radial-gradient(900px 600px at 50% 50%, rgba(70,70,70,0.30) 0%, transparent 70%),
+    radial-gradient(1100px 800px at 5% 85%, rgba(50,50,50,0.40) 0%, transparent 60%),
+    radial-gradient(1300px 900px at 100% 100%, rgba(45,45,45,0.45) 0%, transparent 65%),
+    linear-gradient(180deg, #0F0F0F 0%, #0A0A0A 35%, #0E0E0E 70%, #060606 100%);
   background-attachment: fixed;
 }
 
@@ -79,63 +79,46 @@ select:focus-visible,
   border: 0;
 }
 
-/* Let body gradient bleed through light sections */
-main > section[class*="bg-coffee-50"],
-main > section[class*="bg-coffee-100"],
-main > section[class*="bg-white"] {
+/* All sections transparent so body gradient + smoky overlay show through */
+main > section {
   background-color: transparent !important;
-}
-
-/* Smoky gradient transitions for dark sections */
-main > section[class*="bg-coffee-950"] {
-  background: linear-gradient(180deg, #2A2A2A 0%, #161616 50%, #2A2A2A 100%) !important;
-  position: relative;
-}
-main > section[class*="bg-coffee-900"] {
-  background: linear-gradient(180deg, #333333 0%, #1F1F1F 100%) !important;
   position: relative;
 }
 
-/* Smoky fog transitions between contrasting sections */
-main > section[class*="bg-coffee-950"]::before,
-main > section[class*="bg-coffee-900"]::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 120px;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(220,220,220,0.55) 0%, rgba(180,180,180,0.18) 45%, transparent 100%);
-  filter: blur(2px);
-  z-index: 1;
-}
-main > section[class*="bg-coffee-950"]::after,
-main > section[class*="bg-coffee-900"]::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 120px;
-  pointer-events: none;
-  background: linear-gradient(0deg, rgba(220,220,220,0.55) 0%, rgba(180,180,180,0.18) 45%, transparent 100%);
-  filter: blur(2px);
-  z-index: 1;
-}
-main > section[class*="bg-coffee-950"] > *,
-main > section[class*="bg-coffee-900"] > * { position: relative; z-index: 2; }
-
-/* Smoky overlay floating across the page */
+/* Smoky fog overlay floating across the entire page */
 main::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
   background:
-    radial-gradient(800px 400px at 20% 25%, rgba(255,255,255,0.35) 0%, transparent 60%),
-    radial-gradient(700px 350px at 80% 60%, rgba(180,180,180,0.25) 0%, transparent 65%),
-    radial-gradient(900px 500px at 50% 95%, rgba(160,160,160,0.20) 0%, transparent 70%);
-  filter: blur(40px);
+    radial-gradient(900px 500px at 18% 22%, rgba(110,110,110,0.28) 0%, transparent 60%),
+    radial-gradient(800px 450px at 82% 55%, rgba(95,95,95,0.22) 0%, transparent 65%),
+    radial-gradient(1000px 600px at 50% 92%, rgba(70,70,70,0.30) 0%, transparent 70%),
+    radial-gradient(700px 400px at 25% 75%, rgba(85,85,85,0.18) 0%, transparent 65%);
+  filter: blur(60px);
   mix-blend-mode: screen;
+  animation: smoke-drift 24s ease-in-out infinite alternate;
 }
+@keyframes smoke-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-30px, -20px, 0); }
+}
+
+/* Soft smoky transitions at section boundaries */
+main > section + section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 180px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(120,120,120,0.18) 0%, rgba(80,80,80,0.08) 50%, transparent 100%);
+  filter: blur(40px);
+  z-index: 1;
+}
+
+main > section > * { position: relative; z-index: 2; }
 
 /* Grain texture overlay */
 body::after {
