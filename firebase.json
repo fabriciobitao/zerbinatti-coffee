@@ -1,0 +1,15 @@
+{
+  "hosting": {
+    "public": "public-empty",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": {
+          "serviceId": "zerbinatti-coffee",
+          "region": "southamerica-east1"
+        }
+      }
+    ]
+  }
+}

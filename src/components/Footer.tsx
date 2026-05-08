@@ -159,13 +159,14 @@ export default function Footer() {
               </Link>
               <span
                 className="gruta-badge"
-                data-theme="graphite"
+                data-theme="dark"
                 aria-label="Made by Gruta — clica pra contato"
                 role="button"
                 tabIndex={0}
+                suppressHydrationWarning
               >
                 <canvas className="gruta-mark" width={16} height={16} />
-                <span className="gruta-text" style={{ display: "none" }} />
+                <span className="gruta-text" suppressHydrationWarning />
               </span>
             </div>
           </div>

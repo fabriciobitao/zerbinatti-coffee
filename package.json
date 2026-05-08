@@ -9,9 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^8.5.0",
     "next": "16.2.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "resend": "^6.12.3",
     "zustand": "^5.0.13"
   },
   "devDependencies": {

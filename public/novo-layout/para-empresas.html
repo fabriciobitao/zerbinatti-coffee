@@ -368,26 +368,26 @@
     <h2 class="display" style="margin-top:14px;" data-i18n-html="b2b.form.title">Conte sobre<br/>o seu <em>projeto</em>.</h2>
     <p data-i18n-html="b2b.form.desc">Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.</p>
 
-    <form class="form-grid" onsubmit="event.preventDefault(); alert((window.t && window.t('b2b.form.received')) || 'Recebido — entraremos em contato em até 1 dia útil.');">
+    <form id="b2bForm" class="form-grid" novalidate>
       <div class="form-row">
         <label data-i18n="b2b.form.name">Nome</label>
-        <input type="text" required data-i18n-attr="placeholder:b2b.form.namePh" placeholder="Seu nome completo" />
+        <input name="nome" type="text" required data-i18n-attr="placeholder:b2b.form.namePh" placeholder="Seu nome completo" />
       </div>
       <div class="form-row">
         <label data-i18n="b2b.form.company">Empresa / CNPJ</label>
-        <input type="text" required data-i18n-attr="placeholder:b2b.form.companyPh" placeholder="Razão social ou CNPJ" />
+        <input name="empresa" type="text" required data-i18n-attr="placeholder:b2b.form.companyPh" placeholder="Razão social ou CNPJ" />
       </div>
       <div class="form-row">
         <label data-i18n="b2b.form.email">E-mail</label>
-        <input type="email" required placeholder="contato@empresa.com" />
+        <input name="email" type="email" required placeholder="contato@empresa.com" />
       </div>
       <div class="form-row">
         <label data-i18n="b2b.form.phone">WhatsApp</label>
-        <input type="tel" required placeholder="(11) 99999-0000" />
+        <input name="whatsapp" type="tel" required placeholder="(11) 99999-0000" />
       </div>
       <div class="form-row full">
         <label data-i18n="b2b.form.segment">Segmento</label>
-        <select required>
+        <select name="segmento" required>
           <option value="" data-i18n="b2b.form.segmentSel">Selecione o segmento</option>
           <option data-i18n="b2b.form.s1">Cafeteria / coffee shop</option>
           <option data-i18n="b2b.form.s2">Restaurante / hotel</option>
@@ -398,16 +398,63 @@
       </div>
       <div class="form-row full">
         <label data-i18n="b2b.form.volume">Volume estimado (kg/mês)</label>
-        <input type="text" data-i18n-attr="placeholder:b2b.form.volumePh" placeholder="Ex.: 30kg de torrado por mês" />
+        <input name="volume" type="text" data-i18n-attr="placeholder:b2b.form.volumePh" placeholder="Ex.: 30kg de torrado por mês" />
       </div>
       <div class="form-row full">
         <label data-i18n="b2b.form.message">Mensagem</label>
-        <textarea data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
+        <textarea name="mensagem" data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
       </div>
+      <input type="text" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
       <div class="form-row full form-actions">
-        <button type="submit" class="btn btn-gold" data-i18n-html="b2b.form.send">Enviar pedido <span class="arrow">→</span></button>
+        <button id="b2bSubmit" type="submit" class="btn btn-gold" data-i18n-html="b2b.form.send">Enviar pedido <span class="arrow">→</span></button>
       </div>
+      <div id="b2bFormMsg" class="form-row full" style="display:none;text-align:center;font-size:14px;padding:16px;border-radius:8px;"></div>
     </form>
+    <script>
+    (function(){
+      const form = document.getElementById('b2bForm');
+      const btn = document.getElementById('b2bSubmit');
+      const msg = document.getElementById('b2bFormMsg');
+      if (!form) return;
+      form.addEventListener('submit', async function(e){
+        e.preventDefault();
+        msg.style.display = 'none';
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        const data = Object.fromEntries(new FormData(form).entries());
+        btn.disabled = true;
+        const original = btn.innerHTML;
+        btn.innerHTML = 'Enviando...';
+        try {
+          const res = await fetch('/api/b2b-form', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          const json = await res.json().catch(() => ({}));
+          if (res.ok) {
+            form.reset();
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(217,165,77,.12)';
+            msg.style.color = '#D9A54D';
+            msg.style.border = '1px solid rgba(217,165,77,.4)';
+            msg.textContent = 'Recebido! Entraremos em contato em até 1 dia útil.';
+          } else {
+            throw new Error(json.error || 'request_failed');
+          }
+        } catch (err) {
+          msg.style.display = 'block';
+          msg.style.background = 'rgba(220,80,80,.12)';
+          msg.style.color = '#E37070';
+          msg.style.border = '1px solid rgba(220,80,80,.4)';
+          msg.textContent = 'Não foi possível enviar agora. Tenta de novo em alguns segundos.';
+          console.error('[b2b]', err);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = original;
+        }
+      });
+    })();
+    </script>
     <p class="form-note" data-i18n="b2b.form.note">Resposta em até 1 dia útil — direto do time comercial da fazenda.</p>
   </div>
 </section>
