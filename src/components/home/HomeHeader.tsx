@@ -108,7 +108,7 @@ export default function HomeHeader() {
               className="word"
               style={{ height: 'auto', width: 'auto', maxHeight: 20 }}
             />
-            <span className="sub">Caffè · Dal 1897</span>
+            <span className="sub">Caffè · Desde 1897</span>
           </span>
         </Link>
 
