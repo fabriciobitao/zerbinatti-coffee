@@ -55,10 +55,17 @@ const pressStart = Press_Start_2P({
   display: "swap",
 });
 
+const SITE_URL = "https://zerbinatticoffee.com";
+const OG_IMAGE = "/assets/og-share.jpg";
+const SITE_NAME = "Zerbinatti";
+const TITLE = "Zerbinatti | Café especial desde 1897";
+const DESCRIPTION =
+  "Café especial brasileiro com herança italiana desde 1897. Três gerações de cafeicultura familiar — Valim Farms, MG. Direto do produtor para sua xícara.";
+
 export const metadata: Metadata = {
-  title: "Zerbinatti Coffee | From the 1897 Legacy to Your Cup",
-  description:
-    "Café especial brasileiro com herança italiana desde 1897. Colheita limitada, qualidade premium, direto da fazenda para sua xícara.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
   keywords: [
     "café especial",
     "specialty coffee",
@@ -81,12 +88,27 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Zerbinatti Coffee | Since 1897",
-    description:
-      "Café especial brasileiro com herança italiana desde 1897. Qualidade premium, colheita limitada.",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
     locale: "pt_BR",
-    alternateLocale: "en_US",
+    alternateLocale: ["en_US", "es_ES"],
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 673,
+        height: 706,
+        alt: "Zerbinatti — Café especial direto da fazenda",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 

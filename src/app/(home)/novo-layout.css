@@ -2427,3 +2427,31 @@
   html{scroll-behavior:smooth;}
   .novo-layout{overflow-x:hidden; max-width:100vw;}
   #planos{scroll-margin-top:80px;}
+
+  /* ───────── MOBILE READABILITY BUMP (≤640px) ─────────
+     Aumenta tamanhos de fonte em mobile pra leitura mais confortavel.
+     Mantem hierarquia tipografica mas com base maior. */
+  @media (max-width: 640px){
+    .body{font-size:16.5px; line-height:1.65;}
+    .body-lg{font-size:18px; line-height:1.6;}
+    .small{font-size:14px;}
+    .eyebrow{font-size:12px; letter-spacing:.26em;}
+    .label{font-size:11px; letter-spacing:.26em;}
+    .section-head .meta .k{font-size:11px;}
+    .hero-desc{font-size:17px; line-height:1.55;}
+    .hero-stats-row .v{font-size:22px;}
+    .hero-stats-row .l{font-size:11px;}
+    .processo-step h3,.cafes-card h3{font-size:22px;}
+    .processo-step p,.cafes-card p,.subscription-card p{font-size:15.5px; line-height:1.6;}
+    .historia-shell p{font-size:16.5px; line-height:1.7;}
+    .footer p,.footer li,.footer a{font-size:14px;}
+    .footer h4{font-size:11px;}
+    .formulario p{font-size:16px; line-height:1.65;}
+    .form-row label{font-size:11px;}
+    .form-row input,.form-row select,.form-row textarea{font-size:16px;}
+    .form-note{font-size:13px;}
+  }
+  @media (max-width: 380px){
+    .body{font-size:16px;}
+    .hero-desc{font-size:16px;}
+  }

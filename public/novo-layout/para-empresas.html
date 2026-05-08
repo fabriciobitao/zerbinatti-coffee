@@ -6,6 +6,24 @@
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex" />
 <meta name="googlebot" content="noindex, nofollow" />
 <title>Zerbinatti Caffè · Para Empresas</title>
+<meta name="description" content="Programa B2B Zerbinatti — café especial direto da fazenda para cafeterias, restaurantes, hotéis, torrefações e escritórios. Três gerações, lotes 84+ SCA, contratos anuais com preço travado." />
+<link rel="canonical" href="https://zerbinatticoffee.com/para-empresas" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Zerbinatti" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale:alternate" content="es_ES" />
+<meta property="og:url" content="https://zerbinatticoffee.com/para-empresas" />
+<meta property="og:title" content="Zerbinatti Caffè · Para Empresas" />
+<meta property="og:description" content="Café especial direto do produtor para o seu negócio. Cafeterias, restaurantes, hotéis e escritórios — contrato anual com preço travado." />
+<meta property="og:image" content="https://zerbinatticoffee.com/assets/og-share.jpg" />
+<meta property="og:image:width" content="673" />
+<meta property="og:image:height" content="706" />
+<meta property="og:image:alt" content="Zerbinatti — Café especial direto da fazenda" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Zerbinatti Caffè · Para Empresas" />
+<meta name="twitter:description" content="Café especial direto do produtor para o seu negócio. Contrato anual com preço travado." />
+<meta name="twitter:image" content="https://zerbinatticoffee.com/assets/og-share.jpg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
@@ -206,6 +224,21 @@
     .hero-stats-row{flex-direction:column;}
     .hero-stats-row > div{border-right:none;border-bottom:1px solid var(--line);}
     .hero-stats-row > div:last-child{border-bottom:none;}
+
+    /* Mobile readability bump */
+    .eyebrow{font-size:12px; letter-spacing:.26em;}
+    .label{font-size:11px; letter-spacing:.26em;}
+    .section-head .meta .k{font-size:11px;}
+    .hero-desc{font-size:17px; line-height:1.55;}
+    .hero-stats-row .v{font-size:22px;}
+    .hero-stats-row .l{font-size:11px;}
+    .seg-card .desc{font-size:15.5px; line-height:1.6;}
+    .formulario p{font-size:16px; line-height:1.65;}
+    .form-row label{font-size:11px;}
+    .form-row input,.form-row select,.form-row textarea{font-size:16px;}
+    .form-note{font-size:13px;}
+    .footer p,.footer li,.footer a{font-size:14px;}
+    .footer h4{font-size:11px;}
   }
 </style>
 </head>
@@ -370,20 +403,29 @@
 
     <form id="b2bForm" class="form-grid" novalidate>
       <div class="form-row">
-        <label data-i18n="b2b.form.name">Nome</label>
-        <input name="nome" type="text" required data-i18n-attr="placeholder:b2b.form.namePh" placeholder="Seu nome completo" />
+        <label data-i18n="b2b.form.name">Seu Nome</label>
+        <input name="nome" type="text" required minlength="2" maxlength="200" data-i18n-attr="placeholder:b2b.form.namePh" placeholder="Seu nome completo" />
+        <span class="field-error" data-error-for="nome"></span>
       </div>
       <div class="form-row">
-        <label data-i18n="b2b.form.company">Empresa / CNPJ</label>
-        <input name="empresa" type="text" required data-i18n-attr="placeholder:b2b.form.companyPh" placeholder="Razão social ou CNPJ" />
+        <label data-i18n="b2b.form.company">Empresa</label>
+        <input name="empresa" type="text" required minlength="2" maxlength="300" data-i18n-attr="placeholder:b2b.form.companyPh" placeholder="Razão social" />
+        <span class="field-error" data-error-for="empresa"></span>
+      </div>
+      <div class="form-row" data-pt-only>
+        <label>CNPJ</label>
+        <input name="cnpj" type="text" inputmode="numeric" maxlength="18" placeholder="00.000.000/0000-00" autocomplete="off" />
+        <span class="field-error" data-error-for="cnpj"></span>
       </div>
       <div class="form-row">
         <label data-i18n="b2b.form.email">E-mail</label>
-        <input name="email" type="email" required placeholder="contato@empresa.com" />
+        <input name="email" type="email" required maxlength="200" placeholder="contato@empresa.com" />
+        <span class="field-error" data-error-for="email"></span>
       </div>
       <div class="form-row">
         <label data-i18n="b2b.form.phone">WhatsApp</label>
-        <input name="whatsapp" type="tel" required placeholder="(11) 99999-0000" />
+        <input name="whatsapp" type="tel" required inputmode="numeric" maxlength="16" placeholder="(11) 99999-0000" autocomplete="tel" />
+        <span class="field-error" data-error-for="whatsapp"></span>
       </div>
       <div class="form-row full">
         <label data-i18n="b2b.form.segment">Segmento</label>
@@ -395,14 +437,15 @@
           <option data-i18n="b2b.form.s4">Escritório / coworking</option>
           <option data-i18n="b2b.form.s5">Outro</option>
         </select>
+        <span class="field-error" data-error-for="segmento"></span>
       </div>
       <div class="form-row full">
         <label data-i18n="b2b.form.volume">Volume estimado (kg/mês)</label>
-        <input name="volume" type="text" data-i18n-attr="placeholder:b2b.form.volumePh" placeholder="Ex.: 30kg de torrado por mês" />
+        <input name="volume" type="text" maxlength="200" data-i18n-attr="placeholder:b2b.form.volumePh" placeholder="Ex.: 30kg de torrado por mês" />
       </div>
       <div class="form-row full">
-        <label data-i18n="b2b.form.message">Mensagem</label>
-        <textarea name="mensagem" data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
+        <label>Mensagem <span style="opacity:.6;text-transform:none;letter-spacing:normal">(opcional)</span></label>
+        <textarea name="mensagem" maxlength="4000" data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
       </div>
       <input type="text" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
       <div class="form-row full form-actions">
@@ -410,17 +453,96 @@
       </div>
       <div id="b2bFormMsg" class="form-row full" style="display:none;text-align:center;font-size:14px;padding:16px;border-radius:8px;"></div>
     </form>
+    <style>
+      .field-error{display:none;font-family:var(--mono);font-size:11px;color:#E37070;margin-top:4px;letter-spacing:.04em}
+      .field-error.show{display:block}
+      .form-row input.invalid,.form-row select.invalid,.form-row textarea.invalid{border-color:#E37070}
+    </style>
     <script>
     (function(){
       const form = document.getElementById('b2bForm');
       const btn = document.getElementById('b2bSubmit');
       const msg = document.getElementById('b2bFormMsg');
       if (!form) return;
+
+      function maskCNPJ(v){
+        const d = v.replace(/\D/g,'').slice(0,14);
+        return d
+          .replace(/^(\d{2})(\d)/, '$1.$2')
+          .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+          .replace(/^(\d{2})\.(\d{3})\.(\d{3})(\d)/, '$1.$2.$3/$4')
+          .replace(/^(\d{2})\.(\d{3})\.(\d{3})\/(\d{4})(\d)/, '$1.$2.$3/$4-$5');
+      }
+      function maskPhone(v){
+        const d = v.replace(/\D/g,'').slice(0,11);
+        if (d.length <= 10) {
+          return d
+            .replace(/^(\d{2})(\d)/, '($1) $2')
+            .replace(/^(\(\d{2}\) \d{4})(\d)/, '$1-$2');
+        }
+        return d
+          .replace(/^(\d{2})(\d)/, '($1) $2')
+          .replace(/^(\(\d{2}\) \d{5})(\d)/, '$1-$2');
+      }
+      function validateCNPJ(raw){
+        const c = raw.replace(/\D/g,'');
+        if (c.length !== 14) return false;
+        if (/^(\d)\1{13}$/.test(c)) return false;
+        const calc = (slice, weights) => {
+          const sum = slice.split('').reduce((acc, n, i) => acc + (+n) * weights[i], 0);
+          const mod = sum % 11;
+          return mod < 2 ? 0 : 11 - mod;
+        };
+        const d1 = calc(c.slice(0,12), [5,4,3,2,9,8,7,6,5,4,3,2]);
+        const d2 = calc(c.slice(0,13), [6,5,4,3,2,9,8,7,6,5,4,3,2]);
+        return d1 === +c[12] && d2 === +c[13];
+      }
+      function validatePhone(raw){
+        const d = raw.replace(/\D/g,'');
+        return d.length === 10 || d.length === 11;
+      }
+      function validateEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
+
+      const cnpjEl = form.querySelector('[name="cnpj"]');
+      const waEl = form.querySelector('[name="whatsapp"]');
+      cnpjEl.addEventListener('input', () => { cnpjEl.value = maskCNPJ(cnpjEl.value); });
+      waEl.addEventListener('input', () => { waEl.value = maskPhone(waEl.value); });
+
+      function setError(name, message){
+        const input = form.querySelector('[name="'+name+'"]');
+        const errEl = form.querySelector('[data-error-for="'+name+'"]');
+        if (input) input.classList.add('invalid');
+        if (errEl) { errEl.textContent = message; errEl.classList.add('show'); }
+      }
+      function clearErrors(){
+        form.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+        form.querySelectorAll('.field-error').forEach(el => { el.textContent=''; el.classList.remove('show'); });
+      }
+
+      function runValidation(data){
+        clearErrors();
+        const errors = [];
+        const lang = (window.currentLang && window.currentLang()) || document.documentElement.lang || 'pt';
+        const isPT = lang.startsWith('pt');
+        if (!data.nome || data.nome.trim().length < 2) errors.push(['nome','Informe seu nome completo']);
+        if (!data.empresa || data.empresa.trim().length < 2) errors.push(['empresa','Informe a empresa']);
+        if (isPT && !validateCNPJ(data.cnpj || '')) errors.push(['cnpj','CNPJ inválido']);
+        if (!validateEmail(data.email || '')) errors.push(['email','E-mail inválido']);
+        if (!validatePhone(data.whatsapp || '')) errors.push(['whatsapp','Telefone inválido — use (DDD) número']);
+        if (!data.segmento) errors.push(['segmento','Selecione o segmento']);
+        errors.forEach(([n,m]) => setError(n,m));
+        return errors.length === 0;
+      }
+
       form.addEventListener('submit', async function(e){
         e.preventDefault();
         msg.style.display = 'none';
-        if (!form.checkValidity()) { form.reportValidity(); return; }
         const data = Object.fromEntries(new FormData(form).entries());
+        if (!runValidation(data)) {
+          const firstInvalid = form.querySelector('.invalid');
+          if (firstInvalid) firstInvalid.focus();
+          return;
+        }
         btn.disabled = true;
         const original = btn.innerHTML;
         btn.innerHTML = 'Enviando...';
@@ -433,6 +555,7 @@
           const json = await res.json().catch(() => ({}));
           if (res.ok) {
             form.reset();
+            clearErrors();
             msg.style.display = 'block';
             msg.style.background = 'rgba(217,165,77,.12)';
             msg.style.color = '#D9A54D';
@@ -545,8 +668,8 @@
       'b2b.pil3.h':'Contrato anual','b2b.pil3.d':'Preço travado, alocação garantida, previsibilidade para você operar — sem flutuação de bolsa surpreendendo seu fluxo.',
       'b2b.form.eyebrow':'Pedido de orçamento','b2b.form.title':'Conte sobre<br/>o seu <em>projeto</em>.',
       'b2b.form.desc':'Preencha o formulário e enviaremos uma proposta com preço, logística e <strong style="color:var(--gold);font-weight:400;">amostra grátis para teste</strong>.',
-      'b2b.form.name':'Nome','b2b.form.namePh':'Seu nome completo',
-      'b2b.form.company':'Empresa / CNPJ','b2b.form.companyPh':'Razão social ou CNPJ',
+      'b2b.form.name':'Seu Nome','b2b.form.namePh':'Seu nome completo',
+      'b2b.form.company':'Empresa','b2b.form.companyPh':'Razão social',
       'b2b.form.email':'E-mail','b2b.form.phone':'WhatsApp',
       'b2b.form.segment':'Segmento','b2b.form.segmentSel':'Selecione o segmento',
       'b2b.form.s1':'Cafeteria / coffee shop','b2b.form.s2':'Restaurante / hotel','b2b.form.s3':'Torrefação parceira','b2b.form.s4':'Escritório / coworking','b2b.form.s5':'Outro',
@@ -593,8 +716,8 @@
       'b2b.pil3.h':'Annual contract','b2b.pil3.d':"Locked-in price, guaranteed allocation, predictability for your operation — no market swings hitting your cash flow.",
       'b2b.form.eyebrow':'Quote request','b2b.form.title':'Tell us about<br/>your <em>project</em>.',
       'b2b.form.desc':'Fill in the form and we will send a proposal with pricing, logistics and a <strong style="color:var(--gold);font-weight:400;">free sample for testing</strong>.',
-      'b2b.form.name':'Name','b2b.form.namePh':'Your full name',
-      'b2b.form.company':'Company / Tax ID','b2b.form.companyPh':'Legal name or tax ID',
+      'b2b.form.name':'Your Name','b2b.form.namePh':'Your full name',
+      'b2b.form.company':'Company','b2b.form.companyPh':'Legal name',
       'b2b.form.email':'Email','b2b.form.phone':'WhatsApp',
       'b2b.form.segment':'Segment','b2b.form.segmentSel':'Select your segment',
       'b2b.form.s1':'Café / coffee shop','b2b.form.s2':'Restaurant / hotel','b2b.form.s3':'Partner roaster','b2b.form.s4':'Office / coworking','b2b.form.s5':'Other',
@@ -641,8 +764,8 @@
       'b2b.pil3.h':'Contrato anual','b2b.pil3.d':'Precio fijo, asignación garantizada, previsibilidad para operar — sin fluctuaciones de bolsa sorprendiendo tu flujo.',
       'b2b.form.eyebrow':'Solicitud de presupuesto','b2b.form.title':'Cuéntanos sobre<br/>tu <em>proyecto</em>.',
       'b2b.form.desc':'Llena el formulario y enviaremos una propuesta con precio, logística y <strong style="color:var(--gold);font-weight:400;">muestra gratis para prueba</strong>.',
-      'b2b.form.name':'Nombre','b2b.form.namePh':'Tu nombre completo',
-      'b2b.form.company':'Empresa / CNPJ','b2b.form.companyPh':'Razón social o CNPJ',
+      'b2b.form.name':'Tu Nombre','b2b.form.namePh':'Tu nombre completo',
+      'b2b.form.company':'Empresa','b2b.form.companyPh':'Razón social',
       'b2b.form.email':'E-mail','b2b.form.phone':'WhatsApp',
       'b2b.form.segment':'Segmento','b2b.form.segmentSel':'Selecciona el segmento',
       'b2b.form.s1':'Cafetería / coffee shop','b2b.form.s2':'Restaurante / hotel','b2b.form.s3':'Tostador socio','b2b.form.s4':'Oficina / coworking','b2b.form.s5':'Otro',
@@ -719,6 +842,9 @@
     document.documentElement.lang = HTML_LANG_MAP[currentLang] || 'pt-BR';
     document.querySelectorAll('.lang-btn').forEach(b => {
       b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+    document.querySelectorAll('[data-pt-only]').forEach(el => {
+      el.style.display = currentLang === 'pt' ? '' : 'none';
     });
   }
 

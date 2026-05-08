@@ -31,6 +31,7 @@ function getResend(): Resend {
 type Body = {
   nome?: string;
   empresa?: string;
+  cnpj?: string;
   email?: string;
   whatsapp?: string;
   segmento?: string;
@@ -53,6 +54,43 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
+function digitsOnly(s: string): string {
+  return s.replace(/\D/g, "");
+}
+
+function validateCNPJ(raw: string): boolean {
+  const c = digitsOnly(raw);
+  if (c.length !== 14) return false;
+  if (/^(\d)\1{13}$/.test(c)) return false;
+  const calc = (slice: string, weights: number[]): number => {
+    const sum = slice
+      .split("")
+      .reduce((acc, n, i) => acc + Number(n) * weights[i], 0);
+    const mod = sum % 11;
+    return mod < 2 ? 0 : 11 - mod;
+  };
+  const d1 = calc(c.slice(0, 12), [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  const d2 = calc(c.slice(0, 13), [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+  return d1 === Number(c[12]) && d2 === Number(c[13]);
+}
+
+function formatCNPJ(c: string): string {
+  return c.replace(
+    /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+    "$1.$2.$3/$4-$5",
+  );
+}
+
+function formatPhone(p: string): string {
+  if (p.length === 11) {
+    return p.replace(/^(\d{2})(\d{5})(\d{4})$/, "($1) $2-$3");
+  }
+  if (p.length === 10) {
+    return p.replace(/^(\d{2})(\d{4})(\d{4})$/, "($1) $2-$3");
+  }
+  return p;
+}
+
 export async function POST(req: Request) {
   let body: Body;
   try {
@@ -65,21 +103,32 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const cnpjDigits = digitsOnly(sanitize(body.cnpj, 30));
+  const phoneDigits = digitsOnly(sanitize(body.whatsapp, 30));
   const data = {
     nome: sanitize(body.nome, 200),
     empresa: sanitize(body.empresa, 300),
-    email: sanitize(body.email, 200),
-    whatsapp: sanitize(body.whatsapp, 50),
+    cnpj: cnpjDigits ? formatCNPJ(cnpjDigits) : "",
+    email: sanitize(body.email, 200).toLowerCase(),
+    whatsapp: phoneDigits ? formatPhone(phoneDigits) : "",
     segmento: sanitize(body.segmento, 100),
     volume: sanitize(body.volume, 200),
     mensagem: sanitize(body.mensagem, 4000),
   };
 
-  if (!data.nome || !data.empresa || !data.email || !data.whatsapp || !data.segmento) {
-    return NextResponse.json({ error: "missing_required_fields" }, { status: 400 });
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) {
-    return NextResponse.json({ error: "invalid_email" }, { status: 400 });
+  const fieldErrors: Record<string, string> = {};
+  if (!data.nome || data.nome.length < 2) fieldErrors.nome = "required";
+  if (!data.empresa || data.empresa.length < 2) fieldErrors.empresa = "required";
+  if (cnpjDigits && !validateCNPJ(cnpjDigits)) fieldErrors.cnpj = "invalid";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) fieldErrors.email = "invalid";
+  if (phoneDigits.length !== 10 && phoneDigits.length !== 11) fieldErrors.whatsapp = "invalid";
+  if (!data.segmento) fieldErrors.segmento = "required";
+
+  if (Object.keys(fieldErrors).length) {
+    return NextResponse.json(
+      { error: "validation_failed", fields: fieldErrors },
+      { status: 400 },
+    );
   }
 
   const ip =
@@ -111,7 +160,8 @@ export async function POST(req: Request) {
     const subject = `[B2B Zerbinatti] Pedido de ${data.nome} (${data.empresa})`;
     const rows: [string, string][] = [
       ["Nome", data.nome],
-      ["Empresa / CNPJ", data.empresa],
+      ["Empresa", data.empresa],
+      ...(data.cnpj ? ([["CNPJ", data.cnpj]] as [string, string][]) : []),
       ["E-mail", data.email],
       ["WhatsApp", data.whatsapp],
       ["Segmento", data.segmento],
