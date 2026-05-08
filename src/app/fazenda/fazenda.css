@@ -163,7 +163,7 @@
 .novo-layout .farm-heritage-image {
   position: relative;
   aspect-ratio: 4/5;
-  background: url('/assets/galeria/4.webp') center/cover;
+  background: url('/assets/galeria/peneirar.webp') center/cover;
   overflow: hidden;
 }
 .novo-layout .farm-heritage-image::after {
