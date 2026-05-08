@@ -17,7 +17,7 @@ export default function HomeFooter() {
               Zerbinatti<em>.</em>
             </div>
             <div className="label" style={{ color: 'var(--gold)' }}>
-              Caffè · Dal 1897
+              Caffè · Desde 1897
             </div>
             <T k="footer.brandDesc" as="p" />
           </div>
@@ -89,7 +89,7 @@ export default function HomeFooter() {
         </div>
 
         <div className="footer-bottom">
-          <span>© 2026 Zerbinatti Coffee · Dal 1897</span>
+          <span>© 2026 Zerbinatti Coffee · Desde 1897</span>
           <div
             style={{
               display: 'flex',

@@ -17,7 +17,7 @@ export const dictionary = {
     'nav.historia': 'História',
     'hero.badge': 'Colheita Limitada · Safra 2026',
     'hero.title':
-      'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
+      'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, desde 1897</span>',
     'hero.desc':
       'Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Valim Farms, secagem natural ao sol, torra artesanal em pequenos lotes.',
     'hero.stats.alt': 'Altitude',
@@ -458,7 +458,7 @@ export const dictionary = {
     'nav.historia': 'Historia',
     'hero.badge': 'Cosecha Limitada · Zafra 2026',
     'hero.title':
-      'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Famiglia Zerbinatti, dal 1897</span>',
+      'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Famiglia Zerbinatti, desde 1897</span>',
     'hero.desc':
       'Café especial brasileño, herencia italiana. 100% Arábica cultivado a 640–760m en Valim Farms, secado natural al sol, tostado artesanal en lotes pequeños.',
     'hero.stats.alt': 'Altitud',

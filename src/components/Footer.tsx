@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="mt-5 flex items-center gap-3 text-gold-400">
               <Monogram size={36} className="shrink-0" />
               <div className="text-[10px] tracking-[0.3em] uppercase text-coffee-300">
-                Dal 1897
+                Desde 1897
                 <div className="font-serif text-sm tracking-normal normal-case text-coffee-200">
                   Famiglia Zerbinatti
                 </div>

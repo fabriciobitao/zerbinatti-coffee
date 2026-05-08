@@ -1,4 +1,4 @@
-// Selo circular "Dal 1897" — SVG inline puro.
+// Selo circular "Desde 1897" — SVG inline puro.
 // Observacao: o novo-layout/index.html nao define um <svg class="heritage-seal">
 // explicitamente; usa um carimbo retangular .overlay-stamp dentro de
 // .story-image. Mantemos esse selo aqui como peca utilitaria reusavel para
@@ -18,7 +18,7 @@ export function HeritageSeal({ size = 96, className }: HeritageSealProps) {
       height={size}
       viewBox="0 0 120 120"
       fill="none"
-      aria-label="Dal 1897 — Famiglia Zerbinatti"
+      aria-label="Desde 1897 — Famiglia Zerbinatti"
       role="img"
     >
       <circle
@@ -43,11 +43,11 @@ export function HeritageSeal({ size = 96, className }: HeritageSealProps) {
         y="46"
         textAnchor="middle"
         fontFamily="var(--mono, monospace)"
-        fontSize="9"
-        letterSpacing="3"
+        fontSize="8"
+        letterSpacing="2.5"
         fill="currentColor"
       >
-        DAL
+        DESDE
       </text>
       <text
         x="60"

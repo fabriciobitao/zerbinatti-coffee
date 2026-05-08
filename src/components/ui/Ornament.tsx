@@ -71,7 +71,7 @@ export function Monogram({
 }
 
 /**
- * Selo "Dal 1897" — aplicado em headers editoriais como marca de herança.
+ * Selo "Desde 1897" — aplicado em headers editoriais como marca de herança.
  */
 export function HeritageSeal({ className = "" }: { className?: string }) {
   return (
