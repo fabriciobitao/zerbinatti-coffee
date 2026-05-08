@@ -10,9 +10,15 @@ export default function Subscription() {
     <section className="subscribe-section" id="assinatura">
       <div className="sub-inner">
         <div className="sub-text reveal">
-          <T k="sub.eyebrow" as="span" className="eyebrow" />
-          <T k="sub.title" as="h2" className="display" />
+          <span className="sub-mark" aria-hidden="true">— Clube Zerbinatti</span>
+          <T k="sub.eyebrow" as="h2" className="sub-mega" />
+          <T k="sub.title" as="p" className="sub-tagline" />
           <T k="sub.desc" as="p" className="body-lg" />
+          <div className="sub-perks" aria-hidden="true">
+            <span><i>✦</i> 10% off em cada entrega</span>
+            <span><i>✦</i> Pause ou cancele quando quiser</span>
+            <span><i>✦</i> Torra do mês selecionada à mão</span>
+          </div>
           <a href="#planos" className="btn btn-gold">
             <T k="sub.cta" html as="span" />
           </a>
