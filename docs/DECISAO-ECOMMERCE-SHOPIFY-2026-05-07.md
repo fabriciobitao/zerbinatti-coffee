@@ -36,7 +36,7 @@ O site é **multi-idioma desde a Onda 5 (PT/EN/ES)**. Isso significa que interna
 ## Arquitetura final
 
 ```
-zerbinatti.com.br (Next.js 16 na Vercel — vitrine editorial atual)
+zerbinatti.com.br (Next.js 16 em Cloud Run — vitrine editorial atual)
     ↓ Storefront API GraphQL
 Shopify Basic
     ├─ Catálogo (3 SKUs + assinatura via Shopify Subscriptions)

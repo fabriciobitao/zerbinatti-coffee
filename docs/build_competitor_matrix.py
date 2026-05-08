@@ -15,7 +15,7 @@ OUT = "/Users/fabricio/dev/cafe/docs/CONCORRENTES-CAFE-ESPECIAL-2026-05-07.xlsx"
 # Ordem de colunas: Zerbinatti primeiro, depois concorrentes em ordem do relatório
 # (nome, url do site)
 BRANDS_WITH_URL = [
-    ("Zerbinatti",       "https://cafe-alpha-five.vercel.app/"),
+    ("Zerbinatti",       "https://zerbinatti-coffee-259156177034.southamerica-east1.run.app/"),
     ("Coffee Lab",       "https://loja.coffeelab.com.br/"),
     ("Octavio Café",     "https://octaviocafe.com.br/"),
     ("Suplicy",          "https://www.suplicycafes.com.br/"),
@@ -235,7 +235,7 @@ ROWS = [
 
     # ============= 13. UX / TÉCNICO =============
     ("UX / TÉCNICO", "Plataforma",
-     ["Custom Next.js/Vercel", "Iluria (legado)", "—", "—", "VTEX", "WordPress (B2B)", "—",
+     ["Custom Next.js/Cloud Run", "Iluria (legado)", "—", "—", "VTEX", "WordPress (B2B)", "—",
       "WooCommerce", "Shopify", "Mercafé", "Wix", "Shopify", "Shopify"]),
     ("UX / TÉCNICO", "Mobile-first responsivo",
      ["✓", "—", "—", "—", "—", "—", "—", "—", "✓", "—", "✗", "✓", "✓"]),

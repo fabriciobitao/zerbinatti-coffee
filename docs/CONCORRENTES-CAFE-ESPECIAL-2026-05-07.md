@@ -1,6 +1,6 @@
 # Pesquisa de Concorrentes — Café Especial Brasil
 
-**Projeto:** Zerbinatti (cafe-alpha-five.vercel.app)
+**Projeto:** Zerbinatti (zerbinatticoffee.com)
 **Data:** 2026-05-07
 **Escopo:** Mapeamento de e-commerces de café especial brasileiros, com foco em produto, pagamento, frete e experiência de site.
 **Metodologia:** WebFetch + WebSearch nos sites oficiais. Dados não confirmados marcados como "N/D".
@@ -35,7 +35,7 @@
 | **Academia do Café** | ~15 cafés + acessórios premium | R$ 62–155 (cafés); até R$ 3.300 (moedor C40) | 180g, 250g | N/D | Não | N/D | N/D | **Wix** | N/D | N/D | "Varia por região" | PT |
 | **Moka Clube** | ~30 (microlotes + 1kg) | R$ 68–129 | 250g, 1kg, 50g (samples) | Grão + 4 moagens | "84+ SCA" | R$ 119–199 (500g/1kg) | N/D | **Shopify** | Não exibido | Até 5x sem juros | Sim, R$ 199+ (S/SE) | PT |
 | **Coffee Mais (Coffee++)** | ~10 microlotes + cápsulas | N/D na busca; R$ 39–69 estimado | 250g | Grão e moído | N/D | N/D | N/D | **Shopify** | N/D | N/D | Via Amazon Prime | PT |
-| **Zerbinatti (atual)** | 2 SKUs (Clássico moído + grão) | R$ 39,90 (250g) / R$ 69,90 (500g) | 250g, 500g | Grão e moído | **Sim (84,75)** | Sim (R$ 98,82–188,73/mês com 10% off) | Sim (Para Empresas) | **Custom (Next.js/Vercel)** | N/D | N/D | Sim, R$ 150+ | PT (com herança italiana visual) |
+| **Zerbinatti (atual)** | 2 SKUs (Clássico moído + grão) | R$ 39,90 (250g) / R$ 69,90 (500g) | 250g, 500g | Grão e moído | **Sim (84,75)** | Sim (R$ 98,82–188,73/mês com 10% off) | Sim (Para Empresas) | **Custom (Next.js/Cloud Run)** | N/D | N/D | Sim, R$ 150+ | PT (com herança italiana visual) |
 
 > **Notas:** "N/D" = não conseguimos confirmar publicamente. Vários sites (Suplicy, Octavio, Wolff parcialmente) bloqueiam crawlers ou usam plataformas com SSR pesado — isso por si só já é sintoma de stack defasada.
 
@@ -215,7 +215,7 @@
 
 ### 6.2 O que evitar (anti-patterns observados)
 
-- **Plataforma legada (Iluria, Wix):** Coffee Lab (Iluria) e Academia do Café (Wix) têm marca forte mas e-commerce fraco. **Zerbinatti em Next.js/Vercel custom precisa decidir:** continuar custom (controle total, dívida técnica futura) ou migrar para Shopify Markets (multi-idioma + checkout robusto + apps prontos). Recomendação: Shopify Markets headless com frontend Next.js — melhor dos dois mundos, alinhado à decisão já registrada em memória do projeto.
+- **Plataforma legada (Iluria, Wix):** Coffee Lab (Iluria) e Academia do Café (Wix) têm marca forte mas e-commerce fraco. **Zerbinatti em Next.js/Cloud Run custom precisa decidir:** continuar custom (controle total, dívida técnica futura) ou migrar para Shopify Markets (multi-idioma + checkout robusto + apps prontos). Recomendação: Shopify Markets headless com frontend Next.js — melhor dos dois mundos, alinhado à decisão já registrada em memória do projeto.
 - **Não vender direto (modelo Daterra):** Catastrófico para receita B2C. Não repetir.
 - **Storytelling raso/genérico:** Octavio e Wolff têm produto bom mas comunicação genérica. Zerbinatti tem narrativa "1897 / 3 gerações / Itália / Valim" — explorar mais (fotos antigas, árvore familiar visual, vídeo do produtor atual).
 - **Omitir métodos de pagamento:** Suplicy, Octavio, Wolff escondem. Comunicar Pix, cartão, boleto, parcelamento na home e ficha do produto.
@@ -262,7 +262,7 @@
 - [Academia do Café](https://www.academiadocafe.com.br) e [loja](https://www.academiadocafe.com.br/loja)
 - [Moka Clube](https://www.mokaclube.com.br) e [assinatura](https://www.mokaclube.com.br/products/assinatura-de-cafe)
 - [Coffee Mais (Coffee++)](https://coffeemais.com)
-- [Zerbinatti — site atual](https://cafe-alpha-five.vercel.app/)
+- [Zerbinatti — site atual](https://zerbinatti-coffee-259156177034.southamerica-east1.run.app/)
 - [Tudo Sobre Café — 12 melhores clubes 2026](https://tudosobrecafe.com/clubes-de-assinatura)
 - [BSCA — Cup of Excellence 2025](https://www.bsca.com.br/brasil-melhores-cafes-especiais-2025/)
 - [Visa — App Suplicy](https://www.visa.com.br/sobre-a-visa/noticias-visa/nova-sala-de-imprensa/suplicy-cafes-especiais-lanca-solucao-de-pedido-e-pagamento-por-aplicativo.html)

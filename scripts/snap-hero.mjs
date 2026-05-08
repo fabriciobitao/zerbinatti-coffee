@@ -1,4 +1,4 @@
-// Hero-only viewport screenshot for direct comparison with vercel.png
+// Hero-only viewport screenshot for direct visual QA
 import puppeteer from 'puppeteer-core';
 
 const url = process.argv[2] || 'http://localhost:3000/';

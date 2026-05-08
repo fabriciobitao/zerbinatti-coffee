@@ -12,7 +12,7 @@ A recomendacao Yampi (mais abaixo neste arquivo, sessao anterior) foi **abandona
 - **Backend e-commerce:** Shopify Storefront API (loja `zerbinatticoffee.myshopify.com`, public token em `.env.local`)
 - **Pagamento:** Shopify Payments (a configurar — ver Bloqueadores)
 - **CMS produto:** Shopify admin (descricao, fotos, variantes refletem em real-time no front)
-- **Hosting:** Vercel atual (`cafe-alpha-five.vercel.app`)
+- **Hosting:** Cloud Run (projeto GCP `zerbinatti-cafe`, regiao `southamerica-east1`)
 
 ### O que esta funcionando (validado E2E via puppeteer)
 - [x] Home composta dinamicamente em `src/app/(home)/page.tsx` — espelha 100% do `public/novo-layout/index.html`
@@ -21,7 +21,7 @@ A recomendacao Yampi (mais abaixo neste arquivo, sessao anterior) foi **abandona
 - [x] Wave C: home composta + middleware podado (so `/para-empresas` rewrite) + redirects 308 de URLs legacy (`/cafes`, `/processo`, `/assinatura`, `/historia` -> `/#anchor`)
 - [x] Produtos importados via CSV: Classico Zerbinatti com 2 variantes (250g moido R$98, 500g graos R$188) — variantes mapeadas por slotKey em `src/lib/products.ts`
 - [x] Cart end-to-end testado: clicar Add -> drawer abre -> Shopify cria cart -> retorna `checkoutUrl` valido
-- [x] **Layout pixel-perfect com Vercel original** — adicionadas fontes Cormorant Garamond, Allura, JetBrains Mono, Press Start 2P via `next/font/google` (antes so Playfair+Inter, fazia titulos quebrarem largo)
+- [x] **Layout pixel-perfect com referencia original** — adicionadas fontes Cormorant Garamond, Allura, JetBrains Mono, Press Start 2P via `next/font/google` (antes so Playfair+Inter, fazia titulos quebrarem largo)
 - [x] **RevealObserver** (`src/components/home/RevealObserver.tsx`) — replica `initRevealObserver()` do static; sem ele todas as secoes ficavam `opacity:0`. Tem fallback de scroll listener para casos de fast-scroll onde IO falha
 - [x] Scripts de QA puppeteer: `scripts/snap.mjs` (fullpage com slow scroll), `scripts/snap-hero.mjs` (viewport hero), `scripts/flow-checkout.mjs` (E2E add-to-cart -> checkoutUrl -> Shopify)
 
@@ -54,9 +54,9 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 - **E-commerce:** Shopify Headless (Storefront API) — dev store a criar
 - **CMS:** Sanity (a integrar)
 - **Pagamentos:** Shopify Payments BR (PIX, boleto, cartao) + Internacional
-- **Hosting:** Vercel
+- **Hosting:** Cloud Run (GCP)
 - **Email:** Resend (transacional) + Klaviyo (marketing)
-- **Analytics:** GA4 + Meta Pixel + Vercel Analytics
+- **Analytics:** GA4 + Meta Pixel
 
 ## O que foi feito
 - [x] **Sessao 2026-05-07 — Polimento landing /novo-layout/ + QA mobile**
@@ -83,7 +83,7 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 - [x] Identidade visual: paleta coffee/gold/green, Playfair Display + Inter
 - [x] Shopify client preparado (lib/shopify.ts + types)
 - [x] Repo GitHub: fabriciobitao/zerbinatti-coffee
-- [x] Deploy Vercel: https://cafe-alpha-five.vercel.app (deploy automatico a cada push)
+- [x] Deploy Cloud Run: https://zerbinatti-coffee-259156177034.southamerica-east1.run.app (build via `gcloud builds submit --config=cloudbuild.yaml`)
 - [x] Carrinho funcional com drawer (adicionar, remover, alterar quantidade)
 - [x] Quiz interativo com 4 perguntas + recomendacao de cafe
 - [x] Logo real da marca no header e hero
@@ -157,8 +157,8 @@ E-commerce premium para cafe especial Zerbinatti (heranca italiana desde 1897). 
 ## Decisoes de arquitetura
 - Shopify Headless por: pagamentos BR nativos, Instagram Shopping, assinaturas maduras
 - Sanity CMS por: real-time previews, GROQ, free tier generoso, ideal para conteudo rico de cafe
-- Vercel por: CDN em SP, zero-config Next.js, preview deploys, deploy automatico via GitHub
+- Cloud Run por: regiao `southamerica-east1` (SP), scale-to-zero, suporte nativo a SSR/Server Actions/middleware do Next.js, sem lock-in de plataforma
 
 ## Dominio
-- **Teste:** https://cafe-alpha-five.vercel.app
+- **Teste:** https://zerbinatti-coffee-259156177034.southamerica-east1.run.app
 - **Producao (futuro):** zerbinatticoffee.com (propriedade do cliente)

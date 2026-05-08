@@ -1,0 +1,21 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --build-arg
+      - NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=${_SHOPIFY_DOMAIN}
+      - --build-arg
+      - NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=${_SHOPIFY_TOKEN}
+      - -t
+      - ${_IMAGE}
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args: [push, "${_IMAGE}"]
+images:
+  - ${_IMAGE}
+options:
+  logging: CLOUD_LOGGING_ONLY
+substitutions:
+  _IMAGE: southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest
+  _SHOPIFY_DOMAIN: zerbinatticoffee.myshopify.com
+  _SHOPIFY_TOKEN: 5f110b3e4f23e4e4e45d992fefb5a833
