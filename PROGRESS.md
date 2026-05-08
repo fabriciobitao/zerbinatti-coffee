@@ -1,6 +1,56 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-08 (fazenda redesenhada, variedade Arara, novos precos, infra GCP completa, form B2B end-to-end, custom domains)
+**Ultima atualizacao:** 2026-05-08 (parte 3 — assinatura redesenhada, precos proporcionais, imagem fazenda trocada, deploy de producao publicado)
+
+## Sessao 2026-05-08 (parte 3) — Bloco Assinatura + reorder home + imagem fazenda + deploy
+
+### Override editorial dos precos do Classico (home puxa Shopify ao vivo)
+- [x] Descoberto: home `Cafes.tsx` puxa preco direto do Shopify Storefront API. Editar `products.ts` ou CSV nao afeta a home enquanto Shopify nao for reimportado.
+- [x] Solucao: `EditorialVariantSlot.priceOverrideBRL` em `src/lib/editorial/classico.ts` (49,90 / 79,90), aplicado em `mapVariant` (`src/lib/products.ts`).
+- [x] Override e local — sera removido quando user reimportar SKUs no Shopify admin.
+
+### Reorder das secoes da home
+- [x] Inicialmente movido Subscription pra antes de Processo
+- [x] Voltado: Subscription **logo apos** Processo (4 rituais)
+- [x] Ordem final: `cafes → processo → assinatura → video → galeria → laudo → historia`
+
+### Bloco #assinatura redesenhado (Subscription.tsx + novo-layout.css)
+- [x] Precos recalculados sobre os novos do Classico (10% off):
+  - Plan 1 Quotidiano: 107,73 → **134,73** (3× moído 250g)
+  - Plan 2 Doppio Rituale: 98,82 → **116,82** (1× 250g + 1× 500g)
+  - Plan 3 Maestro: 188,73 → **215,73** (3× grãos 500g)
+- [x] Atualizado nas 3 locales (PT/EN/ES) em `dictionary.ts`
+- [x] Headline "Assinatura Mensal" virou **mega titulo** Cormorant italic com gradient dourado (clamp 56-132px desktop / 54-84px mobile), drop-shadow sutil
+- [x] Eyebrow novo "— Clube Zerbinatti" mono caps com letterspacing
+- [x] Tagline "Café fresco, todo mês, na sua porta" demovida pra italica menor
+- [x] Lista de perks acima do CTA: 10% off · pause/cancele · torra do mes
+- [x] Cards: shimmer sweep dourado no hover, lift sutil, shadow + border-glow
+- [x] Card featured: gradient bg + drop-shadow dourado, preco italico dourado
+- [x] Numerais romanos maiores (56px) com text-shadow dourado
+- [x] Badge "Mais escolhido" movido do Plan II para o **Plan I (Quotidiano)** — chave i18n nova `sub.featured.badge` (PT/EN/ES) substitui a antiga `sub.plan2.badge`
+
+### Imagem trocada em /fazenda (bloco Heranca 1897)
+- [x] `galeria/4.webp` (pacotes Zerbinatti) → `galeria/peneirar.webp` (mao peneirando graos ao sol)
+- [x] Convertido via sharp: 1179×990, webp q82, 59KB
+- [x] CSS `farm-heritage-image` em `fazenda.css` aponta pra nova imagem
+
+### Deploy de producao (revision 00011)
+- [x] **Bloqueio resolvido:** gcloud CLI quebrado por Python 3.9 incompativel (erro proto `_MessageClass | _MessageClass`). Instalado Python 3.12.13 via `uv` em `~/.local/bin/python3.12` e exportado `CLOUDSDK_PYTHON` apontando pra ele.
+- [x] **Bloqueio resolvido:** TypeScript falhou no build (Next.js 16 mudou assinatura de `revalidateTag` — agora exige `(tag, profile)`). Webhook `/api/revalidate` ajustado pra passar `"default"` profile (commit `ede88d1`).
+- [x] Auth: logado como `fabricio.fazer@gmail.com` (owner do projeto `zerbinatti-cafe`).
+- [x] Cloud Build `c7ae16ec-d2a8-4499-9b19-c23a67a2d996` SUCCESS em 2m11s
+- [x] Cloud Run revision **`zerbinatti-coffee-00011-hxf`** em southamerica-east1 com 100% do trafego
+- [x] Validado em prod (`https://zerbinatti-cafe.web.app`):
+  - Precos Classico: 49,90 / 79,90 ✅
+  - Precos Assinatura: 134,73 / 116,82 / 215,73 ✅
+  - Altitude /fazenda: 640-760m ✅
+  - Imagem peneirar.webp 200 OK ✅
+  - Zero rastros dos precos antigos ✅
+
+### Acao do user pendente
+- [ ] Reimportar `docs/shopify-import-products.csv` no Shopify admin (ou editar SKUs ZRB-CLA-250-M / ZRB-CLA-500-G manualmente) pra refletir os novos precos no Storefront API. Quando feito, remover `priceOverrideBRL` em `editorial/classico.ts`.
+
+---
 
 ## Sessao 2026-05-08 (parte 2) — Redesign /fazenda + Arara + novos precos
 
