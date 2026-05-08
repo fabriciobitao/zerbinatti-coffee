@@ -60,7 +60,7 @@ export const products: Product[] = [
       "Blend tradicional da família, embalagem 500g. Notas de chocolate, caramelo e nozes.",
     longDescription:
       "Nascido na primeira torra de Giuseppe Zerbinatti em 1897, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente — o café que fez a reputação da casa e que você serve sem pensar duas vezes.",
-    price: 69.9,
+    price: 79.9,
     tag: "Mais Vendido",
     tagVariant: "popular",
     score: "85",
@@ -71,7 +71,7 @@ export const products: Product[] = [
       region: "Serra do Cabral",
       state: "Minas Gerais",
       altitude: "640 a 760m",
-      variety: "Catuaí Vermelho + Mundo Novo",
+      variety: "Arara",
       process: "Natural",
     },
     notes: ["Chocolate ao leite", "Caramelo", "Nozes", "Final doce"],
@@ -113,7 +113,7 @@ export const products: Product[] = [
     description:
       "Single origin, colheita seletiva, embalagem 500g. Notas de frutas vermelhas e mel.",
     longDescription:
-      "Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. Processo cereja-descascado revela a doçura do fruto e a acidez fina característica das variedades Yellow Bourbon cultivadas entre 640 e 760m. Edição limitada da safra — quando acaba, acaba.",
+      "Lote selecionado das partes mais altas da fazenda, colhido exclusivamente em grão cereja maduro. Processo cereja-descascado revela a doçura do fruto e a acidez fina característica do Arara cultivado entre 640 e 760m. Edição limitada da safra — quando acaba, acaba.",
     price: 89.9,
     tag: "Edição Limitada",
     tagVariant: "limited",
@@ -125,7 +125,7 @@ export const products: Product[] = [
       region: "Serra do Cabral",
       state: "Minas Gerais",
       altitude: "640 a 760m",
-      variety: "Yellow Bourbon",
+      variety: "Arara",
       process: "Cereja descascado (honey)",
     },
     notes: [
@@ -172,7 +172,7 @@ export const products: Product[] = [
     description:
       "Lote exclusivo, embalagem 500g. Notas florais, cítricas e acidez brilhante.",
     longDescription:
-      "Apenas 400kg produzidos na safra inteira. Talhão específico da parte mais alta da Serra, variedade Geisha plantada em 2018 em caráter experimental — o primeiro lote a atingir maturidade comercial em 2025. Para cafeicultores e baristas obsessivos por cafés de competição. Score SCA 90+ conferido por Q-Grader independente.",
+      "Apenas 400kg produzidos na safra inteira. Talhão específico da parte mais alta da Serra, variedade Arara plantada em 2018 — o primeiro lote a atingir maturidade comercial premium em 2025. Para cafeicultores e baristas obsessivos por cafés de competição. Score SCA 90+ conferido por Q-Grader independente.",
     price: 119.9,
     tag: "Raridade",
     tagVariant: "new",
@@ -184,7 +184,7 @@ export const products: Product[] = [
       region: "Serra do Cabral",
       state: "Minas Gerais",
       altitude: "640 a 760m",
-      variety: "Geisha",
+      variety: "Arara",
       process: "Lavado",
     },
     notes: [
@@ -195,7 +195,7 @@ export const products: Product[] = [
       "Final longo e floral",
     ],
     sensory: { sweetness: 4, acidity: 5, body: 3, complexity: 5 },
-    harvest: "Safra 2025 — lote Geisha 01",
+    harvest: "Safra 2025 — lote Arara 01",
     recommendedMethods: ["Hario V60", "Chemex", "Kalita Wave"],
     reviews: [
       {
@@ -204,7 +204,7 @@ export const products: Product[] = [
         method: "Hario V60",
         rating: 5,
         date: "2026-04-05",
-        text: "Sou Q-Grader. Este Geisha entrega tudo o que promete: florais intensos, acidez limpa, complexidade real. Vale cada centavo para quem sabe o que busca.",
+        text: "Sou Q-Grader. Este Arara entrega tudo o que promete: florais intensos, acidez limpa, complexidade real. Vale cada centavo para quem sabe o que busca.",
       },
       {
         author: "Beatriz Lemos",
@@ -220,7 +220,7 @@ export const products: Product[] = [
         method: "Kalita Wave",
         rating: 5,
         date: "2026-02-28",
-        text: "Já provei Geishas panamenhos de R$300 o pacote. Este não fica atrás e custa um terço. Orgulho de ter Geisha brasileiro neste nível.",
+        text: "Já provei microlotes premiados de R$300 o pacote. Este não fica atrás e custa um terço. Orgulho de ter Arara brasileiro neste nível.",
       },
     ],
   },

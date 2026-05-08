@@ -37,12 +37,12 @@ export default function HomeFooter() {
                 </a>
               </li>
               <li>
-                <a href="#assinatura">
+                <a href="/#assinatura">
                   <T k="footer.subs" as="span" />
                 </a>
               </li>
               <li>
-                <a href="#shop">
+                <a href="/#shop">
                   <T k="footer.quickBuy" as="span" />
                 </a>
               </li>
@@ -59,12 +59,12 @@ export default function HomeFooter() {
             <T k="footer.about" as="h4" />
             <ul>
               <li>
-                <a href="#historia">
+                <a href="/#historia">
                   <T k="footer.story" as="span" />
                 </a>
               </li>
               <li>
-                <a href="#processo">
+                <a href="/#processo">
                   <T k="nav.processo" as="span" />
                 </a>
               </li>

@@ -167,19 +167,19 @@ export function MobileDrawer({ open, onClose }: Props) {
           </svg>
         </button>
         <nav aria-label="Navegação móvel">
-          <a href="#cafes" onClick={handleLinkClick}>
+          <a href="/#cafes" onClick={handleLinkClick}>
             {t('nav.cafes')}
           </a>
-          <a href="#processo" onClick={handleLinkClick}>
+          <a href="/#processo" onClick={handleLinkClick}>
             {t('nav.processo')}
           </a>
-          <a href="#assinatura" onClick={handleLinkClick}>
+          <a href="/#assinatura" onClick={handleLinkClick}>
             {t('nav.assinatura')}
           </a>
           <Link href="/para-empresas" onClick={handleLinkClick}>
             {t('nav.empresas')}
           </Link>
-          <a href="#historia" onClick={handleLinkClick}>
+          <a href="/#historia" onClick={handleLinkClick}>
             {t('nav.historia')}
           </a>
         </nav>

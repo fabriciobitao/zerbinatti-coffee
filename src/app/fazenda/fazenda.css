@@ -1,0 +1,468 @@
+/*
+ * Fazenda page — sections que estendem o vocabulário do novo-layout.
+ * Mantém os tokens (--bg-0, --gold, --serif, --mono) já definidos em
+ * novo-layout.css. Tudo escopado em .novo-layout para não vazar.
+ */
+
+/* ───────── HERO COMPACTO ───────── */
+.novo-layout .farm-hero {
+  position: relative;
+  min-height: 78vh;
+  overflow: hidden;
+  background: var(--bg-0);
+  isolation: isolate;
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .farm-hero-bg {
+  position: absolute;
+  inset: -5%;
+  background-image: url('/assets/galeria/3.webp');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  animation: kenburns 22s ease-out infinite alternate;
+  will-change: transform;
+}
+.novo-layout .farm-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 50%, transparent 0%, rgba(20,14,10,.45) 55%, rgba(15,10,7,.85) 100%),
+    linear-gradient(180deg, rgba(15,10,7,.55) 0%, rgba(20,14,10,.30) 40%, rgba(15,10,7,.85) 100%);
+}
+.novo-layout .farm-hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 160px 48px 100px;
+  min-height: 78vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.novo-layout .farm-hero-inner {
+  max-width: 720px;
+}
+.novo-layout .farm-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+  padding: 8px 0;
+  margin-bottom: 24px;
+  transition: color .25s;
+}
+.novo-layout .farm-back:hover {
+  color: var(--gold);
+}
+.novo-layout .farm-hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: .92;
+  letter-spacing: -.02em;
+  color: var(--ink-0);
+  margin-top: 14px;
+}
+.novo-layout .farm-hero-title em {
+  font-style: italic;
+  background: linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 60%, #8B6914 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.novo-layout .farm-hero-desc {
+  margin-top: 28px;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-0);
+  max-width: 580px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0,0,0,.7);
+}
+.novo-layout .farm-hero-meta {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 640px;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+.novo-layout .farm-hero-meta > div {
+  padding: 18px 20px 18px 0;
+  border-right: 1px solid var(--line);
+}
+.novo-layout .farm-hero-meta > div:last-child {
+  border-right: none;
+}
+.novo-layout .farm-hero-meta > div + div {
+  padding-left: 20px;
+}
+.novo-layout .farm-hero-meta .v {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink-0);
+  line-height: 1;
+}
+.novo-layout .farm-hero-meta .v small {
+  font-size: .55em;
+  font-weight: 300;
+  letter-spacing: .01em;
+}
+.novo-layout .farm-hero-meta .l {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* ───────── SECTION HEAD GENÉRICO ───────── */
+.novo-layout .farm-section-head {
+  text-align: center;
+  margin-bottom: 64px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.novo-layout .farm-section-head .display {
+  font-size: clamp(36px, 4.4vw, 64px);
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+.novo-layout .farm-section-head p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ───────── HERANÇA (estilo .story adaptado) ───────── */
+.novo-layout .farm-heritage {
+  padding: 140px 0;
+  background: var(--bg-0);
+  border-top: 1px solid var(--line);
+}
+.novo-layout .farm-heritage-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.novo-layout .farm-heritage-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  background: url('/assets/galeria/4.webp') center/cover;
+  overflow: hidden;
+}
+.novo-layout .farm-heritage-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(26,17,8,.6) 100%);
+}
+.novo-layout .farm-heritage-image .stamp {
+  position: absolute;
+  bottom: 24px; right: 24px;
+  padding: 24px;
+  background: rgba(26,17,8,.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--gold);
+  z-index: 2;
+}
+.novo-layout .farm-heritage-image .stamp .y {
+  font-family: var(--serif);
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 1;
+}
+.novo-layout .farm-heritage-image .stamp .l {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .32em;
+  color: #E8DEC8;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.novo-layout .farm-heritage-text .display {
+  font-size: clamp(36px, 4.4vw, 64px);
+  margin-top: 14px;
+  margin-bottom: 28px;
+}
+.novo-layout .farm-heritage-text .body-lg {
+  margin-bottom: 18px;
+}
+
+/* ───────── NÚMEROS DA FAZENDA (grid estilo .processo) ───────── */
+.novo-layout .farm-numbers {
+  position: relative;
+  padding: 140px 0;
+  background: var(--bg-1);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+}
+.novo-layout .farm-numbers-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: .12;
+  z-index: 0;
+  filter: saturate(.8);
+}
+.novo-layout .farm-numbers-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--bg-1) 0%, transparent 30%, transparent 70%, var(--bg-1) 100%);
+}
+.novo-layout .farm-numbers-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.novo-layout .farm-numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.novo-layout .farm-num-cell {
+  background: var(--bg-1);
+  padding: 48px 32px;
+  position: relative;
+  transition: background .4s;
+}
+.novo-layout .farm-num-cell:hover {
+  background: var(--bg-2);
+}
+.novo-layout .farm-num-cell .v {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 56px;
+  color: var(--gold);
+  line-height: 1;
+  opacity: .85;
+}
+.novo-layout .farm-num-cell .v small {
+  font-size: .45em;
+  font-style: normal;
+  font-weight: 300;
+  margin-left: 4px;
+}
+.novo-layout .farm-num-cell .t {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink-0);
+  margin-top: 18px;
+  margin-bottom: 12px;
+}
+.novo-layout .farm-num-cell .d {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ───────── DETALHES (grid de listas) ───────── */
+.novo-layout .farm-details {
+  padding: 140px 0;
+  background: var(--bg-0);
+  border-top: 1px solid var(--line);
+}
+.novo-layout .farm-details-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.novo-layout .farm-details-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 64px;
+}
+.novo-layout .farm-detail-card {
+  padding: 40px 32px;
+  background: var(--bg-1);
+  border: 1px solid var(--line);
+  position: relative;
+  transition: border-color .35s, transform .35s;
+}
+.novo-layout .farm-detail-card:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+}
+.novo-layout .farm-detail-card .icon {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 40px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.novo-layout .farm-detail-card h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--ink-0);
+  margin-bottom: 16px;
+}
+.novo-layout .farm-detail-card ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.novo-layout .farm-detail-card li {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  padding-left: 18px;
+  position: relative;
+}
+.novo-layout .farm-detail-card li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 9px;
+  width: 6px; height: 1px;
+  background: var(--gold);
+}
+
+/* ───────── VISITAS CTA ───────── */
+.novo-layout .farm-visit {
+  padding: 100px 0 140px;
+  background: var(--bg-0);
+}
+.novo-layout .farm-visit-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 80px 64px;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(ellipse at top right, rgba(201,169,97,.08) 0%, transparent 60%),
+    var(--bg-1);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.novo-layout .farm-visit-inner::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 1px;
+  background: var(--gold);
+}
+.novo-layout .farm-visit-inner .display {
+  font-size: clamp(32px, 3.6vw, 48px);
+  margin-top: 14px;
+  margin-bottom: 18px;
+}
+.novo-layout .farm-visit-inner p {
+  max-width: 620px;
+  margin: 0 auto 36px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+.novo-layout .farm-visit-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 1024px) {
+  .novo-layout .farm-hero-content {
+    padding: 120px 24px 60px;
+  }
+  .novo-layout .farm-heritage {
+    padding: 80px 0;
+  }
+  .novo-layout .farm-heritage-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 0 24px;
+  }
+  .novo-layout .farm-heritage-image {
+    aspect-ratio: 4/3;
+  }
+  .novo-layout .farm-numbers {
+    padding: 80px 0;
+  }
+  .novo-layout .farm-numbers-inner {
+    padding: 0 24px;
+  }
+  .novo-layout .farm-numbers-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .novo-layout .farm-details {
+    padding: 80px 0;
+  }
+  .novo-layout .farm-details-inner {
+    padding: 0 24px;
+  }
+  .novo-layout .farm-details-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .novo-layout .farm-visit {
+    padding: 60px 0 100px;
+  }
+  .novo-layout .farm-visit-inner {
+    padding: 56px 28px;
+    margin: 0 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .novo-layout .farm-hero-content {
+    padding: 100px 22px 48px;
+  }
+  .novo-layout .farm-hero-meta {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .novo-layout .farm-hero-meta > div {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .novo-layout .farm-hero-meta > div:nth-child(odd) {
+    border-right: 1px solid var(--line);
+    padding-right: 16px;
+  }
+  .novo-layout .farm-hero-meta > div + div {
+    padding-left: 0;
+  }
+  .novo-layout .farm-hero-meta > div:nth-child(even) {
+    padding-left: 16px;
+  }
+  .novo-layout .farm-hero-meta > div:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+  .novo-layout .farm-numbers-grid {
+    grid-template-columns: 1fr;
+  }
+  .novo-layout .farm-num-cell {
+    padding: 36px 24px;
+  }
+  .novo-layout .farm-num-cell .v {
+    font-size: 48px;
+  }
+}

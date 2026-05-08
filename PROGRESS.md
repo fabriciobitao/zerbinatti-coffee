@@ -1,6 +1,58 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-08 (infra GCP completa + form B2B end-to-end + custom domains + altitude alinhada)
+**Ultima atualizacao:** 2026-05-08 (fazenda redesenhada, variedade Arara, novos precos, infra GCP completa, form B2B end-to-end, custom domains)
+
+## Sessao 2026-05-08 (parte 2) — Redesign /fazenda + Arara + novos precos
+
+### /fazenda redesenhada no estilo da home
+- [x] Nova `/fazenda` em dark + dourado + serif Cormorant + mono JetBrains (mesma identidade da home)
+- [x] Arquivos novos:
+  - `src/app/fazenda/layout.tsx` — importa `(home)/novo-layout.css` + `fazenda.css`
+  - `src/app/fazenda/fazenda.css` — estilos das secoes especificas (~380 linhas, todas escopadas em `.novo-layout`)
+- [x] Pagina rebuilt com `HomeHeader` + `HomeFooter` + `CartDrawer` + `RevealObserver`
+- [x] Secoes:
+  1. Hero compacto (78vh) com bg `assets/galeria/3.webp`, eyebrow "Origem · Serra do Cabral", titulo "A *Fazenda*", desc, e meta-grid 4 colunas (640-760m / 88 SCA / III geracoes / 1897)
+  2. "Heranca 1897" estilo `.story` com imagem `galeria/4.webp` + carimbo "Famiglia Zerbinatti" + 3 paragrafos
+  3. "Numeros da fazenda" — grid 4 cells com numeros serif italico dourados
+  4. "Variedades, Processo & Terroir" — 3 cards bg-1 com listas premium (bullet dourado)
+  5. "Visitas" CTA — moldura dourada com `btn-gold` + `btn-ghost`
+- [x] Anchors do `HomeHeader`, `MobileDrawer`, `HomeFooter` atualizados de `#cafes` → `/#cafes` (etc) para funcionarem cross-page
+
+### Variedade trocada para Arara (so Arara em producao atualmente)
+- [x] `/fazenda` card "Variedade" — Arara 100% da producao + nota sobre futuras variedades
+- [x] `src/lib/data/products.ts`:
+  - Classico (linha 74): variety → `"Arara"`
+  - Reserva (linhas 116, 128): longDescription "Yellow Bourbon" → "Arara"; variety → "Arara"
+  - Micro-Lote (linhas 175, 187, 198): "Geisha" → "Arara" em longDescription, variety, harvest "lote Arara 01"
+  - Reviews 207 e 223: textos com "Geisha" → "Arara"
+- [x] `src/lib/editorial/classico.ts` linha 77: variety → "Arara"
+- [x] `src/lib/i18n/dictionary.ts` (PT/EN/ES): `proc.cultivo.desc` reescrito para Arara como variedade unica + descricao do hibrido (Obata x Catuai Amarelo)
+- [x] `docs/shopify-import-products.csv`: altitude 900-1.100m → 640-760m, variedade → Arara, tags atualizadas, SEO description
+- [x] `scripts/test-products.mjs`: altitude + variety
+- [x] Verificado via grep: zero ocorrencias antigas (Catuai/Mundo Novo/Yellow Bourbon/Geisha) em copy comercial
+
+### "Secagem em terreiro suspenso" → "Secagem ao sol em terreiro"
+- [x] `/fazenda` (lista processo + paragrafo de heranca)
+- [x] `dictionary.ts` PT (`proc.secagem.desc`)
+- [x] EN: "raised beds" → "patio"
+- [x] ES: "patios elevados" → "patio"
+- [x] `/processo` etapa 2 da timeline
+- [x] `public/novo-layout/index.html` (2 ocorrencias)
+
+### Novos precos do Classico
+- [x] 250g moido: R$ 39,90 → **R$ 49,90**
+- [x] 500g em graos: R$ 69,90 → **R$ 79,90**
+- [x] Atualizado em:
+  - `src/lib/data/products.ts` (SKU Classico, alimenta PDP `/cafes/classico`)
+  - `public/novo-layout/index.html` (6 ocorrencias: cards, shop cards, catalogo JS interno)
+  - `docs/shopify-import-products.csv` (variantes ZRB-CLA-250-M e ZRB-CLA-500-G)
+- [x] Validado: PDP `/cafes/classico` mostra "R$ 79,90" via curl
+- [ ] **Acao do user:** reimportar CSV no Shopify ou editar SKUs manualmente pra refletir na home (que puxa preco do Shopify via `home/Cafes.tsx`)
+
+### Componentes legados nao tocados (intencional)
+- `src/components/Subscription.tsx`, `BestSellers.tsx`, `Quiz.tsx`, `Combos.tsx` — nao importados em nenhuma rota; mantidos pra evitar inconsistencia em calculos derivados (ex: savings/discount). Podem ser deletados em sessao futura.
+
+---
 
 ## Sessao 2026-05-08 — Migracao Vercel -> GCP, custom domains, form B2B
 

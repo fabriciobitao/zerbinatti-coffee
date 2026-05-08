@@ -78,7 +78,7 @@ export const dictionary = {
     'proc.title': 'Quatro <em>rituais.</em>',
     'proc.cultivo': 'Cultivo',
     'proc.cultivo.desc':
-      'Catuaí, Mundo Novo, Yellow Bourbon e Arara plantados manualmente em terraços naturais da Valim Farms.',
+      'Arara plantado manualmente em terraços naturais da Valim Farms — variedade brasileira premiada, híbrido de Obatã com Catuaí Amarelo.',
     'proc.solo': 'Solo',
     'proc.solo.v': 'Vulcânico',
     'proc.colheita': 'Colheita',
@@ -90,7 +90,7 @@ export const dictionary = {
     'proc.metodo.v': 'Manual',
     'proc.secagem': 'Secagem',
     'proc.secagem.desc':
-      'Natural ao sol, em terreiro suspenso. Vinte e cinco dias revolvendo grão a grão até o ponto exato.',
+      'Natural ao sol, em terreiro. Vinte e cinco dias revolvendo grão a grão até o ponto exato.',
     'proc.tempo': 'Tempo',
     'proc.tempo.v': '25 dias',
     'proc.umidade': 'Umidade final',
@@ -299,7 +299,7 @@ export const dictionary = {
     'proc.title': 'Four <em>rituals.</em>',
     'proc.cultivo': 'Cultivation',
     'proc.cultivo.desc':
-      'Catuaí, Mundo Novo, Yellow Bourbon and Arara planted by hand on natural terraces of Valim Farms.',
+      'Arara planted by hand on natural terraces of Valim Farms — an award-winning Brazilian variety, hybrid of Obatã and Yellow Catuaí.',
     'proc.solo': 'Soil',
     'proc.solo.v': 'Volcanic',
     'proc.colheita': 'Harvest',
@@ -311,7 +311,7 @@ export const dictionary = {
     'proc.metodo.v': 'Manual',
     'proc.secagem': 'Drying',
     'proc.secagem.desc':
-      'Natural sun-drying on raised beds. Twenty-five days turning bean by bean to the perfect point.',
+      'Natural sun-drying on the patio. Twenty-five days turning bean by bean to the perfect point.',
     'proc.tempo': 'Time',
     'proc.tempo.v': '25 days',
     'proc.umidade': 'Final moisture',
@@ -519,7 +519,7 @@ export const dictionary = {
     'proc.title': 'Cuatro <em>rituales.</em>',
     'proc.cultivo': 'Cultivo',
     'proc.cultivo.desc':
-      'Catuaí, Mundo Novo, Yellow Bourbon y Arara plantados a mano en terrazas naturales de Valim Farms.',
+      'Arara plantado a mano en terrazas naturales de Valim Farms — variedad brasileña premiada, híbrido de Obatã con Catuaí Amarillo.',
     'proc.solo': 'Suelo',
     'proc.solo.v': 'Volcánico',
     'proc.colheita': 'Cosecha',
@@ -531,7 +531,7 @@ export const dictionary = {
     'proc.metodo.v': 'Manual',
     'proc.secagem': 'Secado',
     'proc.secagem.desc':
-      'Natural al sol, en patios elevados. Veinticinco días removiendo grano a grano hasta el punto exacto.',
+      'Natural al sol, en el patio. Veinticinco días removiendo grano a grano hasta el punto exacto.',
     'proc.tempo': 'Tiempo',
     'proc.tempo.v': '25 días',
     'proc.umidade': 'Humedad final',

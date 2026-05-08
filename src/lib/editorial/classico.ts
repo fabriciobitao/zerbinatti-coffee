@@ -74,7 +74,7 @@ export const editorialClassico: EditorialProduct = {
     region: "Serra do Cabral",
     state: "Minas Gerais",
     altitude: "640 a 760m",
-    variety: "Catuaí Vermelho + Mundo Novo",
+    variety: "Arara",
     process: "Natural",
     harvest: "Safra 2025",
   },

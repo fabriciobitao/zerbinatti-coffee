@@ -16,7 +16,7 @@ export default function Processo() {
     {
       n: "2",
       t: "Secagem natural",
-      d: "Os cerejos secam em terreiro suspenso por 18 a 22 dias, revolvidos várias vezes ao dia para secagem homogênea.",
+      d: "Os cerejos secam ao sol no terreiro por 18 a 22 dias, revolvidos várias vezes ao dia para secagem homogênea.",
     },
     {
       n: "3",

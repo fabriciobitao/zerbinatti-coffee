@@ -113,11 +113,11 @@ export default function HomeHeader() {
         </Link>
 
         <nav className="header-nav" aria-label="Navegação principal">
-          <a href="#cafes">{t('nav.cafes')}</a>
-          <a href="#processo">{t('nav.processo')}</a>
-          <a href="#assinatura">{t('nav.assinatura')}</a>
+          <a href="/#cafes">{t('nav.cafes')}</a>
+          <a href="/#processo">{t('nav.processo')}</a>
+          <a href="/#assinatura">{t('nav.assinatura')}</a>
           <Link href="/para-empresas">{t('nav.empresas')}</Link>
-          <a href="#historia">{t('nav.historia')}</a>
+          <a href="/#historia">{t('nav.historia')}</a>
         </nav>
 
         <div className="header-actions">
