@@ -3,6 +3,7 @@
 // + linha inferior com copyright, links legais e badge da Gruta.
 // O newsletter e uma ilha cliente (<NewsletterForm />).
 
+import Image from 'next/image';
 import { T } from '@/lib/i18n';
 import NewsletterForm from './NewsletterForm';
 
@@ -13,12 +14,16 @@ export default function HomeFooter() {
         <div className="footer-grid">
           {/* Coluna 1 — Brand */}
           <div className="footer-brand">
-            <div className="word">
-              Zerbinatti<em>.</em>
-            </div>
-            <div className="label" style={{ color: 'var(--gold)' }}>
-              Caffè · Desde 1897
-            </div>
+            <Image
+              className="word"
+              src="/assets/zerbinatti-wordmark-gold.png"
+              alt="Zerbinatti"
+              width={280}
+              height={40}
+              priority={false}
+              style={{ height: 'auto', width: 'auto', maxHeight: 40 }}
+            />
+            <div className="label">Caffè · Desde 1897</div>
             <T k="footer.brandDesc" as="p" />
           </div>
 
