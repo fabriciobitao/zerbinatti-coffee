@@ -113,9 +113,10 @@ export default function HomeFooter() {
               aria-label="Made by Gruta — clica pra contato"
               role="button"
               tabIndex={0}
+              suppressHydrationWarning
             >
               <canvas className="gruta-mark" width={16} height={16} />
-              <span className="gruta-text" />
+              <span className="gruta-text" suppressHydrationWarning />
             </span>
           </div>
         </div>

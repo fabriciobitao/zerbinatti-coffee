@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   Playfair_Display,
   Inter,
@@ -111,7 +112,7 @@ export default function RootLayout({
             <CartToasts />
           </CartProvider>
         </LocaleProvider>
-        <script src="/gruta.js" defer />
+        <Script src="/gruta.js" strategy="afterInteractive" />
       </body>
     </html>
   );
