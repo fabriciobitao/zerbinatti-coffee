@@ -32,8 +32,8 @@ export default async function HomePage() {
       <HomeHeader />
       <Hero />
       <Cafes />
-      <Subscription />
       <Processo />
+      <Subscription />
       <VideoFeature />
       <Galeria />
       <CuppingReport />
