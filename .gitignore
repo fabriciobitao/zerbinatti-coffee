@@ -40,3 +40,8 @@ next-env.d.ts
 # auto-generated
 AGENTS.md
 .env*.local
+
+# local-only
+.claude/
+.vercel/
+**/.vercel/
