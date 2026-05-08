@@ -36,9 +36,9 @@ export async function POST(req: NextRequest) {
     payload = {};
   }
 
-  revalidateTag("shopify-products");
+  revalidateTag("shopify-products", "default");
   if (payload.handle) {
-    revalidateTag(`shopify-product:${payload.handle}`);
+    revalidateTag(`shopify-product:${payload.handle}`, "default");
   }
 
   return NextResponse.json({
