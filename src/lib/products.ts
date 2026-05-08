@@ -151,9 +151,25 @@ function mapVariant(
   variant: ShopifyVariant,
   editorial: EditorialProduct | null,
 ): HomeVariantSlot {
-  const amount = Number(variant.price.amount);
+  const slotKey = resolveSlotKey(
+    handle,
+    index,
+    variant.selectedOptions,
+    editorial,
+  );
+
+  const editorialSlot = editorial?.variantSlots.find(
+    (s) => s.slotKey === slotKey,
+  );
+  const shopifyAmount = Number(variant.price.amount);
+  // Editorial price override wins until Shopify is reimported with new SKU prices.
+  const amount =
+    editorialSlot?.priceOverrideBRL && variant.price.currencyCode === "BRL"
+      ? editorialSlot.priceOverrideBRL
+      : shopifyAmount;
+
   return {
-    slotKey: resolveSlotKey(handle, index, variant.selectedOptions, editorial),
+    slotKey,
     variantId: variant.id,
     title: variant.title,
     selectedOptions: variant.selectedOptions,
