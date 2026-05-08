@@ -100,6 +100,9 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} ${cormorant.variable} ${allura.variable} ${jetbrains.variable} ${pressStart.variable} antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="stylesheet" href="/gruta.css" />
+      </head>
       <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
         <LocaleProvider>
           <CartProvider>
@@ -108,6 +111,7 @@ export default function RootLayout({
             <CartToasts />
           </CartProvider>
         </LocaleProvider>
+        <script src="/gruta.js" defer />
       </body>
     </html>
   );

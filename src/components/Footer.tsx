@@ -147,7 +147,7 @@ export default function Footer() {
             <p className="text-xs text-coffee-400">
               &copy; 2026 Zerbinatti Coffee. Todos os direitos reservados.
             </p>
-            <div className="flex gap-6 text-xs text-coffee-400">
+            <div className="flex gap-6 items-center text-xs text-coffee-400">
               <Link href="/termos" className="hover:text-gold-400">
                 Termos de Uso
               </Link>
@@ -157,6 +157,16 @@ export default function Footer() {
               <Link href="/entregas" className="hover:text-gold-400">
                 Política de Entregas
               </Link>
+              <span
+                className="gruta-badge"
+                data-theme="light"
+                aria-label="Made by Gruta — clica pra contato"
+                role="button"
+                tabIndex={0}
+              >
+                <canvas className="gruta-mark" width={16} height={16} />
+                <span className="gruta-text" style={{ display: "none" }} />
+              </span>
             </div>
           </div>
         </div>
