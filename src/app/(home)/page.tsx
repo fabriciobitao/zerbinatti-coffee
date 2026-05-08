@@ -32,11 +32,11 @@ export default async function HomePage() {
       <HomeHeader />
       <Hero />
       <Cafes />
+      <Subscription />
       <Processo />
       <VideoFeature />
       <Galeria />
       <CuppingReport />
-      <Subscription />
       <Historia />
       <HomeFooter />
       <CartDrawer />
