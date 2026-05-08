@@ -181,7 +181,7 @@ export const dictionary = {
     'sub.whatsapp.msg.plan3':
       'Olá! Quero assinar o plano Maestro (3× grãos 500g · mensal). Pode me ajudar?',
     'sub.plan.cta': 'Assinar plano',
-    'story.stamp': 'Famiglia · Dal',
+    'story.stamp': 'Famiglia · Desde',
     'story.eyebrow': 'Nossa História',
     'story.title': 'Da Itália ao <em>coração</em> do Brasil.',
     'story.p1':
