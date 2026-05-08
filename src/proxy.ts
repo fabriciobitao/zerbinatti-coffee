@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 // #historia) sao servidas por `src/app/(home)/page.tsx` (rota Next.js real
 // + redirects 308 em next.config.ts). O unico rewrite remanescente cobre
 // /para-empresas (Step 12 migra essa pagina).
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/para-empresas" || pathname === "/para-empresas/") {
