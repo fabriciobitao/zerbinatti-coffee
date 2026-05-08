@@ -1,6 +1,37 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-07 (branch `site-shopify` — fluxo E2E validado; bloqueador unico no Shopify Admin)
+**Ultima atualizacao:** 2026-05-08 (branch `main` — copy/altitude alinhada, deploy = manual pelo user)
+
+## Sessao 2026-05-08 — Correcao de altitude + reset do pipeline de deploy
+
+### Copy/conteudo
+- [x] Altitude unificada para **640–760m** em todo o site (commit `8379452`):
+  - `src/app/fazenda/page.tsx`, `src/components/Hero.tsx` (2x), `src/lib/editorial/classico.ts`
+  - `src/lib/data/products.ts` (3 SKUs + longDescription do Reserva)
+  - `src/lib/data/articles.ts` (excerpt e body do artigo "Serra do Cabral")
+  - `public/novo-layout/index.html` ja estava 640–760m (nao alterado nesta sessao)
+- [x] Verificado via `grep` que nenhum 900-1.000m / 1.050 / 1.200 / 1.400 sobrou em copy de altitude
+
+### Infra/deploy (resolvido nesta sessao mas sem rodar deploy automatico de novo)
+- gcloud local quebrado (Python 3.9 incompativel com `gcloud builds`); contornado via REST direto contra Cloud Build/Cloud Run/GCS.
+- Projeto correto e o **`zerbinatti-cafe`** (sem sufixo, project number 259156177034). O `zerbinatti-cafe-ece93` foi criado por engano nesta sessao e deletado pelo user.
+- Conta com acesso: **`fabricio.fazer@gmail.com`** (Owner adicionado pelo user no projeto correto). `fabio.menezes@orchestra.lat` nao tem permissao no GCP do Zerbinatti.
+- Billing: vinculado em `billingAccounts/0152B1-B46B87-D27A49`, `billingEnabled: True`.
+- Bucket de fonte: `gs://zerbinatti-cafe_cloudbuild` (existe).
+- Cloud Run: servico `zerbinatti-coffee` em `southamerica-east1`, URL interna `https://zerbinatti-coffee-yuea3jtk7q-rj.a.run.app`. Imagem: `southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest`.
+- Firebase Hosting: site `zerbinatti-cafe` em `zerbinatti-cafe.web.app` faz rewrite pra esse Cloud Run (config em `firebase.json`).
+
+### Como deployar (manual — quem faz e o user)
+```
+gcloud builds submit --config=cloudbuild.yaml --project=zerbinatti-cafe
+```
+Depois do build sucesso, forcar nova revisao do Cloud Run com `:latest` (gcloud quebrado local — usar console ou `gcloud run services update zerbinatti-coffee --image ...:latest --region southamerica-east1`).
+
+### Regra fixa pra essa sessao em diante
+🛑 **AI nao faz deploy automatico no Zerbinatti.** Push pra `main` ok; build/deploy e o user que dispara. Memoria salva em `feedback_zerbinatti_no_auto_deploy.md`.
+
+---
+
 
 ## Sessao 2026-05-07 — Migracao para Shopify Headless (branch `site-shopify`)
 
