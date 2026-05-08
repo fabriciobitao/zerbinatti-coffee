@@ -24,6 +24,7 @@
   const PALETTES = {
     dark:  ["transparent","#0f1a0a","#384818","#7c8a3c","#c4cc7c","#e8ecc4"],
     light: ["transparent","#0f1a0a","#0f1a0a","#384818","#7c8a3c","#c4cc7c"],
+    graphite: ["transparent","#1a1a1a","#3a3a3a","#5c5c5c","#8a8a8a","#c4c4c4"],
   };
   const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   const MODAL_HTML =

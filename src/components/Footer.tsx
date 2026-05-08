@@ -159,7 +159,7 @@ export default function Footer() {
               </Link>
               <span
                 className="gruta-badge"
-                data-theme="light"
+                data-theme="graphite"
                 aria-label="Made by Gruta — clica pra contato"
                 role="button"
                 tabIndex={0}
