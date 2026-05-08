@@ -46,6 +46,10 @@ Registro de erros corrigidos pelo user. Ler no inicio de cada sessao junto com `
 
 - **Next.js 16: `middleware.ts` ja foi deprecated**, agora chama `proxy.ts`. Renomear quando possivel pra remover warning de build.
 
+## Debugging
+
+- **Antes de culpar cache, verificar overrides hardcoded.** Em 2026-05-08 perdemos 1h investigando ISR/CDN/webhook de revalidacao porque a home nao refletia preco editado no Shopify. Causa real: `priceOverrideBRL` em `src/lib/editorial/classico.ts` sobrescrevia silenciosamente o preco da Storefront API. Sintoma: tudo cacheado/invalidado certo, API retorna preco novo, mas o renderer pega override. Regra: quando dado nao reflete origem, **grep por hardcodes do valor antigo no codigo ANTES de deploy/rebuild**.
+
 ## Documentacao
 
 - **Comunicacao em portugues; codigo em ingles.** Se o projeto ja usa portugues no codigo, continuar — mas sempre **sem acentos** em identificadores (`Configuracao`, nao `Configuração`).
