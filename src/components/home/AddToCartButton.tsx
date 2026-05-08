@@ -1,25 +1,50 @@
+'use client';
+
 /**
- * Card de produto (home #cafes) — botao "Adicionar" desativado temporariamente.
- * Renderiza um badge nao-interativo "Em breve" no lugar do CTA de carrinho
- * enquanto a loja ainda nao esta liberada para vendas.
+ * Botao Adicionar do card de produto (home #cafes).
+ * Wired ao Zustand cart store: addItem(variantId, 1) abre o drawer otimistico.
+ *
+ * - Disabled quando !available ou enquanto isLoading.
+ * - Default label: t('btn.add') (contem <span class="arrow">→</span>, renderizado como HTML).
+ * - Loading state mostra spinner inline preservando layout do botao .btn-gold.
  */
+
+import { useT } from '@/lib/i18n/useT';
+import { useCartStore } from '@/lib/cart/store';
 
 type Props = {
   variantId: string;
   available: boolean;
+  /** Override do label padrao (chave i18n com possivel HTML em btn.add). */
   label?: string;
 };
 
-export function AddToCartButton({ variantId, available }: Props) {
+export function AddToCartButton({ variantId, available, label }: Props) {
+  const t = useT();
+  const addItem = useCartStore((s) => s.addItem);
+  const isLoading = useCartStore((s) => s.isLoading);
+
+  const disabled = !available || isLoading;
+  const labelHtml = label ? { __html: label } : t.html('btn.add');
+
   return (
-    <span
+    <button
+      type="button"
       className="btn btn-gold"
-      aria-disabled="true"
-      data-coming-soon="true"
       data-variant-id={variantId}
-      data-available={available ? 'true' : 'false'}
+      data-add="true"
+      aria-busy={isLoading || undefined}
+      disabled={disabled}
+      onClick={() => {
+        if (disabled) return;
+        void addItem(variantId, 1);
+      }}
     >
-      Em breve
-    </span>
+      {isLoading ? (
+        <span className="add-spinner" aria-hidden="true" />
+      ) : (
+        <span dangerouslySetInnerHTML={labelHtml} />
+      )}
+    </button>
   );
 }

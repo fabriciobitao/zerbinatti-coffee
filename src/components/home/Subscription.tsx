@@ -13,6 +13,9 @@ export default function Subscription() {
           <T k="sub.eyebrow" as="span" className="eyebrow" />
           <T k="sub.title" as="h2" className="display" />
           <T k="sub.desc" as="p" className="body-lg" />
+          <a href="#planos" className="btn btn-gold">
+            <T k="sub.cta" html as="span" />
+          </a>
         </div>
         <div className="sub-cards reveal" id="planos">
           <SubscriptionPlanCard planKey="plan1" />
