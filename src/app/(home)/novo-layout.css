@@ -687,7 +687,17 @@
     letter-spacing:-.02em;
     margin-bottom:8px;
   }
-  .feature-text .title em{font-style:italic; color:var(--gold);}
+  .feature-text .title em{
+    font-family:var(--script);
+    font-style:normal;
+    font-weight:400;
+    color:var(--gold);
+    font-size:1.05em;
+    letter-spacing:.01em;
+    line-height:1;
+    display:inline-block;
+    vertical-align:-.08em;
+  }
   .brand-mark{
     display:inline-block;
     height:1.55em;

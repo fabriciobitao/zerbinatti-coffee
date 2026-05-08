@@ -32,6 +32,7 @@ const SLOT_COPY: Record<string, SlotCopy> = {
     tagKey: 'feat.classico.tag',
     specsKey: 'feat.classico.specs',
     descKey: 'feat.classico.desc',
+    italicSuffix: 'Moído',
     packageAlt: 'Clássico Zerbinatti',
   },
   'classico-500g': {
