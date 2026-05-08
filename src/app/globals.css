@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #FDFBF7;
-  --color-foreground: #1A1108;
+  --color-background: #EDEDED;
+  --color-foreground: #141414;
 
-  /* Brand colors */
-  --color-coffee-950: #1A1108;
-  --color-coffee-900: #2C1D0E;
-  --color-coffee-800: #3E2723;
-  --color-coffee-700: #5D4037;
-  --color-coffee-600: #6D4C41;
-  --color-coffee-500: #8D6E63;
-  --color-coffee-400: #A1887F;
-  --color-coffee-300: #BCAAA4;
-  --color-coffee-200: #D7CCC8;
-  --color-coffee-100: #EFEBE9;
-  --color-coffee-50: #FDFBF7;
+  /* Brand colors — Graphite gray scale */
+  --color-coffee-950: #0E0E0E;
+  --color-coffee-900: #1A1A1A;
+  --color-coffee-800: #262626;
+  --color-coffee-700: #363636;
+  --color-coffee-600: #4A4A4A;
+  --color-coffee-500: #666666;
+  --color-coffee-400: #8A8A8A;
+  --color-coffee-300: #A8A8A8;
+  --color-coffee-200: #C8C8C8;
+  --color-coffee-100: #E0E0E0;
+  --color-coffee-50: #F2F2F2;
 
-  --color-gold-600: #B8860B;
-  --color-gold-500: #D4A017;
-  --color-gold-400: #E6BE44;
-  --color-gold-300: #F0D77B;
+  /* Platinum/silver accents (replacing gold) */
+  --color-gold-600: #6E6E6E;
+  --color-gold-500: #909090;
+  --color-gold-400: #B0B0B0;
+  --color-gold-300: #D0D0D0;
 
   --color-green-800: #2E5A3A;
   --color-green-700: #3D7A4F;
@@ -31,8 +32,15 @@
 }
 
 body {
-  background: var(--color-background);
   color: var(--color-foreground);
+  background:
+    radial-gradient(1200px 800px at 15% -10%, #F8F8F8 0%, transparent 55%),
+    radial-gradient(1000px 700px at 95% 10%, #DEDEDE 0%, transparent 60%),
+    radial-gradient(900px 600px at 50% 50%, #E8E8E8 0%, transparent 70%),
+    radial-gradient(1100px 800px at 5% 90%, #D4D4D4 0%, transparent 60%),
+    radial-gradient(1200px 900px at 100% 100%, #C8C8C8 0%, transparent 65%),
+    linear-gradient(180deg, #F2F2F2 0%, #E2E2E2 35%, #CFCFCF 70%, #BABABA 100%);
+  background-attachment: fixed;
 }
 
 html {
@@ -69,6 +77,21 @@ select:focus-visible,
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Let body gradient bleed through light sections */
+main > section[class*="bg-coffee-50"],
+main > section[class*="bg-coffee-100"],
+main > section[class*="bg-white"] {
+  background-color: transparent !important;
+}
+
+/* Soft gradient overlays for dark sections */
+main > section[class*="bg-coffee-950"] {
+  background: linear-gradient(180deg, #1A1A1A 0%, #0E0E0E 50%, #1A1A1A 100%) !important;
+}
+main > section[class*="bg-coffee-900"] {
+  background: linear-gradient(180deg, #262626 0%, #1A1A1A 100%) !important;
 }
 
 /* Grain texture overlay */
