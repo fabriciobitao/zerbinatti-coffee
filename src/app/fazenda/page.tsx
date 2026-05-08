@@ -10,7 +10,7 @@ export default function Fazenda() {
   return (
     <StaticPage eyebrow="Origem" title="A Fazenda">
       <p>
-        Nossa fazenda fica na Serra do Cabral, Minas Gerais, a 900–1.000
+        Nossa fazenda fica na Serra do Cabral, Minas Gerais, a 640–760
         metros de altitude. Solos de origem vulcânica, noites frias e dias
         ensolarados — o terroir ideal para Arábica de alta pontuação.
       </p>
@@ -29,7 +29,7 @@ export default function Fazenda() {
         Números da fazenda
       </h2>
       <ul className="list-disc space-y-2 pl-6">
-        <li>Altitude: 900–1.000 m</li>
+        <li>Altitude: 640–760 m</li>
         <li>Variedades: Bourbon Amarelo, Catuaí Vermelho, Mundo Novo</li>
         <li>Processo: Natural e Cereja Descascado</li>
         <li>Pontuação SCA: 85 a 90+</li>

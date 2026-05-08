@@ -108,7 +108,7 @@ export default function Hero() {
           </p>
 
           <div className={`mt-6 hidden grid-cols-3 gap-2 sm:mt-8 sm:gap-4 md:grid ${fadeClass("delay-[600ms]")}`}>
-            {[["Altitude", "900-1000m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
+            {[["Altitude", "640-760m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
               <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-2 text-center backdrop-blur-sm sm:p-3">
                 <div className="text-[10px] text-coffee-400 sm:text-xs">{label}</div>
                 <div className="mt-0.5 text-xs font-semibold text-coffee-100 sm:mt-1 sm:text-sm">{value}</div>
@@ -164,7 +164,7 @@ export default function Hero() {
         Café moído torrado premium da fazenda. 100% Arábica, secagem natural, torra média-clara. Notas de frutas e caramelo.
       </p>
       <div className="mt-6 grid grid-cols-3 gap-2">
-        {[["Altitude", "900-1000m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
+        {[["Altitude", "640-760m"], ["Secagem", "Natural"], ["Torra", "Média Clara"]].map(([label, value]) => (
           <div key={label} className="rounded-lg border border-coffee-700/50 bg-coffee-900/40 p-2 text-center backdrop-blur-sm">
             <div className="text-[10px] text-coffee-400">{label}</div>
             <div className="mt-0.5 text-xs font-semibold text-coffee-100">{value}</div>

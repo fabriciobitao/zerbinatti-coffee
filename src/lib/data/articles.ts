@@ -18,13 +18,13 @@ export const articles: Article[] = [
     eyebrow: "Terroir",
     category: "Terroir",
     excerpt:
-      "Altitude acima de 1.000m, solo de quartzito e amplitude térmica de 15°C — os três fatores que explicam a acidez brilhante dos cafés da região.",
+      "Altitude entre 640 e 760m, solo de quartzito e amplitude térmica de 15°C — os três fatores que explicam a acidez brilhante dos cafés da região.",
     readingTime: "5 min",
     publishedAt: "2026-04-02",
     author: "Giuliano Zerbinatti",
     body: [
       "Quando meu bisavô Giuseppe desembarcou no Porto de Santos em 1891 com uma mala e uma foto da Toscana no bolso, ele procurou terras que lembrassem a casa que deixou. Encontrou a Serra do Cabral — e foi categórico: aqui é onde a família vai plantar.",
-      "Cento e trinta anos depois, a escolha continua certeira. A Serra do Cabral é uma formação quartzítica no centro-norte de Minas, com altitudes que passam dos 1.400 metros. Nossa fazenda fica entre 900 e 1.200m — exatamente a faixa onde o café arábica encontra o estresse ideal.",
+      "Cento e trinta anos depois, a escolha continua certeira. A Serra do Cabral é uma formação quartzítica no centro-norte de Minas. Nossa fazenda fica entre 640 e 760m — a faixa onde o café arábica encontra o estresse térmico ideal.",
       "Estresse, aqui, é virtude. O grão que matura lentamente sob amplitude térmica alta (nossos invernos têm manhãs a 8°C e tardes a 23°C) desenvolve mais açúcares complexos. É o mesmo princípio do vinho de altitude — quanto mais devagar o fruto amadurece, mais complexa a xícara que ele gera.",
       "Somados ao solo de quartzito decomposto, com drenagem altíssima e micronutrientes específicos, temos o que os cupping scores traduzem em número: nossos lotes batem consistentemente SCA 85+, com picos de 92 em edições como o Geisha da safra 2025.",
       "A Serra do Cabral ainda é região emergente no mapa do café especial brasileiro. Poucas fazendas, menos de 300 produtores. Isso é vantagem para quem bebe — e responsabilidade nossa, de preservar o solo e a fauna enquanto produzimos.",

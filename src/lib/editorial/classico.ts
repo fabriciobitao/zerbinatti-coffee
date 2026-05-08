@@ -73,7 +73,7 @@ export const editorialClassico: EditorialProduct = {
     farm: "Valim Farms",
     region: "Serra do Cabral",
     state: "Minas Gerais",
-    altitude: "900 a 1.100m",
+    altitude: "640 a 760m",
     variety: "Catuaí Vermelho + Mundo Novo",
     process: "Natural",
     harvest: "Safra 2025",
