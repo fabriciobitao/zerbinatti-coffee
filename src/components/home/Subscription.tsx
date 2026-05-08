@@ -24,8 +24,8 @@ export default function Subscription() {
           </a>
         </div>
         <div className="sub-cards reveal" id="planos">
-          <SubscriptionPlanCard planKey="plan1" />
-          <SubscriptionPlanCard planKey="plan2" featured />
+          <SubscriptionPlanCard planKey="plan1" featured />
+          <SubscriptionPlanCard planKey="plan2" />
           <SubscriptionPlanCard planKey="plan3" />
         </div>
       </div>

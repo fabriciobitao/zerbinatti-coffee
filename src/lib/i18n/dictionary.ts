@@ -167,6 +167,7 @@ export const dictionary = {
       'Os dois mundos na mesma assinatura. Praticidade e ritual de barista, lado a lado.',
     'sub.plan2.price': 'R$ 116,82',
     'sub.plan2.badge': 'Mais escolhido',
+    'sub.featured.badge': 'Mais escolhido',
     'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× grãos · 500g · mensal',
     'sub.plan3.desc':
@@ -388,6 +389,7 @@ export const dictionary = {
       'Both worlds in one subscription. Convenience and barista ritual, side by side.',
     'sub.plan2.price': 'R$ 116,82',
     'sub.plan2.badge': 'Most chosen',
+    'sub.featured.badge': 'Most chosen',
     'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× whole beans · 500g · monthly',
     'sub.plan3.desc': 'For those who grind fresh before every cup. The full barista ritual at home.',
@@ -608,6 +610,7 @@ export const dictionary = {
       'Los dos mundos en una sola suscripción. Practicidad y ritual de barista, lado a lado.',
     'sub.plan2.price': 'R$ 116,82',
     'sub.plan2.badge': 'Más elegido',
+    'sub.featured.badge': 'Más elegido',
     'sub.plan3.title': 'Maestro',
     'sub.plan3.freq': '3× granos · 500g · mensual',
     'sub.plan3.desc':

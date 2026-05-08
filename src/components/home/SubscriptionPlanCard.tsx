@@ -43,7 +43,7 @@ export default function SubscriptionPlanCard({
         <T k={`sub.${planKey}.title`} html as="div" className="name" />
         <T k={`sub.${planKey}.freq`} as="div" className="freq" />
         <T k={`sub.${planKey}.desc`} as="div" className="desc" />
-        {featured ? <T k="sub.plan2.badge" as="div" className="badge" /> : null}
+        {featured ? <T k="sub.featured.badge" as="div" className="badge" /> : null}
       </div>
       <div className="price-col">
         <T k={`sub.${planKey}.price`} as="div" className="price" />
