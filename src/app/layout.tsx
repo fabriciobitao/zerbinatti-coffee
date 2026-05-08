@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import {
+  Playfair_Display,
+  Inter,
+  Cormorant_Garamond,
+  Allura,
+  JetBrains_Mono,
+  Press_Start_2P,
+} from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
+import { CartHydrator } from "@/lib/cart/CartHydrator";
+import { LocaleProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -12,6 +21,36 @@ const playfair = Playfair_Display({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  display: "swap",
+});
+
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const allura = Allura({
+  variable: "--font-allura",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  display: "swap",
+});
+
+const pressStart = Press_Start_2P({
+  variable: "--font-press-start",
+  subsets: ["latin"],
+  weight: "400",
   display: "swap",
 });
 
@@ -58,13 +97,17 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${playfair.variable} ${inter.variable} antialiased`}
+      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} ${allura.variable} ${jetbrains.variable} ${pressStart.variable} antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen flex flex-col font-sans">
-        <CartProvider>
-          {children}
-          <CartToasts />
-        </CartProvider>
+      <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
+        <LocaleProvider>
+          <CartProvider>
+            <CartHydrator />
+            {children}
+            <CartToasts />
+          </CartProvider>
+        </LocaleProvider>
       </body>
     </html>
   );
