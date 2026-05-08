@@ -1,39 +1,62 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-08 (branch `main` — copy/altitude alinhada, deploy = manual pelo user)
+**Ultima atualizacao:** 2026-05-08 (infra GCP completa + form B2B end-to-end + custom domains + altitude alinhada)
 
-## Sessao 2026-05-08 — Correcao de altitude + reset do pipeline de deploy
+## Sessao 2026-05-08 — Migracao Vercel -> GCP, custom domains, form B2B
 
 ### Copy/conteudo
 - [x] Altitude unificada para **640–760m** em todo o site (commit `8379452`):
   - `src/app/fazenda/page.tsx`, `src/components/Hero.tsx` (2x), `src/lib/editorial/classico.ts`
   - `src/lib/data/products.ts` (3 SKUs + longDescription do Reserva)
   - `src/lib/data/articles.ts` (excerpt e body do artigo "Serra do Cabral")
-  - `public/novo-layout/index.html` ja estava 640–760m (nao alterado nesta sessao)
-- [x] Verificado via `grep` que nenhum 900-1.000m / 1.050 / 1.200 / 1.400 sobrou em copy de altitude
+- [x] CTAs de compra desabilitados pra mostrar "Em breve" (commit `281e546`)
 
-### Infra/deploy (resolvido nesta sessao mas sem rodar deploy automatico de novo)
-- gcloud local quebrado (Python 3.9 incompativel com `gcloud builds`); contornado via REST direto contra Cloud Build/Cloud Run/GCS.
-- Projeto correto e o **`zerbinatti-cafe`** (sem sufixo, project number 259156177034). O `zerbinatti-cafe-ece93` foi criado por engano nesta sessao e deletado pelo user.
-- Conta com acesso: **`fabricio.fazer@gmail.com`** (Owner adicionado pelo user no projeto correto). `fabio.menezes@orchestra.lat` nao tem permissao no GCP do Zerbinatti.
-- Billing: vinculado em `billingAccounts/0152B1-B46B87-D27A49`, `billingEnabled: True`.
-- Bucket de fonte: `gs://zerbinatti-cafe_cloudbuild` (existe).
-- Cloud Run: servico `zerbinatti-coffee` em `southamerica-east1`, URL interna `https://zerbinatti-coffee-yuea3jtk7q-rj.a.run.app`. Imagem: `southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest`.
-- Firebase Hosting: site `zerbinatti-cafe` em `zerbinatti-cafe.web.app` faz rewrite pra esse Cloud Run (config em `firebase.json`).
+### Acessos GCP
+- **Owners do projeto:** `fabiomenezes@gmail.com` e `fabricio.fazer@gmail.com`. `fabio.menezes@orchestra.lat` nao tem permissao no GCP do Zerbinatti.
 
-### Como deployar (manual — quem faz e o user)
-```
-gcloud builds submit --config=cloudbuild.yaml --project=zerbinatti-cafe
-```
-Depois do build sucesso, forcar nova revisao do Cloud Run com `:latest` (gcloud quebrado local — usar console ou `gcloud run services update zerbinatti-coffee --image ...:latest --region southamerica-east1`).
+### Regra fixa
+🛑 **AI nao faz deploy automatico no Zerbinatti.** Push pra `main` ok; build/deploy e o user que dispara explicitamente. Memoria em `feedback_zerbinatti_no_auto_deploy.md`.
 
-### Regra fixa pra essa sessao em diante
-🛑 **AI nao faz deploy automatico no Zerbinatti.** Push pra `main` ok; build/deploy e o user que dispara. Memoria salva em `feedback_zerbinatti_no_auto_deploy.md`.
+### Infra GCP final
+- **Projeto correto:** `zerbinatti-cafe` (#259156177034). Duplicata `zerbinatti-cafe-ece93` (criada em paralelo pelo Fabricio) marcada para delete (some em 30 dias).
+- **Cloud Run** `zerbinatti-coffee` na regiao `southamerica-east1` (revision 00008-7ww). Build via `cloudbuild.yaml` -> Artifact Registry. Scale to zero, 1Gi/1vCPU, 0-10 instancias.
+- **Firebase Hosting** site `zerbinatti-cafe` na frente do Cloud Run (rewrite). CDN global + SSL automatico. Default URL: `zerbinatti-cafe.web.app`.
+- **Custom domains** (ambos via Firebase Hosting):
+  - `zerbinatti.coffee` — registrado no Cloudflare (DNS do Cloudflare gerencia)
+  - `zerbinatticoffee.com` — registrar GoDaddy, NS Hostinger; DNS editado no Hostinger
+  - Ambos: A `199.36.158.100`, TXT `hosting-site=zerbinatti-cafe`, TXT `_acme-challenge` para Let's Encrypt; **DNS only** no Cloudflare (proxy laranja quebra SSL handshake)
+- **Firestore** Native em `southamerica-east1`, free tier. Coleção `b2b_submissions` recebe leads do form. Cliente com `preferRest: true` (gRPC nao funciona em Cloud Run).
+- **Resend** envia emails transacionais. Domain `zerbinatti.coffee` verificado. API key em env var `RESEND_API_KEY` no Cloud Run. Free tier 3k emails/mes.
+- **Cloudflare Email Routing** ativo no `zerbinatti.coffee`: catch-all `*@zerbinatti.coffee` -> `fabiomenezes@gmail.com`. Destinos verificados: fabiomenezes@gmail.com, fabricio.fazer@gmail.com.
+- **Billing** trocado para conta dedicada "Zerbinatti Cafe" (`01D110-E60327-151D9A`).
+
+### Form B2B (/para-empresas) end-to-end
+- POST `/api/b2b-form` (Next.js route): valida, anti-honeypot, sanitiza, escape HTML
+- Campos: nome, empresa, CNPJ (com mascara + valida digito verificador, opcional em EN/ES), email, whatsapp (mascara 10/11 digitos), segmento, volume (opcional), mensagem (opcional)
+- Mascaras + validacao no front (inline error messages em vermelho); validacao redundante no back (rejeita CNPJ invalido se enviado, aceita vazio)
+- Grava no Firestore + dispara email pros 2 destinos via Resend; Reply-To = email do cliente
+- Smoke test E2E: `curl POST /api/b2b-form` retorna `{ok:true, id:...}`, email chega em ambas inboxes
+
+### Open Graph / Twitter Cards
+- `src/app/layout.tsx`: metadataBase + openGraph.images + twitter card pra todas rotas React. site_name "Zerbinatti" (sem "Coffee"), descricao em portugues.
+- `public/novo-layout/para-empresas.html`: og:* + twitter:* meta tags; descricao B2B-especifica
+- Imagem `/assets/og-share.jpg`: marca Zerbinatti com selos (673x706, AS-IS sem padding bands)
+- URLs absolutas apontam pra `zerbinatticoffee.com` (canonical)
+
+### Mobile readability
+- Bump em `body`, eyebrows, labels, hero desc, inputs (16px = sem zoom-in iOS) em `novo-layout.css` + `para-empresas.html` (≤640px)
+
+### Pendente
+- [ ] `zerbinatticoffee.com`: editar DNS no Hostinger (registros A/TXT do Firebase) — user vai tentar acesso ao Hostinger
+- [ ] Bloqueador Shopify continua: loja em "Opening soon", pagamento e frete nao configurados
+- [ ] Wave D: migrar HTML estatico de `/para-empresas` pra React (`src/app/para-empresas/page.tsx`)
+- [ ] Site tem `robots: noindex, nofollow` — trocar pra `index, follow` quando lancar oficial
 
 ---
 
+## Sessao 2026-05-07 (anterior) — Migracao Shopify Headless
 
-## Sessao 2026-05-07 — Migracao para Shopify Headless (branch `site-shopify`)
+### Detalhes Shopify Headless (sessao 2026-05-07)
 
 ### Decisao revertida
 A recomendacao Yampi (mais abaixo neste arquivo, sessao anterior) foi **abandonada**. O user optou por **Shopify Headless** porque (i) ja atende as premissas do projeto, (ii) so falta adaptar o template novo-layout existente, (iii) Claude Code consegue implementar sozinho.
