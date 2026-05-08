@@ -101,7 +101,7 @@ export const dictionary = {
     'proc.frescor': 'Frescor',
     'proc.quote':
       'O segredo do café perfeito é não ter pressa. A terra ensina, o sol decide, a gente apenas observa.',
-    'proc.who': '— Wilson Valim Zerbinatti, terceira geração',
+    'proc.who': '— Wilson Luiz Valim Zerbinatti, terceira geração',
     'video.eyebrow': 'Nosso café em movimento',
     'video.title': 'Da Fazenda <em>para o Mundo</em>',
     'video.desc':
@@ -323,7 +323,7 @@ export const dictionary = {
     'proc.frescor': 'Freshness',
     'proc.quote':
       'The secret to perfect coffee is not rushing. The land teaches, the sun decides — we just observe.',
-    'proc.who': '— Wilson Valim Zerbinatti, third generation',
+    'proc.who': '— Wilson Luiz Valim Zerbinatti, third generation',
     'video.eyebrow': 'Our coffee in motion',
     'video.title': 'From the Farm <em>to the World</em>',
     'video.desc':
@@ -544,7 +544,7 @@ export const dictionary = {
     'proc.frescor': 'Frescor',
     'proc.quote':
       'El secreto del café perfecto es no tener prisa. La tierra enseña, el sol decide, nosotros solo observamos.',
-    'proc.who': '— Wilson Valim Zerbinatti, tercera generación',
+    'proc.who': '— Wilson Luiz Valim Zerbinatti, tercera generación',
     'video.eyebrow': 'Nuestro café en movimiento',
     'video.title': 'De la Finca <em>al Mundo</em>',
     'video.desc':

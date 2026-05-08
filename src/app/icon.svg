@@ -1,0 +1,95 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="beanBody" x1="30%" y1="5%" x2="70%" y2="100%">
+      <stop offset="0%" stop-color="#F2DDB4"/>
+      <stop offset="30%" stop-color="#E2C089"/>
+      <stop offset="65%" stop-color="#C49A60"/>
+      <stop offset="100%" stop-color="#8B5E32"/>
+    </linearGradient>
+
+    <radialGradient id="topGlow" cx="38%" cy="22%" r="55%">
+      <stop offset="0%" stop-color="#FFF4DC" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#FFF4DC" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFF4DC" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="specular" cx="34%" cy="20%" r="18%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="grooveDark" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#5A3418"/>
+      <stop offset="50%" stop-color="#3A1F0E"/>
+      <stop offset="100%" stop-color="#5A3418"/>
+    </linearGradient>
+
+    <linearGradient id="grooveHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFEBC4" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFEBC4" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FFEBC4" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="softShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.4"/>
+      <feOffset dx="0.5" dy="1.8" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.4"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="grooveBlur" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+
+    <clipPath id="beanClip">
+      <path d="M 32 2
+               C 46 2, 56 14, 56 32
+               C 56 50, 46 62, 32 62
+               C 18 62, 8 50, 8 32
+               C 8 14, 18 2, 32 2 Z"/>
+    </clipPath>
+  </defs>
+
+  <g transform="rotate(-16 32 32)" filter="url(#softShadow)">
+    <path d="M 32 2
+             C 46 2, 56 14, 56 32
+             C 56 50, 46 62, 32 62
+             C 18 62, 8 50, 8 32
+             C 8 14, 18 2, 32 2 Z"
+          fill="url(#beanBody)"/>
+
+    <g clip-path="url(#beanClip)">
+      <rect x="0" y="0" width="64" height="64" fill="url(#topGlow)"/>
+      <rect x="0" y="0" width="64" height="64" fill="url(#specular)"/>
+    </g>
+
+    <path d="M 32 4
+             C 26 12, 25 22, 32 32
+             C 39 42, 38 52, 32 60"
+          stroke="url(#grooveDark)" stroke-width="4" fill="none" stroke-linecap="round"
+          filter="url(#grooveBlur)" opacity="0.55"/>
+
+    <path d="M 32 4
+             C 26 12, 25 22, 32 32
+             C 39 42, 38 52, 32 60"
+          stroke="#3A1F0E" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.95"/>
+
+    <path d="M 32 5
+             C 27 12, 26 22, 32 31"
+          stroke="url(#grooveHighlight)" stroke-width="0.7" fill="none" stroke-linecap="round"
+          transform="translate(-1.6 0)"/>
+
+    <path d="M 32 33
+             C 38 42, 37 51, 32 59"
+          stroke="url(#grooveHighlight)" stroke-width="0.7" fill="none" stroke-linecap="round"
+          transform="translate(1.6 0)"/>
+
+    <path d="M 32 2
+             C 46 2, 56 14, 56 32
+             C 56 50, 46 62, 32 62
+             C 18 62, 8 50, 8 32
+             C 8 14, 18 2, 32 2 Z"
+          fill="none" stroke="#6B4423" stroke-width="0.7" opacity="0.45"/>
+  </g>
+</svg>

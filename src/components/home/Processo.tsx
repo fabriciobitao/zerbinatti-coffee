@@ -1,7 +1,7 @@
 // Processo — Server Component. Reproduz verbatim a <section class="processo">
 // de public/novo-layout/index.html: 4 etapas (Cultivo, Colheita, Secagem,
 // Torra) cada uma com numero romanico em italico, descricao e duas linhas
-// .meta-row, mais a citacao final atribuida a Wilson Valim Zerbinatti.
+// .meta-row, mais a citacao final atribuida a Wilson Luiz Valim Zerbinatti.
 // Toda copy via <T />; nao traduzir as siglas/numeros constantes (640-760m,
 // 11%, 48h, ≤ 12kg) — sao fatos universais.
 
