@@ -26,7 +26,7 @@ import HomeFooter from '@/components/home/HomeFooter';
 import CartDrawer from '@/components/home/CartDrawer';
 import RevealObserver from '@/components/home/RevealObserver';
 
-export const revalidate = 30;
+export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
   return (

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Ornament } from "@/components/ui/Ornament";
 import { AddToCartButton } from "./AddToCartButton";
 
-export const revalidate = 30;
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
