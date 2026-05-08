@@ -34,12 +34,12 @@
 body {
   color: var(--color-foreground);
   background:
-    radial-gradient(1200px 800px at 15% -10%, #F8F8F8 0%, transparent 55%),
-    radial-gradient(1000px 700px at 95% 10%, #DEDEDE 0%, transparent 60%),
-    radial-gradient(900px 600px at 50% 50%, #E8E8E8 0%, transparent 70%),
-    radial-gradient(1100px 800px at 5% 90%, #D4D4D4 0%, transparent 60%),
-    radial-gradient(1200px 900px at 100% 100%, #C8C8C8 0%, transparent 65%),
-    linear-gradient(180deg, #F2F2F2 0%, #E2E2E2 35%, #CFCFCF 70%, #BABABA 100%);
+    radial-gradient(1300px 900px at 15% -10%, #FCFCFC 0%, transparent 55%),
+    radial-gradient(1000px 700px at 95% 10%, #F0F0F0 0%, transparent 60%),
+    radial-gradient(900px 600px at 50% 50%, #F5F5F5 0%, transparent 70%),
+    radial-gradient(1100px 800px at 5% 90%, #ECECEC 0%, transparent 60%),
+    radial-gradient(1200px 900px at 100% 100%, #E2E2E2 0%, transparent 65%),
+    linear-gradient(180deg, #FAFAFA 0%, #F2F2F2 35%, #E8E8E8 70%, #DCDCDC 100%);
   background-attachment: fixed;
 }
 
@@ -86,12 +86,55 @@ main > section[class*="bg-white"] {
   background-color: transparent !important;
 }
 
-/* Soft gradient overlays for dark sections */
+/* Smoky gradient transitions for dark sections */
 main > section[class*="bg-coffee-950"] {
-  background: linear-gradient(180deg, #1A1A1A 0%, #0E0E0E 50%, #1A1A1A 100%) !important;
+  background: linear-gradient(180deg, #2A2A2A 0%, #161616 50%, #2A2A2A 100%) !important;
+  position: relative;
 }
 main > section[class*="bg-coffee-900"] {
-  background: linear-gradient(180deg, #262626 0%, #1A1A1A 100%) !important;
+  background: linear-gradient(180deg, #333333 0%, #1F1F1F 100%) !important;
+  position: relative;
+}
+
+/* Smoky fog transitions between contrasting sections */
+main > section[class*="bg-coffee-950"]::before,
+main > section[class*="bg-coffee-900"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(220,220,220,0.55) 0%, rgba(180,180,180,0.18) 45%, transparent 100%);
+  filter: blur(2px);
+  z-index: 1;
+}
+main > section[class*="bg-coffee-950"]::after,
+main > section[class*="bg-coffee-900"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 120px;
+  pointer-events: none;
+  background: linear-gradient(0deg, rgba(220,220,220,0.55) 0%, rgba(180,180,180,0.18) 45%, transparent 100%);
+  filter: blur(2px);
+  z-index: 1;
+}
+main > section[class*="bg-coffee-950"] > *,
+main > section[class*="bg-coffee-900"] > * { position: relative; z-index: 2; }
+
+/* Smoky overlay floating across the page */
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(800px 400px at 20% 25%, rgba(255,255,255,0.35) 0%, transparent 60%),
+    radial-gradient(700px 350px at 80% 60%, rgba(180,180,180,0.25) 0%, transparent 65%),
+    radial-gradient(900px 500px at 50% 95%, rgba(160,160,160,0.20) 0%, transparent 70%);
+  filter: blur(40px);
+  mix-blend-mode: screen;
 }
 
 /* Grain texture overlay */
