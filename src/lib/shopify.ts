@@ -24,19 +24,25 @@ export function isShopifyConfigured(): boolean {
 export async function shopifyFetch<T>({
   query,
   variables,
-  cache = "force-cache",
+  cache,
   tags,
+  revalidate = 30,
 }: {
   query: string;
   variables?: Record<string, unknown>;
   cache?: RequestCache;
   tags?: string[];
+  revalidate?: number | false;
 }): Promise<T> {
   if (!isShopifyConfigured()) {
     throw new Error(
       "Shopify nao configurado. Defina NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN e NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN em .env.local",
     );
   }
+
+  const next: { tags?: string[]; revalidate?: number | false } = {};
+  if (tags) next.tags = tags;
+  if (revalidate !== undefined) next.revalidate = revalidate;
 
   const res = await fetch(endpoint, {
     method: "POST",
@@ -46,7 +52,7 @@ export async function shopifyFetch<T>({
     },
     body: JSON.stringify({ query, variables }),
     cache,
-    next: tags ? { tags } : undefined,
+    next: Object.keys(next).length ? next : undefined,
   });
 
   if (!res.ok) {
