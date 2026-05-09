@@ -27,6 +27,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet" />
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileReady" async defer></script>
 <link rel="stylesheet" href="/gruta.css" />
 <style>
   :root{
@@ -448,6 +449,7 @@
         <textarea name="mensagem" maxlength="4000" data-i18n-attr="placeholder:b2b.form.messagePh" placeholder="Conte o que está procurando — perfil sensorial, prazo, orçamento, particularidades."></textarea>
       </div>
       <input type="text" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+      <div id="turnstileBox" aria-hidden="true" style="display:none"></div>
       <div class="form-row full form-actions">
         <button id="b2bSubmit" type="submit" class="btn btn-gold" data-i18n-html="b2b.form.send">Enviar pedido <span class="arrow">→</span></button>
       </div>
@@ -459,6 +461,45 @@
       .form-row input.invalid,.form-row select.invalid,.form-row textarea.invalid{border-color:#E37070}
     </style>
     <script>
+    // Turnstile (Cloudflare CAPTCHA invisible) — site key publica
+    window.__TURNSTILE_SITE_KEY = '0x4AAAAAADMDeKbvCnEk0JVY';
+    window.__turnstileToken = null;
+    window.__turnstileWidgetId = null;
+    window.onTurnstileReady = function(){
+      try {
+        if (!window.turnstile) return;
+        var box = document.getElementById('turnstileBox');
+        if (!box) return;
+        window.__turnstileWidgetId = window.turnstile.render(box, {
+          sitekey: window.__TURNSTILE_SITE_KEY,
+          size: 'invisible',
+          appearance: 'interaction-only',
+          callback: function(token){ window.__turnstileToken = token; },
+          'error-callback': function(){ window.__turnstileToken = null; },
+          'expired-callback': function(){ window.__turnstileToken = null; }
+        });
+      } catch(e) { console.warn('[turnstile] init failed', e); }
+    };
+    function getTurnstileToken(timeoutMs){
+      return new Promise(function(resolve){
+        if (window.__turnstileToken) return resolve(window.__turnstileToken);
+        if (!window.turnstile || window.__turnstileWidgetId == null) return resolve(null);
+        try { window.turnstile.execute(window.__turnstileWidgetId); } catch(e){ return resolve(null); }
+        var start = Date.now();
+        var iv = setInterval(function(){
+          if (window.__turnstileToken) { clearInterval(iv); resolve(window.__turnstileToken); }
+          else if (Date.now() - start > (timeoutMs || 8000)) { clearInterval(iv); resolve(null); }
+        }, 100);
+      });
+    }
+    function resetTurnstile(){
+      try {
+        window.__turnstileToken = null;
+        if (window.turnstile && window.__turnstileWidgetId != null) {
+          window.turnstile.reset(window.__turnstileWidgetId);
+        }
+      } catch(e) {}
+    }
     (function(){
       const form = document.getElementById('b2bForm');
       const btn = document.getElementById('b2bSubmit');
@@ -547,24 +588,34 @@
         const original = btn.innerHTML;
         btn.innerHTML = 'Enviando...';
         try {
+          const turnstileToken = await getTurnstileToken();
           const res = await fetch('/api/b2b-form', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(Object.assign({}, data, { turnstileToken: turnstileToken }))
           });
           const json = await res.json().catch(() => ({}));
           if (res.ok) {
             form.reset();
             clearErrors();
+            resetTurnstile();
             msg.style.display = 'block';
             msg.style.background = 'rgba(217,165,77,.12)';
             msg.style.color = '#D9A54D';
             msg.style.border = '1px solid rgba(217,165,77,.4)';
             msg.textContent = 'Recebido! Entraremos em contato em até 1 dia útil.';
+          } else if (json && json.error === 'turnstile_failed') {
+            resetTurnstile();
+            msg.style.display = 'block';
+            msg.style.background = 'rgba(220,80,80,.12)';
+            msg.style.color = '#E37070';
+            msg.style.border = '1px solid rgba(220,80,80,.4)';
+            msg.textContent = 'Validação anti-bot falhou. Recarregue a página e tente de novo.';
           } else {
             throw new Error(json.error || 'request_failed');
           }
         } catch (err) {
+          resetTurnstile();
           msg.style.display = 'block';
           msg.style.background = 'rgba(220,80,80,.12)';
           msg.style.color = '#E37070';
