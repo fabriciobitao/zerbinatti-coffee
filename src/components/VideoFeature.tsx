@@ -40,7 +40,6 @@ export default function VideoFeature() {
                 src="https://player.vimeo.com/video/1171854594?autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0"
                 title="Zerbinatti Coffee — Da Fazenda para o Mundo"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
-                allowFullScreen
                 loading="lazy"
                 className="absolute inset-0 h-full w-full"
               />
