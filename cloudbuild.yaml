@@ -6,6 +6,11 @@ steps:
       - NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=${_SHOPIFY_DOMAIN}
       - --build-arg
       - NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=${_SHOPIFY_TOKEN}
+      - --build-arg
+      - NEXT_PUBLIC_GTM_ID=${_GTM_ID}
+      - --build-arg
+      - SEO_INDEX=${_SEO_INDEX}
+      - --no-cache
       - -t
       - ${_IMAGE}
       - .
@@ -19,3 +24,5 @@ substitutions:
   _IMAGE: southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest
   _SHOPIFY_DOMAIN: zerbinatticoffee.myshopify.com
   _SHOPIFY_TOKEN: 5f110b3e4f23e4e4e45d992fefb5a833
+  _GTM_ID: GTM-PVDQBMTB
+  _SEO_INDEX: "true"
