@@ -1,6 +1,46 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-09 (SEO completo na branch `seo`)
+**Ultima atualizacao:** 2026-05-09 (auditoria de seguranca — plano em branch `security`, sem implementacao)
+
+## Sessao 2026-05-09 (parte 2) — Auditoria de seguranca (branch `security`)
+
+Auditoria full-stack rodou em paralelo com 2 agentes (Security Engineer + Explore). Plano de remediacao salvo em `docs/security-plan.md` na branch `security`. **NAO foi implementado nada nesta sessao** — apenas o diagnostico + plano. Continuar em outra sessao.
+
+### Achados criticos (P0) — risco aceito pelo user
+- **Token Shopify Admin `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`** vazado em commits `5eb9314`/`e1d5fec` (em git history publico). User decidiu nao revogar nem reescrever historico — repo "publico mas so 2 devs".
+- **`VERCEL_OIDC_TOKEN`** em historico (ja expirado em 16/04). Sem acao.
+
+### Achados a implementar (P1) — pendentes pra proxima sessao
+1. **Sem rate limit / CAPTCHA em `/api/b2b-form` e `/api/newsletter/subscribe`**. Honeypot atual fura com Puppeteer. Solucao escolhida: **Turnstile (Cloudflare)** invisible. User precisa criar conta Cloudflare + me passar `NEXT_PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` (ja documentados em `.env.example`).
+2. **CSP wildcards desnecessarios** em `next.config.ts:11,39-40` (`*.googletagmanager.com`, `*.google-analytics.com`) — substituir por hostnames exatos.
+3. **CSP `'unsafe-inline'`** em script-src — manter por enquanto (necessario pelo GTM init); documentar em `lessons.md`.
+4. **Newsletter sem double opt-in** — risco LGPD. Implementar fluxo: status `pending` -> email Resend com link HMAC -> `/api/newsletter/confirm?token=...` -> status `active`. `NEWSLETTER_SECRET` ja em `.env.example`.
+5. **`/api/debug-shopify`** em prod sem auth — verificar conteudo, deletar ou proteger.
+
+### Achados a implementar (P2)
+6. **Hardcoded notify emails** (`fabricio.fazer@gmail.com`, `fabiomenezes@gmail.com`) em `b2b-form/route.ts:7` -> mover pra env var `B2B_NOTIFY_EMAILS`.
+7. **Stack traces em logs prod** -> log so `message` + `errorId` UUID.
+8. **`public/novo-layout/index.html`** (3.8k linhas legacy v1, sem rota) -> deletar. `para-empresas.html` mantem ate Wave D.
+9. **Cloud Run service account** — provavelmente default Compute SA com `roles/editor` global. Criar SA dedicada `zerbinatti-coffee-runtime@` com `roles/datastore.user` + `roles/secretmanager.secretAccessor`. Script `scripts/security-cloudrun-bootstrap.sh` a criar.
+10. **Secrets em env var Cloud Run** (`SHOPIFY_WEBHOOK_SECRET`, `RESEND_API_KEY`) -> mover pra Secret Manager.
+
+### Backlog (P3)
+- Webhook Shopify replay protection via `X-Shopify-Webhook-Id` dedupe (precisa Upstash, nao escolhido)
+- postcss XSS transitive (aguardar Next 16.x patch)
+- HSTS preload submission em `hstspreload.org`
+- Documentar regra anti-PII no dataLayer em `lessons.md` (auditado: hoje OK)
+
+### Estado da branch `security`
+- Branch criada a partir de `main` `35b5e06`. Sem commits novos alem do plano em `docs/security-plan.md`.
+- Plano detalhado com 7 fases + sequencia de 10 commits sugerida em `docs/security-plan.md`.
+- AI nao executou implementacao — proxima sessao retoma a partir desse plano.
+
+### Acao do user pendente pra proxima sessao
+- [ ] Criar conta Cloudflare + Turnstile widget pra `zerbinatticoffee.com`; passar SITE_KEY e SECRET_KEY pra IA
+- [ ] Decidir se ainda usa `/api/debug-shopify` ou pode deletar
+- [ ] (Opcional) Decidir se quer Sentry (env vars ja preparadas) pra Fase 5.2 logs com errorId
+
+---
 
 ## Sessao 2026-05-09 — Revisao SEO completa (branch `seo`)
 
