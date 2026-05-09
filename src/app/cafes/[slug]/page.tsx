@@ -8,6 +8,8 @@ import { SensoryProfile } from "@/components/ui/SensoryProfile";
 import { Reviews } from "@/components/ui/Reviews";
 import { Badge } from "@/components/ui/Badge";
 import { Ornament } from "@/components/ui/Ornament";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { productSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { AddToCartButton } from "./AddToCartButton";
 
 export const dynamic = "force-dynamic";
@@ -104,6 +106,16 @@ export default async function ProductPage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          productSchema(product),
+          breadcrumbSchema([
+            { name: "Início", url: "/" },
+            { name: "Cafés", url: "/#cafes" },
+            { name: product.name, url: `/cafes/${slug}` },
+          ]),
+        ]}
+      />
       <Header />
       <main className="bg-coffee-50">
         <div className="mx-auto max-w-7xl px-6 pt-28 pb-12 lg:px-8 lg:pt-32">

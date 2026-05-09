@@ -4,6 +4,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { articles, getArticleBySlug } from "@/lib/data/articles";
 import { Ornament } from "@/components/ui/Ornament";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 
 export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
@@ -67,6 +69,17 @@ export default async function ArticlePage({
 
   return (
     <>
+      <JsonLd
+        data={[
+          articleSchema(article),
+          breadcrumbSchema([
+            { name: "Início", url: "/" },
+            { name: "Revista", url: "/revista" },
+            { name: article.category, url: "/revista" },
+            { name: article.title, url: `/revista/${slug}` },
+          ]),
+        ]}
+      />
       <Header />
       <main className="bg-coffee-50">
         <article className="pt-28 pb-16">

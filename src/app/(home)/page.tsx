@@ -25,12 +25,29 @@ import Historia from '@/components/home/Historia';
 import HomeFooter from '@/components/home/HomeFooter';
 import CartDrawer from '@/components/home/CartDrawer';
 import RevealObserver from '@/components/home/RevealObserver';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { faqSchema } from '@/lib/seo/schemas';
+import { faqs } from '@/lib/data/faqs';
+import { products } from '@/lib/data/products';
 
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Cafés Zerbinatti",
+    itemListElement: products.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      url: `https://zerbinatticoffee.com/cafes/${p.slug}`,
+      name: p.name,
+    })),
+  };
+
   return (
     <main className="novo-layout">
+      <JsonLd data={[faqSchema(faqs), itemListSchema]} />
       <HomeHeader />
       <Hero />
       <Cafes />

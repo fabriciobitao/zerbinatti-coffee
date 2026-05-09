@@ -11,6 +11,8 @@ import {
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { CartHydrator } from "@/lib/cart/CartHydrator";
 import { LocaleProvider } from "@/lib/i18n";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -152,6 +154,7 @@ export default function RootLayout({
     >
       <head>
         <link rel="stylesheet" href="/gruta.css" />
+        <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </head>
       <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
         <LocaleProvider>
