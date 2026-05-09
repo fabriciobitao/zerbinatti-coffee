@@ -76,45 +76,60 @@ export default function NewsletterForm() {
   }
 
   return (
-    <form className="newsletter" onSubmit={handleSubmit} noValidate>
-      <input
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={t('footer.emailPlaceholder')}
-        aria-label={t('footer.newsletter')}
-        disabled={submitted || pending || loading}
-        aria-invalid={error ? true : undefined}
-      />
-      {/* honeypot anti-bot — nao mostrar no UI */}
-      <input
-        type="text"
-        name="website"
-        value={honeypot}
-        onChange={(e) => setHoneypot(e.target.value)}
-        tabIndex={-1}
-        autoComplete="off"
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          left: '-9999px',
-          width: 1,
-          height: 1,
-          opacity: 0,
-          pointerEvents: 'none',
-        }}
-      />
-      <TurnstileWidget onToken={setTurnstileToken} />
-      <button type="submit" disabled={submitted || pending || loading}>
-        {submitted
-          ? t('footer.subscribed')
-          : pending
-            ? t('footer.pendingConfirm')
+    <form onSubmit={handleSubmit} noValidate>
+      <div className="newsletter">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t('footer.emailPlaceholder')}
+          aria-label={t('footer.newsletter')}
+          disabled={submitted || pending || loading}
+          aria-invalid={error ? true : undefined}
+        />
+        {/* honeypot anti-bot — nao mostrar no UI */}
+        <input
+          type="text"
+          name="website"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            width: 1,
+            height: 1,
+            opacity: 0,
+            pointerEvents: 'none',
+          }}
+        />
+        <button type="submit" disabled={submitted || pending || loading}>
+          {submitted || pending
+            ? t('footer.subscribed')
             : loading
               ? '…'
               : t('footer.subscribe')}
-      </button>
+        </button>
+      </div>
+      <TurnstileWidget onToken={setTurnstileToken} />
+      {pending ? (
+        <div
+          role="status"
+          style={{
+            marginTop: 10,
+            fontSize: 12,
+            color: 'var(--gold, #C9A961)',
+            fontFamily: 'var(--sans, sans-serif)',
+            fontStyle: 'italic',
+            lineHeight: 1.5,
+          }}
+        >
+          {t('footer.pendingConfirm')}
+        </div>
+      ) : null}
       {error ? (
         <div
           role="alert"
