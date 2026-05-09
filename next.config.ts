@@ -102,10 +102,31 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
-    // Links externos antigos (/cafes, /processo, /assinatura, /historia) viram
-    // ancoras na home unica. Step 11/13. NB: source eh exact match — nao captura
-    // /cafes/[slug] (PDPs, rota dinamica real).
     return [
+      // Migracao de dominio primario: zerbinatticoffee.com -> zerbinatti.coffee.
+      // 301 preserva link equity; path + query sao mantidos automaticamente.
+      // NAO captura `checkout.zerbinatticoffee.com` (Shopify checkout independente).
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "zerbinatticoffee.com" }],
+        destination: "https://zerbinatti.coffee/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.zerbinatticoffee.com" }],
+        destination: "https://zerbinatti.coffee/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.zerbinatti.coffee" }],
+        destination: "https://zerbinatti.coffee/:path*",
+        permanent: true,
+      },
+      // Links externos antigos (/cafes, /processo, /assinatura, /historia) viram
+      // ancoras na home unica. Step 11/13. NB: source eh exact match — nao captura
+      // /cafes/[slug] (PDPs, rota dinamica real).
       { source: "/cafes", destination: "/#cafes", permanent: true },
       { source: "/assinatura", destination: "/#assinatura", permanent: true },
       { source: "/historia", destination: "/#historia", permanent: true },

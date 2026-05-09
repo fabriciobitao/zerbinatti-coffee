@@ -6,7 +6,7 @@
 import type { Product, Review } from "@/lib/data/products";
 import type { Article } from "@/lib/data/articles";
 
-const SITE_URL = "https://zerbinatticoffee.com";
+const SITE_URL = "https://zerbinatti.coffee";
 const ORG_NAME = "Zerbinatti Coffee";
 const LOGO_URL = `${SITE_URL}/assets/logo-white.png`;
 

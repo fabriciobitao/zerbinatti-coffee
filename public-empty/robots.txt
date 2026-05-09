@@ -3,5 +3,5 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 
-Host: https://zerbinatticoffee.com
-Sitemap: https://zerbinatticoffee.com/sitemap.xml
+Host: https://zerbinatti.coffee
+Sitemap: https://zerbinatti.coffee/sitemap.xml

@@ -40,7 +40,7 @@ export default async function HomePage() {
     itemListElement: products.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,
-      url: `https://zerbinatticoffee.com/cafes/${p.slug}`,
+      url: `https://zerbinatti.coffee/cafes/${p.slug}`,
       name: p.name,
     })),
   };

@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://zerbinatticoffee.com/</loc>
+    <loc>https://zerbinatti.coffee/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://zerbinatticoffee.com/fazenda</loc>
+    <loc>https://zerbinatti.coffee/fazenda</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zerbinatticoffee.com/para-empresas</loc>
+    <loc>https://zerbinatti.coffee/para-empresas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zerbinatticoffee.com/entregas</loc>
+    <loc>https://zerbinatti.coffee/entregas</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://zerbinatticoffee.com/termos</loc>
+    <loc>https://zerbinatti.coffee/termos</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://zerbinatticoffee.com/privacidade</loc>
+    <loc>https://zerbinatti.coffee/privacidade</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -50,7 +50,7 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://zerbinatticoffee.com";
+const SITE_URL = "https://zerbinatti.coffee";
 const OG_IMAGE = "/assets/og-share.jpg";
 const SITE_NAME = "Zerbinatti";
 const TITLE_DEFAULT = "Zerbinatti — Café Especial Brasileiro desde 1897";

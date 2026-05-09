@@ -48,7 +48,7 @@ const FROM =
 function siteUrl(): string {
   return (
     process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-    "https://zerbinatticoffee.com"
+    "https://zerbinatti.coffee"
   );
 }
 
