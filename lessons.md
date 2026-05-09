@@ -57,3 +57,21 @@ Registro de erros corrigidos pelo user. Ler no inicio de cada sessao junto com `
 - **`PROGRESS.md` na raiz fica atualizado.** Sempre ler no inicio da sessao e atualizar ao final. Data dentro do arquivo, nao no nome.
 
 - **`lessons.md` (este arquivo)** atualiza toda vez que o user corrige um erro. Lista simples, sem enrolacao, com a regra explicita pra nao repetir.
+
+## Seguranca
+
+- **Nunca push de PII no `dataLayer`/GA4.** Email, CPF, CNPJ, telefone, nome completo nao podem ir nem em parametros customizados nem em `user_properties` (LGPD + termos GA4). Auditado em `src/lib/analytics/dataLayer.ts` — manter assim. `pushLead` aceita so flags categoricas (segment, volume, form_name, method).
+
+- **CSP `'unsafe-inline'` em script-src e necessario hoje** pelo bootstrap inline do GTM (`<Script id="gtm-init">`). Migracao pra nonce em backlog — custo alto (middleware + `next/script` propagation + cache invalidation em SSG/ISR) vs ganho marginal. Qualquer `dangerouslySetInnerHTML` novo: usar so constantes/i18n ou JSON.stringify com escape de `</`.
+
+- **Secrets nunca em env var Cloud Run em texto claro.** Sempre via Secret Manager + `--update-secrets=NAME=secret-id:latest`. Vale pra `SHOPIFY_WEBHOOK_SECRET`, `RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `NEWSLETTER_SECRET`.
+
+- **Cloud Run nao roda com SA default Compute (`roles/editor`).** Sempre criar SA dedicada (`zerbinatti-coffee-runtime@`) com so as roles necessarias: `roles/datastore.user` (Firestore) + `roles/secretmanager.secretAccessor`.
+
+- **Forms publicos protegidos por Turnstile invisible.** Honeypot fura com Puppeteer basico — nao confiar so nele. Site key publica em `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, secret em `TURNSTILE_SECRET_KEY` server-only. Verifier em `src/lib/turnstile.ts` (no-op se secret ausente, pra dev).
+
+- **Newsletter exige double opt-in (LGPD).** Status `pending` no Firestore -> email Resend com link HMAC -> `/api/newsletter/confirm?email=&token=` valida `timingSafeEqual` -> ativa. `NEWSLETTER_SECRET` 32+ chars.
+
+- **Logs de erro em prod: so `message` + `errorId` UUID.** Nunca stack trace completo (vaza paths internos, nomes de funcoes). `errorId` retorna no JSON pra correlacionar com Cloud Logging.
+
+- **`public/novo-layout/index.html` foi deletado** (legacy v1 nao servido por rota mas acessivel em `/novo-layout/index.html` — superficie de ataque desnecessaria). `para-empresas.html` mantem ate Wave D migrar pra React.
