@@ -78,40 +78,30 @@ export default function Hero() {
             <img
               src="/assets/selo-scaa.png"
               alt="SCAA Specialty Coffee Association of America"
-              width={512}
-              height={512}
               loading="lazy"
               decoding="async"
             />
             <img
               src="/assets/selo-100.png"
               alt="Selo 100 anos Zerbinatti — desde 1897"
-              width={512}
-              height={512}
               loading="lazy"
               decoding="async"
             />
             <img
               src="/assets/selo-cup.png"
               alt="Cup of Excellence — café especial premiado"
-              width={512}
-              height={512}
               loading="lazy"
               decoding="async"
             />
             <img
               src="/assets/selo-brasil.png"
               alt="Café 100% Brasileiro"
-              width={512}
-              height={512}
               loading="lazy"
               decoding="async"
             />
             <img
               src="/assets/selo-organic.png"
               alt="Café Orgânico Certificado"
-              width={1024}
-              height={1024}
               loading="lazy"
               decoding="async"
             />
