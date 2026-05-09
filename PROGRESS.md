@@ -1,6 +1,51 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-09 (auditoria de seguranca — plano em branch `security`, sem implementacao)
+**Ultima atualizacao:** 2026-05-09 (parte 3) — Hardening implementado em branch `security`, build verde, pronto pra merge apos user setar keys em Cloud Run.
+
+## Sessao 2026-05-09 (parte 3) — Hardening de seguranca implementado (branch `security`)
+
+Plano executado: 5 fases em codigo + script bootstrap pra Cloud Run + checklist final. 4 commits na branch `security`, build verde em todos.
+
+### O que foi feito
+- [x] **Turnstile (Cloudflare CAPTCHA invisivel)** em `/api/b2b-form` + `/api/newsletter/subscribe` + form B2B HTML legacy. `src/lib/turnstile.ts` + `src/components/security/TurnstileWidget.tsx`. No-op em dev sem secret.
+- [x] **Newsletter double opt-in (LGPD)**: status `pending` -> email Resend com link HMAC -> `/api/newsletter/confirm` valida `timingSafeEqual` -> ativa.
+- [x] **CSP hardening**: removidos wildcards `*.googletagmanager.com`, `*.google-analytics.com`, `*.myshopify.com`, `*.sentry.io`. Hostnames exatos. `'unsafe-inline'` mantido (GTM init) com comentario explicando.
+- [x] **Logs em prod**: `errorId` UUID em vez de stack trace. Retornado no JSON pra correlacao Cloud Logging.
+- [x] **`B2B_NOTIFY_EMAILS` env** com fallback hardcoded; documentado em `.env.example`.
+- [x] **`public/novo-layout/index.html` deletado** (legacy 3.8k linhas, era acessivel em `/novo-layout/index.html`).
+- [x] **`scripts/security-cloudrun-bootstrap.sh`** idempotente: cria SA dedicada `zerbinatti-coffee-runtime@`, sobe 4 secrets pro Secret Manager (shopify-webhook, resend, turnstile, newsletter), atualiza service.
+- [x] **`docs/security-checklist.md`** com status implementado vs pendente.
+- [x] **`lessons.md`** atualizado com 7 regras de hardening (anti-PII dataLayer, secrets em SM, SA dedicada, Turnstile, double opt-in, errorId, CSP unsafe-inline).
+
+### Cloudflare Turnstile (entregue pelo user)
+- Site Key (publica): `0x4AAAAAADMDeKbvCnEk0JVY` — em `.env.local` como `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
+- Secret Key: em `.env.local` como `TURNSTILE_SECRET_KEY` (gitignored)
+- Hostnames: `zerbinatticoffee.com`, `zerbinatti.coffee`, `localhost`
+
+### Commits na branch `security`
+```
+4676e21 chore(security): deleta novo-layout/index.html legacy + lessons hardening
+639c75b security(csp): remove wildcards e Sentry generico (apenas hostnames exatos)
+105b555 security(turnstile+optin): Cloudflare Turnstile invisivel + double opt-in newsletter
+845ae8a docs(security): plano de hardening + atualiza PROGRESS  ← base
+```
+
+### Pendente do user pra deploy em prod
+- [ ] Setar `NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAADMDeKbvCnEk0JVY` e `TURNSTILE_SECRET_KEY=<secret>` no Cloud Run.
+- [ ] Rodar `bash scripts/security-cloudrun-bootstrap.sh` pra criar SA dedicada + mover secrets pro Secret Manager (idempotente; header explica vars exportadas necessarias).
+- [ ] `B2B_NOTIFY_EMAILS=fabricio.fazer@gmail.com,fabiomenezes@gmail.com` no Cloud Run (opcional, fallback hardcoded mantido).
+- [ ] Merge `security` -> `main` apos validar curl/Tag Assistant em staging.
+
+### Riscos aceitos (do plano original)
+- **Token Shopify Admin `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`** em git history (commits `5eb9314`/`e1d5fec`). Sem revoke.
+- **VERCEL_OIDC_TOKEN** ja expirado em 16/04. Sem acao.
+
+### Backlog (P3 — nao implementado)
+- Webhook Shopify replay protection via `X-Shopify-Webhook-Id` dedupe (precisa Upstash).
+- HSTS preload submission em `hstspreload.org`.
+- postcss XSS transitive (aguardar Next 16.x patch).
+
+---
 
 ## Sessao 2026-05-09 (parte 2) — Auditoria de seguranca (branch `security`)
 
