@@ -45,3 +45,5 @@ AGENTS.md
 .claude/
 .vercel/
 **/.vercel/
+tools/.secrets/
+tools/node_modules/

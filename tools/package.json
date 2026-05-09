@@ -1,0 +1,13 @@
+{
+  "name": "zerbinatti-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "gtm:auth": "node setup-gtm-auth.js",
+    "gtm:setup": "node setup-gtm.js",
+    "gtm:inspect": "node inspect-gtm.js"
+  },
+  "dependencies": {
+    "googleapis": "^171.4.0"
+  }
+}
