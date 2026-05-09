@@ -149,6 +149,9 @@ export default function RootLayout({
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
       </head>
       <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
+        <a href="#main" className="skip-to-content">
+          Pular para o conteúdo
+        </a>
         <LocaleProvider>
           <CartProvider>
             <CartHydrator />

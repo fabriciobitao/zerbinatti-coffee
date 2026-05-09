@@ -15,7 +15,7 @@ export default function StaticPage({
   children,
 }: StaticPageProps) {
   return (
-    <main className="bg-coffee-50 py-16 sm:py-24">
+    <main id="main" className="bg-coffee-50 py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-6 lg:px-8">
         <Link
           href="/"

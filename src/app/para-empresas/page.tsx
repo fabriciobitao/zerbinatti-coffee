@@ -63,7 +63,7 @@ export default function ParaEmpresas() {
   return (
     <>
       <Header />
-      <main className="bg-coffee-50">
+      <main id="main" className="bg-coffee-50">
         {/* Hero */}
         <section className="bg-coffee-950 pt-28 pb-20 sm:pt-32">
           <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">

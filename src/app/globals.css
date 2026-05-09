@@ -163,3 +163,25 @@ body::after {
 ::-webkit-scrollbar-track { background: var(--color-coffee-100); }
 ::-webkit-scrollbar-thumb { background: var(--color-coffee-400); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-coffee-600); }
+
+/* Skip-to-content (acessibilidade WCAG + LBI) */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--color-coffee-900);
+  color: var(--color-gold-400);
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--color-gold-500);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-to-content:focus {
+  top: 16px;
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 2px;
+}

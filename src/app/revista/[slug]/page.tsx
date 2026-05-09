@@ -82,7 +82,7 @@ export default async function ArticlePage({
         ]}
       />
       <Header />
-      <main className="bg-coffee-50">
+      <main id="main" className="bg-coffee-50">
         <article className="pt-28 pb-16">
           <div className="mx-auto max-w-3xl px-6 lg:px-8">
             <nav className="text-xs text-coffee-600" aria-label="Breadcrumb">

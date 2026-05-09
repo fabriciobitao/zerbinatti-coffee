@@ -84,7 +84,7 @@ const detailCards = [
 
 export default function Fazenda() {
   return (
-    <main className="novo-layout">
+    <main id="main" className="novo-layout">
       <HomeHeader />
 
       {/* Hero compacto */}

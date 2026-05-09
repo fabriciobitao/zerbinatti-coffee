@@ -117,7 +117,7 @@ export default async function ProductPage({
         ]}
       />
       <Header />
-      <main className="bg-coffee-50">
+      <main id="main" className="bg-coffee-50">
         <div className="mx-auto max-w-7xl px-6 pt-28 pb-12 lg:px-8 lg:pt-32">
           {/* Breadcrumb */}
           <nav

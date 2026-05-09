@@ -46,7 +46,7 @@ export default async function HomePage() {
   };
 
   return (
-    <main className="novo-layout">
+    <main id="main" className="novo-layout">
       <JsonLd data={[faqSchema(faqs), itemListSchema]} />
       <HomeHeader />
       <Hero />

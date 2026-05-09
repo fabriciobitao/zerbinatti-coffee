@@ -37,7 +37,7 @@ export default function Revista() {
   return (
     <>
       <Header />
-      <main className="bg-coffee-50">
+      <main id="main" className="bg-coffee-50">
         {/* Header editorial */}
         <section className="bg-coffee-950 pt-28 pb-16 sm:pt-32">
           <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
