@@ -1,6 +1,7 @@
 // Subscription — Server Component. Reproduz a <section class="subscribe-section" id="assinatura">
 // de public/novo-layout/index.html. Layout de duas colunas: texto + 3 cards de planos.
-// CTAs nos cards abrem WhatsApp (deeplink) ate Shopify Subscriptions ser plugado.
+// Temporariamente sem CTA principal — secao serve so de marketing com selo "Em breve"
+// ate a loja liberar assinaturas.
 
 import { T } from '@/lib/i18n';
 import SubscriptionPlanCard from './SubscriptionPlanCard';
@@ -19,9 +20,13 @@ export default function Subscription() {
             <span><i>✦</i> Pause ou cancele quando quiser</span>
             <span><i>✦</i> Torra do mês selecionada à mão</span>
           </div>
-          <a href="#planos" className="btn btn-gold">
-            <T k="sub.cta" html as="span" />
-          </a>
+          <span
+            className="sub-coming-soon-seal"
+            data-coming-soon="true"
+            aria-label="Assinatura em breve"
+          >
+            Em breve
+          </span>
         </div>
         <div className="sub-cards reveal" id="planos">
           <SubscriptionPlanCard planKey="plan1" featured />

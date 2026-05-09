@@ -1964,6 +1964,48 @@
     line-height:1;
   }
 
+  /* Selo "Em breve" — substitui o CTA principal enquanto a loja nao libera assinaturas */
+  .sub-coming-soon-seal{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 28px;
+    border:1px solid var(--gold);
+    border-radius:999px;
+    background:linear-gradient(180deg, rgba(201,169,97,.08) 0%, rgba(201,169,97,.02) 100%);
+    color:var(--gold);
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    box-shadow:0 0 0 1px rgba(201,169,97,.15) inset, 0 8px 24px rgba(201,169,97,.10);
+    cursor:default;
+    user-select:none;
+  }
+  .sub-coming-soon-seal::before{
+    content:"●";
+    color:var(--gold-soft);
+    font-size:8px;
+    line-height:1;
+    animation:pulse-coming-soon 2s ease-in-out infinite;
+  }
+  @keyframes pulse-coming-soon{
+    0%, 100% { opacity:.4; }
+    50%      { opacity:1; }
+  }
+
+  /* Cards de plano em modo "em breve": sem cursor pointer, sem hover */
+  .plan[data-coming-soon="true"]{
+    cursor:default;
+    opacity:.85;
+  }
+  .plan[data-coming-soon="true"]:hover{
+    transform:none;
+    border-color:var(--line);
+    box-shadow:none;
+  }
+
   .sub-cards{
     display:grid;
     gap:16px;
