@@ -97,7 +97,10 @@ export default function Fazenda() {
             </a>
             <span className="eyebrow">Origem · Serra do Cabral</span>
             <h1 className="farm-hero-title">
-              A <em>Fazenda</em>
+              Fazenda <em>Zerbinatti</em>
+              <span className="farm-hero-subtitle">
+                Café especial Serra do Cabral · desde 1897
+              </span>
             </h1>
             <p className="farm-hero-desc">
               Em Minas Gerais, entre 640 e 760 metros de altitude, plantamos

@@ -17,7 +17,7 @@ export const dictionary = {
     'nav.historia': 'História',
     'hero.badge': 'Colheita Limitada · Safra 2026',
     'hero.title':
-      'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Famiglia Zerbinatti, desde 1897</span>',
+      'Do nosso<br><em>legado</em><br>para sua mesa.<span class="since">— Café especial Zerbinatti, desde 1897</span>',
     'hero.desc':
       'Café especial brasileiro, herança italiana. 100% Arábica colhido a 640–760m na Valim Farms, secagem natural ao sol, torra artesanal em pequenos lotes.',
     'hero.stats.alt': 'Altitude',
@@ -237,7 +237,7 @@ export const dictionary = {
     'nav.historia': 'Story',
     'hero.badge': 'Limited Harvest · 2026 Crop',
     'hero.title':
-      'From our<br><em>legacy</em><br>to your table.<span class="since">— Famiglia Zerbinatti, since 1897</span>',
+      'From our<br><em>legacy</em><br>to your table.<span class="since">— Specialty coffee Zerbinatti, since 1897</span>',
     'hero.desc':
       'Brazilian specialty coffee, Italian heritage. 100% Arabica grown at 640–760m in Valim Farms, sun-dried naturally, artisan-roasted in small batches.',
     'hero.stats.alt': 'Altitude',
@@ -391,7 +391,7 @@ export const dictionary = {
     'sub.plan3.desc': 'For those who grind fresh before every cup. The full barista ritual at home.',
     'sub.plan3.price': 'R$ 215,73',
     'sub.priceMonth': '/month',
-    'sub.priceMonthOff': '/month · 15% off',
+    'sub.priceMonthOff': '/month · 10% off',
     'sub.whatsapp.msg.plan1':
       "Hi! I'd like to subscribe to the Quotidiano plan (3× ground 250g · monthly). Can you help?",
     'sub.whatsapp.msg.plan2':
@@ -456,7 +456,7 @@ export const dictionary = {
     'nav.historia': 'Historia',
     'hero.badge': 'Cosecha Limitada · Zafra 2026',
     'hero.title':
-      'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Famiglia Zerbinatti, desde 1897</span>',
+      'De nuestro<br><em>legado</em><br>a tu mesa.<span class="since">— Café especial Zerbinatti, desde 1897</span>',
     'hero.desc':
       'Café especial brasileño, herencia italiana. 100% Arábica cultivado a 640–760m en Valim Farms, secado natural al sol, tostado artesanal en lotes pequeños.',
     'hero.stats.alt': 'Altitud',
@@ -611,7 +611,7 @@ export const dictionary = {
       'Para quien muele fresco antes de cada taza. El ritual completo del barista en casa.',
     'sub.plan3.price': 'R$ 215,73',
     'sub.priceMonth': '/mes',
-    'sub.priceMonthOff': '/mes · 15% off',
+    'sub.priceMonthOff': '/mes · 10% off',
     'sub.whatsapp.msg.plan1':
       '¡Hola! Quiero suscribirme al plan Quotidiano (3× molido 250g · mensual). ¿Pueden ayudarme?',
     'sub.whatsapp.msg.plan2':

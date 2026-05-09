@@ -78,6 +78,17 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.novo-layout .farm-hero-subtitle {
+  display: block;
+  margin-top: 14px;
+  font-family: var(--mono, monospace);
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 400;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: .85;
+}
 .novo-layout .farm-hero-desc {
   margin-top: 28px;
   font-size: 17px;

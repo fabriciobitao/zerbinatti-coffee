@@ -6,6 +6,7 @@ import { articles, getArticleBySlug } from "@/lib/data/articles";
 import { Ornament } from "@/components/ui/Ornament";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { articleSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { RelatedProductCTA } from "@/components/revista/RelatedProductCTA";
 
 export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
@@ -122,6 +123,8 @@ export default async function ArticlePage({
                 </p>
               ))}
             </div>
+
+            <RelatedProductCTA articleSlug={slug} />
 
             <Ornament className="my-12" />
 

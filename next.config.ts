@@ -109,7 +109,6 @@ const nextConfig: NextConfig = {
     // /cafes/[slug] (PDPs, rota dinamica real).
     return [
       { source: "/cafes", destination: "/#cafes", permanent: true },
-      { source: "/processo", destination: "/#processo", permanent: true },
       { source: "/assinatura", destination: "/#assinatura", permanent: true },
       { source: "/historia", destination: "/#historia", permanent: true },
       // Link campanha Instagram (@zerbinatticoffee). Query string (fbclid, utm_*)
