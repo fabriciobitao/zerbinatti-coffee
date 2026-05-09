@@ -112,6 +112,9 @@ const nextConfig: NextConfig = {
       { source: "/processo", destination: "/#processo", permanent: true },
       { source: "/assinatura", destination: "/#assinatura", permanent: true },
       { source: "/historia", destination: "/#historia", permanent: true },
+      // Link campanha Instagram (@zerbinatticoffee). Query string (fbclid, utm_*)
+      // e preservada automaticamente pelo Next.js no redirect.
+      { source: "/nca", destination: "/", permanent: false },
     ];
   },
   images: {
