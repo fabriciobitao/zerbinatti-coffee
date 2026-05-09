@@ -2,9 +2,11 @@ import StaticPage from "@/components/StaticPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
 export const metadata = {
-  title: "Termos de Uso — Zerbinatti Coffee",
+  title: "Termos de Uso",
   description:
     "Termos e condições de uso do site e da loja Zerbinatti Coffee.",
+  alternates: { canonical: "/termos" },
+  robots: { index: true, follow: true },
 };
 
 export default function Termos() {

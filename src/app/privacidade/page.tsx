@@ -2,9 +2,11 @@ import StaticPage from "@/components/StaticPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
 export const metadata = {
-  title: "Política de Privacidade — Zerbinatti Coffee",
+  title: "Política de Privacidade",
   description:
     "Como a Zerbinatti Coffee coleta, usa e protege seus dados pessoais em conformidade com a LGPD.",
+  alternates: { canonical: "/privacidade" },
+  robots: { index: true, follow: true },
 };
 
 export default function Privacidade() {

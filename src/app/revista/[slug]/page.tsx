@@ -16,10 +16,33 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const article = getArticleBySlug(slug);
-  if (!article) return { title: "Artigo não encontrado — Revista Zerbinatti" };
+  if (!article) return { title: "Artigo não encontrado" };
+
+  const url = `/revista/${slug}`;
+  const title = article.title;
+  const description = article.excerpt.slice(0, 160);
+  const ogImage = "/assets/og-share.jpg";
+
   return {
-    title: `${article.title} — Revista Zerbinatti`,
-    description: article.excerpt,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "article",
+      publishedTime: article.publishedAt,
+      authors: [article.author],
+      section: article.category,
+      images: [{ url: ogImage, width: 1200, height: 630, alt: article.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 

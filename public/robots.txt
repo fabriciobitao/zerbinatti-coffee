@@ -1,3 +1,0 @@
-# Site nao indexavel — preview privado
-User-agent: *
-Disallow: /

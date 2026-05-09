@@ -5,9 +5,23 @@ import { articles } from "@/lib/data/articles";
 import { Ornament, Monogram } from "@/components/ui/Ornament";
 
 export const metadata = {
-  title: "Revista Zerbinatti — Ensaios sobre café, terroir e ofício",
+  title: "Revista — Ensaios sobre café, terroir e ofício",
   description:
     "Ensaios editoriais da família Zerbinatti sobre café especial, terroir da Serra do Cabral, preparo e a história da casa desde 1897.",
+  alternates: { canonical: "/revista" },
+  openGraph: {
+    title: "Revista Zerbinatti — Ensaios sobre café e terroir",
+    description:
+      "Ensaios editoriais sobre café especial, Serra do Cabral, métodos de preparo e a história da casa desde 1897.",
+    url: "/revista",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Revista Zerbinatti — Ensaios sobre café e terroir",
+    description:
+      "Ensaios editoriais sobre café especial, Serra do Cabral e a história da casa desde 1897.",
+  },
 };
 
 function formatDate(iso: string) {

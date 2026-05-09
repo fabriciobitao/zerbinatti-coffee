@@ -4,9 +4,23 @@ import B2BForm from "@/components/B2BForm";
 import { Ornament, Monogram } from "@/components/ui/Ornament";
 
 export const metadata = {
-  title: "Para Empresas — Zerbinatti Coffee B2B",
+  title: "Café Especial para Empresas — Zerbinatti B2B",
   description:
     "Café especial Zerbinatti para cafeterias, restaurantes, torrefações e escritórios. Parceria direta com a fazenda, alocação exclusiva, preços escalonados.",
+  alternates: { canonical: "/para-empresas" },
+  openGraph: {
+    title: "Café Especial para Empresas — Zerbinatti B2B",
+    description:
+      "Parceria direta com a Fazenda Zerbinatti. Cafeterias, restaurantes, torrefações e escritórios. Alocação exclusiva e preços escalonados.",
+    url: "/para-empresas",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Café Especial para Empresas — Zerbinatti B2B",
+    description:
+      "Parceria direta com a fazenda. Cafeterias, restaurantes, torrefações e escritórios.",
+  },
 };
 
 const segments = [

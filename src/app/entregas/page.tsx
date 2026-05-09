@@ -2,9 +2,11 @@ import StaticPage from "@/components/StaticPage";
 import { CONTACT_EMAIL } from "@/lib/config";
 
 export const metadata = {
-  title: "Política de Entregas — Zerbinatti Coffee",
+  title: "Política de Entregas",
   description:
     "Prazos, frete, troca e devolução de café torrado Zerbinatti.",
+  alternates: { canonical: "/entregas" },
+  robots: { index: true, follow: true },
 };
 
 export default function Entregas() {

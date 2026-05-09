@@ -58,37 +58,63 @@ const pressStart = Press_Start_2P({
 const SITE_URL = "https://zerbinatticoffee.com";
 const OG_IMAGE = "/assets/og-share.jpg";
 const SITE_NAME = "Zerbinatti";
-const TITLE = "Zerbinatti | Café especial desde 1897";
+const TITLE_DEFAULT = "Zerbinatti — Café Especial Brasileiro desde 1897";
+const TITLE_TEMPLATE = "%s | Zerbinatti Coffee";
 const DESCRIPTION =
-  "Café especial brasileiro com herança italiana desde 1897. Três gerações de cafeicultura familiar — Valim Farms, MG. Direto do produtor para sua xícara.";
+  "Café especial brasileiro com herança italiana desde 1897. Três gerações cultivando 100% Arábica na Serra do Cabral, MG. Direto do produtor para sua xícara.";
+
+const SEO_INDEX = process.env.SEO_INDEX === "true";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: TITLE,
+  title: { default: TITLE_DEFAULT, template: TITLE_TEMPLATE },
   description: DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: "Família Zerbinatti", url: SITE_URL }],
+  creator: "Zerbinatti Coffee",
+  publisher: "Zerbinatti Coffee",
   keywords: [
     "café especial",
-    "specialty coffee",
-    "Brazilian coffee",
-    "Zerbinatti",
+    "café Zerbinatti",
+    "café Serra do Cabral",
+    "café arábica brasileiro",
+    "café arara",
+    "specialty coffee Brazil",
     "café premium",
-    "single origin",
+    "café single origin",
+    "café fazenda Minas Gerais",
+    "torra sob demanda",
   ],
-  robots: {
-    index: false,
-    follow: false,
-    nocache: true,
-    googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: true,
-      "max-video-preview": -1,
-      "max-image-preview": "none",
-      "max-snippet": -1,
-    },
+  alternates: {
+    canonical: "/",
   },
+  robots: SEO_INDEX
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-video-preview": -1,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {
+          index: false,
+          follow: false,
+          noimageindex: true,
+          "max-video-preview": -1,
+          "max-image-preview": "none",
+          "max-snippet": -1,
+        },
+      },
   openGraph: {
-    title: TITLE,
+    title: TITLE_DEFAULT,
     description: DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -106,10 +132,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
+    title: TITLE_DEFAULT,
     description: DESCRIPTION,
     images: [OG_IMAGE],
   },
+  category: "food",
 };
 
 export default function RootLayout({

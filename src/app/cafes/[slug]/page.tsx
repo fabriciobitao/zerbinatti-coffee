@@ -23,10 +23,30 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
-  if (!product) return { title: "Café não encontrado — Zerbinatti" };
+  if (!product) return { title: "Café não encontrado" };
+
+  const url = `/cafes/${slug}`;
+  const title = `${product.name} — Café Especial ${product.origin.process}`;
+  const description = `${product.tagline}. ${product.notes.slice(0, 3).join(", ")}. SCA ${product.score}. ${product.weight} torra ${product.roast.toLowerCase()}.`.slice(0, 160);
+  const ogImage = "/assets/pacote-graos-2026.webp";
+
   return {
-    title: `${product.name} — Zerbinatti Coffee`,
-    description: product.longDescription,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: product.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
   };
 }
 

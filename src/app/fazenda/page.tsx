@@ -4,9 +4,23 @@ import CartDrawer from "@/components/home/CartDrawer";
 import RevealObserver from "@/components/home/RevealObserver";
 
 export const metadata = {
-  title: "A Fazenda — Zerbinatti Coffee",
+  title: "Fazenda Zerbinatti — Serra do Cabral, MG",
   description:
-    "Conheça a fazenda Zerbinatti em Serra do Cabral, MG — herança italiana desde 1897, café especial 640–760m de altitude.",
+    "Café especial Zerbinatti cultivado entre 640–760m na Serra do Cabral, Minas Gerais. Herança italiana desde 1897, três gerações, variedade Arara, SCA 88+.",
+  alternates: { canonical: "/fazenda" },
+  openGraph: {
+    title: "Fazenda Zerbinatti — Serra do Cabral desde 1897",
+    description:
+      "Café especial cultivado entre 640–760m na Serra do Cabral, MG. Três gerações da família Zerbinatti, variedade Arara, SCA 88+.",
+    url: "/fazenda",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fazenda Zerbinatti — Serra do Cabral desde 1897",
+    description:
+      "Café especial cultivado entre 640–760m na Serra do Cabral, MG. Três gerações da família, variedade Arara.",
+  },
 };
 
 const numbers = [
