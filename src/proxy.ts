@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 // Migracao de dominio primario: zerbinatticoffee.com -> zerbinatti.coffee.
-// 308 = redirect permanente preservando method + body. Search engines tratam 308
-// como 301 pra fins de link equity.
+// 301 (em vez de 308) porque o validador "Mudanca de endereco" do Google Search
+// Console e estrito quanto ao codigo: rejeita 308 com "Nao foi possivel buscar
+// a pagina". 301 nao preserva method em POST (downgrade pra GET), mas o matcher
+// exclui /api e nao temos POST publico fora da API — risco zero.
 //
 // Lemos `x-forwarded-host` antes de `host` porque Fastly (CDN na frente do Cloud
 // Run) reescreve o Host header pro hostname do origin; o dominio original chega
@@ -36,7 +38,7 @@ export function proxy(request: NextRequest) {
     url.protocol = "https:";
     url.host = CANONICAL_HOST;
     url.port = "";
-    return NextResponse.redirect(url, 308);
+    return NextResponse.redirect(url, 301);
   }
 
   const { pathname } = request.nextUrl;
