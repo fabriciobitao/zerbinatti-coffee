@@ -1,33 +1,58 @@
 'use client';
 
-// NewsletterForm — Client island. Reproduz o comportamento do <form class="newsletter">
-// estatico em public/novo-layout/index.html: ao submeter, troca o texto do botao para
-// "Inscrito ✓" otimisticamente. Nada e persistido.
-//
-// TODO: plugar backend de newsletter. Opcoes consideradas: Resend audiences
-// (RESEND_AUDIENCE_ID ja em .env.example) ou Klaviyo via API. Implementar route
-// handler em /api/newsletter/subscribe que valida email + dispara double opt-in
-// (NEWSLETTER_SECRET ja em .env.example) antes de inserir na audience.
+// NewsletterForm — Client island. Submit POST -> /api/newsletter/subscribe
+// que persiste o email no Firestore (collection: newsletter_optin).
+// Otimismo: troca o botao pra "Inscrito ✓" assim que a request resolve OK.
+// Honeypot anti-bot via input hidden text.
 
-import { useState, type FormEvent } from 'react';
-import { useT } from '@/lib/i18n';
+import { useContext, useState, type FormEvent } from 'react';
+import { useT, LocaleContext } from '@/lib/i18n';
 import { pushLead } from '@/lib/analytics/dataLayer';
 
 export default function NewsletterForm() {
   const t = useT();
+  const { locale } = useContext(LocaleContext);
   const [submitted, setSubmitted] = useState(false);
   const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email) return;
-    // TODO: POST para /api/newsletter/subscribe (Resend audiences) +
-    // dispara email com link do PDF /downloads/guia-brewing-zerbinatti.pdf.
-    pushLead('sign_up', {
-      method: 'newsletter',
-      form_name: 'footer_newsletter',
-    });
-    setSubmitted(true);
+    if (!email || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          locale,
+          source: 'footer',
+          honeypot,
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(
+          json?.error === 'invalid_email'
+            ? t('footer.errInvalidEmail')
+            : t('footer.errGeneric'),
+        );
+        setLoading(false);
+        return;
+      }
+      pushLead('sign_up', {
+        method: 'newsletter',
+        form_name: 'footer_newsletter',
+      });
+      setSubmitted(true);
+    } catch {
+      setError(t('footer.errGeneric'));
+      setLoading(false);
+    }
   }
 
   return (
@@ -39,11 +64,48 @@ export default function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder={t('footer.emailPlaceholder')}
         aria-label={t('footer.newsletter')}
-        disabled={submitted}
+        disabled={submitted || loading}
+        aria-invalid={error ? true : undefined}
       />
-      <button type="submit" disabled={submitted}>
-        {submitted ? t('footer.subscribed') : t('footer.subscribe')}
+      {/* honeypot anti-bot — nao mostrar no UI */}
+      <input
+        type="text"
+        name="website"
+        value={honeypot}
+        onChange={(e) => setHoneypot(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          left: '-9999px',
+          width: 1,
+          height: 1,
+          opacity: 0,
+          pointerEvents: 'none',
+        }}
+      />
+      <button type="submit" disabled={submitted || loading}>
+        {submitted
+          ? t('footer.subscribed')
+          : loading
+            ? '…'
+            : t('footer.subscribe')}
       </button>
+      {error ? (
+        <div
+          role="alert"
+          style={{
+            marginTop: 8,
+            fontSize: 12,
+            color: '#E47A6A',
+            fontFamily: 'var(--mono, monospace)',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {error}
+        </div>
+      ) : null}
     </form>
   );
 }
