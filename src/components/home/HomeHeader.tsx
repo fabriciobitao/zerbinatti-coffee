@@ -27,6 +27,7 @@ import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
 import { MobileDrawer } from './MobileDrawer';
 import { CartButton } from './CartButton';
+import { HeaderInstagramButton } from '@/components/InstagramButton';
 
 const LANG_LABELS: Record<Locale, string> = {
   pt: 'Português',
@@ -140,6 +141,8 @@ export default function HomeHeader() {
               );
             })}
           </div>
+
+          <HeaderInstagramButton />
 
           <CartButton />
 

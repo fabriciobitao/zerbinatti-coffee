@@ -6,6 +6,7 @@
 import Image from 'next/image';
 import { T } from '@/lib/i18n';
 import NewsletterForm from './NewsletterForm';
+import { FooterInstagramLink } from '@/components/InstagramButton';
 
 export default function HomeFooter() {
   return (
@@ -90,6 +91,9 @@ export default function HomeFooter() {
               className="footer-news-desc"
             />
             <NewsletterForm />
+            <div style={{ marginTop: 20, display: 'flex', gap: 14, alignItems: 'center' }}>
+              <FooterInstagramLink />
+            </div>
           </div>
         </div>
 

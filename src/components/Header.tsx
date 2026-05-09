@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CartButton } from "./CartDrawer";
+import { HeaderInstagramButton } from "./InstagramButton";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -89,11 +90,13 @@ export default function Header() {
           ))}
         </div>
 
-        <div className="hidden items-center lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
+          <HeaderInstagramButton />
           <CartButton />
         </div>
 
         <div className="flex items-center gap-3 lg:hidden">
+          <HeaderInstagramButton />
           <CartButton />
           <button className="text-coffee-50" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
