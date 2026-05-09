@@ -1,0 +1,104 @@
+﻿=== ABA: Planos Shopify ===
+"Planos Shopify (precos USD oficiais convertidos a R$ 5,30/USD)",,,,,,,
+Atualizado: 2026-05-08 | Fonte: shopify.com/pricing,,,,,,,
+,,,,,,,
+Plano,Mensal (USD),Mensal (BRL),Anual (BRL)*,Economia anual,Taxa por venda (3rd party),Cartao via Shopify Payments,Notas
+Basic,29,153.7,1383.3,461.0999999999999,+2.0% sobre cada venda,2.9% + 30c USD,"Entrada. 1 loja, ate 2 staffs. Sem reports avancados."
+Grow,79,418.7,3768.3,1256.1,+1.0% sobre cada venda,2.6% + 30c USD,"Antigo 'Shopify'. 5 staffs, professional reports."
+Advanced,299,1584.7,14262.3,4754.1,+0.6% sobre cada venda,2.4% + 30c USD,"15 staffs, reports custom, calculated shipping."
+Plus,2300,12190,109710,36570,+0.2% sobre cada venda,negociado,"Enterprise. Checkout customizavel via Liquid, multi-store. Min 12 meses."
+,,,,,,,
+* Anual com desconto de 25% (Basic/Grow/Advanced). Plus tem desconto custom em 3 anos.,,,,,,,
+** Shopify Payments NAO esta disponivel oficialmente no Brasil em maio/2026.,,,,,,,
+"    Voce SEMPRE paga a taxa 3rd-party (Mercado Pago, PagSeguro etc) + a coluna F.",,,,,,,
+
+
+=== ABA: Pagamento BR ===
+Provedores de pagamento BR (combinados com Shopify),,,,,,
+,,,,,,
+Provider,Metodo,Taxa (%),Taxa fixa (R$),Em R$ 50,Em R$ 100,Notas
+Mercado Pago,PIX,0.99,0,0.495,0.99,Mais barato do BR
+Mercado Pago,Boleto,0,3.49,3.49,3.49,Lento (~2 dias compensar)
+Mercado Pago,Cartao 1x,4.99,0,2.495,4.99,Recebe em 14d (D+14)
+Mercado Pago,Cartao 2-12x,5.31,0,2.655,5.31,+1.5% por parcela alem de 1x
+PagSeguro,PIX,0.99,0,0.495,0.99,
+PagSeguro,Boleto,0,3.99,3.99,3.99,
+PagSeguro,Cartao 1x,4.39,0.4,2.595,4.79,+0.40 fixo por venda
+Pagar.me,PIX,0.99,0,0.495,0.99,Stone — D+1
+Pagar.me,Cartao,3.19,0.4,1.995,3.59,Mais barato; +2.49%/parcela
+Stripe BR,Cartao internacional,4.99,0,2.495,4.99,Sem PIX nem boleto
+,,,,,,
+"Recomendacao: ativar Mercado Pago no Shopify -> oferece PIX (~1%), Boleto e Cartao.",,,,,,
+Mix tipico BR e-commerce: 45% Cartao / 35% PIX / 15% Boleto / 5% Outros = ~3% medio sobre receita.,,,,,,
+
+
+=== ABA: Infra GCP+Firebase ===
+Custo de infra para 15k-30k MUU/mes (Cloud Run + Firebase Hosting + Firestore),,,,,,
+,,,,,,
+Premissas de trafego,,,,,,
+Page views por usuario (estimado),5,,,,,
+"KB por page view (HTML+JS+CSS, sem imagens cacheadas)",150,,,,,
+API calls Shopify por page (Storefront + cart),1.5,,,,,
+Form B2B submissoes/mes (Firestore writes),50,,,,,
+,,,,,,
+,,,,,,
+Cenarios,,,,,,
+Servico,Baixo (k MUU),Medio (k MUU),Alto (k MUU),,,
+Cloud Run (compute),0,0,0,,,
+Firebase Hosting (CDN bandwidth),0.5794246673583984,4.844137001037597,9.108849334716796,,,
+Firestore (B2B forms),0,0,0,,,
+TOTAL infra/mes,=SUM(B12:B14),=SUM(C12:C14),=SUM(D12:D14),,,
+,,,,,,
+Observacoes:,,,,,,
+"- Cloud Run: $0.40/M requests, $0.000018/vCPU-s, $0.000002/GiB-s (post free tier).",,,,,,
+"- Firebase Hosting: 10 GB/mes free; depois $0.15/GB cached, $0.20/GB uncached.",,,,,,
+"- Firestore: 20k writes/dia free, 50k reads/dia free. Form B2B esta dentro do free tier.",,,,,,
+- NAO inclui custos de imagens (CDN Shopify hospeda) nem video (Vimeo).,,,,,,
+- Cold start Cloud Run: scale-to-zero pode ter latencia 1-2s no primeiro hit; ok pra esse volume.,,,,,,
+
+
+=== ABA: Cenario Total ===
+Custo total de plataforma por mes (Shopify + Pagamento + Infra),,,,,,
+,,,,,,
+Premissas:,,,,,,
+- Conversao 1.5% (e-commerce maturo BR ~1-2%),,,,,,
+- Ticket medio R$ 65 (mix 250g R$ 49.90 / 500g R$ 79.90),,,,,,
+"- Mix de pagamento: 45% Cartao Mercado Pago, 35% PIX, 15% Boleto, 5% outros",,,,,,
+- Taxa media efetiva por venda: 3.0% sobre receita (cartao 5% × 0.45 + PIX 1% × 0.35 + boleto fixo),,,,,,
+,,,,,,
+Cenario por trafego mensal,,,,,,
+Trafego (MUU),Pedidos/mes,Receita bruta,Shopify Basic anual/mes,Taxa pagamento (3%),Infra GCP+Firebase,TOTAL plataforma/mes
+"15,000 (Baixo)",225,14625,115.275,731.25,0,846.525
+"22,500 (Medio)",337.5,21937.5,115.275,1096.875,1.5,1213.65
+"30,000 (Alto)",450,29250,115.275,1462.5,4.5,1582.275
+* Pagamento total inclui gateway BR (3% medio) + taxa Shopify por plano (2.0% pro Basic).,,,,,,
+,,,,,,
+Comparativo entre planos Shopify (mesmos cenarios de trafego),,,,,,
+Trafego (MUU),Receita bruta,Custo TOTAL Basic,Custo TOTAL Grow,Custo TOTAL Advanced,Economia Grow vs Basic,Economia Adv vs Basic
+"15,000 (Baixo)",14625,846.525,899.025,1715.025,-52.5,-868.5000000000001
+"22,500 (Medio)",21937.5,1213.65,1193.025,1979.775,20.625,-766.125
+"30,000 (Alto)",29250,1582.275,1488.525,2246.025,93.75,-663.75
+,,,,,,
+Quando vale subir de plano (break-even),,,,,,
+"Grow vale a pena acima de R$ 19,875 de receita/mes (mensalidade extra: R$ 199, economia 1.0% por venda)",,,,,,
+"Advanced vale a pena acima de R$ 76,661 de receita/mes (mensalidade extra: R$ 1,073, economia 1.4% por venda)",,,,,,
+"Beneficios nao-financeiros do Grow: 5 staffs (vs 2 Basic), reports profissionais, retencao de carrinho abandonado.",,,,,,
+
+
+=== ABA: Sources ===
+Fontes e premissas,
+,
+Servico,URL
+Shopify Pricing,https://www.shopify.com/pricing
+Shopify transaction fees explained 2026,https://craftshift.com/shopify-transaction-fees-explained/
+Cloud Run pricing,https://cloud.google.com/run/pricing
+Firebase Hosting pricing,https://firebase.google.com/docs/hosting/usage-quotas-pricing
+Firebase pricing plans,https://firebase.google.com/pricing
+Mercado Pago taxas,https://www.mercadopago.com.br/ajuda/Custos_265
+PagSeguro taxas,https://pagseguro.uol.com.br/para-seu-negocio/taxas-e-tarifas
+Pagar.me taxas,https://pagar.me/precos
+,
+,
+"Cotacao USD/BRL utilizada: R$ 5,30 (referencia maio/2026).",
+
+
