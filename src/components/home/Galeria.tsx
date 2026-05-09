@@ -21,6 +21,8 @@ type Item = {
   src: string;
   alt: string;
   capKey: string;
+  width: number;
+  height: number;
   // classes/styles extras para casar com o grid masonry do CSS
   extraClass?: string;
   style?: React.CSSProperties;
@@ -32,6 +34,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/1.webp',
     alt: 'Composição da marca Zerbinatti com selos de qualidade',
     capKey: 'gal.cap.1',
+    width: 1485,
+    height: 1852,
     extraClass: 'g-tall',
   },
   {
@@ -39,6 +43,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/2.webp',
     alt: 'Cerejas amarelas maduras no pé de café',
     capKey: 'gal.cap.2',
+    width: 1396,
+    height: 1866,
     extraClass: 'g-wide',
   },
   {
@@ -46,6 +52,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/3.webp',
     alt: 'Cafezal florido ao pôr-do-sol na Valim Farms',
     capKey: 'gal.cap.3',
+    width: 1042,
+    height: 1804,
     style: { gridColumn: 'span 4', gridRow: 'span 2' },
   },
   {
@@ -53,6 +61,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/4.webp',
     alt: 'Pacotes Zerbinatti 250g enfileirados',
     capKey: 'gal.cap.4',
+    width: 1407,
+    height: 1870,
     style: { gridColumn: 'span 4', gridRow: 'span 2' },
   },
   {
@@ -60,6 +70,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/5.webp',
     alt: 'Mudas de café em viveiro com sombreamento',
     capKey: 'gal.cap.5',
+    width: 1042,
+    height: 1761,
     style: { gridColumn: 'span 4', gridRow: 'span 2' },
   },
   {
@@ -67,6 +79,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/6.webp',
     alt: 'Terreiro de secagem natural com árvore icônica',
     capKey: 'gal.cap.6',
+    width: 1042,
+    height: 1680,
     extraClass: 'g-wide',
   },
   {
@@ -74,6 +88,8 @@ const ITEMS: Item[] = [
     src: '/assets/galeria/7.webp',
     alt: 'Plantio jovem de café em terra vermelha',
     capKey: 'gal.cap.7',
+    width: 1066,
+    height: 1362,
     style: { gridColumn: 'span 4', gridRow: 'span 3' },
   },
 ];
@@ -141,7 +157,14 @@ export default function Galeria() {
                   tabIndex={0}
                   aria-label={t(it.capKey)}
                 >
-                  <img src={it.src} alt={it.alt} loading="lazy" />
+                  <img
+                    src={it.src}
+                    alt={it.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={it.width}
+                    height={it.height}
+                  />
                   <figcaption>
                     <span className="num">{formatNum(it.n)}</span>{' '}
                     <span>{t(it.capKey)}</span>

@@ -6,7 +6,6 @@ import {
   Cormorant_Garamond,
   Allura,
   JetBrains_Mono,
-  Press_Start_2P,
 } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { CartHydrator } from "@/lib/cart/CartHydrator";
@@ -47,13 +46,6 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
   subsets: ["latin"],
   weight: ["300", "400", "500"],
-  display: "swap",
-});
-
-const pressStart = Press_Start_2P({
-  variable: "--font-press-start",
-  subsets: ["latin"],
-  weight: "400",
   display: "swap",
 });
 
@@ -149,7 +141,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} ${allura.variable} ${jetbrains.variable} ${pressStart.variable} antialiased`}
+      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} ${allura.variable} ${jetbrains.variable} antialiased`}
       suppressHydrationWarning
     >
       <head>

@@ -39,7 +39,6 @@
     --script: var(--font-allura), 'Allura', 'Pinyon Script', cursive;
     --sans: var(--font-inter), 'Inter', system-ui, sans-serif;
     --mono: var(--font-jetbrains), 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, monospace;
-    --pixel: var(--font-press-start), 'Press Start 2P', monospace;
   }
 
   .novo-layout, .novo-layout *{box-sizing:border-box; margin:0; padding:0;}

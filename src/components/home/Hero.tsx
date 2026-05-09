@@ -4,17 +4,24 @@
 // O unico ilha cliente e <HeroMotion /> que ativa .reveal -> .in no mount
 // e atualiza a opacidade do scroll-indicator durante o scroll.
 
+import Image from 'next/image';
 import { T } from '@/lib/i18n';
 import { HeroMotion } from './HeroMotion';
 
 export default function Hero() {
   return (
     <section className="hero" id="hero">
-      <div
-        className="hero-bg"
-        id="heroBg"
-        style={{ backgroundImage: "url('/assets/hero-bg.jpg')" }}
-      />
+      <div className="hero-bg" id="heroBg">
+        <Image
+          src="/assets/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={82}
+          style={{ objectFit: 'cover', objectPosition: 'center' }}
+        />
+      </div>
       <div className="hero-amber-glow" />
       <div className="hero-steam" style={{ left: '18%', bottom: '6%' }}>
         <span className="plume" />
@@ -69,11 +76,46 @@ export default function Hero() {
           </div>
 
           <div className="hero-seals reveal">
-            <img src="/assets/selo-scaa.png" alt="SCAA" />
-            <img src="/assets/selo-100.png" alt="Zerbinatti 100" />
-            <img src="/assets/selo-cup.png" alt="Cup of Excellence" />
-            <img src="/assets/selo-brasil.png" alt="Brasil" />
-            <img src="/assets/selo-organic.png" alt="Organic Coffee" />
+            <img
+              src="/assets/selo-scaa.png"
+              alt="SCAA Specialty Coffee Association of America"
+              width={512}
+              height={512}
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/assets/selo-100.png"
+              alt="Selo 100 anos Zerbinatti — desde 1897"
+              width={512}
+              height={512}
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/assets/selo-cup.png"
+              alt="Cup of Excellence — café especial premiado"
+              width={512}
+              height={512}
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/assets/selo-brasil.png"
+              alt="Café 100% Brasileiro"
+              width={512}
+              height={512}
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              src="/assets/selo-organic.png"
+              alt="Café Orgânico Certificado"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
       </div>

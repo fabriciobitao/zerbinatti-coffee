@@ -216,6 +216,7 @@ export async function getHomeProducts(): Promise<HomeProduct[]> {
   const data = await shopifyFetch<GetAllProductsResponse>({
     query: GET_ALL_PRODUCTS,
     variables: { first: 20 },
+    cache: "force-cache",
     tags: ["shopify-products"],
   });
 
@@ -233,6 +234,7 @@ export async function getProductByHandle(
   const data = await shopifyFetch<GetProductByHandleResponse>({
     query: GET_PRODUCT_BY_HANDLE,
     variables: { handle },
+    cache: "force-cache",
     tags: ["shopify-products", `shopify-product:${handle}`],
   });
 

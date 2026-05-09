@@ -95,7 +95,6 @@ export function FeatureCard({
               width={180}
               height={32}
               style={{ height: 'auto', width: 'auto', display: 'inline-block' }}
-              unoptimized
             />
             {copy.italicSuffix ? <> <em>{copy.italicSuffix}</em></> : null}
           </h3>
@@ -160,23 +159,21 @@ export function FeatureCard({
             width={600}
             height={800}
             sizes="(max-width: 900px) 80vw, 40vw"
-            unoptimized
+            priority={variant.slotKey === 'classico-250g'}
           />
           <Image
             className="pkg-seal pkg-seal--score"
             src="/assets/selo-sca-84-75.png"
-            alt={`SCA Score ${scaScore}`}
+            alt={`Certificação SCA ${scaScore} — Specialty Coffee Association`}
             width={120}
             height={120}
-            unoptimized
           />
           <Image
             className="pkg-seal pkg-seal--organic"
             src="/assets/selo-organico-fazenda.png"
-            alt="Café Orgânico da Fazenda"
+            alt="Selo Café Orgânico da Fazenda Zerbinatti"
             width={120}
             height={120}
-            unoptimized
           />
         </div>
       </div>

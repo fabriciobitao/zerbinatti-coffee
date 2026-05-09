@@ -12,7 +12,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { productSchema, breadcrumbSchema } from "@/lib/seo/schemas";
 import { AddToCartButton } from "./AddToCartButton";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));

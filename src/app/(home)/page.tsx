@@ -30,7 +30,7 @@ import { faqSchema } from '@/lib/seo/schemas';
 import { faqs } from '@/lib/data/faqs';
 import { products } from '@/lib/data/products';
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const itemListSchema = {
