@@ -11,6 +11,7 @@
 
 import { useState, type FormEvent } from 'react';
 import { useT } from '@/lib/i18n';
+import { pushLead } from '@/lib/analytics/dataLayer';
 
 export default function NewsletterForm() {
   const t = useT();
@@ -20,7 +21,12 @@ export default function NewsletterForm() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email) return;
-    // TODO: POST para /api/newsletter/subscribe (Resend ou Klaviyo).
+    // TODO: POST para /api/newsletter/subscribe (Resend audiences) +
+    // dispara email com link do PDF /downloads/guia-brewing-zerbinatti.pdf.
+    pushLead('sign_up', {
+      method: 'newsletter',
+      form_name: 'footer_newsletter',
+    });
     setSubmitted(true);
   }
 
