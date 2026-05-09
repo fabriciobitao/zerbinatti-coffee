@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { buildWhatsAppUrl } from "@/lib/config";
+import { pushLead } from "@/lib/analytics/dataLayer";
 
 type FormState = {
   name: string;
@@ -45,6 +46,12 @@ export default function B2BForm() {
       `*Mensagem:*`,
       form.message || "—",
     ].join("\n");
+    pushLead("generate_lead", {
+      method: "whatsapp",
+      form_name: "b2b_para_empresas",
+      segment: form.segment,
+      estimated_volume_kg: form.volume,
+    });
     window.open(buildWhatsAppUrl(msg), "_blank", "noopener,noreferrer");
     setSent(true);
   };

@@ -22,6 +22,7 @@ import Image from 'next/image';
 import { useCartStore } from '@/lib/cart/store';
 import type { Cart, CartLine } from '@/lib/cart/types';
 import { useT } from '@/lib/i18n/useT';
+import { pushEcommerce } from '@/lib/analytics/dataLayer';
 
 const FREE_SHIPPING_THRESHOLD = 150;
 
@@ -274,7 +275,24 @@ export default function CartDrawer() {
               className="btn btn-gold"
               aria-disabled={checkoutDisabled}
               onClick={(e) => {
-                if (checkoutDisabled) e.preventDefault();
+                if (checkoutDisabled) {
+                  e.preventDefault();
+                  return;
+                }
+                if (cart) {
+                  pushEcommerce('begin_checkout', {
+                    currency: cart.cost.subtotalAmount.currencyCode,
+                    value: subtotal,
+                    items: cart.lines.map((line) => ({
+                      item_id: line.merchandise.variantId,
+                      item_name: line.merchandise.product.title,
+                      item_brand: 'Zerbinatti',
+                      item_variant: line.merchandise.title,
+                      price: parseFloat(line.merchandise.price.amount),
+                      quantity: line.quantity,
+                    })),
+                  });
+                }
               }}
               style={{
                 pointerEvents: checkoutDisabled ? 'none' : undefined,

@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Ornament } from "@/components/ui/Ornament";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { productSchema, breadcrumbSchema } from "@/lib/seo/schemas";
+import { ViewItemTracker } from "@/components/analytics/ViewItemTracker";
 import { AddToCartButton } from "./AddToCartButton";
 
 export const revalidate = 3600;
@@ -115,6 +116,11 @@ export default async function ProductPage({
             { name: product.name, url: `/cafes/${slug}` },
           ]),
         ]}
+      />
+      <ViewItemTracker
+        itemId={product.id}
+        itemName={product.name}
+        price={product.price * 0.9}
       />
       <Header />
       <main id="main" className="bg-coffee-50">

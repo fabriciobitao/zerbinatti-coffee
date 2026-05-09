@@ -16,6 +16,7 @@ import {
   removeLineAction,
   updateLineAction,
 } from "./actions";
+import { pushEcommerce } from "@/lib/analytics/dataLayer";
 
 const CART_ID_KEY = "zrb-cart-id";
 
@@ -82,6 +83,25 @@ export const useCartStore = create<CartStore>((set, get) => ({
       const next = await addToCartAction(currentId, variantId, quantity);
       persistCartId(next.id);
       set({ cart: next, isLoading: false });
+
+      const line = next.lines.find((l) => l.merchandise.variantId === variantId);
+      if (line) {
+        const price = parseFloat(line.merchandise.price.amount);
+        pushEcommerce("add_to_cart", {
+          currency: line.merchandise.price.currencyCode,
+          value: price * quantity,
+          items: [
+            {
+              item_id: variantId,
+              item_name: line.merchandise.product.title,
+              item_brand: "Zerbinatti",
+              item_variant: line.merchandise.title,
+              price,
+              quantity,
+            },
+          ],
+        });
+      }
     } catch (err) {
       set({
         isLoading: false,
@@ -111,11 +131,31 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const cartId = get().cart?.id;
     if (!cartId) return;
 
+    const removedLine = get().cart?.lines.find((l) => l.id === lineId);
+
     set({ isLoading: true, error: null });
     try {
       const next = await removeLineAction(cartId, lineId);
       persistCartId(next.id);
       set({ cart: next, isLoading: false });
+
+      if (removedLine) {
+        const price = parseFloat(removedLine.merchandise.price.amount);
+        pushEcommerce("remove_from_cart", {
+          currency: removedLine.merchandise.price.currencyCode,
+          value: price * removedLine.quantity,
+          items: [
+            {
+              item_id: removedLine.merchandise.variantId,
+              item_name: removedLine.merchandise.product.title,
+              item_brand: "Zerbinatti",
+              item_variant: removedLine.merchandise.title,
+              price,
+              quantity: removedLine.quantity,
+            },
+          ],
+        });
+      }
     } catch (err) {
       set({
         isLoading: false,
