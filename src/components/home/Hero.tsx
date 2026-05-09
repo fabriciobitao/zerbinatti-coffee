@@ -4,24 +4,23 @@
 // O unico ilha cliente e <HeroMotion /> que ativa .reveal -> .in no mount
 // e atualiza a opacidade do scroll-indicator durante o scroll.
 
-import Image from 'next/image';
 import { T } from '@/lib/i18n';
 import { HeroMotion } from './HeroMotion';
 
 export default function Hero() {
   return (
     <section className="hero" id="hero">
-      <div className="hero-bg" id="heroBg">
-        <Image
-          src="/assets/hero-bg.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={82}
-          style={{ objectFit: 'cover', objectPosition: 'center' }}
-        />
-      </div>
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/hero-bg.webp"
+        fetchPriority="high"
+      />
+      <div
+        className="hero-bg"
+        id="heroBg"
+        style={{ backgroundImage: "url('/assets/hero-bg.webp')" }}
+      />
       <div className="hero-amber-glow" />
       <div className="hero-steam" style={{ left: '18%', bottom: '6%' }}>
         <span className="plume" />
