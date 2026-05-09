@@ -4,15 +4,15 @@ const isDev = process.env.NODE_ENV !== "production";
 
 const cspDirectives: Record<string, string[]> = {
   "default-src": ["'self'"],
+  // 'unsafe-inline' necessario pelo bootstrap inline do GTM (<Script id="gtm-init">).
+  // Migracao pra nonce em backlog — custo alto vs ganho marginal no stack atual.
   "script-src": [
     "'self'",
     "https://www.googletagmanager.com",
     "https://www.google-analytics.com",
-    "https://*.googletagmanager.com",
-    "https://*.google-analytics.com",
+    "https://ssl.google-analytics.com",
     "https://connect.facebook.net",
     "https://challenges.cloudflare.com",
-    "https://*.sentry.io",
     "https://*.ingest.sentry.io",
     isDev ? "'unsafe-eval'" : "",
     "'unsafe-inline'",
@@ -33,22 +33,20 @@ const cspDirectives: Record<string, string[]> = {
   "font-src": ["'self'", "data:", "https://fonts.gstatic.com"],
   "connect-src": [
     "'self'",
-    "https://*.myshopify.com",
+    "https://zerbinatticoffee.myshopify.com",
     "https://www.google-analytics.com",
-    "https://*.analytics.google.com",
-    "https://*.google-analytics.com",
-    "https://*.googletagmanager.com",
+    "https://region1.google-analytics.com",
+    "https://analytics.google.com",
+    "https://www.googletagmanager.com",
     "https://www.facebook.com",
     "https://api.resend.com",
     "https://challenges.cloudflare.com",
-    "https://*.sentry.io",
     "https://*.ingest.sentry.io",
     "https://*.api.sanity.io",
     "https://*.apicdn.sanity.io",
     "wss://*.api.sanity.io",
     "https://player.vimeo.com",
     "https://*.vimeocdn.com",
-    "https://*.cloudfunctions.net",
     isDev ? "ws://localhost:*" : "",
   ].filter(Boolean),
   "frame-src": [
