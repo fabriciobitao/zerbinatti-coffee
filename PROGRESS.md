@@ -1,6 +1,88 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-08 (parte 4 — custom checkout, branding, webhook, "em breve" mode)
+**Ultima atualizacao:** 2026-05-09 (SEO completo na branch `seo`)
+
+## Sessao 2026-05-09 — Revisao SEO completa (branch `seo`)
+
+Branch dedicada `seo` a partir de `main` (commit `aa09952`). 9 commits faseados, build verde em todos.
+
+### Indexacao base (Fase 1)
+- [x] `src/app/sitemap.ts` dinamico — 16 rotas com priority/changeFrequency (home 1.0, PDPs 0.9, fazenda/processo 0.8, revista 0.7, legais 0.3)
+- [x] `src/app/robots.ts` controlado por `process.env.SEO_INDEX` — flip de 1 env var ativa indexacao em prod
+- [x] `public/robots.txt` deletado (substituido pela rota dinamica)
+- [x] Layout root: title template `%s | Zerbinatti Coffee`, canonical `/`, robots dinamico, applicationName/authors/creator
+- [x] Cada PDP `/cafes/[slug]`: generateMetadata com canonical/openGraph (type=website + product image)/twitter card
+- [x] Cada artigo `/revista/[slug]`: openGraph type=article (publishedTime, authors, section)
+- [x] Demais rotas (fazenda, revista, para-empresas, processo, termos, privacidade, entregas): metadata canonical+og+twitter dedicado
+
+### Structured data JSON-LD (Fase 2)
+- [x] `src/components/seo/JsonLd.tsx` — helper safe-by-default (escape `</script>`)
+- [x] `src/lib/seo/schemas.ts` — factories Organization, WebSite, Product (offers BRL + aggregateRating + review[] + additionalProperty origem/safra/SCA), Article, BreadcrumbList, FAQPage
+- [x] `src/lib/data/faqs.ts` — 8 perguntas curadas (especial, armazenamento, moagem, assinatura, frete, torra, comparativo Classico/Reserva/Microlote, certificacao SCA)
+- [x] Aplicado: Organization+WebSite no layout root; Product+Breadcrumb em 3 PDPs; Article+Breadcrumb em 3 artigos; FAQPage+ItemList na home; BreadcrumbList+FAQPage(4 perguntas) em /processo
+
+### Content / H1 / RelatedProductCTA (Fase 3)
+- [x] hero.title PT/EN/ES: adicionado "Café especial Zerbinatti" no `<span class="since">` sem alterar visual
+- [x] /fazenda H1: "Fazenda Zerbinatti" + subtitle "Café especial Serra do Cabral · desde 1897" (CSS .farm-hero-subtitle)
+- [x] /processo: virou pagina indexavel real (removido redirect /processo->/#processo); cada step ganhou paragrafo expandido (~80 palavras); 4 FAQs sobre processo + FAQPage schema; total ~700 palavras
+- [x] `src/components/revista/RelatedProductCTA.tsx`: card com badge/preco PIX/CTA "Ver detalhes" — terroir->microlote, torra->classico, historia->reserva
+- [x] Fix dictionary: `sub.priceMonthOff` EN/ES "15% off" -> "10% off" (consistencia PT)
+
+### Performance / midia (Fase 4)
+- [x] `scripts/optimize-images.mjs` (sharp) — converte JPG/PNG -> webp+avif, recomprime webp grandes em q78. Auto-deleta variants maiores que original
+- [x] Imagens: hero-bg 146KB->44KB webp/32KB avif (-78%); rotulo-500g 415KB->46KB/36KB (-91%); wordmarks 76-122KB->22-56KB; og-share 83KB->33KB/24KB
+- [x] Hero LCP: backgroundImage CSS -> `<Image priority fill sizes="100vw">`; selos com width/height + alt descritivo + lazy
+- [x] `next.config.ts`: images.formats avif+webp, deviceSizes 360/414/640/.../1920, imageSizes 16-384
+- [x] FeatureCard: removido `unoptimized` em wordmark/pacote/selos; alt descritivo (Certificacao SCA, Selo Cafe Organico); priority no pacote do Classico (above-the-fold)
+- [x] Galeria: width/height em todas 7 imagens (previne CLS)
+- [x] Press Start 2P removida (importada mas nunca usada via `--pixel` em CSS)
+- [x] **ISR ativado**: home `/` e PDPs `/cafes/[slug]` agora SSG com revalidate 3600s (substituindo `force-dynamic`); shopifyFetch nas leituras com cache=force-cache + tags ja existentes; webhook /api/revalidate continua disparando revalidateTag em product update
+- [x] Trade-off: stale ate webhook chegar (~segundos). Bot do Google nao paga SSR a cada crawl.
+
+### Acessibilidade (Fase 5)
+- [x] Skip-to-content link em layout.tsx (focus-only) + estilos em globals.css
+- [x] `<main id="main">` em todas paginas (home, fazenda, PDPs, revista, /processo via StaticPage, /para-empresas, /termos, /privacidade, /entregas)
+- [x] `scripts/audit-alt.mjs` — detecta alts vazios/genericos. Todos os 30+ `<img>`/`<Image>` passaram
+
+### Analytics / GTM (Fase 5.5)
+- [x] `src/components/analytics/GtmScripts.tsx` — `<Script next/script afterInteractive>` no `<head>` + `<noscript>` iframe pos-`<body>`; controlado por `NEXT_PUBLIC_GTM_ID`
+- [x] `.env.example`: `NEXT_PUBLIC_GTM_ID=GTM-PVDQBMTB` documentado
+- [x] `src/lib/analytics/dataLayer.ts` — pushEvent, pushEcommerce (limpa ecommerce object antes pra evitar leak), pushLead. Tipos GA4Item compativeis com GA4 Enhanced Ecommerce
+- [x] `src/components/analytics/ViewItemTracker.tsx` — client island dispara view_item no mount da PDP
+- [x] Eventos plugados:
+  - view_item: mount /cafes/[slug] (preco PIX -10%)
+  - add_to_cart: Zustand store addItem apos mutation Shopify
+  - remove_from_cart: Zustand store removeLine
+  - begin_checkout: CartDrawer onClick do botao "Finalizar"
+  - generate_lead: B2BForm submit (method=whatsapp + segment + volume)
+  - sign_up: NewsletterForm submit (method=newsletter)
+- [x] CSP em next.config.ts ja cobre googletagmanager + google-analytics + connect.facebook.net
+
+### Lead magnet (Fase 6)
+- [x] `public/downloads/guia-brewing-zerbinatti.pdf` (162KB) — gerado via `scripts/generate-guia-pdf.mjs` (puppeteer-core + Chrome local) a partir de `guia-brewing-zerbinatti.html`
+- [x] HTML do guia: layout A4 Cormorant+Inter+gold, fundamentos (frescor/moagem/agua), tabela de moagem por metodo, 4 receitas passo-a-passo, top 5 erros, recomendacao por SKU
+- [x] Newsletter copy PT/EN/ES reescrita prometendo o PDF como lead magnet
+- [x] NewsletterForm dispara `sign_up` event
+
+### Validacao (Fase 7)
+- [x] `scripts/seo-snapshot.mjs` — puppeteer-core captura title/description/canonical/og:*/twitter:*/JSON-LD/H1/robots de cada rota; salva em `docs/seo-snapshots/<timestamp>.json`
+- [x] `public/novo-layout/para-empresas.html`: robots `noindex,nofollow` -> `index,follow` (HTML estatico via proxy.ts rewrite; quando migrar pra React em Wave D, adicionar JSON-LD)
+- [x] `docs/seo-checklist.md`: gate de release com lista do que foi feito + pendencias pos-deploy
+
+### Como ATIVAR a indexacao em prod
+1. Setar `SEO_INDEX=true` no Cloud Run env vars
+2. Setar `NEXT_PUBLIC_GTM_ID=GTM-PVDQBMTB` no Cloud Run env vars
+3. Merge `seo` -> `main` (apos review do user)
+4. Disparar build + deploy (`gcloud builds submit --config=cloudbuild.yaml` + `gcloud run deploy`)
+5. Validar:
+   - `curl https://zerbinatticoffee.com/robots.txt` -> Allow `/` + Sitemap + Host
+   - `curl https://zerbinatticoffee.com/sitemap.xml` -> 16 URLs XML
+   - Lighthouse mobile: Performance >85, SEO 100, Accessibility >95
+   - https://search.google.com/test/rich-results em PDP/artigo/home
+6. Google Search Console: adicionar propriedade + submeter sitemap; idem Bing
+7. Quando user tiver GA4 Measurement ID e Google Ads Conversion ID, usar skill `gtm-control` pra configurar tags do container `GTM-PVDQBMTB` via API
+
+---
 
 ## Sessao 2026-05-08 (parte 4) — Checkout custom + branding + cache fix + Em Breve mode
 
