@@ -81,7 +81,7 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value:
-      "camera=(), microphone=(), geolocation=(), payment=(self 'https://*.myshopify.com'), interest-cohort=()",
+      'camera=(), microphone=(), geolocation=(), payment=(self "https://checkout.zerbinatticoffee.com" "https://zerbinatticoffee.myshopify.com"), interest-cohort=()',
   },
   { key: "X-DNS-Prefetch-Control", value: "on" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },

@@ -10,12 +10,6 @@ import { HeroMotion } from './HeroMotion';
 export default function Hero() {
   return (
     <section className="hero" id="hero">
-      <link
-        rel="preload"
-        as="image"
-        href="/assets/hero-bg.webp"
-        fetchPriority="high"
-      />
       <div
         className="hero-bg"
         id="heroBg"
