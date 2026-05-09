@@ -1,6 +1,29 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-09 (parte 3) — Hardening implementado em branch `security`, build verde, pronto pra merge apos user setar keys em Cloud Run.
+**Ultima atualizacao:** 2026-05-09 (parte 4) — Hardening em PROD. Revision Cloud Run `zerbinatti-coffee-00024-tlh` 100% trafego. Turnstile + double opt-in + CSP sem wildcards validados via curl.
+
+## Sessao 2026-05-09 (parte 4) — Merge security -> main + deploy em PROD
+
+- [x] Merge `security` -> `main` (commit merge `3e49737`), 4 commits novos.
+- [x] Cloud Build `a35dc062-9121-4cda-a909-9cf366a91b45` SUCCESS em 2m11s. Imagem: `southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest`.
+- [x] Cloud Run revision **`zerbinatti-coffee-00024-tlh`** com 100% trafego. Env vars novas: `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `NEWSLETTER_SECRET` (32 chars random), `B2B_NOTIFY_EMAILS`, `NEXT_PUBLIC_SITE_URL`.
+- [x] Firebase Hosting redeploy pra invalidar cache CDN (estava servindo CSP antigo).
+- [x] Validacao curl em prod:
+  - `POST /api/b2b-form` sem turnstileToken -> `{"error":"turnstile_failed","reason":"missing_token"}` ✓
+  - `POST /api/newsletter/subscribe` sem turnstileToken -> idem ✓
+  - CSP em `zerbinatticoffee.com` sem wildcards `*.googletagmanager.com` / `*.google-analytics.com` ✓
+  - `connect-src` com `zerbinatticoffee.myshopify.com` exato (sem `*.myshopify.com`) ✓
+  - GET `/`, `/cafes/classico`, `/para-empresas`, `/fazenda`, `/processo`, `/revista`: todos 200 ✓
+- [x] Service account ainda eh default Compute (`259156177034-compute@`). Migracao pra SA dedicada pendente — rodar `bash scripts/security-cloudrun-bootstrap.sh` quando quiser (ai movimenta tambem secrets pro Secret Manager).
+
+### Pendencias da sessao
+- [ ] Rodar `scripts/security-cloudrun-bootstrap.sh` pra SA dedicada + secrets em Secret Manager (opcional, hardening adicional).
+- [ ] Tag Assistant validar GTM em prod com novo CSP (deve continuar funcionando — testes via curl OK).
+- [ ] Smoke E2E manual via UI: enviar form B2B real com Turnstile passando + clicar link de confirmacao da newsletter.
+
+---
+
+## Sessao 2026-05-09 (parte 3) — Hardening de seguranca implementado (branch `security`)
 
 ## Sessao 2026-05-09 (parte 3) — Hardening de seguranca implementado (branch `security`)
 
