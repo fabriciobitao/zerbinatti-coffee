@@ -102,28 +102,11 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
+    // Redirect de migracao de dominio primario (zerbinatticoffee.com -> zerbinatti.coffee)
+    // vive em src/middleware.ts. `has: { type: 'host' }` nao funciona aqui porque o
+    // Cloud Run roda atras de Fastly, que reescreve o Host header pro hostname do
+    // origin server; o dominio original chega no app via `x-forwarded-host`.
     return [
-      // Migracao de dominio primario: zerbinatticoffee.com -> zerbinatti.coffee.
-      // 301 preserva link equity; path + query sao mantidos automaticamente.
-      // NAO captura `checkout.zerbinatticoffee.com` (Shopify checkout independente).
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "zerbinatticoffee.com" }],
-        destination: "https://zerbinatti.coffee/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.zerbinatticoffee.com" }],
-        destination: "https://zerbinatti.coffee/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.zerbinatti.coffee" }],
-        destination: "https://zerbinatti.coffee/:path*",
-        permanent: true,
-      },
       // Links externos antigos (/cafes, /processo, /assinatura, /historia) viram
       // ancoras na home unica. Step 11/13. NB: source eh exact match — nao captura
       // /cafes/[slug] (PDPs, rota dinamica real).
