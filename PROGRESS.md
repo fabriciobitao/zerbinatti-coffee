@@ -1,6 +1,58 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-08 (parte 3 — assinatura redesenhada, precos proporcionais, imagem fazenda trocada, deploy de producao publicado)
+**Ultima atualizacao:** 2026-05-08 (parte 4 — custom checkout, branding, webhook, "em breve" mode)
+
+## Sessao 2026-05-08 (parte 4) — Checkout custom + branding + cache fix + Em Breve mode
+
+### Custom checkout URL (`checkout.zerbinatticoffee.com`)
+- [x] Conectado domain no Shopify Admin (DNS Cloudflare-only CNAME -> `shops.myshopify.com`)
+- [x] Setado como **primary domain** na loja → `cartCreate` agora retorna `https://checkout.zerbinatticoffee.com/checkouts/cn/...`
+- [x] Cliente nunca mais ve `myshopify.com` — fluxo aparenta ser tudo zerbinatticoffee.com
+- [x] Redirect via `theme.liquid` — quando alguem entra na raiz `checkout.zerbinatticoffee.com/`, JS+meta refresh manda pra `https://zerbinatticoffee.com` (esconde vitrine padrao Shopify)
+
+### Checkout branding (Zerbinatti gold + dark)
+- [x] Logo: banner gerado em `public/assets/zerbinatti-checkout-banner-dark.png` (2400x240, `logo-white.png` cream centralizado em fundo `#1F1611`) — Logo position "Full width" no Checkout Editor cobre o header inteiro com o banner escuro
+- [x] Cores aplicadas no Shopify Checkout Editor: Accent/Buttons `#C9A961`, Order Summary bg `#F4ECD8`, Main bg `#FFFFFF`
+- [x] Fonts: Cormorant (headings) + Inter (body), via Google Fonts no editor
+- [x] Resultado: botao "Pay now" dourado, painel cream sutil, link Privacy policy gold
+
+### Webhook de revalidacao Shopify -> Next.js
+- [x] Rota `src/app/api/revalidate/route.ts` (HMAC sha256, env `SHOPIFY_WEBHOOK_SECRET`)
+- [x] Webhook configurado no Shopify Admin: Event `Product update` -> `https://zerbinatticoffee.com/api/revalidate` -> 200 quando HMAC valido, chama `revalidateTag` + `revalidatePath`
+- [x] Secret salvo como env var no Cloud Run via `--update-env-vars`
+
+### Cache fix (problema dos precos nao refletindo na home)
+- [x] **Root cause**: `priceOverrideBRL` HARDCODED em `src/lib/editorial/classico.ts` (49,90 / 79,90) sobrescrevia silenciosamente o preco da Storefront API. NAO era cache.
+- [x] Lessons learned: gastei 1h investigando ISR/CDN/webhook antes de descobrir o override. Lesson registrada em `lessons.md`: **grep por hardcodes do valor antigo no codigo ANTES de assumir cache issue**.
+- [x] Removido `priceOverrideBRL` (commit `03eb7f1`); home agora puxa preco do Shopify ao vivo
+- [x] Cache strategy: `cache: 'no-store'` no `shopifyFetch` + `dynamic: 'force-dynamic'` na home/PDP. Trade-off: 1 chamada Storefront API por render. Free tier aguenta.
+- [x] Quando virar gargalo, otimizar pra ISR + `'use cache'` + cacheTag (Next.js 16 nova API)
+
+### "Em breve" mode (commit `ac37356`)
+- [x] **Estado atual**: loja em modo coming-soon visualmente, mas **infra de venda 100% funcional** (cart Shopify, checkout custom, webhook ativo)
+- [x] AddToCartButton (home + PDP): badge "Em breve" nao-interativo no lugar do botao
+- [x] Subscription: CTA principal substituido por **selo dourado pulsante** "● EM BREVE" (mono caps, border gold, animacao 2s)
+- [x] SubscriptionPlanCard: cards sem link, sem preco, sem clique — so info (titulo, freq, descricao, badge)
+
+### 🔓 Como REATIVAR a venda (quando estoque + tudo pronto)
+1. `git revert ac37356 --no-edit && git push origin main`
+2. Disparar build + deploy (gcloud builds submit + gcloud run deploy + firebase deploy --only hosting)
+3. Validar via `node scripts/flow-checkout.mjs https://zerbinatticoffee.com/`
+
+### Planilhas de custos (em `docs/`)
+- [x] `custos-plataforma-2026-05-08.xlsx` — 5 abas: Shopify (Basic/Grow/Advanced/Plus), Pagamento BR, Infra GCP+Firebase, Cenario Total com break-even Basic vs Grow vs Advanced, Sources
+- [x] `frete-estimativas-2026-05-08.xlsx` — 35 destinos a partir de 37570-000, PAC/Jadlog/Sedex pra 250g e 500g, sugestao de zonas flat rate por regiao
+- [x] Ambos no Drive: pasta "Zerbinatti Coffee" (xlsx originais) + Google Sheet v2 com Grow no root do meu Drive (link: `1syS-Tl-Kb0jsA5jI4Zr_oOBI2kcwBdukoBfclWjHeIg`)
+
+### Pendencias (ordem de impacto)
+- [ ] **PIX + Boleto** no Shopify (hoje so Cartao + PayPal — critico no BR)
+- [ ] **Frete real** via Melhor Envio + Gadol app (precisa CCS — $20/mes ou plano anual)
+- [ ] Subir versao do Online Store sales channel pra esconder vitrine padrao Shopify de vez (alternativa ao redirect via theme)
+- [ ] Wave D: migrar `/para-empresas` HTML estatico pra React
+- [ ] Trocar `robots: noindex` por `index, follow` quando lancar oficial
+- [ ] Otimizar cache: voltar pra ISR + webhook quando descobrir a sintaxe certa do Next.js 16 (`'use cache'` + `cacheTag` + `revalidateTag(tag, profile)`)
+
+---
 
 ## Sessao 2026-05-08 (parte 3) — Bloco Assinatura + reorder home + imagem fazenda + deploy
 
