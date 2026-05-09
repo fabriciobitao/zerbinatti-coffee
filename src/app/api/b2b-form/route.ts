@@ -1,11 +1,22 @@
 import { NextResponse } from "next/server";
 import { Firestore } from "@google-cloud/firestore";
 import { Resend } from "resend";
+import { verifyTurnstile } from "@/lib/turnstile";
 
 export const runtime = "nodejs";
 
-const NOTIFY_TO = ["fabricio.fazer@gmail.com", "fabiomenezes@gmail.com"];
+const DEFAULT_NOTIFY_TO = ["fabricio.fazer@gmail.com", "fabiomenezes@gmail.com"];
 const FROM = "Zerbinatti B2B <noreply@zerbinatti.coffee>";
+
+function getNotifyTo(): string[] {
+  const env = process.env.B2B_NOTIFY_EMAILS;
+  if (!env) return DEFAULT_NOTIFY_TO;
+  const list = env
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s));
+  return list.length ? list : DEFAULT_NOTIFY_TO;
+}
 
 let _firestore: Firestore | null = null;
 function getFirestore(): Firestore {
@@ -38,6 +49,7 @@ type Body = {
   volume?: string;
   mensagem?: string;
   honeypot?: string;
+  turnstileToken?: string;
 };
 
 function sanitize(s: unknown, max = 2000): string {
@@ -103,6 +115,18 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  const ipForVerify =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+    req.headers.get("x-real-ip") ||
+    undefined;
+  const turnstile = await verifyTurnstile(body.turnstileToken, ipForVerify);
+  if (!turnstile.ok) {
+    return NextResponse.json(
+      { error: "turnstile_failed", reason: turnstile.reason },
+      { status: 403 },
+    );
+  }
+
   const cnpjDigits = digitsOnly(sanitize(body.cnpj, 30));
   const phoneDigits = digitsOnly(sanitize(body.whatsapp, 30));
   const data = {
@@ -131,10 +155,7 @@ export async function POST(req: Request) {
     );
   }
 
-  const ip =
-    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
-    req.headers.get("x-real-ip") ||
-    "";
+  const ip = ipForVerify || "";
   const userAgent = req.headers.get("user-agent") || "";
 
   const record = {
@@ -144,6 +165,7 @@ export async function POST(req: Request) {
     createdAt: new Date(),
   };
 
+  const errorId = crypto.randomUUID();
   let docId = "";
   try {
     const doc = await getFirestore().collection("b2b_submissions").add(record);
@@ -151,9 +173,15 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error(
       "[b2b-form] firestore error",
-      err instanceof Error ? `${err.name}: ${err.message}\n${err.stack}` : err,
+      JSON.stringify({
+        errorId,
+        message: err instanceof Error ? err.message : String(err),
+      }),
     );
-    return NextResponse.json({ error: "storage_failed" }, { status: 500 });
+    return NextResponse.json(
+      { error: "storage_failed", errorId },
+      { status: 500 },
+    );
   }
 
   try {
@@ -182,15 +210,26 @@ export async function POST(req: Request) {
 
     await getResend().emails.send({
       from: FROM,
-      to: NOTIFY_TO,
+      to: getNotifyTo(),
       replyTo: data.email,
       subject,
       html,
       text,
     });
   } catch (err) {
-    console.error("[b2b-form] resend error", err);
-    return NextResponse.json({ ok: true, warning: "email_failed", id: docId });
+    console.error(
+      "[b2b-form] resend error",
+      JSON.stringify({
+        errorId,
+        message: err instanceof Error ? err.message : String(err),
+      }),
+    );
+    return NextResponse.json({
+      ok: true,
+      warning: "email_failed",
+      id: docId,
+      errorId,
+    });
   }
 
   return NextResponse.json({ ok: true, id: docId });

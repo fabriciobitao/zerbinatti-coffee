@@ -2,21 +2,33 @@
 
 // NewsletterForm — Client island. Submit POST -> /api/newsletter/subscribe
 // que persiste o email no Firestore (collection: newsletter_optin).
-// Otimismo: troca o botao pra "Inscrito ✓" assim que a request resolve OK.
-// Honeypot anti-bot via input hidden text.
+// Double opt-in: status=pending -> email Resend com link HMAC -> /api/newsletter/confirm -> status=active.
+// Anti-bot: honeypot + Cloudflare Turnstile invisible.
 
-import { useContext, useState, type FormEvent } from 'react';
+import { useContext, useEffect, useState, type FormEvent } from 'react';
 import { useT, LocaleContext } from '@/lib/i18n';
 import { pushLead } from '@/lib/analytics/dataLayer';
+import TurnstileWidget from '@/components/security/TurnstileWidget';
 
 export default function NewsletterForm() {
   const t = useT();
   const { locale } = useContext(LocaleContext);
   const [submitted, setSubmitted] = useState(false);
+  const [pending, setPending] = useState(false);
   const [email, setEmail] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const flag = params.get('subscribed');
+    if (flag === 'ok' || flag === 'already') {
+      setSubmitted(true);
+    }
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,14 +44,18 @@ export default function NewsletterForm() {
           locale,
           source: 'footer',
           honeypot,
+          turnstileToken,
         }),
       });
       const json = await res.json().catch(() => ({}));
       if (!res.ok) {
+        const code = json?.error;
         setError(
-          json?.error === 'invalid_email'
+          code === 'invalid_email'
             ? t('footer.errInvalidEmail')
-            : t('footer.errGeneric'),
+            : code === 'turnstile_failed'
+              ? t('footer.errCaptcha')
+              : t('footer.errGeneric'),
         );
         setLoading(false);
         return;
@@ -48,7 +64,11 @@ export default function NewsletterForm() {
         method: 'newsletter',
         form_name: 'footer_newsletter',
       });
-      setSubmitted(true);
+      if (json?.pending) {
+        setPending(true);
+      } else {
+        setSubmitted(true);
+      }
     } catch {
       setError(t('footer.errGeneric'));
       setLoading(false);
@@ -64,7 +84,7 @@ export default function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder={t('footer.emailPlaceholder')}
         aria-label={t('footer.newsletter')}
-        disabled={submitted || loading}
+        disabled={submitted || pending || loading}
         aria-invalid={error ? true : undefined}
       />
       {/* honeypot anti-bot — nao mostrar no UI */}
@@ -85,12 +105,15 @@ export default function NewsletterForm() {
           pointerEvents: 'none',
         }}
       />
-      <button type="submit" disabled={submitted || loading}>
+      <TurnstileWidget onToken={setTurnstileToken} />
+      <button type="submit" disabled={submitted || pending || loading}>
         {submitted
           ? t('footer.subscribed')
-          : loading
-            ? '…'
-            : t('footer.subscribe')}
+          : pending
+            ? t('footer.pendingConfirm')
+            : loading
+              ? '…'
+              : t('footer.subscribe')}
       </button>
       {error ? (
         <div

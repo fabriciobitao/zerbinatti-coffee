@@ -9,6 +9,8 @@ steps:
       - --build-arg
       - NEXT_PUBLIC_GTM_ID=${_GTM_ID}
       - --build-arg
+      - NEXT_PUBLIC_TURNSTILE_SITE_KEY=${_TURNSTILE_SITE_KEY}
+      - --build-arg
       - SEO_INDEX=${_SEO_INDEX}
       - --no-cache
       - -t
@@ -25,4 +27,5 @@ substitutions:
   _SHOPIFY_DOMAIN: zerbinatticoffee.myshopify.com
   _SHOPIFY_TOKEN: 5f110b3e4f23e4e4e45d992fefb5a833
   _GTM_ID: GTM-PVDQBMTB
+  _TURNSTILE_SITE_KEY: 0x4AAAAAADMDeKbvCnEk0JVY
   _SEO_INDEX: "true"
