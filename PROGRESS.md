@@ -14,10 +14,15 @@
   - CSP em `zerbinatticoffee.com` sem wildcards `*.googletagmanager.com` / `*.google-analytics.com` ✓
   - `connect-src` com `zerbinatticoffee.myshopify.com` exato (sem `*.myshopify.com`) ✓
   - GET `/`, `/cafes/classico`, `/para-empresas`, `/fazenda`, `/processo`, `/revista`: todos 200 ✓
-- [x] Service account ainda eh default Compute (`259156177034-compute@`). Migracao pra SA dedicada pendente — rodar `bash scripts/security-cloudrun-bootstrap.sh` quando quiser (ai movimenta tambem secrets pro Secret Manager).
+- [x] Bootstrap rodado: revision **`zerbinatti-coffee-00025-k97`** com SA dedicada `zerbinatti-coffee-runtime@zerbinatti-cafe.iam.gserviceaccount.com` (roles minimas: `datastore.user` + `secretmanager.secretAccessor`).
+- [x] Secrets migrados de env var em texto claro pra Secret Manager via `secretKeyRef`:
+  - `shopify-webhook-secret` (versao 1)
+  - `resend-api-key` (versao 1)
+  - `turnstile-secret-key` (versao 1)
+  - `newsletter-secret` (versao 1)
+- [x] Validacao: `gcloud run services describe ... --format='value(spec.template.spec.serviceAccountName)'` retorna SA dedicada; env vars sensiveis aparecem como `secretKeyRef` (nao texto claro).
 
 ### Pendencias da sessao
-- [ ] Rodar `scripts/security-cloudrun-bootstrap.sh` pra SA dedicada + secrets em Secret Manager (opcional, hardening adicional).
 - [ ] Tag Assistant validar GTM em prod com novo CSP (deve continuar funcionando — testes via curl OK).
 - [ ] Smoke E2E manual via UI: enviar form B2B real com Turnstile passando + clicar link de confirmacao da newsletter.
 
