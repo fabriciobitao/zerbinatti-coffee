@@ -21,15 +21,40 @@ function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && (LOCALES as string[]).includes(value);
 }
 
+// Mapeia navigator.language (ex: "en-US", "es-MX", "pt-BR") pro locale suportado.
+// Se browser nao bater com nenhum, retorna null (mantem DEFAULT_LOCALE).
+function detectBrowserLocale(): Locale | null {
+  if (typeof navigator === 'undefined') return null;
+  const candidates = [
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+    navigator.language,
+  ].filter(Boolean);
+  for (const tag of candidates) {
+    const prefix = tag.toLowerCase().split('-')[0];
+    if (prefix === 'en') return 'en';
+    if (prefix === 'es') return 'es';
+    if (prefix === 'pt') return 'pt';
+  }
+  return null;
+}
+
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
 
   // Hidrata do localStorage apos mount (evita mismatch SSR/CSR).
+  // Se nao houver preferencia salva, detecta via navigator.language
+  // (visitante US -> en, MX/ES -> es, demais -> pt). User ainda pode trocar
+  // manualmente via lang-switch — escolha persiste em localStorage.
   useEffect(() => {
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (isLocale(stored) && stored !== locale) {
-        setLocaleState(stored);
+      if (isLocale(stored)) {
+        if (stored !== locale) setLocaleState(stored);
+        return;
+      }
+      const detected = detectBrowserLocale();
+      if (detected && detected !== locale) {
+        setLocaleState(detected);
       }
     } catch {
       // localStorage indisponivel (SSR, modo privado, etc) — mantem default.

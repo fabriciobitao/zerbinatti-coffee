@@ -6,6 +6,7 @@
 
 import { T } from '@/lib/i18n';
 import { HeroMotion } from './HeroMotion';
+import { HeroInstagramButton } from '@/components/InstagramButton';
 
 export default function Hero() {
   return (
@@ -100,6 +101,10 @@ export default function Hero() {
               decoding="async"
             />
           </div>
+
+          {/* Mobile-only: Instagram migrou do header pro hero. Em desktop o
+              header ja exibe o IG; este link fica oculto via CSS. */}
+          <HeroInstagramButton />
         </div>
       </div>
 

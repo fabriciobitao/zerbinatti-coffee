@@ -29,6 +29,9 @@ const HEADER_STYLE: CSSProperties = {
 // (border gold, glow radial). Hover faz brilhar + escalar. Dimensoes batem
 // com .icon-btn do novo-layout.css (34px desktop / 44px mobile) pra alinhar
 // visualmente com os outros botoes do header.
+// Em mobile (≤640px) ele e ocultado via CSS (.header-instagram-btn{display:none})
+// porque a vaga e dada pra bandeira EN (acesso rapido a versao em ingles).
+// O Instagram aparece em vez disso dentro do Hero via <HeroInstagramButton/>.
 export function HeaderInstagramButton() {
   return (
     <a
@@ -37,10 +40,29 @@ export function HeaderInstagramButton() {
       rel="noopener noreferrer"
       aria-label="Zerbinatti no Instagram"
       title="Siga no Instagram"
-      className="inline-grid place-items-center transition-all duration-300 hover:scale-110 hover:[box-shadow:0_0_0_1px_rgba(252,233,168,.5)_inset,_0_0_22px_rgba(240,215,123,.7)] h-[44px] w-[44px] lg:h-[34px] lg:w-[34px]"
+      className="header-instagram-btn inline-grid place-items-center transition-all duration-300 hover:scale-110 hover:[box-shadow:0_0_0_1px_rgba(252,233,168,.5)_inset,_0_0_22px_rgba(240,215,123,.7)] h-[44px] w-[44px] lg:h-[34px] lg:w-[34px]"
       style={HEADER_STYLE}
     >
       <Icon size={16} />
+    </a>
+  );
+}
+
+// Variante para o Hero — visivel apenas em mobile (≤640px) via CSS.
+// Posicionado discretamente apos os selos como um "+1 selo" circular.
+// Reusa HEADER_STYLE pro mesmo glow/border do botao do header desktop.
+export function HeroInstagramButton() {
+  return (
+    <a
+      href={INSTAGRAM_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Zerbinatti no Instagram"
+      title="Siga no Instagram"
+      className="hero-instagram-mobile"
+      style={HEADER_STYLE}
+    >
+      <Icon size={20} />
     </a>
   );
 }
