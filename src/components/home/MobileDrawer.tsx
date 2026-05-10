@@ -21,6 +21,7 @@
 
 import { useCallback, useContext, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { LocaleContext } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
@@ -79,6 +80,9 @@ type Props = {
 export function MobileDrawer({ open, onClose }: Props) {
   const { locale, setLocale } = useContext(LocaleContext);
   const t = useT();
+  const pathname = usePathname() ?? '/';
+  const homePrefix = pathname.startsWith('/en') ? '/en' : '';
+  const isOnEn = pathname.startsWith('/en');
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -167,19 +171,19 @@ export function MobileDrawer({ open, onClose }: Props) {
           </svg>
         </button>
         <nav aria-label="Navegação móvel">
-          <a href="/#cafes" onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#cafes`} onClick={handleLinkClick}>
             {t('nav.cafes')}
           </a>
-          <a href="/#processo" onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#processo`} onClick={handleLinkClick}>
             {t('nav.processo')}
           </a>
-          <a href="/#assinatura" onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#assinatura`} onClick={handleLinkClick}>
             {t('nav.assinatura')}
           </a>
           <Link href="/para-empresas" onClick={handleLinkClick}>
             {t('nav.empresas')}
           </Link>
-          <a href="/#historia" onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#historia`} onClick={handleLinkClick}>
             {t('nav.historia')}
           </a>
         </nav>

@@ -1,14 +1,20 @@
-// HomeFooter — Server Component. Reproduz o <footer class="footer"> do
+// HomeFooter — Reproduz o <footer class="footer"> do
 // public/novo-layout/index.html: 4 colunas (brand, loja, sobre, newsletter)
 // + linha inferior com copyright, links legais e badge da Gruta.
-// O newsletter e uma ilha cliente (<NewsletterForm />).
+// Client Component porque usa usePathname pra prefixar ancoras com /en
+// quando montado na rota /en. NewsletterForm continua sendo ilha cliente.
+
+'use client';
 
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { T } from '@/lib/i18n';
 import NewsletterForm from './NewsletterForm';
 import { FooterInstagramLink } from '@/components/InstagramButton';
 
 export default function HomeFooter() {
+  const pathname = usePathname() ?? '/';
+  const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -38,12 +44,12 @@ export default function HomeFooter() {
                 </a>
               </li>
               <li>
-                <a href="/#assinatura">
+                <a href={`${homePrefix}/#assinatura`}>
                   <T k="footer.subs" as="span" />
                 </a>
               </li>
               <li>
-                <a href="/#shop">
+                <a href={`${homePrefix}/#shop`}>
                   <T k="footer.quickBuy" as="span" />
                 </a>
               </li>
@@ -60,12 +66,12 @@ export default function HomeFooter() {
             <T k="footer.about" as="h4" />
             <ul>
               <li>
-                <a href="/#historia">
+                <a href={`${homePrefix}/#historia`}>
                   <T k="footer.story" as="span" />
                 </a>
               </li>
               <li>
-                <a href="/#processo">
+                <a href={`${homePrefix}/#processo`}>
                   <T k="nav.processo" as="span" />
                 </a>
               </li>

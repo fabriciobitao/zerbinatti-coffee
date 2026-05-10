@@ -2,6 +2,7 @@
 
 // Provider de locale client-side. SSR sempre renderiza em pt; hidrata do localStorage no mount.
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { DEFAULT_LOCALE, LOCALES, type Locale } from './dictionary';
 
 type LocaleContextValue = {
@@ -38,14 +39,35 @@ function detectBrowserLocale(): Locale | null {
   return null;
 }
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(DEFAULT_LOCALE);
+type LocaleProviderProps = {
+  children: React.ReactNode;
+  // Quando definido, o provider trava o locale inicial nesse valor
+  // (sem auto-detect, sem leitura de localStorage). Usado em rotas
+  // dedicadas a um idioma (ex: /en) pra garantir que SSR e cliente
+  // rendam em ingles independente da preferencia salva do visitante.
+  initialLocale?: Locale;
+  // Quando false, mudancas via setLocale NAO persistem em localStorage.
+  // Default em rotas locale-fixed pra nao sobrescrever a preferencia
+  // que o user escolheu na home canonica.
+  persistent?: boolean;
+};
+
+export function LocaleProvider({
+  children,
+  initialLocale,
+  persistent = true,
+}: LocaleProviderProps) {
+  const [locale, setLocaleState] = useState<Locale>(initialLocale ?? DEFAULT_LOCALE);
+  const isLocaleFixed = initialLocale !== undefined;
+  const pathname = usePathname() ?? '/';
 
   // Hidrata do localStorage apos mount (evita mismatch SSR/CSR).
   // Se nao houver preferencia salva, detecta via navigator.language
   // (visitante US -> en, MX/ES -> es, demais -> pt). User ainda pode trocar
   // manualmente via lang-switch — escolha persiste em localStorage.
+  // Se initialLocale foi passado (rota /en por ex), pula tudo isso.
   useEffect(() => {
+    if (isLocaleFixed) return;
     try {
       const stored = window.localStorage.getItem(STORAGE_KEY);
       if (isLocale(stored)) {
@@ -63,20 +85,29 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   // Sincroniza <html lang> a cada troca.
+  // Quando ha provider aninhado (/en route com initialLocale), o provider
+  // externo do root layout nao deve atualizar o lang — senao a ordem de
+  // useEffect (child-first) faz o externo sobrescrever o interno. Solucao:
+  // o externo (sem initialLocale) skipa quando o pathname indica rota
+  // locale-fixed conhecida (/en).
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = HTML_LANG_MAP[locale];
-    }
-  }, [locale]);
+    if (typeof document === 'undefined') return;
+    if (!isLocaleFixed && pathname.startsWith('/en')) return;
+    document.documentElement.lang = HTML_LANG_MAP[locale];
+  }, [locale, pathname, isLocaleFixed]);
 
-  const setLocale = useCallback((next: Locale) => {
-    setLocaleState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // Falha silenciosa — UI ja atualizou em memoria.
-    }
-  }, []);
+  const setLocale = useCallback(
+    (next: Locale) => {
+      setLocaleState(next);
+      if (!persistent) return;
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // Falha silenciosa — UI ja atualizou em memoria.
+      }
+    },
+    [persistent],
+  );
 
   const value = useMemo<LocaleContextValue>(() => ({ locale, setLocale }), [locale, setLocale]);
 

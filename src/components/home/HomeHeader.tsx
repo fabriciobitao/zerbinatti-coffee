@@ -22,6 +22,7 @@
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { LocaleContext } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
@@ -77,6 +78,11 @@ const FLAGS: Record<Locale, () => React.JSX.Element> = {
 export default function HomeHeader() {
   const { locale, setLocale } = useContext(LocaleContext);
   const t = useT();
+  const pathname = usePathname() ?? '/';
+  // /en e suas subrotas usam prefixo `/en` pras ancoras internas
+  // (#cafes, #processo, etc) pra manter a bolha EN durante a navegacao.
+  const homePrefix = pathname.startsWith('/en') ? '/en' : '';
+  const isOnEn = pathname.startsWith('/en');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -114,11 +120,11 @@ export default function HomeHeader() {
         </Link>
 
         <nav className="header-nav" aria-label="Navegação principal">
-          <a href="/#cafes">{t('nav.cafes')}</a>
-          <a href="/#processo">{t('nav.processo')}</a>
-          <a href="/#assinatura">{t('nav.assinatura')}</a>
+          <a href={`${homePrefix}/#cafes`}>{t('nav.cafes')}</a>
+          <a href={`${homePrefix}/#processo`}>{t('nav.processo')}</a>
+          <a href={`${homePrefix}/#assinatura`}>{t('nav.assinatura')}</a>
           <Link href="/para-empresas">{t('nav.empresas')}</Link>
-          <a href="/#historia">{t('nav.historia')}</a>
+          <a href={`${homePrefix}/#historia`}>{t('nav.historia')}</a>
         </nav>
 
         <div className="header-actions">
@@ -145,21 +151,20 @@ export default function HomeHeader() {
           {/* Botao mobile-only: toggle PT<->EN pra acesso rapido a versao em
               ingles e volta. Em desktop fica oculto (.lang-switch full ja cobre).
               Substitui visualmente o Instagram, que migrou pro Hero em mobile.
-              Se locale=en mostra bandeira PT (volta); senao mostra EN (vai). */}
+              Agora navega entre /en e / (URLs canonicas) em vez de switch
+              in-page — assim o user pode copiar a URL e compartilhar com OG
+              correto. A bandeira mostrada e SEMPRE a do "outro" idioma. */}
           {(() => {
-            const isEn = locale === 'en';
-            const next: Locale = isEn ? 'pt' : 'en';
-            const NextFlag = FLAGS[next];
+            const NextFlag = isOnEn ? FlagPT : FlagEN;
             return (
-              <button
-                type="button"
+              <Link
+                href={isOnEn ? '/' : '/en'}
                 className="lang-toggle-mobile"
-                aria-label={isEn ? 'Versão em português' : 'English version'}
-                title={isEn ? 'Português' : 'English'}
-                onClick={() => setLocale(next)}
+                aria-label={isOnEn ? 'Versão em português' : 'English version'}
+                title={isOnEn ? 'Português' : 'English'}
               >
                 <NextFlag />
-              </button>
+              </Link>
             );
           })()}
 
