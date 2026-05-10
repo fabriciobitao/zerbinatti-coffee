@@ -40,6 +40,8 @@ Registro de erros corrigidos pelo user. Ler no inicio de cada sessao junto com `
 
 - **Body precisa `overflow-x: hidden` + `max-width: 100vw`** pra evitar scroll horizontal acidental em mobile (sobretudo com elementos posicionados absolutamente).
 
+- **Toggle de idioma em mobile mostra a bandeira do "outro" idioma**, nao a do idioma atual. Bandeira fixa "EN" sempre visivel quando o user ja esta em EN nao da affordance de volta — vira beco sem saida. Regra: se locale=en mostrar PT (volta), se pt/es mostrar EN (vai). Mesma logica pra qualquer toggle binario de idioma compacto.
+
 ## Dev / Build
 
 - **React/Babel inline JSX so carregam em `localhost` ou `?dev=1`.** Em producao causa CSP error e quebra a pagina. Wrapping com `if` no `<script>` antes de injetar.

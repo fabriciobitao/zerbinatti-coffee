@@ -2758,9 +2758,10 @@
 
   /* ───────── HEADER MOBILE LANG SHORTCUT + HERO INSTAGRAM ─────────
      Em mobile (≤640px) o lang-switch full e oculto. Damos atalho direto
-     pra versao em ingles (audiencia US/EN) com a bandeira EN no header,
-     ocupando a vaga que era do Instagram. O Instagram migra pro Hero. */
-  .lang-en-mobile{
+     pra alternar PT<->EN (audiencia US/EN) ocupando a vaga que era do
+     Instagram. A bandeira mostrada e SEMPRE a do "outro" idioma (se esta
+     em EN mostra PT pra voltar). O Instagram migra pro Hero. */
+  .lang-toggle-mobile{
     display:none;
     width:38px; height:38px;
     border:1px solid var(--line);
@@ -2773,9 +2774,8 @@
     overflow:hidden;
     transition:border-color .25s, transform .2s, box-shadow .25s;
   }
-  .lang-en-mobile svg{display:block; width:24px; height:18px; border-radius:2px;}
-  .lang-en-mobile:hover{border-color:var(--gold); transform:scale(1.05);}
-  .lang-en-mobile.active{border-color:var(--gold); box-shadow:0 0 0 1px var(--gold) inset;}
+  .lang-toggle-mobile svg{display:block; width:24px; height:18px; border-radius:2px;}
+  .lang-toggle-mobile:hover{border-color:var(--gold); transform:scale(1.05);}
 
   .hero-instagram-mobile{
     display:none;
@@ -2793,6 +2793,6 @@
 
   @media (max-width: 640px){
     .header-instagram-btn{display:none !important;}
-    .lang-en-mobile{display:inline-flex;}
+    .lang-toggle-mobile{display:inline-flex; width:44px; height:44px;}
     .hero-instagram-mobile{display:inline-grid; place-items:center;}
   }

@@ -142,19 +142,26 @@ export default function HomeHeader() {
             })}
           </div>
 
-          {/* Botao mobile-only: bandeira EN pra acesso rapido a versao em ingles.
-              Em desktop fica oculto (.lang-switch ja cobre o switch completo).
-              Substitui visualmente o Instagram, que migrou pro Hero em mobile. */}
-          <button
-            type="button"
-            className={`lang-en-mobile${locale === 'en' ? ' active' : ''}`}
-            aria-label="English version"
-            aria-pressed={locale === 'en'}
-            title="English"
-            onClick={() => setLocale('en')}
-          >
-            <FlagEN />
-          </button>
+          {/* Botao mobile-only: toggle PT<->EN pra acesso rapido a versao em
+              ingles e volta. Em desktop fica oculto (.lang-switch full ja cobre).
+              Substitui visualmente o Instagram, que migrou pro Hero em mobile.
+              Se locale=en mostra bandeira PT (volta); senao mostra EN (vai). */}
+          {(() => {
+            const isEn = locale === 'en';
+            const next: Locale = isEn ? 'pt' : 'en';
+            const NextFlag = FLAGS[next];
+            return (
+              <button
+                type="button"
+                className="lang-toggle-mobile"
+                aria-label={isEn ? 'Versão em português' : 'English version'}
+                title={isEn ? 'Português' : 'English'}
+                onClick={() => setLocale(next)}
+              >
+                <NextFlag />
+              </button>
+            );
+          })()}
 
           <HeaderInstagramButton />
 
