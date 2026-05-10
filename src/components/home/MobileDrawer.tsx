@@ -25,6 +25,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LocaleContext, persistLocalePreference } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
+import { anchorsForPath } from '@/lib/i18n/anchors';
 
 const LANG_LABELS: Record<Locale, string> = {
   pt: 'Português',
@@ -84,6 +85,7 @@ export function MobileDrawer({ open, onClose }: Props) {
   const router = useRouter();
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   const isOnEn = pathname.startsWith('/en');
+  const anchors = anchorsForPath(pathname);
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -194,19 +196,19 @@ export function MobileDrawer({ open, onClose }: Props) {
           </svg>
         </button>
         <nav aria-label="Navegação móvel">
-          <a href={`${homePrefix}/#cafes`} onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#${anchors.cafes}`} onClick={handleLinkClick}>
             {t('nav.cafes')}
           </a>
-          <a href={`${homePrefix}/#processo`} onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#${anchors.processo}`} onClick={handleLinkClick}>
             {t('nav.processo')}
           </a>
-          <a href={`${homePrefix}/#assinatura`} onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#${anchors.assinatura}`} onClick={handleLinkClick}>
             {t('nav.assinatura')}
           </a>
           <Link href="/en/for-business" onClick={handleLinkClick}>
             {t('nav.empresas')}
           </Link>
-          <a href={`${homePrefix}/#historia`} onClick={handleLinkClick}>
+          <a href={`${homePrefix}/#${anchors.historia}`} onClick={handleLinkClick}>
             {t('nav.historia')}
           </a>
         </nav>

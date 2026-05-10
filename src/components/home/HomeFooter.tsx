@@ -9,12 +9,14 @@
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { T } from '@/lib/i18n';
+import { anchorsForPath } from '@/lib/i18n/anchors';
 import NewsletterForm from './NewsletterForm';
 import { FooterInstagramLink } from '@/components/InstagramButton';
 
 export default function HomeFooter() {
   const pathname = usePathname() ?? '/';
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
+  const anchors = anchorsForPath(pathname);
   return (
     <footer className="footer">
       <div className="footer-inner">
@@ -44,7 +46,7 @@ export default function HomeFooter() {
                 </a>
               </li>
               <li>
-                <a href={`${homePrefix}/#assinatura`}>
+                <a href={`${homePrefix}/#${anchors.assinatura}`}>
                   <T k="footer.subs" as="span" />
                 </a>
               </li>
@@ -66,12 +68,12 @@ export default function HomeFooter() {
             <T k="footer.about" as="h4" />
             <ul>
               <li>
-                <a href={`${homePrefix}/#historia`}>
+                <a href={`${homePrefix}/#${anchors.historia}`}>
                   <T k="footer.story" as="span" />
                 </a>
               </li>
               <li>
-                <a href={`${homePrefix}/#processo`}>
+                <a href={`${homePrefix}/#${anchors.processo}`}>
                   <T k="nav.processo" as="span" />
                 </a>
               </li>

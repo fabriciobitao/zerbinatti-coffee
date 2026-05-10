@@ -7,9 +7,9 @@
 
 import { T } from '@/lib/i18n';
 
-export default function Processo() {
+export default function Processo({ id = 'processo' }: { id?: string } = {}) {
   return (
-    <section className="processo" id="processo">
+    <section className="processo" id={id}>
       <div className="processo-bg" />
       <div className="processo-inner">
         <div className="processo-head reveal">

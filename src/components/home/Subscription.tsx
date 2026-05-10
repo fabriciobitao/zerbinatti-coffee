@@ -6,9 +6,9 @@
 import { T } from '@/lib/i18n';
 import SubscriptionPlanCard from './SubscriptionPlanCard';
 
-export default function Subscription() {
+export default function Subscription({ id = 'assinatura' }: { id?: string } = {}) {
   return (
-    <section className="subscribe-section" id="assinatura">
+    <section className="subscribe-section" id={id}>
       <div className="sub-inner">
         <div className="sub-text reveal">
           <span className="sub-mark" aria-hidden="true">— Clube Zerbinatti</span>

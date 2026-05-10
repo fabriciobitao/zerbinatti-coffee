@@ -17,9 +17,9 @@ const statNumberStyle: React.CSSProperties = {
 
 const statLabelStyle: React.CSSProperties = { marginTop: 6 };
 
-export default function Historia() {
+export default function Historia({ id = 'historia' }: { id?: string } = {}) {
   return (
-    <section className="story" id="historia">
+    <section className="story" id={id}>
       <div className="story-inner">
         <div className="story-image reveal">
           <div className="overlay-stamp">

@@ -26,6 +26,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { LocaleContext, persistLocalePreference } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
+import { anchorsForPath } from '@/lib/i18n/anchors';
 import { MobileDrawer } from './MobileDrawer';
 import { CartButton } from './CartButton';
 import { HeaderInstagramButton } from '@/components/InstagramButton';
@@ -80,10 +81,12 @@ export default function HomeHeader() {
   const t = useT();
   const pathname = usePathname() ?? '/';
   const router = useRouter();
-  // /en e suas subrotas usam prefixo `/en` pras ancoras internas
-  // (#cafes, #processo, etc) pra manter a bolha EN durante a navegacao.
+  // /en e suas subrotas usam prefixo `/en` pras ancoras internas e ids
+  // localizados (#coffees em vez de #cafes, etc) pra manter a bolha EN
+  // durante a navegacao com URLs idiomaticas.
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   const isOnEn = pathname.startsWith('/en');
+  const anchors = anchorsForPath(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -144,15 +147,15 @@ export default function HomeHeader() {
         </Link>
 
         <nav className="header-nav" aria-label="Navegação principal">
-          <a href={`${homePrefix}/#cafes`}>{t('nav.cafes')}</a>
-          <a href={`${homePrefix}/#processo`}>{t('nav.processo')}</a>
-          <a href={`${homePrefix}/#assinatura`}>{t('nav.assinatura')}</a>
+          <a href={`${homePrefix}/#${anchors.cafes}`}>{t('nav.cafes')}</a>
+          <a href={`${homePrefix}/#${anchors.processo}`}>{t('nav.processo')}</a>
+          <a href={`${homePrefix}/#${anchors.assinatura}`}>{t('nav.assinatura')}</a>
           {/* B2B unificado em ingles: "Para Empresas" no menu PT continua
               renderizando label localizado, mas o href sempre vai pra
               /en/for-business (URL canonica EN) — materiais B2B sao
               English-only daqui pra frente. */}
           <Link href="/en/for-business">{t('nav.empresas')}</Link>
-          <a href={`${homePrefix}/#historia`}>{t('nav.historia')}</a>
+          <a href={`${homePrefix}/#${anchors.historia}`}>{t('nav.historia')}</a>
         </nav>
 
         <div className="header-actions">

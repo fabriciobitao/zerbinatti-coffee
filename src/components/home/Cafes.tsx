@@ -151,7 +151,7 @@ function FeatureDivider() {
   );
 }
 
-export async function Cafes() {
+export async function Cafes({ id = 'cafes' }: { id?: string } = {}) {
   const products = await getHomeProducts();
   const classico = products.find((p) => p.handle === CLASSICO_HANDLE) ?? null;
 
@@ -161,7 +161,7 @@ export async function Cafes() {
     return (
       <>
         <HeritageMark />
-        <section id="cafes" aria-hidden="true" />
+        <section id={id} aria-hidden="true" />
       </>
     );
   }
@@ -177,7 +177,7 @@ export async function Cafes() {
     <>
       <HeritageMark />
 
-      <div id="cafes">
+      <div id={id}>
         {orderedVariants.map((variant, idx) => (
           <div key={variant.slotKey}>
             <FeatureCard

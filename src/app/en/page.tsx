@@ -24,6 +24,7 @@ import CartDrawer from '@/components/home/CartDrawer';
 import RevealObserver from '@/components/home/RevealObserver';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { products } from '@/lib/data/products';
+import { ANCHORS } from '@/lib/i18n/anchors';
 
 export const revalidate = 3600;
 
@@ -44,14 +45,14 @@ export default async function HomePageEN() {
     <main id="main" className="novo-layout">
       <JsonLd data={[itemListSchema]} />
       <HomeHeader />
-      <Hero />
-      <Cafes />
-      <Processo />
-      <Subscription />
+      <Hero anchors={ANCHORS.en} />
+      <Cafes id={ANCHORS.en.cafes} />
+      <Processo id={ANCHORS.en.processo} />
+      <Subscription id={ANCHORS.en.assinatura} />
       <VideoFeature />
       <Galeria />
       <CuppingReport />
-      <Historia />
+      <Historia id={ANCHORS.en.historia} />
       <HomeFooter />
       <CartDrawer />
       <RevealObserver />

@@ -5,10 +5,13 @@
 // e atualiza a opacidade do scroll-indicator durante o scroll.
 
 import { T } from '@/lib/i18n';
+import { ANCHORS, type AnchorKey } from '@/lib/i18n/anchors';
 import { HeroMotion } from './HeroMotion';
 import { HeroInstagramButton } from '@/components/InstagramButton';
 
-export default function Hero() {
+type HeroAnchors = Record<AnchorKey, string>;
+
+export default function Hero({ anchors = ANCHORS.pt }: { anchors?: HeroAnchors } = {}) {
   return (
     <section className="hero" id="hero">
       <div
@@ -61,10 +64,10 @@ export default function Hero() {
           </div>
 
           <div className="hero-cta reveal">
-            <a href="#cafes" className="btn btn-gold">
+            <a href={`#${anchors.cafes}`} className="btn btn-gold">
               <T k="hero.cta.shop" html as="span" />
             </a>
-            <a href="#assinatura" className="btn btn-ghost">
+            <a href={`#${anchors.assinatura}`} className="btn btn-ghost">
               <T k="hero.cta.sub" as="span" />
             </a>
           </div>
