@@ -1,0 +1,444 @@
+/*
+ * /en/for-business — sections especificas do B2B.
+ * Estende novo-layout.css (mesmo paleta, mesmas fontes, mesmo .novo-layout
+ * scope). Aqui ficam APENAS estilos que nao existem na home: hero-stats-row
+ * com bordas, segmentos-grid (4 cards), pilares-grid (3 colunas com bordas),
+ * formulario-shell + form-grid com inputs gold-on-dark.
+ */
+
+.novo-layout .b2b-hero {
+  position: relative;
+  min-height: 78vh;
+  overflow: hidden;
+  background: var(--bg-0);
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .b2b-hero-bg {
+  position: absolute;
+  inset: -5%;
+  background: url('/assets/hero-bg.webp') center / cover no-repeat;
+  z-index: 0;
+  animation: kenburns 22s ease-out infinite alternate;
+  will-change: transform;
+}
+.novo-layout .b2b-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(31, 22, 17, 0.82) 0%, rgba(31, 22, 17, 0.7) 50%, rgba(31, 22, 17, 0.95) 100%),
+    radial-gradient(ellipse 90% 60% at 30% 50%, transparent 0%, rgba(31, 22, 17, 0.6) 70%);
+}
+.novo-layout .b2b-hero-glow {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(217, 165, 77, 0.22) 0%, rgba(217, 165, 77, 0.08) 35%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.novo-layout .b2b-hero-inner {
+  position: relative;
+  z-index: 5;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 140px 48px 80px;
+  width: 100%;
+}
+.novo-layout .b2b-hero-title {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  max-width: 920px;
+}
+.novo-layout .b2b-hero-title em {
+  font-style: italic;
+  background: linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 60%, #8B6914 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.novo-layout .b2b-hero-desc {
+  margin-top: 28px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-0);
+  max-width: 620px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(31, 22, 17, 0.8);
+}
+.novo-layout .b2b-stats-row {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 760px;
+}
+.novo-layout .b2b-stats-row > div {
+  flex: 1;
+  min-width: 140px;
+  padding: 18px 24px;
+  border-right: 1px solid var(--line);
+}
+.novo-layout .b2b-stats-row > div:last-child { border-right: none; }
+.novo-layout .b2b-stats-row .v {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--ink-0);
+  line-height: 1;
+}
+.novo-layout .b2b-stats-row .l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+.novo-layout .b2b-cta {
+  margin-top: 40px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.novo-layout .b2b-section { padding: 120px 0; position: relative; }
+.novo-layout .b2b-section-inner { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+.novo-layout .b2b-section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  margin-bottom: 64px;
+  align-items: end;
+}
+.novo-layout .b2b-section-head .display {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  font-size: clamp(38px, 4.6vw, 68px);
+}
+.novo-layout .b2b-section-head .display em {
+  font-style: italic;
+  color: var(--gold);
+}
+.novo-layout .b2b-section-head p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-1);
+  max-width: 520px;
+}
+.novo-layout .b2b-section-head .meta {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.novo-layout .b2b-section-head .meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.novo-layout .b2b-section-head .meta .k {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.novo-layout .b2b-section-head .meta .v {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink-0);
+}
+
+/* SEGMENTOS */
+.novo-layout .b2b-segments { background: var(--bg-1); }
+.novo-layout .b2b-segments-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.novo-layout .b2b-seg-card {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 44px 40px;
+  overflow: hidden;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+}
+.novo-layout .b2b-seg-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.novo-layout .b2b-seg-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.novo-layout .b2b-seg-card:hover::before { width: 100%; }
+.novo-layout .b2b-seg-card .num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  margin-bottom: 16px;
+}
+.novo-layout .b2b-seg-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.1;
+  color: var(--ink-0);
+  margin-bottom: 14px;
+}
+.novo-layout .b2b-seg-card h3 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.novo-layout .b2b-seg-card .desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-1);
+  margin-bottom: 24px;
+  max-width: 440px;
+}
+.novo-layout .b2b-seg-card ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.novo-layout .b2b-seg-card ul li {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.novo-layout .b2b-seg-card ul li::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* PILARES */
+.novo-layout .b2b-pillars { background: var(--bg-0); }
+.novo-layout .b2b-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .b2b-pillar {
+  padding: 48px 40px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.novo-layout .b2b-pillar:last-child { border-right: none; }
+.novo-layout .b2b-pillar .icon {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.novo-layout .b2b-pillar .num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  margin-bottom: 8px;
+}
+.novo-layout .b2b-pillar h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  color: var(--ink-0);
+  margin-bottom: 14px;
+}
+.novo-layout .b2b-pillar p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-1);
+}
+
+/* FORMULARIO */
+.novo-layout .b2b-form-section { background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%); }
+.novo-layout .b2b-form-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 48px;
+  text-align: center;
+}
+.novo-layout .b2b-form-shell .display {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  font-size: clamp(40px, 4.4vw, 64px);
+}
+.novo-layout .b2b-form-shell .display em {
+  font-style: italic;
+  color: var(--gold);
+}
+.novo-layout .b2b-form-shell .eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.novo-layout .b2b-form-shell > p {
+  margin-top: 18px;
+  color: var(--ink-1);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.novo-layout .b2b-form-shell > p strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+.novo-layout .b2b-form-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  text-align: left;
+}
+.novo-layout .b2b-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.novo-layout .b2b-form-row.full { grid-column: 1 / -1; }
+.novo-layout .b2b-form-row label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.novo-layout .b2b-form-row input,
+.novo-layout .b2b-form-row select,
+.novo-layout .b2b-form-row textarea {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink-0);
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.novo-layout .b2b-form-row input:focus,
+.novo-layout .b2b-form-row select:focus,
+.novo-layout .b2b-form-row textarea:focus { border-color: var(--gold); }
+.novo-layout .b2b-form-row textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+.novo-layout .b2b-form-row input.invalid,
+.novo-layout .b2b-form-row select.invalid,
+.novo-layout .b2b-form-row textarea.invalid { border-color: #E37070; }
+.novo-layout .b2b-field-error {
+  display: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #E37070;
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+.novo-layout .b2b-field-error.show { display: block; }
+.novo-layout .b2b-form-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+.novo-layout .b2b-form-msg {
+  display: none;
+  text-align: center;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 18px;
+}
+.novo-layout .b2b-form-msg.success {
+  display: block;
+  background: rgba(217, 165, 77, 0.12);
+  color: #D9A54D;
+  border: 1px solid rgba(217, 165, 77, 0.4);
+}
+.novo-layout .b2b-form-msg.error {
+  display: block;
+  background: rgba(220, 80, 80, 0.12);
+  color: #E37070;
+  border: 1px solid rgba(220, 80, 80, 0.4);
+}
+.novo-layout .b2b-form-note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* MOBILE */
+@media (max-width: 1024px) {
+  .novo-layout .b2b-hero-inner { padding: 120px 24px 60px; }
+  .novo-layout .b2b-section { padding: 80px 0; }
+  .novo-layout .b2b-section-inner { padding: 0 24px; }
+  .novo-layout .b2b-section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+  .novo-layout .b2b-segments-grid { grid-template-columns: 1fr; gap: 14px; }
+  .novo-layout .b2b-seg-card { padding: 32px 24px; }
+  .novo-layout .b2b-seg-card h3 { font-size: 24px; }
+  .novo-layout .b2b-pillars-grid { grid-template-columns: 1fr; border-top: none; }
+  .novo-layout .b2b-pillar { padding: 40px 24px; border-right: none; border-top: 1px solid var(--line); }
+  .novo-layout .b2b-pillar:first-child { border-top: none; }
+  .novo-layout .b2b-form-shell { padding: 0 24px; }
+  .novo-layout .b2b-form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .novo-layout .b2b-hero { min-height: 80vh; }
+  .novo-layout .b2b-stats-row { flex-direction: column; }
+  .novo-layout .b2b-stats-row > div { border-right: none; border-bottom: 1px solid var(--line); }
+  .novo-layout .b2b-stats-row > div:last-child { border-bottom: none; }
+  .novo-layout .b2b-hero-desc { font-size: 17px; line-height: 1.55; }
+  .novo-layout .b2b-stats-row .v { font-size: 22px; }
+  .novo-layout .b2b-stats-row .l { font-size: 11px; }
+  .novo-layout .b2b-seg-card .desc { font-size: 15.5px; line-height: 1.6; }
+  .novo-layout .b2b-form-shell > p { font-size: 16px; line-height: 1.65; }
+  .novo-layout .b2b-form-row label { font-size: 11px; }
+  .novo-layout .b2b-form-row input,
+  .novo-layout .b2b-form-row select,
+  .novo-layout .b2b-form-row textarea { font-size: 16px; }
+  .novo-layout .b2b-form-note { font-size: 13px; }
+}

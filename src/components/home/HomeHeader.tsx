@@ -147,7 +147,11 @@ export default function HomeHeader() {
           <a href={`${homePrefix}/#cafes`}>{t('nav.cafes')}</a>
           <a href={`${homePrefix}/#processo`}>{t('nav.processo')}</a>
           <a href={`${homePrefix}/#assinatura`}>{t('nav.assinatura')}</a>
-          <Link href="/para-empresas">{t('nav.empresas')}</Link>
+          {/* B2B unificado em ingles: "Para Empresas" no menu PT continua
+              renderizando label localizado, mas o href sempre vai pra
+              /en/for-business (URL canonica EN) — materiais B2B sao
+              English-only daqui pra frente. */}
+          <Link href="/en/for-business">{t('nav.empresas')}</Link>
           <a href={`${homePrefix}/#historia`}>{t('nav.historia')}</a>
         </nav>
 

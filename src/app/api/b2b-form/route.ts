@@ -48,6 +48,11 @@ type Body = {
   segmento?: string;
   volume?: string;
   mensagem?: string;
+  pais?: string;
+  // Locale do form de origem ("pt" | "en"). Quando "en", relaxa
+  // validacao de telefone (audiencia internacional, sem (DDD)) e
+  // ignora CNPJ. Default "pt" mantem comportamento anterior.
+  locale?: string;
   honeypot?: string;
   turnstileToken?: string;
 };
@@ -127,6 +132,7 @@ export async function POST(req: Request) {
     );
   }
 
+  const locale = sanitize(body.locale, 8).toLowerCase() === "en" ? "en" : "pt";
   const cnpjDigits = digitsOnly(sanitize(body.cnpj, 30));
   const phoneDigits = digitsOnly(sanitize(body.whatsapp, 30));
   const data = {
@@ -134,18 +140,27 @@ export async function POST(req: Request) {
     empresa: sanitize(body.empresa, 300),
     cnpj: cnpjDigits ? formatCNPJ(cnpjDigits) : "",
     email: sanitize(body.email, 200).toLowerCase(),
-    whatsapp: phoneDigits ? formatPhone(phoneDigits) : "",
+    whatsapp: phoneDigits ? (locale === "en" ? `+${phoneDigits}` : formatPhone(phoneDigits)) : "",
     segmento: sanitize(body.segmento, 100),
     volume: sanitize(body.volume, 200),
     mensagem: sanitize(body.mensagem, 4000),
+    pais: sanitize(body.pais, 100),
+    locale,
   };
 
   const fieldErrors: Record<string, string> = {};
   if (!data.nome || data.nome.length < 2) fieldErrors.nome = "required";
   if (!data.empresa || data.empresa.length < 2) fieldErrors.empresa = "required";
-  if (cnpjDigits && !validateCNPJ(cnpjDigits)) fieldErrors.cnpj = "invalid";
+  // CNPJ so e validado em PT (audiencia BR). EN ignora.
+  if (locale === "pt" && cnpjDigits && !validateCNPJ(cnpjDigits)) fieldErrors.cnpj = "invalid";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.email)) fieldErrors.email = "invalid";
-  if (phoneDigits.length !== 10 && phoneDigits.length !== 11) fieldErrors.whatsapp = "invalid";
+  // EN aceita qualquer telefone com 7+ digitos (internacional, com codigo
+  // do pais opcional). PT exige formato BR exato (10 ou 11 digitos).
+  if (locale === "en") {
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) fieldErrors.whatsapp = "invalid";
+  } else if (phoneDigits.length !== 10 && phoneDigits.length !== 11) {
+    fieldErrors.whatsapp = "invalid";
+  }
   if (!data.segmento) fieldErrors.segmento = "required";
 
   if (Object.keys(fieldErrors).length) {
@@ -185,16 +200,18 @@ export async function POST(req: Request) {
   }
 
   try {
-    const subject = `[B2B Zerbinatti] Pedido de ${data.nome} (${data.empresa})`;
+    const subject = `[B2B Zerbinatti${locale === "en" ? " · EN" : ""}] Pedido de ${data.nome} (${data.empresa})`;
     const rows: [string, string][] = [
       ["Nome", data.nome],
       ["Empresa", data.empresa],
       ...(data.cnpj ? ([["CNPJ", data.cnpj]] as [string, string][]) : []),
+      ...(data.pais ? ([["País", data.pais]] as [string, string][]) : []),
       ["E-mail", data.email],
-      ["WhatsApp", data.whatsapp],
+      [locale === "en" ? "Phone / WhatsApp" : "WhatsApp", data.whatsapp],
       ["Segmento", data.segmento],
       ["Volume estimado", data.volume || "—"],
       ["Mensagem", data.mensagem || "—"],
+      ["Idioma do form", locale === "en" ? "English (/en/for-business)" : "Português (/para-empresas)"],
     ];
     const html = `
       <div style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:24px;color:#1a1a1a">

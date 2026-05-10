@@ -23,9 +23,11 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zerbinatti.coffee/para-empresas</loc>
+    <loc>https://zerbinatti.coffee/en/for-business</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zerbinatti.coffee/en/for-business" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zerbinatti.coffee/en/for-business" />
   </url>
   <url>
     <loc>https://zerbinatti.coffee/entregas</loc>

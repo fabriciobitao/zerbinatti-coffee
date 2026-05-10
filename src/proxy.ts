@@ -43,16 +43,20 @@ export function proxy(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/para-empresas" || pathname === "/para-empresas/") {
-    return NextResponse.rewrite(
-      new URL("/novo-layout/para-empresas.html", request.url),
-    );
-  }
-
-  if (pathname === "/para-empresas.html") {
-    return NextResponse.rewrite(
-      new URL("/novo-layout/para-empresas.html", request.url),
-    );
+  // B2B unificado em ingles: /para-empresas (legacy URL) e /para-empresas.html
+  // redirecionam 301 pra /en/for-business. Preserva equity SEO de inbound
+  // links antigos enquanto canoniza a nova URL EN. /en/para-empresas tambem
+  // redireciona pra ca caso alguem digite manualmente.
+  if (
+    pathname === "/para-empresas" ||
+    pathname === "/para-empresas/" ||
+    pathname === "/para-empresas.html" ||
+    pathname === "/en/para-empresas" ||
+    pathname === "/en/para-empresas/"
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/en/for-business";
+    return NextResponse.redirect(url, 301);
   }
 }
 

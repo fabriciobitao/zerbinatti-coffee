@@ -203,7 +203,7 @@ export function MobileDrawer({ open, onClose }: Props) {
           <a href={`${homePrefix}/#assinatura`} onClick={handleLinkClick}>
             {t('nav.assinatura')}
           </a>
-          <Link href="/para-empresas" onClick={handleLinkClick}>
+          <Link href="/en/for-business" onClick={handleLinkClick}>
             {t('nav.empresas')}
           </Link>
           <a href={`${homePrefix}/#historia`} onClick={handleLinkClick}>

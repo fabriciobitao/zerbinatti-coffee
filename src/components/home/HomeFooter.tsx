@@ -54,7 +54,7 @@ export default function HomeFooter() {
                 </a>
               </li>
               <li>
-                <a href="/para-empresas">
+                <a href="/en/for-business">
                   <T k="nav.empresas" as="span" />
                 </a>
               </li>
