@@ -21,8 +21,8 @@
 
 import { useCallback, useContext, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LocaleContext } from '@/lib/i18n/LocaleProvider';
+import { usePathname, useRouter } from 'next/navigation';
+import { LocaleContext, persistLocalePreference } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
 
@@ -81,10 +81,33 @@ export function MobileDrawer({ open, onClose }: Props) {
   const { locale, setLocale } = useContext(LocaleContext);
   const t = useT();
   const pathname = usePathname() ?? '/';
+  const router = useRouter();
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   const isOnEn = pathname.startsWith('/en');
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  // Mesma logica do header desktop: bandeira navega quando o destino tem
+  // URL canonica (/en pra EN, / pra PT/ES). ES sem rota dedicada -> in-page.
+  const handleLangClick = useCallback(
+    (code: Locale) => {
+      onClose();
+      if (code === 'en') {
+        if (!isOnEn) {
+          persistLocalePreference('en');
+          router.push('/en');
+        }
+        return;
+      }
+      if (isOnEn) {
+        persistLocalePreference(code);
+        router.push('/');
+        return;
+      }
+      setLocale(code);
+    },
+    [isOnEn, onClose, router, setLocale],
+  );
 
   // Scroll lock + ESC + focus trap
   useEffect(() => {
@@ -199,7 +222,7 @@ export function MobileDrawer({ open, onClose }: Props) {
                 aria-label={LANG_LABELS[code]}
                 aria-pressed={locale === code}
                 title={LANG_LABELS[code]}
-                onClick={() => setLocale(code)}
+                onClick={() => handleLangClick(code)}
               >
                 <Flag />
               </button>

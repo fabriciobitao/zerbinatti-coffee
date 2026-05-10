@@ -15,8 +15,31 @@ export const LocaleContext = createContext<LocaleContextValue>({
   setLocale: () => {},
 });
 
-const STORAGE_KEY = 'zerbinatti.locale';
+export const LOCALE_STORAGE_KEY = 'zerbinatti.locale';
+const STORAGE_KEY = LOCALE_STORAGE_KEY;
 const HTML_LANG_MAP: Record<Locale, string> = { pt: 'pt-BR', en: 'en', es: 'es' };
+
+const LOCALE_EVENT = 'zrb:locale-persist';
+
+// Helper publico: grava a preferencia de idioma em localStorage SEM precisar
+// passar pelo provider, e dispara um CustomEvent que provider externo escuta
+// pra atualizar seu state. Usado nos handlers de troca de idioma do header
+// quando a acao envolve navegacao (ex: clicar PT em /en navega pra / e
+// queremos que o provider de / ja hidrate como PT). Bypassa o `persistent`
+// flag do provider aninhado (que e false em /en pra nao "vazar" preferencia).
+//
+// Sem o dispatch, o outer provider — montado uma unica vez no root layout
+// e nao re-renderizado entre client-nav — nao re-le localStorage e fica
+// stale com o locale auto-detectado da primeira visita.
+export function persistLocalePreference(code: Locale): void {
+  try {
+    if (typeof window === 'undefined') return;
+    window.localStorage.setItem(STORAGE_KEY, code);
+    window.dispatchEvent(new CustomEvent<Locale>(LOCALE_EVENT, { detail: code }));
+  } catch {
+    // Falha silenciosa — modo privado / cookies bloqueados.
+  }
+}
 
 function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && (LOCALES as string[]).includes(value);
@@ -82,6 +105,23 @@ export function LocaleProvider({
       // localStorage indisponivel (SSR, modo privado, etc) — mantem default.
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Escuta dispatches de persistLocalePreference. Necessario porque o
+  // provider externo (root layout) nao re-monta em navegacoes client-side,
+  // entao se o user clica "ES" em /en e navega pra /, o provider externo
+  // precisa atualizar seu state pra refletir a escolha — caso contrario
+  // / hidrata com o locale auto-detectado da primeira visita.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const onPersist = (e: Event) => {
+      const detail = (e as CustomEvent<Locale>).detail;
+      if (isLocale(detail)) {
+        setLocaleState(detail);
+      }
+    };
+    window.addEventListener(LOCALE_EVENT, onPersist);
+    return () => window.removeEventListener(LOCALE_EVENT, onPersist);
   }, []);
 
   // Sincroniza <html lang> a cada troca.

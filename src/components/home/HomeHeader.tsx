@@ -19,11 +19,11 @@
  * Scroll shadow: aplica `.scrolled` no `<header>` quando window.scrollY > 8.
  */
 
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LocaleContext } from '@/lib/i18n/LocaleProvider';
+import { usePathname, useRouter } from 'next/navigation';
+import { LocaleContext, persistLocalePreference } from '@/lib/i18n/LocaleProvider';
 import { LOCALES, type Locale } from '@/lib/i18n/dictionary';
 import { useT } from '@/lib/i18n/useT';
 import { MobileDrawer } from './MobileDrawer';
@@ -79,12 +79,36 @@ export default function HomeHeader() {
   const { locale, setLocale } = useContext(LocaleContext);
   const t = useT();
   const pathname = usePathname() ?? '/';
+  const router = useRouter();
   // /en e suas subrotas usam prefixo `/en` pras ancoras internas
   // (#cafes, #processo, etc) pra manter a bolha EN durante a navegacao.
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   const isOnEn = pathname.startsWith('/en');
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  // Click no lang-switch coordena com as URLs canonicas:
+  // - EN sempre vai pra /en (URL EN canonica), persistindo a preferencia
+  // - PT/ES, se estamos em /en, navegam pra / (URL PT canonica) e ja
+  //   persistem o locale escolhido pra hidratar /. Senao, switch in-page.
+  const handleLangClick = useCallback(
+    (code: Locale) => {
+      if (code === 'en') {
+        if (!isOnEn) {
+          persistLocalePreference('en');
+          router.push('/en');
+        }
+        return;
+      }
+      if (isOnEn) {
+        persistLocalePreference(code);
+        router.push('/');
+        return;
+      }
+      setLocale(code);
+    },
+    [isOnEn, router, setLocale],
+  );
 
   // Scroll shadow: classe .scrolled quando scrollY > 8
   useEffect(() => {
@@ -140,7 +164,7 @@ export default function HomeHeader() {
                   aria-label={LANG_LABELS[code]}
                   aria-pressed={locale === code}
                   title={LANG_LABELS[code]}
-                  onClick={() => setLocale(code)}
+                  onClick={() => handleLangClick(code)}
                 >
                   <Flag />
                 </button>
