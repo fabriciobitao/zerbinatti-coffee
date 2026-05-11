@@ -22,6 +22,7 @@ import HomeFooter from '@/components/home/HomeFooter';
 import CartDrawer from '@/components/home/CartDrawer';
 import ExportForm from './ExportForm';
 import ClientTag from './ClientTag';
+import ExportGalleryLab from './ExportGalleryLab';
 
 type StepKey = 'step1' | 'step2' | 'step3' | 'step4' | 'step5';
 const PROCESS_STEPS: { key: StepKey; n: string }[] = [
@@ -213,12 +214,27 @@ export default function ExportPage() {
         </div>
       </section>
 
-      {/* ===== ATTO II — COFFEES ===== */}
+      {/* ===== ATTO II — LA GALLERIA + IL LAUDO (combined) ===== */}
+      <section className="export-section export-galleria" id="galleria">
+        <Divider />
+        <div className="export-section-inner">
+          <div className="export-section-head-v2">
+            <AttoMarker num="ATTO II" eyebrowKey="gal.eyebrow" />
+            <h2 className="export-display-v2">
+              The land, the <em>hands.</em><br />
+              Every lot, <em>a score.</em>
+            </h2>
+          </div>
+          <ExportGalleryLab />
+        </div>
+      </section>
+
+      {/* ===== ATTO III — COFFEES ===== */}
       <section className="export-section export-coffees" id="coffees">
         <Divider />
         <div className="export-section-inner">
           <div className="export-section-head-v2">
-            <AttoMarker num="ATTO II" eyebrowKey="export.coffees.eyebrow" />
+            <AttoMarker num="ATTO III" eyebrowKey="export.coffees.eyebrow" />
             <T as="h2" k="export.coffees.title" html className="export-display-v2" />
           </div>
 
@@ -262,12 +278,12 @@ export default function ExportPage() {
         </div>
       </section>
 
-      {/* ===== ATTO III — PROCESS ===== */}
+      {/* ===== ATTO IV — PROCESS ===== */}
       <section className="export-section export-process" id="process">
         <Divider />
         <div className="export-section-inner">
           <div className="export-section-head-v2">
-            <AttoMarker num="ATTO III" eyebrowKey="export.process.eyebrow" />
+            <AttoMarker num="ATTO IV" eyebrowKey="export.process.eyebrow" />
             <T as="h2" k="export.process.title" html className="export-display-v2" />
           </div>
 
@@ -285,13 +301,13 @@ export default function ExportPage() {
         </div>
       </section>
 
-      {/* ===== ATTO IV — LOGISTICS (Bill of Lading) ===== */}
+      {/* ===== ATTO V — LOGISTICS (Bill of Lading) ===== */}
       <section className="export-section export-logistics" id="logistics">
         <div className="export-logistics-bg" aria-hidden="true" />
         <Divider />
         <div className="export-section-inner">
           <div className="export-section-head-v2">
-            <AttoMarker num="ATTO IV" eyebrowKey="export.logistics.eyebrow" />
+            <AttoMarker num="ATTO V" eyebrowKey="export.logistics.eyebrow" />
             <T as="h2" k="export.logistics.title" html className="export-display-v2" />
           </div>
 
