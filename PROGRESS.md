@@ -1,6 +1,24 @@
 # Zerbinatti Coffee — Progresso
 
-**Ultima atualizacao:** 2026-05-09 (parte 4) — Hardening em PROD. Revision Cloud Run `zerbinatti-coffee-00024-tlh` 100% trafego. Turnstile + double opt-in + CSP sem wildcards validados via curl.
+**Ultima atualizacao:** 2026-05-11 — LP de exportacao trilingue em PROD. Revision Cloud Run `zerbinatti-coffee-00038-fxs` 100% trafego. Rotas `/exportacao`, `/export`, `/es/exportacion` (primeiro segmento /es do site) servindo conteudo localizado, form `/api/export-form` ativo com Firestore `export_submissions` + Resend `[EXPORT Zerbinatti]`.
+
+## Sessao 2026-05-11 — LP de exportacao trilingue (PT/EN/ES)
+
+- [x] PR #1 `feat/export-lp` -> `main` mergeado (commit merge `a6c9ace`).
+- [x] Cloud Build `a342a777-7ba5-4878-bad1-e0dbc670fa76` SUCCESS. Imagem: `southamerica-east1-docker.pkg.dev/zerbinatti-cafe/cloud-run-source-deploy/zerbinatti-coffee:latest`.
+- [x] Cloud Run revision **`zerbinatti-coffee-00038-fxs`** com 100% trafego.
+- [x] Validacao curl em prod:
+  - GET `/exportacao` (PT), `/export` (EN), `/es/exportacion` (ES): 200 com SSR localizado (titulos, og:locale, hreflang/canonical, conteudo body)
+  - POST `/api/export-form` sem turnstileToken -> `{"error":"turnstile_failed","reason":"missing_token"}` ✓
+- [x] `EXPORT_NOTIFY_EMAILS` env nao configurada — usa fallback do B2B (`fabricio.fazer@gmail.com` + `fabiomenezes@gmail.com`) com subject prefix `[EXPORT Zerbinatti · LOCALE]` pra filtro de inbox.
+- [x] Bootstrap do segmento `/es` (LocaleProvider initialLocale='es', primeira rota ES). `LocaleProvider`, `anchorsForPath` e `HomeHeader` reconhecem rotas de export pra lang-switch correto.
+
+### Pendencias da sessao
+- [ ] Smoke E2E manual UI: enviar lead real via form com Turnstile passando nos 3 idiomas; conferir doc novo em Firestore `export_submissions` e email entrando com subject prefix correto.
+- [ ] Avaliar adicionar link "Export" no HomeHeader (descoberta organica) ou manter so via URL direta + SEO.
+- [ ] (Opcional) Provisionar inbox dedicada `export@zerbinatti.coffee` e setar `EXPORT_NOTIFY_EMAILS` no Cloud Run.
+
+---
 
 ## Sessao 2026-05-09 (parte 4) — Merge security -> main + deploy em PROD
 
