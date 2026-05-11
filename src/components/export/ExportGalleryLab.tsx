@@ -13,7 +13,6 @@
  * Lightbox da home reaproveitado para fullscreen das fotos.
  */
 
-import Image from 'next/image';
 import { useCallback, useState } from 'react';
 import { useT } from '@/lib/i18n';
 import { Lightbox, type LightboxItem } from '../home/Lightbox';
@@ -100,12 +99,14 @@ export default function ExportGalleryLab() {
                 tabIndex={0}
                 aria-label={t(it.capKey)}
               >
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={it.src}
                   alt={it.alt}
+                  loading="lazy"
+                  decoding="async"
                   width={it.w}
                   height={it.h}
-                  sizes="(max-width: 1024px) 50vw, 24vw"
                 />
                 <figcaption>
                   <span className="num">{String(i + 1).padStart(2, '0')}</span>
