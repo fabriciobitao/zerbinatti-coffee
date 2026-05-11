@@ -178,6 +178,9 @@ export default function HomeHeader() {
               /en/for-business (URL canonica EN) — materiais B2B sao
               English-only daqui pra frente. */}
           <Link href="/en/for-business">{t('nav.empresas')}</Link>
+          {/* Link "Export" localizado: PT->/exportacao, EN->/export, ES->/es/exportacion.
+              Reusa EXPORT_ROUTES definido acima pra coerencia com o lang-switch. */}
+          <Link href={EXPORT_ROUTES[locale]}>{t('nav.export')}</Link>
           <a href={`${homePrefix}/#${anchors.historia}`}>{t('nav.historia')}</a>
         </nav>
 
