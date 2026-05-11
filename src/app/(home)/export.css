@@ -106,7 +106,16 @@
   background: rgba(13, 10, 7, 0.55);
   backdrop-filter: blur(10px) saturate(1.1);
   -webkit-backdrop-filter: blur(10px) saturate(1.1);
-  transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  will-change: background-color;
+}
+/* Mobile: drop expensive backdrop-filter (GPU-heavy), use solid bg. */
+@media (max-width: 980px) {
+  .export-v3 .site-header {
+    background: rgba(13, 10, 7, 0.88);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 .export-v3 .site-header::before {
   content: "";
@@ -121,6 +130,13 @@
   backdrop-filter: blur(16px) saturate(1.2);
   -webkit-backdrop-filter: blur(16px) saturate(1.2);
   border-bottom-color: var(--x-gold-line);
+}
+@media (max-width: 980px) {
+  .export-v3 .site-header.scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(13, 10, 7, 0.96);
+  }
 }
 .export-v3 .site-header.scrolled::before { opacity: 0; }
 .export-v3 .site-header-inner {
