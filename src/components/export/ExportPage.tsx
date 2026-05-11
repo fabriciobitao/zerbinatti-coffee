@@ -250,8 +250,13 @@ export default function ExportPage() {
             <div className="gal-photos">
               {GALLERY_IMGS.map((g, i) => (
                 <figure key={i} className="gal-photo">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.src} alt={g.alt} loading="lazy" decoding="async" />
+                  <Image
+                    src={g.src}
+                    alt={g.alt}
+                    fill
+                    sizes="(max-width: 980px) 50vw, 30vw"
+                    style={{ objectFit: 'cover' }}
+                  />
                   <figcaption>
                     <span className="num">{g.n}</span>
                     <span>{g.cap}</span>
