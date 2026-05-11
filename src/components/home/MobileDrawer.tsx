@@ -86,6 +86,13 @@ export function MobileDrawer({ open, onClose }: Props) {
   const homePrefix = pathname.startsWith('/en') ? '/en' : '';
   const isOnEn = pathname.startsWith('/en');
   const anchors = anchorsForPath(pathname);
+  // Mapeamento de rota da LP de exportacao por idioma — usado pelo link
+  // "Export" no menu mobile (PT->/exportacao, EN->/export, ES->/es/exportacion).
+  const EXPORT_ROUTES: Record<Locale, string> = {
+    pt: '/exportacao',
+    en: '/export',
+    es: '/es/exportacion',
+  };
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -207,6 +214,10 @@ export function MobileDrawer({ open, onClose }: Props) {
           </a>
           <Link href="/en/for-business" onClick={handleLinkClick}>
             {t('nav.empresas')}
+          </Link>
+          {/* Link "Export" localizado por idioma — mesma logica do desktop. */}
+          <Link href={EXPORT_ROUTES[locale]} onClick={handleLinkClick}>
+            {t('nav.export')}
           </Link>
           <a href={`${homePrefix}/#${anchors.historia}`} onClick={handleLinkClick}>
             {t('nav.historia')}
