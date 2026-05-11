@@ -561,6 +561,21 @@
   stroke: var(--gold);
   stroke-width: 1;
 }
+.novo-layout .export-gl-radar-wrap .radar-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  fill: var(--ink-2);
+  text-transform: uppercase;
+}
+.novo-layout .export-gl-radar-wrap .radar-label.v {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 11px;
+  letter-spacing: 0;
+  fill: var(--gold);
+  text-transform: none;
+}
 
 /* ===== COFFEES — STAGGERED VITRINE ===== */
 .novo-layout .export-coffees { background: var(--bg-0); }
