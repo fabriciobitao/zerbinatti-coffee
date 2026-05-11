@@ -81,21 +81,40 @@ export default function HomeHeader() {
   const t = useT();
   const pathname = usePathname() ?? '/';
   const router = useRouter();
-  // /en e suas subrotas usam prefixo `/en` pras ancoras internas e ids
-  // localizados (#coffees em vez de #cafes, etc) pra manter a bolha EN
-  // durante a navegacao com URLs idiomaticas.
-  const homePrefix = pathname.startsWith('/en') ? '/en' : '';
-  const isOnEn = pathname.startsWith('/en');
+  // /en e /export sao rotas canonicas EN — links pras ancoras internas usam
+  // prefixo `/en` (e IDs em ingles #coffees etc) pra manter a bolha EN
+  // durante a navegacao.
+  const isOnEnRoute = pathname.startsWith('/en') || pathname === '/export';
+  const homePrefix = isOnEnRoute ? '/en' : '';
+  const isOnEn = isOnEnRoute;
+  // Paginas de export (PT/EN/ES) — lang-switch navega entre as 3 versoes
+  // canonicas em vez de trocar locale in-page.
+  const EXPORT_ROUTES: Record<Locale, string> = {
+    pt: '/exportacao',
+    en: '/export',
+    es: '/es/exportacion',
+  };
+  const isOnExportPage =
+    pathname === '/exportacao' ||
+    pathname === '/export' ||
+    pathname === '/es/exportacion';
   const anchors = anchorsForPath(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   // Click no lang-switch coordena com as URLs canonicas:
-  // - EN sempre vai pra /en (URL EN canonica), persistindo a preferencia
+  // - Em pagina de export, navega entre as 3 versoes (PT/EN/ES) canonicas.
+  // - EN sempre vai pra /en (URL EN canonica), persistindo a preferencia.
   // - PT/ES, se estamos em /en, navegam pra / (URL PT canonica) e ja
   //   persistem o locale escolhido pra hidratar /. Senao, switch in-page.
   const handleLangClick = useCallback(
     (code: Locale) => {
+      if (isOnExportPage) {
+        if (locale === code) return;
+        persistLocalePreference(code);
+        router.push(EXPORT_ROUTES[code]);
+        return;
+      }
       if (code === 'en') {
         if (!isOnEn) {
           persistLocalePreference('en');
@@ -110,7 +129,11 @@ export default function HomeHeader() {
       }
       setLocale(code);
     },
-    [isOnEn, router, setLocale],
+    // EXPORT_ROUTES e estavel (objeto inline com chaves fixas), nao precisa
+    // entrar nas deps — ESLint aceita a omissao porque o ref nao muda
+    // semanticamente entre renders.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isOnEn, isOnExportPage, locale, router, setLocale],
   );
 
   // Scroll shadow: classe .scrolled quando scrollY > 8

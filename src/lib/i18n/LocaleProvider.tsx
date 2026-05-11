@@ -45,6 +45,15 @@ function isLocale(value: unknown): value is Locale {
   return typeof value === 'string' && (LOCALES as string[]).includes(value);
 }
 
+// Pathnames cujas paginas montam um LocaleProvider aninhado com initialLocale.
+// O provider externo (root layout) precisa skipar o sync de <html lang>
+// nestes paths pra nao sobrescrever a configuracao do provider interno.
+export function isLocaleFixedRoute(pathname: string): boolean {
+  if (pathname.startsWith('/en') || pathname.startsWith('/es')) return true;
+  if (pathname === '/export' || pathname === '/exportacao') return true;
+  return false;
+}
+
 // Mapeia navigator.language (ex: "en-US", "es-MX", "pt-BR") pro locale suportado.
 // Se browser nao bater com nenhum, retorna null (mantem DEFAULT_LOCALE).
 function detectBrowserLocale(): Locale | null {
@@ -125,14 +134,14 @@ export function LocaleProvider({
   }, []);
 
   // Sincroniza <html lang> a cada troca.
-  // Quando ha provider aninhado (/en route com initialLocale), o provider
-  // externo do root layout nao deve atualizar o lang — senao a ordem de
-  // useEffect (child-first) faz o externo sobrescrever o interno. Solucao:
-  // o externo (sem initialLocale) skipa quando o pathname indica rota
-  // locale-fixed conhecida (/en).
+  // Quando ha provider aninhado (/en, /es, /export, /exportacao com
+  // initialLocale), o provider externo do root layout nao deve atualizar
+  // o lang — senao a ordem de useEffect (parent-after-child) faz o externo
+  // sobrescrever o interno. Solucao: o externo (sem initialLocale) skipa
+  // quando o pathname indica rota locale-fixed conhecida.
   useEffect(() => {
     if (typeof document === 'undefined') return;
-    if (!isLocaleFixed && pathname.startsWith('/en')) return;
+    if (!isLocaleFixed && isLocaleFixedRoute(pathname)) return;
     document.documentElement.lang = HTML_LANG_MAP[locale];
   }, [locale, pathname, isLocaleFixed]);
 

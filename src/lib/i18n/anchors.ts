@@ -37,8 +37,8 @@ export const ANCHORS: Record<Locale, Record<AnchorKey, string>> = {
 };
 
 // Helper: dado um pathname, retorna o conjunto de anchors apropriado.
-// /en e subrotas -> EN. Demais -> PT (DEFAULT_LOCALE).
+// /en e /export (EN canonico) -> EN. Demais -> PT (DEFAULT_LOCALE).
 export function anchorsForPath(pathname: string): Record<AnchorKey, string> {
-  if (pathname.startsWith('/en')) return ANCHORS.en;
+  if (pathname.startsWith('/en') || pathname === '/export') return ANCHORS.en;
   return ANCHORS.pt;
 }

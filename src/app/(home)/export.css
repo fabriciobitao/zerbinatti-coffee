@@ -1,0 +1,551 @@
+/*
+ * Export landing page — estilos compartilhados por /exportacao, /export e
+ * /es/exportacion. Replica a linguagem visual do /for-business (paleta
+ * gold/mocha, fontes serif+mono, scope .novo-layout) mas com classes
+ * .export-* dedicadas pra nao acoplar as 3 rotas a for-business.css
+ * (que so e carregado em /en/for-business).
+ *
+ * Sections originais alem do skeleton replicado:
+ *   .export-process-timeline   — 5 steps horizontais com linha conectora
+ *   .export-coffees-grid       — vitrine de cafes (referencia sensorial)
+ *   .export-coffees-note       — disclaimer "sob negociacao"
+ *   .export-logistics-grid     — tabela key/value de termos comerciais
+ *   .export-trust-grid         — 3 cards de garantias
+ *   .export-meta-grid          — meta de origem (Localizacao, Altitude, etc)
+ */
+
+/* ===== HERO ===== */
+.novo-layout .export-hero {
+  position: relative;
+  min-height: 80vh;
+  overflow: hidden;
+  background: var(--bg-0);
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .export-hero-bg {
+  position: absolute;
+  inset: -5%;
+  background: url('/assets/hero-bg.webp') center / cover no-repeat;
+  z-index: 0;
+  animation: kenburns 22s ease-out infinite alternate;
+  will-change: transform;
+}
+.novo-layout .export-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(31, 22, 17, 0.84) 0%, rgba(31, 22, 17, 0.72) 50%, rgba(31, 22, 17, 0.96) 100%),
+    radial-gradient(ellipse 90% 60% at 35% 50%, transparent 0%, rgba(31, 22, 17, 0.6) 70%);
+}
+.novo-layout .export-hero-glow {
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 920px;
+  height: 920px;
+  background: radial-gradient(circle, rgba(217, 165, 77, 0.24) 0%, rgba(217, 165, 77, 0.08) 35%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.novo-layout .export-hero-inner {
+  position: relative;
+  z-index: 5;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 140px 48px 90px;
+  width: 100%;
+}
+.novo-layout .export-hero-title {
+  margin-top: 24px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  max-width: 960px;
+}
+.novo-layout .export-hero-title em {
+  font-style: italic;
+  background: linear-gradient(180deg, var(--gold-soft) 0%, var(--gold) 60%, #8B6914 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.novo-layout .export-hero-desc {
+  margin-top: 28px;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink-0);
+  max-width: 660px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(31, 22, 17, 0.8);
+}
+.novo-layout .export-stats-row {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  max-width: 880px;
+}
+.novo-layout .export-stats-row > div {
+  flex: 1;
+  min-width: 150px;
+  padding: 18px 24px;
+  border-right: 1px solid var(--line);
+}
+.novo-layout .export-stats-row > div:last-child { border-right: none; }
+.novo-layout .export-stats-row .v {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--ink-0);
+  line-height: 1;
+}
+.novo-layout .export-stats-row .l {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+.novo-layout .export-cta {
+  margin-top: 40px;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ===== SECTIONS ===== */
+.novo-layout .export-section { padding: 120px 0; position: relative; }
+.novo-layout .export-section-inner { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
+.novo-layout .export-section-head {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  margin-bottom: 64px;
+  align-items: end;
+}
+.novo-layout .export-section-head .display {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  font-size: clamp(38px, 4.6vw, 68px);
+}
+.novo-layout .export-section-head .display em {
+  font-style: italic;
+  color: var(--gold);
+}
+.novo-layout .export-section-head p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-1);
+  max-width: 540px;
+}
+.novo-layout .export-section-head .eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ===== ORIGIN ===== */
+.novo-layout .export-origin { background: var(--bg-1); }
+.novo-layout .export-meta-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+}
+.novo-layout .export-meta-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.novo-layout .export-meta-grid .k {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.novo-layout .export-meta-grid .v {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink-0);
+}
+
+/* ===== COFFEES VITRINE ===== */
+.novo-layout .export-coffees { background: var(--bg-0); }
+.novo-layout .export-coffees-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.novo-layout .export-coffee-card {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  padding: 36px 32px;
+  overflow: hidden;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.novo-layout .export-coffee-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.4s ease;
+}
+.novo-layout .export-coffee-card:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.novo-layout .export-coffee-card:hover::before { width: 100%; }
+.novo-layout .export-coffee-card .tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.novo-layout .export-coffee-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 1.1;
+  color: var(--ink-0);
+}
+.novo-layout .export-coffee-card .desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-1);
+}
+.novo-layout .export-coffee-card .specs {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.novo-layout .export-coffee-card .specs .k {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  display: block;
+}
+.novo-layout .export-coffee-card .specs .v {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--ink-0);
+  display: block;
+  margin-top: 3px;
+}
+.novo-layout .export-coffees-note {
+  margin-top: 32px;
+  padding: 22px 28px;
+  border: 1px dashed var(--gold);
+  border-radius: 6px;
+  background: rgba(217, 165, 77, 0.05);
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-1);
+  font-style: italic;
+}
+.novo-layout .export-coffees-note strong {
+  color: var(--gold);
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* ===== PROCESS TIMELINE ===== */
+.novo-layout .export-process { background: var(--bg-1); }
+.novo-layout .export-timeline {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .export-timeline-step {
+  padding: 44px 28px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.novo-layout .export-timeline-step:last-child { border-right: none; }
+.novo-layout .export-timeline-step .step-num {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.novo-layout .export-timeline-step h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--ink-0);
+  margin-bottom: 12px;
+}
+.novo-layout .export-timeline-step p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-1);
+}
+
+/* ===== LOGISTICS / TRADE TERMS ===== */
+.novo-layout .export-logistics { background: var(--bg-0); }
+.novo-layout .export-logistics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .export-logistics-row {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+}
+.novo-layout .export-logistics-row:nth-child(even) { border-right: none; }
+.novo-layout .export-logistics-row:nth-last-child(-n+2) { border-bottom: none; }
+.novo-layout .export-logistics-row .k {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.novo-layout .export-logistics-row .v {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--ink-0);
+  line-height: 1.5;
+}
+
+/* ===== FORM ===== */
+.novo-layout .export-form-section {
+  background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-0) 100%);
+}
+.novo-layout .export-form-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 48px;
+  text-align: center;
+}
+.novo-layout .export-form-shell .display {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink-0);
+  font-size: clamp(40px, 4.4vw, 64px);
+}
+.novo-layout .export-form-shell .display em {
+  font-style: italic;
+  color: var(--gold);
+}
+.novo-layout .export-form-shell .eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.novo-layout .export-form-shell > p {
+  margin-top: 18px;
+  color: var(--ink-1);
+  font-size: 17px;
+  line-height: 1.6;
+}
+.novo-layout .export-form-shell > p strong {
+  color: var(--gold);
+  font-weight: 400;
+}
+.novo-layout .export-form-grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  text-align: left;
+}
+.novo-layout .export-form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.novo-layout .export-form-row.full { grid-column: 1 / -1; }
+.novo-layout .export-form-row label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.novo-layout .export-form-row input,
+.novo-layout .export-form-row select,
+.novo-layout .export-form-row textarea {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink-0);
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 14px 16px;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.25s;
+}
+.novo-layout .export-form-row input:focus,
+.novo-layout .export-form-row select:focus,
+.novo-layout .export-form-row textarea:focus { border-color: var(--gold); }
+.novo-layout .export-form-row textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+.novo-layout .export-form-row input.invalid,
+.novo-layout .export-form-row select.invalid,
+.novo-layout .export-form-row textarea.invalid { border-color: #E37070; }
+.novo-layout .export-field-error {
+  display: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #E37070;
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+.novo-layout .export-field-error.show { display: block; }
+.novo-layout .export-form-actions {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+.novo-layout .export-form-msg {
+  display: none;
+  text-align: center;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 8px;
+  margin-top: 18px;
+}
+.novo-layout .export-form-msg.success {
+  display: block;
+  background: rgba(217, 165, 77, 0.12);
+  color: #D9A54D;
+  border: 1px solid rgba(217, 165, 77, 0.4);
+}
+.novo-layout .export-form-msg.error {
+  display: block;
+  background: rgba(220, 80, 80, 0.12);
+  color: #E37070;
+  border: 1px solid rgba(220, 80, 80, 0.4);
+}
+.novo-layout .export-form-note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+/* ===== TRUST CARDS ===== */
+.novo-layout .export-trust { background: var(--bg-1); padding-bottom: 100px; }
+.novo-layout .export-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.novo-layout .export-trust-card {
+  padding: 48px 40px;
+  border-right: 1px solid var(--line);
+}
+.novo-layout .export-trust-card:last-child { border-right: none; }
+.novo-layout .export-trust-card .icon {
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.novo-layout .export-trust-card h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--ink-0);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.novo-layout .export-trust-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-1);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 1024px) {
+  .novo-layout .export-hero-inner { padding: 120px 24px 60px; }
+  .novo-layout .export-section { padding: 80px 0; }
+  .novo-layout .export-section-inner { padding: 0 24px; }
+  .novo-layout .export-section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 40px; }
+  .novo-layout .export-coffees-grid { grid-template-columns: 1fr; gap: 14px; }
+  .novo-layout .export-coffee-card { padding: 28px 24px; }
+  .novo-layout .export-timeline { grid-template-columns: 1fr; border-top: 1px solid var(--line); }
+  .novo-layout .export-timeline-step { border-right: none; border-bottom: 1px solid var(--line); padding: 32px 24px; }
+  .novo-layout .export-timeline-step:last-child { border-bottom: none; }
+  .novo-layout .export-logistics-grid { grid-template-columns: 1fr; }
+  .novo-layout .export-logistics-row { grid-template-columns: 1fr; gap: 6px; border-right: none; padding: 18px 20px; }
+  .novo-layout .export-logistics-row:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .novo-layout .export-logistics-row:last-child { border-bottom: none; }
+  .novo-layout .export-trust-grid { grid-template-columns: 1fr; border-top: none; }
+  .novo-layout .export-trust-card { border-right: none; border-top: 1px solid var(--line); padding: 36px 24px; }
+  .novo-layout .export-trust-card:first-child { border-top: none; }
+  .novo-layout .export-meta-grid { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+  .novo-layout .export-form-shell { padding: 0 24px; }
+  .novo-layout .export-form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .novo-layout .export-hero { min-height: 82vh; }
+  .novo-layout .export-stats-row { flex-direction: column; }
+  .novo-layout .export-stats-row > div { border-right: none; border-bottom: 1px solid var(--line); }
+  .novo-layout .export-stats-row > div:last-child { border-bottom: none; }
+  .novo-layout .export-hero-desc { font-size: 17px; line-height: 1.55; }
+  .novo-layout .export-stats-row .v { font-size: 22px; }
+  .novo-layout .export-stats-row .l { font-size: 11px; }
+  .novo-layout .export-coffee-card .desc { font-size: 15px; line-height: 1.6; }
+  .novo-layout .export-form-shell > p { font-size: 16px; line-height: 1.65; }
+  .novo-layout .export-form-row label { font-size: 11px; }
+  .novo-layout .export-form-row input,
+  .novo-layout .export-form-row select,
+  .novo-layout .export-form-row textarea { font-size: 16px; }
+  .novo-layout .export-form-note { font-size: 13px; }
+}
