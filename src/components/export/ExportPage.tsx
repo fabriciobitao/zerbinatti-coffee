@@ -1,18 +1,21 @@
 /**
- * ExportPage — server component compartilhado pelas 3 rotas
- * (/exportacao, /export, /es/exportacion). Todo texto vem do dictionary
- * via <T>, locale e definido pelo LocaleProvider de cada layout.
+ * ExportPage v2 — premium redesign 2026-05-11.
  *
- * Sections:
- *   1. Hero — badge, titulo, desc, stats, CTAs
- *   2. Origin — terroir Serra do Cabral + meta (altitude/variedade/colheita)
- *   3. Coffees — vitrine de 3 cafes (referencia sensorial) + disclaimer
- *   4. Process — timeline horizontal de 5 etapas
- *   5. Logistics — tabela de termos comerciais (Incoterms, volume, etc)
- *   6. Form — ExportForm (client island)
- *   7. Trust — 3 cards de garantias
+ * Sintetiza UX Architect + UI Designer:
+ *  - Hero asimetrico 58/42 (texto esquerda, foto warehouse direita full-bleed)
+ *  - ATTO I / II / III / IV como device italiano cross-locale (brand mark, nao traduzido)
+ *  - Divisor diamond + coords "17°50'S · 44°00'W" (Serra do Cabral)
+ *  - Origin com vertical stack (sacas-arabica-empilhadas) na coluna 7/12
+ *  - Logistics como "BILL OF LADING" sobre saca-product-of-brazil a 12%
+ *  - Process vertical alternating rows com numerais oversized
+ *  - Form em dark inset com double-frame
+ *  - Trust como statement assinado (substitui 3 cards genericos)
+ *
+ * Server component — usa <T> client islands pra i18n. ExportForm e CartDrawer
+ * sao os unicos client roots.
  */
 
+import Image from 'next/image';
 import { T } from '@/lib/i18n/T';
 import HomeHeader from '@/components/home/HomeHeader';
 import HomeFooter from '@/components/home/HomeFooter';
@@ -40,8 +43,6 @@ const LOGISTICS_FIELDS = [
   'payment',
 ] as const;
 
-// Coffees vitrine — nomes proprios (sem traducao), demais campos i18n.
-// Apenas 3 cafes mais emblematicos da linha pra evitar overload visual.
 const FEATURED_COFFEES: {
   name: string;
   score: string;
@@ -80,39 +81,55 @@ const FEATURED_COFFEES: {
   },
 ];
 
+// Divisor reutilizado entre sections — diamond + coords Serra do Cabral.
+function Divider() {
+  return (
+    <div className="export-divider" aria-hidden="true">
+      <span className="rule" />
+      <span className="diamond" />
+      <span>17°50&prime;S · 44°00&prime;W</span>
+      <span className="diamond" />
+      <span className="rule" />
+    </div>
+  );
+}
+
+// Marker "ATTO N" + eyebrow — abre cada section.
+function AttoMarker({ num, eyebrowKey }: { num: string; eyebrowKey: string }) {
+  return (
+    <div className="export-atto">
+      <span className="atto-num">{num}</span>
+      <T as="span" k={eyebrowKey} className="eyebrow" />
+    </div>
+  );
+}
+
 export default function ExportPage() {
   return (
     <main id="main" className="novo-layout">
       <HomeHeader />
 
-      {/* HERO */}
-      <section className="export-hero">
-        <div className="export-hero-bg" aria-hidden="true" />
-        <div className="export-hero-glow" aria-hidden="true" />
-        <div className="export-hero-inner">
-          <div className="hero-badge">
-            <span className="dot" />
-            <T as="span" k="export.hero.badge" className="label" />
+      {/* ===== HERO — split asimetrico, typography-led ===== */}
+      <section className="export-hero-v2">
+        <div className="export-hero-text">
+          <div className="export-act-row">
+            <span className="diamond-mini" aria-hidden="true" />
+            <span>Export Division</span>
+            <span className="dot-sep">·</span>
+            <span>Est. 1897</span>
+            <span className="dot-sep">·</span>
+            <span>Serra do Cabral · MG</span>
           </div>
-          <T as="h1" k="export.hero.title" html className="export-hero-title" />
-          <T as="p" k="export.hero.desc" className="export-hero-desc" />
-          <div className="export-stats-row">
-            <div>
-              <div className="v">1897</div>
-              <T as="div" k="export.stats.since" className="l" />
-            </div>
-            <div>
-              <div className="v">85+</div>
-              <T as="div" k="export.stats.score" className="l" />
-            </div>
-            <div>
-              <div className="v">III</div>
-              <T as="div" k="export.stats.generations" className="l" />
-            </div>
-            <div>
-              <div className="v">∞</div>
-              <T as="div" k="export.stats.shipping" className="l" />
-            </div>
+          <T as="h1" k="export.hero.title" html className="export-hero-title-v2" />
+          <T as="p" k="export.hero.desc" className="export-hero-desc-v2" />
+          <div className="export-hero-meta">
+            <span>17°50&prime;S 44°00&prime;W</span>
+            <span className="sep" aria-hidden="true" />
+            <span>640 – 760 m</span>
+            <span className="sep" aria-hidden="true" />
+            <span>100% Arabica</span>
+            <span className="sep" aria-hidden="true" />
+            <span>Worldwide shipping</span>
           </div>
           <div className="export-cta">
             <a href="#inquiry" className="btn btn-gold">
@@ -123,19 +140,30 @@ export default function ExportPage() {
             </a>
           </div>
         </div>
+        <div className="export-hero-image" aria-hidden="true">
+          <Image
+            src="/assets/export/sacas-cafes-do-brasil.webp"
+            alt=""
+            fill
+            sizes="(max-width: 1024px) 100vw, 42vw"
+            priority
+          />
+        </div>
       </section>
 
-      {/* ORIGIN */}
+      {/* ===== ATTO I — ORIGIN ===== */}
       <section className="export-section export-origin" id="origin">
+        <Divider />
         <div className="export-section-inner">
-          <div className="export-section-head">
-            <div>
-              <T as="span" k="export.origin.eyebrow" className="eyebrow" />
-              <T as="h2" k="export.origin.title" html className="display" />
-            </div>
-            <div>
+          <div className="export-section-head-v2">
+            <AttoMarker num="ATTO I" eyebrowKey="export.origin.eyebrow" />
+            <T as="h2" k="export.origin.title" html className="export-display-v2" />
+          </div>
+
+          <div className="export-origin-split">
+            <div className="export-origin-text">
               <T as="p" k="export.origin.body" />
-              <div className="export-meta-grid">
+              <div className="export-meta-vert">
                 {ORIGIN_META.map((field) => (
                   <div key={field}>
                     <T as="span" k={`export.origin.meta.${field}`} className="k" />
@@ -144,21 +172,25 @@ export default function ExportPage() {
                 ))}
               </div>
             </div>
+            <div className="export-origin-image">
+              <Image
+                src="/assets/export/sacas-arabica-empilhadas.webp"
+                alt=""
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* COFFEES */}
+      {/* ===== ATTO II — COFFEES ===== */}
       <section className="export-section export-coffees" id="coffees">
+        <Divider />
         <div className="export-section-inner">
-          <div className="export-section-head">
-            <div>
-              <T as="span" k="export.coffees.eyebrow" className="eyebrow" />
-              <T as="h2" k="export.coffees.title" html className="display" />
-            </div>
-            <div>
-              <T as="p" k="export.coffees.note" />
-            </div>
+          <div className="export-section-head-v2">
+            <AttoMarker num="ATTO II" eyebrowKey="export.coffees.eyebrow" />
+            <T as="h2" k="export.coffees.title" html className="export-display-v2" />
           </div>
 
           <div className="export-coffees-grid">
@@ -192,103 +224,105 @@ export default function ExportPage() {
                     <T as="span" k={c.roastKey} className="v" />
                   </div>
                 </div>
+                <span className="seal" aria-hidden="true">Z</span>
               </article>
             ))}
           </div>
+
+          <T as="p" k="export.coffees.note" className="export-coffees-note" />
         </div>
       </section>
 
-      {/* PROCESS */}
+      {/* ===== ATTO III — PROCESS ===== */}
       <section className="export-section export-process" id="process">
+        <Divider />
         <div className="export-section-inner">
-          <div className="export-section-head">
-            <div>
-              <T as="span" k="export.process.eyebrow" className="eyebrow" />
-              <T as="h2" k="export.process.title" html className="display" />
-            </div>
-            <div />
+          <div className="export-section-head-v2">
+            <AttoMarker num="ATTO III" eyebrowKey="export.process.eyebrow" />
+            <T as="h2" k="export.process.title" html className="export-display-v2" />
           </div>
 
           <div className="export-timeline">
             {PROCESS_STEPS.map((s) => (
               <div key={s.key} className="export-timeline-step">
-                <div className="step-num">{s.n}</div>
-                <T as="h3" k={`export.process.${s.key}.title`} />
-                <T as="p" k={`export.process.${s.key}.desc`} />
+                <div className="step-num" aria-hidden="true">{s.n}</div>
+                <div className="step-body">
+                  <T as="h3" k={`export.process.${s.key}.title`} />
+                  <T as="p" k={`export.process.${s.key}.desc`} />
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* LOGISTICS */}
+      {/* ===== ATTO IV — LOGISTICS (Bill of Lading) ===== */}
       <section className="export-section export-logistics" id="logistics">
+        <div className="export-logistics-bg" aria-hidden="true" />
+        <Divider />
         <div className="export-section-inner">
-          <div className="export-section-head">
-            <div>
-              <T as="span" k="export.logistics.eyebrow" className="eyebrow" />
-              <T as="h2" k="export.logistics.title" html className="display" />
-            </div>
-            <div>
-              <T as="p" k="export.logistics.intro" />
-            </div>
+          <div className="export-section-head-v2">
+            <AttoMarker num="ATTO IV" eyebrowKey="export.logistics.eyebrow" />
+            <T as="h2" k="export.logistics.title" html className="export-display-v2" />
           </div>
 
-          <div className="export-logistics-grid">
-            {LOGISTICS_FIELDS.map((f) => (
-              <div key={f} className="export-logistics-row">
-                <T as="span" k={`export.logistics.${f}.label`} className="k" />
-                <T as="span" k={`export.logistics.${f}.value`} className="v" />
-              </div>
-            ))}
+          <T as="p" k="export.logistics.intro" className="export-hero-desc-v2" />
+
+          <div className="export-bill">
+            <div className="export-bill-header" aria-hidden="true">
+              <span className="diamond" />
+              <span>Bill of Lading · Termini Commerciali</span>
+              <span className="diamond" />
+            </div>
+
+            <div className="export-logistics-grid">
+              {LOGISTICS_FIELDS.map((f) => (
+                <div key={f} className="export-logistics-row">
+                  <T as="span" k={`export.logistics.${f}.label`} className="k" />
+                  <T as="span" k={`export.logistics.${f}.value`} className="v" />
+                </div>
+              ))}
+            </div>
+
+            <div className="export-bill-stamp" aria-hidden="true">
+              Zerbinatti<br />Export<br />MG · Brazil
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FORM */}
+      {/* ===== ATTO V — FORM (Private Consultation) ===== */}
       <section className="export-section export-form-section" id="inquiry">
+        <Divider />
         <div className="export-form-shell">
-          <T as="span" k="export.form.eyebrow" className="eyebrow" />
-          <T as="h2" k="export.form.title" html className="display" />
-          <T as="p" k="export.form.desc" />
-          <ExportForm />
+          <div className="script">Consulenza privata</div>
+          <T as="h2" k="export.form.title" html className="display-v2" />
+          <T as="p" k="export.form.desc" className="lede" />
+
+          <div className="export-form-frame">
+            <ExportForm />
+          </div>
+
           <T as="p" k="export.form.note" className="export-form-note" />
         </div>
       </section>
 
-      {/* TRUST */}
-      <section className="export-section export-trust">
-        <div className="export-section-inner">
-          <div className="export-trust-grid">
-            <div className="export-trust-card">
-              <div className="icon" aria-hidden="true">
-                <svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4}>
-                  <circle cx={12} cy={12} r={9} />
-                  <path d="M8 12l3 3 5-5" />
-                </svg>
-              </div>
-              <T as="h3" k="export.trust.qgrader" />
-              <T as="p" k="export.trust.qgrader.desc" />
-            </div>
-            <div className="export-trust-card">
-              <div className="icon" aria-hidden="true">
-                <svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4}>
-                  <path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6" />
-                </svg>
-              </div>
-              <T as="h3" k="export.trust.direct" />
-              <T as="p" k="export.trust.direct.desc" />
-            </div>
-            <div className="export-trust-card">
-              <div className="icon" aria-hidden="true">
-                <svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4}>
-                  <rect x={3} y={7} width={18} height={13} rx={2} />
-                  <path d="M3 11h18M8 16h2M14 16h4M9 7V4h6v3" />
-                </svg>
-              </div>
-              <T as="h3" k="export.trust.samples" />
-              <T as="p" k="export.trust.samples.desc" />
-            </div>
+      {/* ===== TRUST — signed statement ===== */}
+      <section className="export-trust">
+        <div className="export-trust-shell">
+          <p className="statement">
+            &ldquo;<T as="span" k="export.trust.qgrader" />{' '}
+            <em>—</em>{' '}
+            <T as="span" k="export.trust.direct" />.&rdquo;
+          </p>
+          <div className="signature">Famiglia Zerbinatti</div>
+          <div className="signed-by">III generazioni · Serra do Cabral · MG</div>
+
+          <div className="export-trust-seals" aria-hidden="true">
+            <div className="seal"><span className="dot" /> SCA 85+ Cupping</div>
+            <div className="seal"><span className="dot" /> Q-Graders</div>
+            <div className="seal"><span className="dot" /> ICO Marks</div>
+            <div className="seal"><span className="dot" /> Pre-Shipment Sample</div>
           </div>
         </div>
       </section>
