@@ -38,8 +38,8 @@ const RADAR_DATA = [
   { label: 'Doçura', value: 10.0 },
 ];
 
-const CX = 180;
-const CY = 180;
+const CX = 230;
+const CY = 230;
 const R = 130;
 const MAX = 10;
 const angleAt = (i: number, n: number) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
@@ -76,6 +76,16 @@ export default function ExportGalleryLab() {
   const axes = RADAR_DATA.map((_, i) => {
     const a = angleAt(i, N);
     return { x: fmt(CX + R * Math.cos(a)), y: fmt(CY + R * Math.sin(a)) };
+  });
+  const labels = RADAR_DATA.map((d, i) => {
+    const a = angleAt(i, N);
+    const lr = R + 22;
+    const x = fmt(CX + lr * Math.cos(a));
+    const y = fmt(CY + lr * Math.sin(a));
+    let anchor: 'start' | 'middle' | 'end' = 'middle';
+    if (Math.cos(a) > 0.25) anchor = 'start';
+    else if (Math.cos(a) < -0.25) anchor = 'end';
+    return { x, y, anchor, label: d.label.toUpperCase(), value: d.value.toFixed(2) };
   });
 
   return (
@@ -131,7 +141,7 @@ export default function ExportGalleryLab() {
                 <div className="num">84.75</div>
                 <div className="lbl">{t('cup.total')}</div>
               </div>
-              <svg viewBox="0 0 360 360" aria-label="Radar sensorial">
+              <svg viewBox="0 0 460 460" aria-label="Radar sensorial">
                 <defs>
                   <radialGradient id="exportRadarGlow" cx="50%" cy="50%" r="50%">
                     <stop offset="0%" stopColor="var(--gold)" stopOpacity="0.55" />
@@ -153,6 +163,28 @@ export default function ExportGalleryLab() {
                 <polygon points={polyPoints} fill="url(#exportRadarFill)" stroke="var(--gold)" strokeWidth="1.4" />
                 {points.map((p, i) => (
                   <circle key={i} cx={p.x} cy={p.y} r={3} className="radar-dot" />
+                ))}
+                {labels.map((l, i) => (
+                  <g key={`lbl-${i}`}>
+                    <text
+                      x={l.x}
+                      y={l.y}
+                      className="radar-label"
+                      textAnchor={l.anchor}
+                      dominantBaseline="middle"
+                    >
+                      {l.label}
+                    </text>
+                    <text
+                      x={l.x}
+                      y={l.y + 11}
+                      className="radar-label v"
+                      textAnchor={l.anchor}
+                      dominantBaseline="middle"
+                    >
+                      {l.value}
+                    </text>
+                  </g>
                 ))}
               </svg>
             </div>
