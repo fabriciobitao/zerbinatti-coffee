@@ -22,61 +22,100 @@
   --paper: #F4EDE2;
 }
 
-/* ===== HERO V2 — SPLIT ASIMETRICO ===== */
+/* ===== HERO V3 — CENTERED, BRAND-LED ===== */
 .novo-layout .export-hero-v2 {
   position: relative;
-  min-height: 92vh;
-  display: grid;
-  grid-template-columns: 58% 42%;
+  min-height: 96vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--bg-0);
   border-bottom: 1px solid var(--gold-hairline);
   isolation: isolate;
   overflow: hidden;
+  padding: 160px 24px 100px;
 }
-.novo-layout .export-hero-text {
-  position: relative;
-  z-index: 2;
-  padding: 160px 6vw 90px 6vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 32px;
-  background:
-    radial-gradient(ellipse 70% 80% at 25% 50%, rgba(201, 169, 97, 0.10) 0%, transparent 60%),
-    var(--bg-0);
-}
-.novo-layout .export-hero-image {
-  position: relative;
-  overflow: hidden;
-  border-left: 1px solid var(--gold-hairline);
-}
-.novo-layout .export-hero-image::before {
+/* Camada de fundo: glow dourado + grain sutil + vinheta */
+.novo-layout .export-hero-v2::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 0;
   background:
-    linear-gradient(90deg, var(--bg-0) 0%, transparent 18%),
-    linear-gradient(180deg, transparent 60%, rgba(31, 22, 17, 0.55) 100%);
+    radial-gradient(ellipse 55% 65% at 50% 45%, rgba(201, 169, 97, 0.16) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(0, 0, 0, 0.55) 0%, transparent 60%),
+    var(--bg-0);
   pointer-events: none;
 }
-.novo-layout .export-hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(0.85) contrast(1.05);
-  animation: kenburns 28s ease-out infinite alternate;
+/* Camada decorativa: 2 selos da fazenda como accents grandes (low opacity) */
+.novo-layout .export-hero-v2::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    url('/assets/selo-scaa.png'),
+    url('/assets/selo-organico-fazenda.png');
+  background-position:
+    calc(50% - 540px) calc(50% - 50px),
+    calc(50% + 540px) calc(50% + 60px);
+  background-size: 220px auto, 240px auto;
+  background-repeat: no-repeat;
+  opacity: 0.10;
+  filter: saturate(1.1);
+  pointer-events: none;
 }
 
-/* Top eyebrow row do hero */
+.novo-layout .export-hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 26px;
+}
+
+/* Wordmark grande Zerbinatti — anchor visual do hero */
+.novo-layout .export-hero-wordmark {
+  display: block;
+  margin: 0 auto 4px;
+  height: clamp(60px, 7.2vw, 110px);
+  width: auto;
+  filter: drop-shadow(0 4px 32px rgba(201, 169, 97, 0.28));
+  user-select: none;
+}
+.novo-layout .export-hero-tagline {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.85;
+  margin: -10px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.novo-layout .export-hero-tagline .rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-hairline);
+}
+
+/* Tagline italiana — eyebrow do hero, centralizado */
 .novo-layout .export-act-row {
   display: flex;
   align-items: center;
-  gap: 18px;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.36em;
   text-transform: uppercase;
   color: var(--gold);
 }
@@ -87,6 +126,17 @@
   background: var(--gold);
   transform: rotate(45deg);
   display: inline-block;
+}
+/* Tagline italiana grande — usa script Allura */
+.novo-layout .export-hero-italian {
+  font-family: var(--script, 'Allura', cursive);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(38px, 4vw, 60px);
+  color: var(--gold);
+  line-height: 1;
+  margin: -6px 0 4px;
+  letter-spacing: 0.01em;
 }
 
 /* Titulo do hero — Cormorant italic 92px com gradiente gold no <em> */
@@ -113,14 +163,16 @@
   font-size: 22px;
   line-height: 1.55;
   color: var(--ink-1);
-  max-width: 540px;
-  margin: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-/* Linha de metadata da fazenda — coords + estado */
+/* Linha de metadata da fazenda — coords + estado, centralizada */
 .novo-layout .export-hero-meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
   font-family: var(--mono);
@@ -129,8 +181,10 @@
   text-transform: uppercase;
   color: var(--ink-2);
   padding-top: 22px;
+  margin-top: 4px;
   border-top: 1px solid var(--gold-hairline);
-  max-width: 680px;
+  max-width: 760px;
+  width: 100%;
 }
 .novo-layout .export-hero-meta .sep {
   width: 4px;
@@ -144,7 +198,30 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
   padding-top: 8px;
+}
+
+/* Stamps row — selos circulares da propria embalagem como trust marks */
+.novo-layout .export-hero-stamps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  margin: 12px 0 6px;
+  flex-wrap: wrap;
+}
+.novo-layout .export-hero-stamps img {
+  height: 84px;
+  width: auto;
+  opacity: 0.92;
+  filter: drop-shadow(0 0 24px rgba(201, 169, 97, 0.18));
+}
+
+/* Titulo centralizado — sobrescreve max-width do v2 */
+.novo-layout .export-hero-v2 .export-hero-title-v2 {
+  max-width: 980px;
+  text-align: center;
 }
 
 /* ===== DIVISOR COM DIAMANTE + COORDS ===== */
@@ -153,13 +230,17 @@
   align-items: center;
   justify-content: center;
   gap: 22px;
-  padding: 64px 24px 0;
+  padding: 48px 24px 96px;
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--gold);
   opacity: 0.78;
+}
+@media (max-width: 1024px) {
+  .novo-layout .export-divider { padding: 32px 16px 56px; }
+  .novo-layout .export-divider .rule { width: 60px; }
 }
 .novo-layout .export-divider .rule {
   flex: 0 0 auto;
@@ -479,6 +560,47 @@
   color: var(--ink-1);
   max-width: 640px;
   margin: 0;
+}
+
+/* ===== LOGISTICS — pull-quote do intro ===== */
+.novo-layout .export-pullquote {
+  position: relative;
+  max-width: 880px;
+  margin: 40px auto 56px;
+  padding: 48px 56px;
+  font-family: var(--cormorant, var(--serif));
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.5;
+  color: var(--ink-0);
+  text-align: center;
+  border-top: 1px solid var(--gold-hairline);
+  border-bottom: 1px solid var(--gold-hairline);
+}
+.novo-layout .export-pullquote::before,
+.novo-layout .export-pullquote::after {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 80px;
+  color: var(--gold);
+  line-height: 1;
+  position: absolute;
+  opacity: 0.65;
+}
+.novo-layout .export-pullquote::before {
+  content: "\201C";
+  top: 14px;
+  left: 16px;
+}
+.novo-layout .export-pullquote::after {
+  content: "\201D";
+  bottom: -10px;
+  right: 16px;
+}
+.novo-layout .export-pullquote em {
+  color: var(--gold);
+  font-style: italic;
 }
 
 /* ===== LOGISTICS — BILL OF LADING ===== */
@@ -806,13 +928,17 @@
 
 /* ===== MOBILE ===== */
 @media (max-width: 1024px) {
-  .novo-layout .export-hero-v2 { grid-template-columns: 1fr; min-height: auto; }
-  .novo-layout .export-hero-text { padding: 120px 24px 60px; }
-  .novo-layout .export-hero-image {
-    min-height: 360px;
-    border-left: none;
-    border-top: 1px solid var(--gold-hairline);
+  .novo-layout .export-hero-v2 { padding: 120px 24px 70px; min-height: auto; }
+  .novo-layout .export-hero-v2::after {
+    background-position:
+      calc(50% - 280px) calc(50% - 200px),
+      calc(50% + 280px) calc(50% + 200px);
+    background-size: 140px auto, 150px auto;
+    opacity: 0.07;
   }
+  .novo-layout .export-hero-stamps { gap: 20px; }
+  .novo-layout .export-hero-stamps img { height: 64px; }
+  .novo-layout .export-pullquote { padding: 36px 32px; margin: 24px auto 36px; }
   .novo-layout .export-section { padding: 80px 0; }
   .novo-layout .export-section-inner { padding: 0 24px; }
   .novo-layout .export-section-head-v2 {

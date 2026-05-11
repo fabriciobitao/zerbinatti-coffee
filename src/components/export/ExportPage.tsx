@@ -109,7 +109,7 @@ export default function ExportPage() {
     <main id="main" className="novo-layout">
       <HomeHeader />
 
-      {/* ===== HERO — split asimetrico, typography-led ===== */}
+      {/* ===== HERO V3 — centered, brand-led (Zerbinatti's own marks) ===== */}
       <section className="export-hero-v2">
         <div className="export-hero-text">
           <div className="export-act-row">
@@ -119,9 +119,47 @@ export default function ExportPage() {
             <span>Est. 1897</span>
             <span className="dot-sep">·</span>
             <span>Serra do Cabral · MG</span>
+            <span className="diamond-mini" aria-hidden="true" />
           </div>
+          <Image
+            src="/assets/zerbinatti-wordmark-gold.png"
+            alt="Zerbinatti"
+            width={1205}
+            height={295}
+            priority
+            className="export-hero-wordmark"
+          />
+          <div className="export-hero-tagline">
+            <span className="rule" aria-hidden="true" />
+            <span>Caffè · Dall&apos;Italia al Brasile dal 1897</span>
+            <span className="rule" aria-hidden="true" />
+          </div>
+          <div className="export-hero-italian">Specialty Coffee for Export</div>
           <T as="h1" k="export.hero.title" html className="export-hero-title-v2" />
           <T as="p" k="export.hero.desc" className="export-hero-desc-v2" />
+          <div className="export-hero-stamps" aria-hidden="true">
+            <Image
+              src="/assets/selo-organico-fazenda.png"
+              alt=""
+              width={84}
+              height={84}
+              style={{ height: 84, width: 'auto' }}
+            />
+            <Image
+              src="/assets/selo-scaa.png"
+              alt=""
+              width={84}
+              height={84}
+              style={{ height: 84, width: 'auto' }}
+            />
+            <Image
+              src="/assets/selo-cup.png"
+              alt=""
+              width={84}
+              height={84}
+              style={{ height: 84, width: 'auto' }}
+            />
+          </div>
           <div className="export-hero-meta">
             <span>17°50&prime;S 44°00&prime;W</span>
             <span className="sep" aria-hidden="true" />
@@ -139,15 +177,6 @@ export default function ExportPage() {
               <T as="span" k="export.hero.cta.origin" />
             </a>
           </div>
-        </div>
-        <div className="export-hero-image" aria-hidden="true">
-          <Image
-            src="/assets/export/sacas-cafes-do-brasil.webp"
-            alt=""
-            fill
-            sizes="(max-width: 1024px) 100vw, 42vw"
-            priority
-          />
         </div>
       </section>
 
@@ -266,7 +295,9 @@ export default function ExportPage() {
             <T as="h2" k="export.logistics.title" html className="export-display-v2" />
           </div>
 
-          <T as="p" k="export.logistics.intro" className="export-hero-desc-v2" />
+          <blockquote className="export-pullquote">
+            <T as="span" k="export.logistics.intro" />
+          </blockquote>
 
           <div className="export-bill">
             <div className="export-bill-header" aria-hidden="true">
