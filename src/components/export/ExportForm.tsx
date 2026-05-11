@@ -191,8 +191,8 @@ export default function ExportForm() {
   }, [form, msg]);
 
   return (
-    <form ref={formRef} className="export-form-grid" onSubmit={onSubmit} noValidate>
-      <div className="export-form-row">
+    <form ref={formRef} className="form-grid" onSubmit={onSubmit} noValidate>
+      <div className="field">
         <label htmlFor="exp-nome">{t('export.form.label.nome')}</label>
         <input
           id="exp-nome"
@@ -206,10 +206,10 @@ export default function ExportForm() {
           className={errors.nome ? 'invalid' : ''}
           onChange={(e) => update('nome', e.target.value)}
         />
-        {errors.nome && <span className="export-field-error show">{errors.nome}</span>}
+        {errors.nome && <span className="x-field-error show">{errors.nome}</span>}
       </div>
 
-      <div className="export-form-row">
+      <div className="field">
         <label htmlFor="exp-empresa">{t('export.form.label.empresa')}</label>
         <input
           id="exp-empresa"
@@ -223,10 +223,10 @@ export default function ExportForm() {
           className={errors.empresa ? 'invalid' : ''}
           onChange={(e) => update('empresa', e.target.value)}
         />
-        {errors.empresa && <span className="export-field-error show">{errors.empresa}</span>}
+        {errors.empresa && <span className="x-field-error show">{errors.empresa}</span>}
       </div>
 
-      <div className="export-form-row">
+      <div className="field">
         <label htmlFor="exp-email">{t('export.form.label.email')}</label>
         <input
           id="exp-email"
@@ -239,10 +239,10 @@ export default function ExportForm() {
           className={errors.email ? 'invalid' : ''}
           onChange={(e) => update('email', e.target.value)}
         />
-        {errors.email && <span className="export-field-error show">{errors.email}</span>}
+        {errors.email && <span className="x-field-error show">{errors.email}</span>}
       </div>
 
-      <div className="export-form-row">
+      <div className="field">
         <label htmlFor="exp-pais">{t('export.form.label.pais')}</label>
         <input
           id="exp-pais"
@@ -255,10 +255,10 @@ export default function ExportForm() {
           className={errors.pais ? 'invalid' : ''}
           onChange={(e) => update('pais', e.target.value)}
         />
-        {errors.pais && <span className="export-field-error show">{errors.pais}</span>}
+        {errors.pais && <span className="x-field-error show">{errors.pais}</span>}
       </div>
 
-      <div className="export-form-row full">
+      <div className="field full">
         <label htmlFor="exp-phone">{t('export.form.label.whatsapp')}</label>
         <input
           id="exp-phone"
@@ -273,10 +273,10 @@ export default function ExportForm() {
           className={errors.whatsapp ? 'invalid' : ''}
           onChange={(e) => update('whatsapp', e.target.value)}
         />
-        {errors.whatsapp && <span className="export-field-error show">{errors.whatsapp}</span>}
+        {errors.whatsapp && <span className="x-field-error show">{errors.whatsapp}</span>}
       </div>
 
-      <div className="export-form-row">
+      <div className="field">
         <label htmlFor="exp-tipo">{t('export.form.label.tipoCafe')}</label>
         <select
           id="exp-tipo"
@@ -292,10 +292,10 @@ export default function ExportForm() {
             </option>
           ))}
         </select>
-        {errors.tipoCafe && <span className="export-field-error show">{errors.tipoCafe}</span>}
+        {errors.tipoCafe && <span className="x-field-error show">{errors.tipoCafe}</span>}
       </div>
 
-      <div className="export-form-row">
+      <div className="field">
         <label htmlFor="exp-timeline">{t('export.form.label.timeline')}</label>
         <select
           id="exp-timeline"
@@ -311,7 +311,7 @@ export default function ExportForm() {
         </select>
       </div>
 
-      <div className="export-form-row full">
+      <div className="field full">
         <label htmlFor="exp-volume">{t('export.form.label.volume')}</label>
         <input
           id="exp-volume"
@@ -324,7 +324,7 @@ export default function ExportForm() {
         />
       </div>
 
-      <div className="export-form-row full">
+      <div className="field full">
         <label htmlFor="exp-porto">
           {t('export.form.label.porto')}{' '}
           <span style={{ opacity: 0.55, textTransform: 'none', letterSpacing: 'normal' }}>
@@ -342,7 +342,7 @@ export default function ExportForm() {
         />
       </div>
 
-      <div className="export-form-row full">
+      <div className="field full">
         <label htmlFor="exp-mensagem">
           {t('export.form.label.mensagem')}{' '}
           <span style={{ opacity: 0.55, textTransform: 'none', letterSpacing: 'normal' }}>
@@ -372,18 +372,31 @@ export default function ExportForm() {
       {/* Cloudflare Turnstile invisible — token preenchido em ref. */}
       <TurnstileWidget onToken={(token) => { turnstileTokenRef.current = token; }} />
 
-      <div className="export-form-row full export-form-actions">
-        <button type="submit" className="btn btn-gold" disabled={submitting}>
-          {submitting ? (
-            t('export.form.submitting')
-          ) : (
-            <span dangerouslySetInnerHTML={t.html('export.form.submit')} />
-          )}
-        </button>
+      <div className="field full">
+        <div className="form-actions">
+          <div
+            style={{
+              fontFamily: 'var(--x-mono)',
+              fontSize: 10,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+              color: 'var(--x-ink-2)',
+            }}
+          >
+            {t('export.form.note')}
+          </div>
+          <button type="submit" className="x-btn x-btn-gold" disabled={submitting}>
+            {submitting ? (
+              t('export.form.submitting')
+            ) : (
+              <span dangerouslySetInnerHTML={t.html('export.form.submit')} />
+            )}
+          </button>
+        </div>
       </div>
 
       {msg && (
-        <div className={`export-form-row full export-form-msg ${msg.kind}`}>{msg.text}</div>
+        <div className={`form-msg ${msg.kind}`}>{msg.text}</div>
       )}
     </form>
   );
