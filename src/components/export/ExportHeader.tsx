@@ -96,6 +96,10 @@ export default function ExportHeader() {
               </button>
             ))}
           </div>
+          <Link href={locale === 'en' ? '/en' : '/'} className="x-btn x-btn-ghost x-btn-sm">
+            {locale === 'pt' ? 'Loja Virtual' : locale === 'es' ? 'Tienda' : 'Boutique'}{' '}
+            <span className="arrow">↗</span>
+          </Link>
           <a href="#inquiry" className="x-btn x-btn-gold x-btn-sm">
             Request quote <span className="arrow">→</span>
           </a>
