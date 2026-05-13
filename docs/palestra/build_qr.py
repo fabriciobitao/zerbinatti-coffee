@@ -11,7 +11,7 @@ from PIL import Image, ImageDraw, ImageFilter
 import qrcode
 from qrcode.constants import ERROR_CORRECT_H
 
-URL = "https://zerbinatticoffee.com"
+URL = "https://zerbinatti.coffee/en"
 OUT = "/Users/fabricio/dev/cafe/docs/palestra/img/qr-zerbinatti.png"
 BRAND_SRC = "/Users/fabricio/dev/cafe/public/images/farm/brand-composition.webp"
 
