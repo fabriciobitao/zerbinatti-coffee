@@ -48,7 +48,7 @@ export default function Historia({ id = 'historia' }: { id?: string } = {}) {
             <div>
               <div style={statNumberStyle}>100%</div>
               <div className="label" style={statLabelStyle}>
-                Arábica
+                <T k="cup.arabica" />
               </div>
             </div>
             <div>
