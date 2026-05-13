@@ -16,16 +16,15 @@ export default function Subscription({ id = 'assinatura' }: { id?: string } = {}
           <T k="sub.title" as="p" className="sub-tagline" />
           <T k="sub.desc" as="p" className="body-lg" />
           <div className="sub-perks" aria-hidden="true">
-            <span><i>✦</i> 10% off em cada entrega</span>
-            <span><i>✦</i> Pause ou cancele quando quiser</span>
-            <span><i>✦</i> Torra do mês selecionada à mão</span>
+            <span><i>✦</i> <T k="sub.perk.discount" /></span>
+            <span><i>✦</i> <T k="sub.perk.flex" /></span>
+            <span><i>✦</i> <T k="sub.perk.curated" /></span>
           </div>
           <span
             className="sub-coming-soon-seal"
             data-coming-soon="true"
-            aria-label="Assinatura em breve"
           >
-            Em breve
+            <T k="cta.comingSoon" />
           </span>
         </div>
         <div className="sub-cards reveal" id="planos">

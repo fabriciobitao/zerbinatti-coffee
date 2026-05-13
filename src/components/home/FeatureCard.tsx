@@ -21,8 +21,8 @@ type SlotCopy = {
   tagKey: string;
   specsKey: string;
   descKey: string;
-  /** Sufixo italico apos o brand-mark (ex.: "Em Grãos"). undefined = sem sufixo. */
-  italicSuffix?: string;
+  /** Chave i18n do sufixo italico apos o brand-mark. undefined = sem sufixo. */
+  italicSuffixKey?: string;
   packageAlt: string;
 };
 
@@ -32,7 +32,7 @@ const SLOT_COPY: Record<string, SlotCopy> = {
     tagKey: 'feat.classico.tag',
     specsKey: 'feat.classico.specs',
     descKey: 'feat.classico.desc',
-    italicSuffix: 'Moído',
+    italicSuffixKey: 'feat.classico.italicSuffix',
     packageAlt: 'Clássico Zerbinatti',
   },
   'classico-500g': {
@@ -40,7 +40,7 @@ const SLOT_COPY: Record<string, SlotCopy> = {
     tagKey: 'feat.micro.tag',
     specsKey: 'feat.micro.specs',
     descKey: 'feat.micro.desc',
-    italicSuffix: 'Em Grãos',
+    italicSuffixKey: 'feat.micro.italicSuffix',
     packageAlt: 'Clássico Zerbinatti — Em Grãos',
   },
 };
@@ -96,7 +96,12 @@ export function FeatureCard({
               height={32}
               style={{ height: 'auto', width: 'auto', display: 'inline-block' }}
             />
-            {copy.italicSuffix ? <> <em>{copy.italicSuffix}</em></> : null}
+            {copy.italicSuffixKey ? (
+              <>
+                {' '}
+                <T k={copy.italicSuffixKey} as="em" />
+              </>
+            ) : null}
           </h3>
           <T k={copy.tagKey} as="div" className="tagline" />
           <div

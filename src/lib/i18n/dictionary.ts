@@ -31,11 +31,13 @@ export const dictionary = {
     'feat.classico.num': 'N° 01 — Mais vendido',
     'feat.classico.tag': 'O blend da família desde 1897.',
     'feat.classico.specs': 'Moído · 250g · Torra Média',
+    'feat.classico.italicSuffix': 'Moído',
     'feat.classico.desc':
       'Nascido na primeira torra de Giuseppe Zerbinatti, este blend atravessou três gerações sem perder a alma. Equilíbrio entre doçura, corpo redondo e final persistente.',
     'feat.micro.num': 'N° 02 — Versão em grãos',
     'feat.micro.tag': 'O mesmo blend, agora em grãos.',
     'feat.micro.specs': 'Em grãos · 500g · Torra Média',
+    'feat.micro.italicSuffix': 'Em Grãos',
     'feat.micro.desc':
       'A mesma alma do Clássico Zerbinatti, agora em grãos inteiros. Para quem prefere moer fresco antes de cada xícara e preservar todo o aroma da torra média da Valim Farms. Pacote 500g.',
     'meta.origem': 'Origem',
@@ -180,6 +182,11 @@ export const dictionary = {
     'sub.whatsapp.msg.plan3':
       'Olá! Quero assinar o plano Maestro (3× grãos 500g · mensal). Pode me ajudar?',
     'sub.plan.cta': 'Assinar plano',
+    'sub.perk.discount': '10% off em cada entrega',
+    'sub.perk.flex': 'Pause ou cancele quando quiser',
+    'sub.perk.curated': 'Torra do mês selecionada à mão',
+    'sub.comingSoon.aria': 'Assinatura em breve',
+    'cta.comingSoon': 'Em breve',
     'story.stamp': 'Famiglia · Desde',
     'story.eyebrow': 'Nossa História',
     'story.title': 'Da Itália ao <em>coração</em> do Brasil.',
@@ -360,11 +367,13 @@ export const dictionary = {
     'feat.classico.num': 'N° 01 — Best seller',
     'feat.classico.tag': 'The family blend since 1897.',
     'feat.classico.specs': 'Ground · 250g · Medium Roast',
+    'feat.classico.italicSuffix': 'Ground',
     'feat.classico.desc':
       'Born in Giuseppe Zerbinatti\u2019s first roast, this blend has crossed three generations without losing its soul. Balance of sweetness, round body and a persistent finish.',
     'feat.micro.num': 'N° 02 — Whole bean version',
     'feat.micro.tag': 'The same blend, now in beans.',
     'feat.micro.specs': 'Whole beans · 500g · Medium roast',
+    'feat.micro.italicSuffix': 'Whole Beans',
     'feat.micro.desc':
       'The same soul of Clássico Zerbinatti, now in whole beans. For those who prefer to grind fresh before each cup and preserve the full aroma of Valim Farms’s medium roast. 500g pack.',
     'meta.origem': 'Origin',
@@ -508,6 +517,11 @@ export const dictionary = {
     'sub.whatsapp.msg.plan3':
       "Hi! I'd like to subscribe to the Maestro plan (3× whole beans 500g · monthly). Can you help?",
     'sub.plan.cta': 'Subscribe to plan',
+    'sub.perk.discount': '10% off every shipment',
+    'sub.perk.flex': 'Pause or cancel anytime',
+    'sub.perk.curated': 'Monthly roast hand-picked',
+    'sub.comingSoon.aria': 'Subscription coming soon',
+    'cta.comingSoon': 'Coming soon',
     'story.stamp': 'Famiglia · Since',
     'story.eyebrow': 'Our Story',
     'story.title': 'From Italy to the <em>heart</em> of Brazil.',
@@ -688,11 +702,13 @@ export const dictionary = {
     'feat.classico.num': 'N° 01 — Más vendido',
     'feat.classico.tag': 'El blend de la familia desde 1897.',
     'feat.classico.specs': 'Molido · 250g · Tueste Medio',
+    'feat.classico.italicSuffix': 'Molido',
     'feat.classico.desc':
       'Nacido en el primer tueste de Giuseppe Zerbinatti, este blend atravesó tres generaciones sin perder el alma. Equilibrio entre dulzor, cuerpo redondo y final persistente.',
     'feat.micro.num': 'N° 02 — Versión en granos',
     'feat.micro.tag': 'El mismo blend, ahora en granos.',
     'feat.micro.specs': 'En granos · 500g · Tueste Medio',
+    'feat.micro.italicSuffix': 'En Granos',
     'feat.micro.desc':
       'La misma alma del Clássico Zerbinatti, ahora en granos enteros. Para quienes prefieren moler fresco antes de cada taza y preservar todo el aroma del tueste medio de Valim Farms. Paquete 500g.',
     'meta.origem': 'Origen',
@@ -837,6 +853,11 @@ export const dictionary = {
     'sub.whatsapp.msg.plan3':
       '¡Hola! Quiero suscribirme al plan Maestro (3× granos 500g · mensual). ¿Pueden ayudarme?',
     'sub.plan.cta': 'Suscribirse al plan',
+    'sub.perk.discount': '10% off en cada envío',
+    'sub.perk.flex': 'Pausa o cancela cuando quieras',
+    'sub.perk.curated': 'Tueste del mes elegido a mano',
+    'sub.comingSoon.aria': 'Suscripción próximamente',
+    'cta.comingSoon': 'Próximamente',
     'story.stamp': 'Famiglia · Desde',
     'story.eyebrow': 'Nuestra Historia',
     'story.title': 'De Italia al <em>corazón</em> de Brasil.',

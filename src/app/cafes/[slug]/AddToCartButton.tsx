@@ -4,6 +4,8 @@
  * enquanto a loja ainda nao esta liberada para vendas.
  */
 
+import { T } from '@/lib/i18n/T';
+
 export function AddToCartButton({
   variantId,
   availableForSale,
@@ -19,7 +21,7 @@ export function AddToCartButton({
       data-available={availableForSale ? "true" : "false"}
       className="flex-1 inline-flex items-center justify-center rounded-full bg-coffee-900 px-5 py-3 text-sm font-semibold text-coffee-50 opacity-60 cursor-not-allowed"
     >
-      Em breve
+      <T k="cta.comingSoon" />
     </span>
   );
 }

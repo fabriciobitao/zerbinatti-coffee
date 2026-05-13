@@ -4,6 +4,8 @@
  * enquanto a loja ainda nao esta liberada para vendas.
  */
 
+import { T } from '@/lib/i18n/T';
+
 type Props = {
   variantId: string;
   available: boolean;
@@ -19,7 +21,7 @@ export function AddToCartButton({ variantId, available }: Props) {
       data-variant-id={variantId}
       data-available={available ? 'true' : 'false'}
     >
-      Em breve
+      <T k="cta.comingSoon" />
     </span>
   );
 }
