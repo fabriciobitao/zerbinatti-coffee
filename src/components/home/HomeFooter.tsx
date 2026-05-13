@@ -32,7 +32,7 @@ export default function HomeFooter() {
               priority={false}
               style={{ height: 'auto', width: 'auto', maxHeight: 40 }}
             />
-            <div className="label">Caffè · Desde 1897</div>
+            <T k="brand.caffe" as="div" className="label" />
             <T k="footer.brandDesc" as="p" />
           </div>
 

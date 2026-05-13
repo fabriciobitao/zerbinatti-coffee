@@ -9,7 +9,7 @@ import {
 } from "next/font/google";
 import { CartProvider, CartToasts } from "@/lib/cart-context";
 import { CartHydrator } from "@/lib/cart/CartHydrator";
-import { LocaleProvider } from "@/lib/i18n";
+import { LocaleProvider, T } from "@/lib/i18n";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/seo/schemas";
 import { GtmHeadScript, GtmNoscript } from "@/components/analytics/GtmScripts";
@@ -157,10 +157,10 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col font-sans" suppressHydrationWarning>
         <GtmNoscript />
-        <a href="#main" className="skip-to-content">
-          Pular para o conteúdo
-        </a>
         <LocaleProvider>
+          <a href="#main" className="skip-to-content">
+            <T k="a11y.skipToContent" />
+          </a>
           <CartProvider>
             <CartHydrator />
             {children}

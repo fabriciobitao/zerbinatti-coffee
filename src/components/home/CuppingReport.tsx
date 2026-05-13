@@ -1,31 +1,26 @@
-// CuppingReport — Server Component. Reproduz verbatim a <section
-// class="cupping" id="laudo"> de public/novo-layout/index.html.
-//
-// O HTML original usava <script>initRadar()</script> para construir o radar
-// dinamicamente no DOM. Aqui reescrevemos a mesma logica para gerar o SVG
-// estaticamente em build/render — mantendo cx=260, cy=260, R=200, max=10 e
-// os mesmos valores RADAR_DATA (10 dimensoes SCA: Fragrancia, Sabor,
-// Retrogosto, Acidez, Corpo, Equilibrio, Geral, Uniformidade, Limpidez,
-// Docura — todos em escala 0–10). Os labels sao constantes visuais (igual
-// ao HTML original que tambem nao traduz os labels do radar).
+'use client';
 
-import { T } from '@/lib/i18n';
+// CuppingReport — Client Component (precisa de useT pros labels do SVG radar).
+// Reproduz a <section class="cupping" id="laudo"> de public/novo-layout/index.html
+// com radar SCA de 10 dimensoes (escala 0–10, total = 84.75).
 
-type Dim = { k: string; label: string; value: number };
+import { T, useT } from '@/lib/i18n';
 
-// Mesma ordem e mesmos valores do RADAR_DATA em public/novo-layout/index.html
-// (linhas 3354–3365). NAO mexer sem atualizar os dois lados — total = 84.75.
+type Dim = { k: string; labelKey: string; value: number };
+
+// Mesma ordem do RADAR_DATA em public/novo-layout/index.html. NAO mexer sem
+// atualizar os dois lados — total = 84.75.
 const RADAR_DATA: Dim[] = [
-  { k: 'FA', label: 'Fragrância', value: 8.25 },
-  { k: 'FL', label: 'Sabor', value: 8.0 },
-  { k: 'AF', label: 'Retrogosto', value: 8.75 },
-  { k: 'AC', label: 'Acidez', value: 8.0 },
-  { k: 'BD', label: 'Corpo', value: 8.75 },
-  { k: 'BA', label: 'Equilíbrio', value: 8.25 },
-  { k: 'OV', label: 'Geral', value: 8.5 },
-  { k: 'UN', label: 'Uniformid.', value: 8.0 },
-  { k: 'CL', label: 'Limpidez', value: 8.0 },
-  { k: 'SW', label: 'Doçura', value: 10.0 },
+  { k: 'FA', labelKey: 'cup.radar.fragancia', value: 8.25 },
+  { k: 'FL', labelKey: 'cup.radar.sabor', value: 8.0 },
+  { k: 'AF', labelKey: 'cup.radar.retrogosto', value: 8.75 },
+  { k: 'AC', labelKey: 'cup.radar.acidez', value: 8.0 },
+  { k: 'BD', labelKey: 'cup.radar.corpo', value: 8.75 },
+  { k: 'BA', labelKey: 'cup.radar.equilibrio', value: 8.25 },
+  { k: 'OV', labelKey: 'cup.radar.geral', value: 8.5 },
+  { k: 'UN', labelKey: 'cup.radar.uniformidade', value: 8.0 },
+  { k: 'CL', labelKey: 'cup.radar.limpidez', value: 8.0 },
+  { k: 'SW', labelKey: 'cup.radar.docura', value: 10.0 },
 ];
 
 const CX = 260;
@@ -44,6 +39,7 @@ function fmt(n: number) {
 }
 
 export default function CuppingReport() {
+  const t = useT();
   const N = RADAR_DATA.length;
 
   // Eixos centrais e poligono dos pontos
@@ -74,7 +70,7 @@ export default function CuppingReport() {
     let anchor: 'start' | 'middle' | 'end' = 'middle';
     if (Math.cos(a) > 0.2) anchor = 'start';
     else if (Math.cos(a) < -0.2) anchor = 'end';
-    return { x, y, anchor, label: d.label.toUpperCase(), value: d.value.toFixed(2) };
+    return { x, y, anchor, label: t(d.labelKey).toUpperCase(), value: d.value.toFixed(2) };
   });
 
   return (
@@ -102,7 +98,7 @@ export default function CuppingReport() {
             <div className="cupping-attrs">
               <div>
                 <T k="cup.species" as="div" className="k" />
-                <div className="v">Arábica</div>
+                <T k="cup.arabica" as="div" className="v" />
               </div>
               <div>
                 <T k="meta.var" as="div" className="k" />

@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CartButton } from "./CartDrawer";
 import { HeaderInstagramButton } from "./InstagramButton";
+import { useT } from "@/lib/i18n/useT";
 
 export default function Header() {
+  const t = useT();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -72,7 +74,7 @@ export default function Header() {
                   "0 1px 2px rgba(0,0,0,.65), 0 0 10px rgba(240,215,123,.4)",
               }}
             >
-              Caffè · Desde 1897
+              {t("brand.caffe")}
             </span>
           </span>
         </Link>

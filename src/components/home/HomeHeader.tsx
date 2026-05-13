@@ -165,7 +165,7 @@ export default function HomeHeader() {
               className="word"
               style={{ height: 'auto', width: 'auto', maxHeight: 28 }}
             />
-            <span className="sub">Caffè · Desde 1897</span>
+            <span className="sub">{t('brand.caffe')}</span>
           </span>
         </Link>
 
